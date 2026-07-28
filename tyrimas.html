@@ -1,0 +1,267 @@
+<!doctype html><title>BrAIn Club Jr — Problem, Research & Solution</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --paper:#FBFAF7;--card:#FFFFFF;--ink:#1E2233;--soft:#565D73;--faint:#8A90A6;
+    --line:#E7E4DC;--edge:#D8D3C7;--accent:#2E5FE8;--accent-ink:#1E3FB0;--wash:#E7EEFE;
+    --good:#12855A;--good-w:#E0F1EA;--warn:#C67A12;--warn-w:#FBEFD9;--bad:#C63A38;--bad-w:#FBE6E5;
+    --disp:'SF Pro Rounded',ui-rounded,'Nunito','Segoe UI',system-ui,sans-serif;
+    --serif:'Iowan Old Style','Palatino Linotype','Georgia',serif;
+    --sys:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,monospace;
+    --sh:0 1px 2px rgba(30,34,51,.05),0 12px 28px -18px rgba(30,34,51,.3);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#111420;--card:#191D2C;--ink:#EEF0F7;--soft:#AEB4C8;--faint:#7C8299;
+    --line:#282D3E;--edge:#38405A;--accent:#6E92FF;--accent-ink:#9DB6FF;--wash:#1A2444;
+    --good:#3FBE8E;--good-w:#123329;--warn:#E5A93F;--warn-w:#37290F;--bad:#F0716B;--bad-w:#371A1A;
+    --sh:0 1px 2px rgba(0,0,0,.5),0 14px 30px -18px rgba(0,0,0,.7);
+  }}
+  :root[data-theme="dark"]{--paper:#111420;--card:#191D2C;--ink:#EEF0F7;--soft:#AEB4C8;--faint:#7C8299;--line:#282D3E;--edge:#38405A;--accent:#6E92FF;--accent-ink:#9DB6FF;--wash:#1A2444;--good:#3FBE8E;--good-w:#123329;--warn:#E5A93F;--warn-w:#37290F;--bad:#F0716B;--bad-w:#371A1A;--sh:0 1px 2px rgba(0,0,0,.5),0 14px 30px -18px rgba(0,0,0,.7)}
+  :root[data-theme="light"]{--paper:#FBFAF7;--card:#FFFFFF;--ink:#1E2233;--soft:#565D73;--faint:#8A90A6;--line:#E7E4DC;--edge:#D8D3C7;--accent:#2E5FE8;--accent-ink:#1E3FB0;--wash:#E7EEFE;--good:#12855A;--good-w:#E0F1EA;--warn:#C67A12;--warn-w:#FBEFD9;--bad:#C63A38;--bad-w:#FBE6E5}
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sys);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,h4{line-height:1.15;letter-spacing:-.01em;text-wrap:balance;font-family:var(--disp);font-weight:800}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  a{color:var(--accent-ink)}
+  header{padding:52px 0 24px}
+  header h1{font-size:clamp(2rem,5.4vw,3.1rem);margin-top:10px;font-family:var(--serif);font-weight:700;letter-spacing:-.02em}
+  header .thesis{font-size:1.2rem;color:var(--soft);margin-top:16px;max-width:60ch;font-family:var(--serif)}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .chip{font-family:var(--mono);font-size:.68rem;padding:5px 11px;border-radius:6px;border:1px solid var(--edge);background:var(--card);color:var(--soft);font-weight:600}
+  section{padding:30px 0;border-top:1px solid var(--line)}
+  .sec h2{font-size:clamp(1.5rem,3.6vw,2.1rem)}
+  .lead{color:var(--soft);margin-top:8px;font-size:1.05rem;max-width:66ch}
+  h2 .kk{font-family:var(--mono);font-size:.8rem;color:var(--accent);font-weight:700;display:block;margin-bottom:2px}
+  p{margin-top:12px;max-width:70ch}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+  @media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:16px;box-shadow:var(--sh)}
+  .stat .n{font-family:var(--disp);font-weight:800;font-size:1.7rem;color:var(--accent)}
+  .stat .l{font-size:.82rem;color:var(--soft);margin-top:4px}
+  .stat .s{font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:6px}
+
+  .m{background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:18px 20px;box-shadow:var(--sh);margin-top:14px}
+  .m .top{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .m .rank{font-family:var(--disp);font-weight:800;color:#fff;background:var(--accent);width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:0 0 auto;font-size:1rem}
+  .m h3{font-size:1.16rem;flex:1;min-width:200px}
+  .badge{font-family:var(--mono);font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
+  .badge.strong{background:var(--good-w);color:var(--good)}
+  .badge.frame{background:var(--warn-w);color:var(--warn)}
+  .m .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  @media(max-width:640px){.m .grid{grid-template-columns:1fr}}
+  .m .box{border-left:3px solid var(--edge);padding-left:11px}
+  .m .box .l{font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  .m .box p{font-size:.9rem;margin-top:2px}
+  .m .box.skill{border-color:var(--good)}.m .box.why{border-color:var(--warn)}
+  .m .src{font-size:.78rem;color:var(--faint);margin-top:10px}
+
+  .tblwrap{overflow-x:auto;border:1px solid var(--edge);border-radius:12px;box-shadow:var(--sh);margin-top:16px}
+  table{border-collapse:collapse;width:100%;min-width:720px;background:var(--card);font-size:.86rem}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--wash);font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);position:sticky;top:0}
+  tbody td b{color:var(--ink)}
+  td .can{color:var(--good);font-weight:600}
+
+  .units{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+  @media(max-width:640px){.units{grid-template-columns:1fr}}
+  .unit{background:var(--card);border:1px solid var(--edge);border-radius:10px;padding:12px 14px;box-shadow:var(--sh)}
+  .unit .u{font-family:var(--mono);font-size:.64rem;color:var(--accent);font-weight:700}
+  .unit b{display:block;font-family:var(--disp);margin:2px 0}
+  .unit span{font-size:.82rem;color:var(--soft)}
+
+  .sol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  @media(max-width:640px){.sol{grid-template-columns:1fr}}
+  .card2{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:16px;box-shadow:var(--sh)}
+  .card2 h4{font-size:1.02rem}
+  .card2 ul{margin:8px 0 0;padding-left:18px}.card2 li{font-size:.9rem;margin-bottom:5px;color:var(--soft)}
+  .card2 li b{color:var(--ink)}
+  .cast{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .cc{font-size:.84rem;background:var(--wash);border:1px solid var(--edge);border-radius:8px;padding:6px 10px}
+
+  .flag{border-left:4px solid var(--warn);background:var(--warn-w);border-radius:0 10px 10px 0;padding:13px 16px;margin-top:14px;font-size:.92rem}
+  .flag b{color:var(--ink)}
+  .demo{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .demo a{font-size:.84rem;text-decoration:none;background:var(--card);border:1px solid var(--edge);border-radius:8px;padding:7px 12px;font-weight:600}
+  .srcs{columns:2;column-gap:22px;margin-top:12px}
+  @media(max-width:640px){.srcs{columns:1}}
+  .srcs a{display:block;break-inside:avoid;font-size:.8rem;padding:6px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+  footer{border-top:1px solid var(--line);padding:30px 0 56px;color:var(--faint);font-size:.82rem}
+</style>
+
+<header><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow"><div class="wrap">
+  <div class="eyebrow">BrAIn Club Jr · Informacijos Gynėjai · Dokumentas 1 / 2 · pristatymui Paul + Šiaurės Licėjus</div>
+  <h1>The 10 mistakes kids make online — and the class that fixes them</h1>
+  <p class="thesis">Children are online — in Roblox, Fortnite, YouTube and TikTok — years before school teaches them how information, money, and strangers actually work there. This is the problem, the evidence, and a 45-minute weekly class built to close the gap.</p>
+  <div class="meta">
+    <span class="chip">Grades 1–2 (age 6–8), extends to 4</span>
+    <span class="chip">111-agent research · 24/25 claims verified</span>
+    <span class="chip">Sources: FTC · Ofcom · EU Kids Online · CEOP · Common Sense</span>
+  </div>
+</div></header>
+
+<main>
+
+<!-- PROBLEM -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">01 · The Problem</span>Kids arrive online unprepared — and the platforms are designed to exploit that</h2>
+  <p class="lead">Today's worry has a name. Jean Twenge framed this cohort as “the smartphone generation,” and Jonathan Haidt's <i>The Anxious Generation</i> (2024) turned it into the defining parent-and-teacher conversation. But anxiety isn't a skill. The real gap is that <b>6–8 year-olds already play and watch on platforms engineered to take their attention, data, and money</b> — while most receive little or no guidance on how to handle it.</p>
+  <p>Two things are true at once, and both point to the same answer: kids don't need to be kept away from technology forever — they need to be <b>taught to defend themselves in it early</b>, the way we teach road safety before we teach driving.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">$520M</div><div class="l">FTC fine on Epic (Fortnite) for dark patterns + charging kids without consent</div><div class="s">FTC, 2022</div></div>
+    <div class="stat"><div class="n">25%</div><div class="l">of web ads a 6-year-old can recognise as ads (75% only by age 10–12)</div><div class="s">Ali et al., 2009</div></div>
+    <div class="stat"><div class="n">Many</div><div class="l">children get <i>no</i> online-safety advice from parents, teachers or friends</div><div class="s">EU Kids Online 2020</div></div>
+    <div class="stat"><div class="n">15</div><div class="l">peer-reviewed studies link loot-box use to problem gambling</div><div class="s">UK Gov / DCMS 2022</div></div>
+  </div>
+  <div class="flag"><b>Honesty on sentiment:</b> we verified the Twenge→Haidt lineage as the intellectual backbone of the worry. The fuller map (Wait Until 8th, phone-free-schools outcomes, the optimistic “amazing generation” counter-view) needs a dedicated second pass before we quote it as settled.</div>
+</div></section>
+
+<!-- EVIDENCE / TOP 10 -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">02 · The Evidence</span>The 10 crucial mistakes, ranked</h2>
+  <p class="lead">Ranked by harm × how early it hits × how fixable it is by teaching. Each carries an evidence badge: <span class="badge strong">STRONG — verified primary source</span> or <span class="badge frame">FRAMEWORK — curriculum-backed, prevalence to confirm</span>. This honesty is deliberate — it tells us which lessons rest on hard data and which need a second research pass.</p>
+
+  <div class="m"><div class="top"><span class="rank">1</span><h3>Oversharing personal &amp; family information</h3><span class="badge strong">STRONG</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>6-year-olds don't grasp “an audience” — a game chat feels like talking to one friend. They'll say name, school, address, and “I'm home alone.”</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>Public vs private information; the rule “does this help a stranger find me?”</p></div></div>
+    <p class="src">📌 CEOP (UK National Crime Agency): everyday family photos are now being misused to generate illegal AI child-abuse imagery — a live, current threat.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">2</span><h3>Falling for money traps &amp; manipulation (dark patterns, loot boxes, in-app buys)</h3><span class="badge strong">STRONG</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>Less impulse control; a “continue” button silently becomes a “buy” button; fake currency (V-Bucks, Robux) hides that real money is spent.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>Recognise “this wants my money / attention”; stop; ask a trusted adult before buying/tapping.</p></div></div>
+    <p class="src">📌 FTC fined Epic $520M; “most children will have been caught, because they've been clicking, clicking, clicking.” UK Gov: block child loot-box purchases without a parent. <b>Best-documented harm of all.</b></p></div>
+
+  <div class="m"><div class="top"><span class="rank">3</span><h3>Falling for scams: “free V-Bucks/Robux,” “you won a prize,” phishing</h3><span class="badge frame">FRAMEWORK</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>Desire for free skins/currency + no “too good to be true” instinct = clicks phishing links, gives away logins.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>“Too good to be true = a trick.” Stop → don't click → tell an adult.</p></div></div>
+    <p class="src">📌 Framework-covered (Common Sense, Be Internet Awesome “Don't fall for fake”). Dedicated FTC/FBI child-scam prevalence data = a flagged second-pass item.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">4</span><h3>Can't tell ads from content, or real from fake</h3><span class="badge strong">STRONG</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>A 6-year-old recognises only ~25% of ads on a page; “influencer says buy this” reads as a friend's advice, not a paid ad. Now compounded by AI-generated images.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>“Is this an ad? Is this real or made-up? Who made it and why?”</p></div></div>
+    <p class="src">📌 Ali, Blades, Oates &amp; Blumberg, 2009 (BJDP, N=401). The core information-literacy skill.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">5</span><h3>Trusting the wrong “friends” — stranger contact &amp; grooming red flags</h3><span class="badge strong">STRONG</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>“Someone I play with = my friend.” Games default chat ON with strangers. Red flags (“don't tell your parents,” move to DMs, send a pic) aren't recognised.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>People online aren't always who they say; a secret from parents is the biggest red flag; tell a trusted adult.</p></div></div>
+    <p class="src">📌 FTC: Fortnite's on-by-default chat exposed kids to harassment &amp; trauma → chat now off-by-default for children. CEOP grooming guidance.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">6</span><h3>Not telling a trusted adult / not knowing where to get help</h3><span class="badge strong">STRONG</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>The <b>biggest systemic gap.</b> When something goes wrong, kids stay silent or tell a friend — rarely someone who can help.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>Name your 5 trusted adults (“Hand of 5”); it's never your fault; speaking up is brave.</p></div></div>
+    <p class="src">📌 EU Kids Online 2020 (25,101 children): many receive no guidance and confide in parents/friends, not professionals. CEOP: calm, open conversation.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">7</span><h3>Cyberbullying — as target and as bystander</h3><span class="badge frame">FRAMEWORK</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>A screen hides feelings; mean words feel “less real”; bystanders don't know they can help.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>Be kind; be an upstander (tell an adult + support the target).</p></div></div>
+    <p class="src">📌 Common Sense “Legs/upstander” strand; FTC notes harassment on Fortnite. Bystander-behaviour prevalence = second-pass item.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">8</span><h3>Posting &amp; commenting mistakes (what to post/not; how to comment/not)</h3><span class="badge frame">FRAMEWORK</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>No sense of “permanent” or “everyone can see”; comments posted in anger or oversharing.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>Digital footprint (“it stays”); think before you post; kind comments only.</p></div></div>
+    <p class="src">📌 Common Sense “Feet/digital footprint” + “Heart/relationships” strands.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">9</span><h3>Installing risky software — mods, cheats, “free” apps → malware</h3><span class="badge frame">FRAMEWORK</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>Wants cheats/skins; downloads anything; “free” hides the cost.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>Never install without a trusted adult; “free” often isn't.</p></div></div>
+    <p class="src">📌 Framework-based; dedicated malware-from-mods prevalence = second-pass item.</p></div>
+
+  <div class="m"><div class="top"><span class="rank">10</span><h3>Weak password &amp; account security</h3><span class="badge frame">FRAMEWORK</span></div>
+    <div class="grid"><div class="box why"><span class="l">Why at this age</span><p>Shares passwords with friends; uses “123456”; no idea accounts get stolen.</p></div>
+      <div class="box skill"><span class="l">Skill that prevents it</span><p>A password is a secret; make it strong &amp; fun; never share (except a parent).</p></div></div>
+    <p class="src">📌 Be Internet Awesome “Secure your secrets”; under-10 password/2FA data = second-pass item.</p></div>
+</div></section>
+
+<!-- LEARNING OUTCOMES -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">03 · Gaps → Lessons → Outcomes</span>Each mistake becomes a topic + a measurable outcome</h2>
+  <p class="lead">Formal-education format: Bloom's-style “the child can…”, mapped to three trusted frameworks (UK <b>Education for a Connected World</b> · <b>Common Sense</b> K-2 · <b>MediaSmarts</b>) and the LT <b>Bendrosios programos</b> (Informatika “Saugus elgesys” F3.3).</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>Lesson topic</th><th>Learning outcome — „the child can…"</th><th>Framework</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Public vs private</td><td class="can">…decide what is safe to share vs keep private, and apply „does this help a stranger find me?"</td><td>CSense Privacy · EfCW Privacy&amp;Security · F3.3</td></tr>
+      <tr><td>2</td><td>Money &amp; manipulation traps</td><td class="can">…spot when a game/app wants their money or attention, and stop &amp; ask an adult before buying/tapping</td><td>MediaSmarts Consumer · EfCW</td></tr>
+      <tr><td>3</td><td>Scams &amp; „free" tricks</td><td class="can">…recognise „too good to be true" and refuse a phishing/„free prize" link</td><td>CSense Media Lit · BIA Alert</td></tr>
+      <tr><td>4</td><td>Ads vs content · real vs fake</td><td class="can">…tell an ad from content and ask „is this real? who made it &amp; why?"</td><td>MediaSmarts Understand · CSense Head</td></tr>
+      <tr><td>5</td><td>Online friends &amp; red flags</td><td class="can">…explain that people online may not be who they say, and name „secret from parents" as a red flag</td><td>EfCW Relationships · CEOP</td></tr>
+      <tr><td>6</td><td>Tell a trusted adult</td><td class="can">…name 5 trusted adults and describe when &amp; how to ask for help</td><td>EfCW Health&amp;Wellbeing · CEOP</td></tr>
+      <tr><td>7</td><td>Kindness &amp; upstander</td><td class="can">…choose kind words and act as an upstander when they see meanness</td><td>CSense Legs/Heart · EfCW Bullying</td></tr>
+      <tr><td>8</td><td>Post &amp; comment wisely</td><td class="can">…explain a digital footprint („it stays") and think before posting/commenting</td><td>CSense Feet · EfCW Reputation</td></tr>
+      <tr><td>9</td><td>Safe downloads</td><td class="can">…refuse to install software without a trusted adult and explain „free isn't always free"</td><td>EfCW Privacy&amp;Security</td></tr>
+      <tr><td>10</td><td>Password secrets</td><td class="can">…make a strong password and keep it secret (except from a parent)</td><td>BIA Strong · EfCW</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 30 LESSON MAP -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">04 · The Year</span>30-lesson map (source material foundation)</h2>
+  <p class="lead">10 mistakes → 10 units of 3 lessons (Meet the mistake · Practice it · Master &amp; teach it), spiralling up the 9 „Gynėjas" levels. This is the skeleton the 30 built lessons hang on.</p>
+  <div class="units">
+    <div class="unit"><span class="u">Wk 1–3 · U1</span><b>Vieša ar Slapta</b><span>public/private · Hand-of-5 (DEMO lesson)</span></div>
+    <div class="unit"><span class="u">Wk 4–6 · U2</span><b>Triukai dėl pinigų</b><span>dark patterns · in-app buys · stop &amp; ask</span></div>
+    <div class="unit"><span class="u">Wk 7–9 · U3</span><b>Apgaulės ir „nemokamai"</b><span>free V-Bucks/„laimėjai" scams</span></div>
+    <div class="unit"><span class="u">Wk 10–12 · U4</span><b>Reklama ar tikra?</b><span>ads vs content · real vs fake/AI · Baitas</span></div>
+    <div class="unit"><span class="u">Wk 13–15 · U5</span><b>Draugai internete</b><span>strangers · red flags · „nesakyk tėvams"</span></div>
+    <div class="unit"><span class="u">Wk 16–18 · U6</span><b>Pasakyk suaugusiam</b><span>Hand-of-5 · help-seeking · it's not your fault</span></div>
+    <div class="unit"><span class="u">Wk 19–21 · U7</span><b>Gerumas ir Upstander</b><span>kindness · stop bullying · Safer Internet Day</span></div>
+    <div class="unit"><span class="u">Wk 22–24 · U8</span><b>Ką skelbti / komentuoti</b><span>footprint · think before post/comment</span></div>
+    <div class="unit"><span class="u">Wk 25–27 · U9</span><b>Saugus diegimas + AI</b><span>installs/malware · when to trust AI (Baitas)</span></div>
+    <div class="unit"><span class="u">Wk 28–30 · U10</span><b>Slaptažodžiai + Finalas</b><span>passwords · Gynėjas exam · parent showcase</span></div>
+  </div>
+</div></section>
+
+<!-- SOLUTION -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">05 · The Solution</span>BrAIn Club Jr — „Informacijos Gynėjai"</h2>
+  <p class="lead">A once-weekly 45-min class where kids become Defenders of Information — catching Kaleidas's mistakes so they never make them. Story-driven, gamified, bilingual (LT + EN).</p>
+  <div class="sol">
+    <div class="card2"><h4>🧩 The format (deliberately minimal)</h4>
+      <ul><li><b>45 min</b> · 20–30 kids · <b>1 teacher</b></li><li>Needs only: <b>paper, pen, 1 screen, 1 projector, internet</b></li><li>Web-based tools + tests (no installs) · physical + handwriting activities</li><li>Take-home artifact (badge) + 20-min parent task</li></ul></div>
+    <div class="card2"><h4>🎭 The universe</h4>
+      <p style="font-size:.9rem;color:var(--soft)">Kids catch the mistakes so they don't have to make them.</p>
+      <div class="cast"><span class="cc">🧒 <b>Kaleidas</b> — hero who errs</span><span class="cc">👧 <b>Misty</b> — best friend</span><span class="cc">🐶 <b>Baitas</b> — the AI-dog: safe / not-safe detector; teaches when to trust AI</span><span class="cc">👩‍🏫 <b>Mokytoja Lekta</b></span><span class="cc">👨‍👩 <b>Rūta &amp; Darius</b></span></div></div>
+  </div>
+  <div class="card2" style="margin-top:12px"><h4>🛠️ Already built &amp; validated (the demo)</h4>
+    <p style="font-size:.9rem;color:var(--soft)">Lesson 1 is built and stress-tested by agent panels (educators 77% · parents 77% · students 75%). Live pieces:</p>
+    <div class="demo">
+      <a href="https://claude.ai/code/artifact/99e6a0b6-3a3b-43ed-a47d-501a701e3234" target="_blank" rel="noopener">🖼️ 12-slide deck</a>
+      <a href="https://claude.ai/code/artifact/1725c053-110f-4baf-9233-672bed4861cd" target="_blank" rel="noopener">🎮 Game identity test</a>
+      <a href="https://claude.ai/code/artifact/a391c3c3-3cde-4831-8026-9a779c6a6aaa" target="_blank" rel="noopener">📋 Mentor script + LT curriculum</a>
+      <a href="https://claude.ai/code/artifact/37231066-1131-40cd-97ed-519009a0764f" target="_blank" rel="noopener">🛡️ Program kit</a>
+    </div>
+    <p style="font-size:.78rem;color:var(--faint);margin-top:8px">⚠️ Demo assets still use old names (Clydeus/Mira/Spotus/Neuron) — being renamed to the Kaleidas/Misty/Baitas canon.</p>
+  </div>
+</div></section>
+
+<!-- GAPS -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">06 · Honest gaps</span>What to verify before we call this final</h2>
+  <div class="flag"><b>Second research pass needed for 4 of the 10 mistakes</b> — scams/phishing, malware-from-mods, passwords/2FA, and bystander-cyberbullying are currently framework-backed but lack dedicated prevalence data (FTC/FBI child-scam stats, etc.).</div>
+  <div class="flag"><b>Age-6–8 data is inferential.</b> EU Kids Online starts at 9; the ad-recognition study is 2009 static screenshots. Solid for direction, thin for exact prevalence at the youngest ages.</div>
+  <div class="flag"><b>Sentiment map is partial.</b> Only Twenge→Haidt verified; Wait Until 8th, phone-free-schools outcomes, and the optimistic counter-view need a dedicated pass.</div>
+</div></section>
+
+<!-- SOURCES -->
+<section class="sec"><div class="wrap">
+  <h2><span class="kk">07 · Sources</span>Primary &amp; peer-reviewed</h2>
+  <div class="srcs">
+    <a href="https://www.ftc.gov/news-events/news/press-releases/2022/12/fortnite-video-game-maker-epic-games-pay-more-half-billion-dollars-over-ftc-allegations" target="_blank" rel="noopener">FTC — Epic/Fortnite $520M (dark patterns, kids' charges)</a>
+    <a href="https://www.ftc.gov/reports/bringing-dark-patterns-light" target="_blank" rel="noopener">FTC — Bringing Dark Patterns to Light</a>
+    <a href="https://bpspsychub.onlinelibrary.wiley.com/doi/10.1348/026151008X388378" target="_blank" rel="noopener">Ali et al. 2009 — children's ad recognition (BJDP)</a>
+    <a href="https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/eu-kids-online-2020" target="_blank" rel="noopener">EU Kids Online 2020 (LSE, 25,101 children)</a>
+    <a href="https://www.ofcom.org.uk/media-use-and-attitudes/media-habits-children/childrens-media-use-and-attitudes-2024/" target="_blank" rel="noopener">Ofcom — Children's Media Use &amp; Attitudes 2024</a>
+    <a href="https://www.gov.uk/government/consultations/loot-boxes-in-video-games-call-for-evidence/outcome/government-response-to-the-call-for-evidence-on-loot-boxes-in-video-games" target="_blank" rel="noopener">UK Gov — Loot boxes evidence review</a>
+    <a href="https://www.ceopeducation.co.uk/parents/" target="_blank" rel="noopener">CEOP Education (NCA) — parent guidance / AI photo misuse</a>
+    <a href="https://www.gov.uk/government/publications/education-for-a-connected-world" target="_blank" rel="noopener">UKCIS — Education for a Connected World</a>
+    <a href="https://www.commonsense.org/education/digital-citizenship/curriculum?grades=k%2C1%2C2" target="_blank" rel="noopener">Common Sense — K-2 Digital Citizenship</a>
+    <a href="https://mediasmarts.ca/digital-media-literacy/general-information/digital-media-literacy-framework" target="_blank" rel="noopener">MediaSmarts — USE/UNDERSTAND/ENGAGE framework</a>
+    <a href="https://www.jeanmtwenge.com/" target="_blank" rel="noopener">Twenge — iGen / “smartphone generation” (→ Haidt)</a>
+  </div>
+  <p style="font-size:.78rem;color:var(--faint);margin-top:14px">Method: 6 search angles → 28 sources → 102 claims → 25 adversarially verified (24 confirmed, 1 refuted). Web-search budget exhausted; some pages verified via supplied quote + domain knowledge (noted in gaps).</p>
+</div></section>
+
+</main>
+<footer><div class="wrap">BrAIn Club Jr · Dokumentas 1/2 · Problem → Research → Solution · 2026-07-24 · su Paul + Gabrielius · Šiaurės Licėjus demo Jul 27</div></footer>

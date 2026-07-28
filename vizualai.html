@@ -1,0 +1,136 @@
+<!doctype html><title>v2 — Vizualinė kryptis + veikėjai (Higgsfield)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#0E1230;--bg2:#161B44;--card:#1B2150;--edge:#3A2F8E;--ink:#F2F0FF;--soft:#B3B0E4;--faint:#7E7BB8;
+    --p1:#8A6BFF;--p2:#FF7A2E;--p3:#12D18E;--p4:#FF4D6D;--p5:#22C7E8;--gold:#FFC53D;
+    --disp:'SF Pro Rounded',ui-rounded,'Nunito','Baloo 2','Segoe UI',system-ui,sans-serif;
+    --sys:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:radial-gradient(1200px 700px at 50% -10%,#241a5c,var(--bg));color:var(--ink);font-family:var(--sys);line-height:1.55;-webkit-font-smoothing:antialiased;background-attachment:fixed}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  header{padding:44px 0 20px;text-align:center}
+  header h1{font-size:clamp(2rem,6vw,3.2rem);text-shadow:0 0 32px rgba(138,107,255,.5);margin-top:10px}
+  header h1 span{color:var(--p2)}
+  header p{color:var(--soft);max-width:60ch;margin:14px auto 0;font-size:1.08rem}
+  section{padding:26px 0;border-top:1px solid var(--edge)}
+  .sec h2{font-size:clamp(1.4rem,3.6vw,2rem)}
+  .sec>p{color:var(--soft);margin-top:6px;max-width:66ch}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.04em;padding:4px 11px;border-radius:99px;border:1.5px solid var(--edge);color:var(--soft);margin:4px 6px 0 0}
+
+  .princ{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+  @media(max-width:640px){.princ{grid-template-columns:1fr}}
+  .pc{background:var(--card);border:1.5px solid var(--edge);border-radius:14px;padding:14px 16px}
+  .pc b{font-family:var(--disp)}
+  .pc p{font-size:.9rem;color:var(--soft);margin-top:4px}
+
+  .lock{background:#0b0e26;border:1.5px solid var(--edge);border-radius:14px;padding:14px 16px;margin-top:14px;font-family:var(--mono);font-size:.78rem;color:#cfd0ff;line-height:1.55;overflow-x:auto}
+  .lock b{color:var(--gold);font-family:var(--disp)}
+
+  .chars{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+  @media(max-width:720px){.chars{grid-template-columns:1fr}}
+  .char{background:linear-gradient(165deg,var(--card),#12163a);border:1.5px solid var(--edge);border-radius:20px;padding:18px;box-shadow:0 16px 34px -20px #000}
+  .char .art{height:150px;display:grid;place-items:center;border-radius:14px;margin-bottom:12px;position:relative;overflow:hidden}
+  .char svg{height:132px;width:auto;filter:drop-shadow(0 8px 14px rgba(0,0,0,.4))}
+  .char h3{font-size:1.25rem;display:flex;align-items:center;gap:8px}
+  .char .role{font-size:.86rem;color:var(--soft);margin-top:2px}
+  .char .prompt{margin-top:12px;background:#0b0e26;border:1px solid var(--edge);border-radius:10px;padding:10px 12px;font-family:var(--mono);font-size:.72rem;color:#cfd0ff;line-height:1.5}
+  .char .prompt b{color:var(--p2);font-family:var(--disp)}
+  .star{font-family:var(--mono);font-size:.62rem;font-weight:700;color:#0E1230;background:var(--gold);border-radius:99px;padding:3px 8px}
+
+  .comic{background:var(--card);border:1.5px solid var(--edge);border-radius:14px;padding:14px 16px;margin-top:12px}
+  .comic b{font-family:var(--disp);color:var(--p5)}
+  .comic code{display:block;font-family:var(--mono);font-size:.74rem;color:#cfd0ff;margin-top:6px;white-space:pre-wrap}
+
+  .plan{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  @media(max-width:640px){.plan{grid-template-columns:1fr}}
+  .plan .pc h3{font-size:1.05rem;color:var(--gold)}
+  ul.clean{margin:8px 0 0;padding-left:18px}ul.clean li{font-size:.9rem;color:var(--soft);margin-bottom:5px}ul.clean li b{color:var(--ink)}
+  .wait{background:color-mix(in srgb,var(--gold) 12%,var(--card));border:1.5px solid var(--gold);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.95rem}
+  .wait b{color:var(--gold)}
+  footer{border-top:1px solid var(--edge);padding:26px 0 50px;color:var(--faint);font-size:.8rem;text-align:center}
+</style>
+
+<header><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow"><div class="wrap">
+  <div class="eyebrow">BrAIn Club Jr · v2 · vaikams skirtos skaidrės</div>
+  <h1>Vizualinė kryptis + <span>veikėjų dizainas</span></h1>
+  <p>Kids-first, žaidimo-herojaus energija. Estetika tarp populiariausių vaikų žaidimų (drąsūs veikėjai, ryškios plokščios spalvos, žaidimo-UI energija) — bet <b>originalu ir IP-saugu</b>. Čia — stiliaus gidas + Higgsfield promptai + komiksų šablonai. Dekai (Gamma + HTML) — kai gausiu transkriptą.</p>
+</div></header>
+
+<main>
+
+<section class="sec"><div class="wrap">
+  <h2>1 · Art direction — 6 principai</h2>
+  <div>
+    <span class="pill">drąsūs juodi kontūrai</span><span class="pill">ryškios sodrios spalvos</span><span class="pill">didelės galvos / herojiškos proporcijos</span><span class="pill">ekspresyvios akys</span><span class="pill">dinamiškos pozos</span><span class="pill">žaidimo-badge energija</span>
+  </div>
+  <div class="princ">
+    <div class="pc"><b>🦸 Herojai, ne „mažyliai"</b><p>Vaikai nori būti šaunūs, ne globojami. Veikėjai — drąsūs, „cool", šiek tiek humoro. Ne infantilu.</p></div>
+    <div class="pc"><b>🎮 Žaidimo kalba</b><p>UI kaip žaidime: lygiai, ženkliukai, „POW", energijos juostos, taškai — pažįstama iš jų žaidimų.</p></div>
+    <div class="pc"><b>🌈 Sodrios plokščios spalvos</b><p>Kiekvienas veikėjas — sava ryški spalva (kaip komandos herojai). Didelis kontrastas, minimalūs gradientai.</p></div>
+    <div class="pc"><b>🐶 Baitas = žvaigždė-gadget'as</b><p>Šuo su AI vizoriumi (SAFE žalia / NE-SAFE raudona). Vaikai dievina augintinį-su-technologija.</p></div>
+  </div>
+  <div class="lock"><b>🔒 STILIAUS UŽRAKTAS</b> (pridėk prie KIEKVIENO Higgsfield prompto — IP-saugus, be žaidimų pavadinimų):
+<br>modern mobile-game hero character, bold clean black outlines, thick line art, super-saturated flat colors, soft cel shading, big expressive eyes, chibi-heroic proportions (big head, small body), dynamic confident pose, vibrant, playful, high energy, vector, plain background, no text, no logos
+<br>--neg: realistic, 3D render, muted colors, Minecraft/Roblox/Brawl Stars/Fortnite characters or logos, any known game brand, scary, weapons, real child photo</div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>2 · Veikėjai + Higgsfield promptai</h2>
+  <p>Vektoriniai maketai = kryptis (ne galutinis menas). Promptai = kopijuok į Higgsfield. Kanono aktoriai (užrakinti Jul 24).</p>
+  <div class="chars">
+
+    <div class="char"><div class="art" style="background:radial-gradient(circle at 50% 40%,#3a2a10,#12163a)">
+      <svg viewBox="0 0 120 132" aria-label="Kaleidas"><path d="M42 8 q18 -10 36 0 l-8 16 l10 6 l-12 4" fill="#7a4a22" stroke="#0b0e26" stroke-width="4"/><rect x="34" y="58" width="52" height="56" rx="16" fill="var(--p2)" stroke="#0b0e26" stroke-width="4.5"/><circle cx="60" cy="40" r="26" fill="#ffd9b3" stroke="#0b0e26" stroke-width="4.5"/><path d="M32 30 q6 -22 28 -20 q22 -2 28 20 q-14 -8 -28 -5 q-14 -3 -28 5" fill="#7a4a22" stroke="#0b0e26" stroke-width="4"/><circle cx="50" cy="40" r="5.5" fill="#0b0e26"/><circle cx="70" cy="40" r="5.5" fill="#0b0e26"/><circle cx="52" cy="38" r="2" fill="#fff"/><circle cx="72" cy="38" r="2" fill="#fff"/><path d="M48 52 q12 10 24 0" fill="none" stroke="#0b0e26" stroke-width="4.5" stroke-linecap="round"/><path d="M60 100 l-6 -12 h12 z" fill="var(--gold)" stroke="#0b0e26" stroke-width="3"/></svg>
+    </div><h3>Kaleidas <span class="star">HERO</span></h3><div class="role">Drąsus, greitas, geraširdis — daro klaidas juokingai. Spalva: energijos oranžinė.</div>
+    <div class="prompt"><b>Higgsfield:</b> 7-year-old boy hero, messy warm-brown hair with one spiky cowlick, bright orange hoodie with a small lightning emblem, big confident grin, one eyebrow raised (mischievous), mid-action pose pointing forward</div></div>
+
+    <div class="char"><div class="art" style="background:radial-gradient(circle at 50% 40%,#2a1040,#12163a)">
+      <svg viewBox="0 0 120 132" aria-label="Misty"><rect x="34" y="58" width="52" height="56" rx="16" fill="var(--p1)" stroke="#0b0e26" stroke-width="4.5"/><circle cx="60" cy="40" r="26" fill="#ffe0c4" stroke="#0b0e26" stroke-width="4.5"/><path d="M32 44 q0 -30 28 -30 q28 0 28 30 q-9 -9 -14 -6 l0 13 q-14 -6 -28 0 l0 -13 q-5 -3 -14 6" fill="#2b7a8f" stroke="#0b0e26" stroke-width="4"/><rect x="70" y="18" width="12" height="6" rx="3" fill="var(--p5)" stroke="#0b0e26" stroke-width="2.5"/><circle cx="50" cy="41" r="5.5" fill="#0b0e26"/><circle cx="70" cy="41" r="5.5" fill="#0b0e26"/><circle cx="52" cy="39" r="2" fill="#fff"/><circle cx="72" cy="39" r="2" fill="#fff"/><path d="M50 53 q10 8 20 0" fill="none" stroke="#0b0e26" stroke-width="4.5" stroke-linecap="round"/></svg>
+    </div><h3>Misty <span class="star">FRIEND</span></h3><div class="role">Drąsi, gudri geriausia draugė. Spalva: violetinė + teal sruoga.</div>
+    <div class="prompt"><b>Higgsfield:</b> 7-year-old girl hero, teal-streaked dark bob with a cyan clip, purple bomber jacket, brave determined smile, hands on hips power pose, small backpack</div></div>
+
+    <div class="char"><div class="art" style="background:radial-gradient(circle at 50% 40%,#0e2e37,#12163a)">
+      <svg viewBox="0 0 120 132" aria-label="Baitas"><ellipse cx="60" cy="92" rx="36" ry="26" fill="#fff" stroke="#0b0e26" stroke-width="4.5"/><circle cx="44" cy="88" r="9" fill="#c98a4a"/><circle cx="76" cy="98" r="8" fill="#c98a4a"/><circle cx="42" cy="52" r="24" fill="#fff" stroke="#0b0e26" stroke-width="4.5"/><path d="M22 40 q-10 -3 -10 12 q0 12 12 9" fill="#c98a4a" stroke="#0b0e26" stroke-width="4.5"/><rect x="24" y="44" width="42" height="14" rx="7" fill="var(--p5)" stroke="#0b0e26" stroke-width="4"/><rect x="30" y="47" width="9" height="8" rx="2" fill="var(--p3)"/><rect x="52" y="47" width="9" height="8" rx="2" fill="var(--p4)"/><ellipse cx="43" cy="66" rx="6" ry="4" fill="#0b0e26"/><path d="M50 74 q-2 8 6 8" fill="none" stroke="#0b0e26" stroke-width="4" stroke-linecap="round"/><text x="72" y="40" font-size="15" fill="var(--p3)" font-weight="bold">✓</text></svg>
+    </div><h3>Baitas <span class="star">⭐ AI-ŠUO</span></h3><div class="role">Šuo su AI vizoriumi: skenuoja ir rodo <b style="color:var(--p3)">SAFE</b> / <b style="color:var(--p4)">NE-SAFE</b>. Moko, kada pasitikėti DI.</div>
+    <div class="prompt"><b>Higgsfield:</b> small white cartoon dog with brown spots, wearing a sleek tech visor/goggles across the eyes with two glowing lights (one green, one red), a small holographic scanner beam, one floppy ear, alert heroic pose, cute but techy</div></div>
+
+    <div class="char"><div class="art" style="background:radial-gradient(circle at 50% 40%,#241d48,#12163a)">
+      <svg viewBox="0 0 120 132" aria-label="Mokytoja Lekta"><rect x="36" y="60" width="48" height="56" rx="15" fill="var(--p3)" stroke="#0b0e26" stroke-width="4.5"/><circle cx="60" cy="42" r="24" fill="#ffe6cf" stroke="#0b0e26" stroke-width="4.5"/><path d="M36 42 q0 -26 24 -26 q24 0 24 26 q-6 -11 -24 -9 q-18 -2 -24 9" fill="#5a3b6b" stroke="#0b0e26" stroke-width="4"/><rect x="42" y="38" width="16" height="12" rx="4" fill="none" stroke="#0b0e26" stroke-width="3.5"/><rect x="62" y="38" width="16" height="12" rx="4" fill="none" stroke="#0b0e26" stroke-width="3.5"/><line x1="58" y1="42" x2="62" y2="42" stroke="#0b0e26" stroke-width="3.5"/><path d="M50 54 q10 6 20 0" fill="none" stroke="#0b0e26" stroke-width="4" stroke-linecap="round"/></svg>
+    </div><h3>Mokytoja Lekta <span class="star">MENTOR</span></h3><div class="role">Šaunus, ne nuobodus mentorius. Patikimas suaugęs. Spalva: žalia.</div>
+    <div class="prompt"><b>Higgsfield:</b> cool young teacher mentor, funky round glasses, colorful cardigan, warm confident smile, holding a glowing tablet, approachable not stuffy</div></div>
+
+    <div class="char"><div class="art" style="background:radial-gradient(circle at 50% 40%,#101a3a,#12163a)">
+      <svg viewBox="0 0 120 132" aria-label="Neuron"><circle cx="60" cy="62" r="36" fill="var(--p1)" stroke="#0b0e26" stroke-width="4.5"/><circle cx="60" cy="62" r="36" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="6 7"/><circle cx="48" cy="58" r="7" fill="#fff"/><circle cx="72" cy="58" r="7" fill="#fff"/><circle cx="48" cy="58" r="3.4" fill="#0b0e26"/><circle cx="72" cy="58" r="3.4" fill="#0b0e26"/><path d="M48 76 q12 9 24 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M60 26 v-11 M38 34 l-8 -8 M82 34 l8 -8" stroke="#0b0e26" stroke-width="4.5" stroke-linecap="round"/><circle cx="60" cy="12" r="5" fill="var(--p5)" stroke="#0b0e26" stroke-width="3"/></svg>
+    </div><h3>Neuron <span class="star">AI TRENERIS</span></h3><div class="role">Jungiantis BrainClub AI mascot (per visas programas). Duoda 3 magiškus klausimus + ženkliukus. Spalva: violetinė+cyan.</div>
+    <div class="prompt"><b>Higgsfield:</b> friendly glowing AI companion, rounded brain-spark hybrid orb, purple and cyan, floating, warm expressive eyes, little antenna spark, holographic, futuristic but cute</div></div>
+
+  </div>
+  <p style="font-size:.82rem;color:var(--faint);margin-top:12px">Baitas = šuo (buvęs Spotus, pervadinta). Neuron IR Baitas abu lieka (Neuron = viso BrainClub AI; Baitas = saugu/nesaugu detektorius). Remtis ir Robotikos Akademijos + Brain Club esamais veikėjais dėl stiliaus vienovės.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>3 · Komiksų kadrai — promptų šablonai</h2>
+  <p>Kiekvienas istorijos beat'as = 2 kadrai: ✅ gerai / ❌ klaida. Baitas skenuoja ir rodo verdiktą.</p>
+  <div class="comic"><b>Šablonas (gerai vs klaida):</b>
+    <code>2-panel kids comic, [STILIAUS UŽRAKTAS]. Panel 1 (green glow, GOOD): [Kaleidas does the safe thing], Baitas the AI-dog visor glows GREEN ✓. Panel 2 (red glow, MISTAKE): [Kaleidas does the risky thing], Baitas visor glows RED, small warning icon. Empty speech bubbles for Lithuanian text.</code></div>
+  <div class="comic"><b>Pvz. — adresas:</b>
+    <code>...Panel 1: Kaleidas at a tablet saying no to a shadowy stranger, Baitas visor GREEN. Panel 2: Kaleidas typing his home address to a hooded avatar, Baitas visor RED + alert.</code></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>4 · Dekų planas (kai gausiu transkriptą)</h2>
+  <div class="plan">
+    <div class="pc"><h3>🅰 Gamma versija</h3><ul class="clean"><li>Paste-to-generate turinys (12+ skaidrių)</li><li>Higgsfield vaizdai įdedami</li><li>Vizualas: v2 art direction</li></ul></div>
+    <div class="pc"><h3>🅱 HTML artifact</h3><ul class="clean"><li>Atvaizduotas, pristatymui, nuoroda</li><li>Scroll-deck (patikimai veikia cloud'e)</li><li>Ta pati v2 estetika + garsas/animacija</li></ul></div>
+  </div>
+  <div class="wait"><b>⏳ Laukiu transkripto.</b> Kai įklijuosi Fireflies pokalbį su Paulu — perskaitysiu VISĄ, ištrauksiu kiekvieną pastabą apie skaidres, ir sukursiu abu dekus su jūsų sprendimais. Šis vizualas — tam, kad turėtumėt į ką reaguoti dabar.</div>
+</div></section>
+
+</main>
+<footer><div class="wrap">BrAIn Club Jr · v2 vizualinė kryptis · veikėjai užrakinti: Kaleidas · Misty · Baitas · Mokytoja Lekta · tėvai Rūta &amp; Darius</div></footer>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>🛡️ Informacijos Gynėjai — BrAIn Club Jr</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0d1226; --bg2:#141b38; --card:#1a2246; --line:#2a3563;
+    --ink:#f2f5ff; --dim:#a8b3d9; --accent:#ffc94d; --accent2:#5cc9ff; --good:#4ade80;
+  }
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1100px 600px at 50% -10%,#1e2a5c 0%,var(--bg) 60%);
+    color:var(--ink);min-height:100vh;line-height:1.55;
+    padding:32px 20px 64px;
+  }
+  .wrap{max-width:920px;margin:0 auto}
+  header{text-align:center;margin-bottom:14px}
+  .shield{font-size:56px;line-height:1;filter:drop-shadow(0 4px 14px rgba(255,201,77,.35))}
+  h1{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-.02em;margin:10px 0 6px}
+  .sub{color:var(--dim);font-size:17px;max-width:600px;margin:0 auto}
+  .meta{color:var(--dim);font-size:13px;margin-top:14px;opacity:.75}
+  .langbar{display:flex;justify-content:center;margin:22px 0 34px}
+  .langbtn{
+    background:var(--card);color:var(--ink);border:1px solid var(--line);
+    padding:9px 20px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;
+    transition:.15s;
+  }
+  .langbtn:hover{border-color:var(--accent);color:var(--accent)}
+  h2{
+    font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--accent);margin:34px 0 14px;display:flex;align-items:center;gap:10px;
+  }
+  h2::after{content:"";flex:1;height:1px;background:var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+  a.card{
+    display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px;text-decoration:none;color:inherit;transition:.18s;
+  }
+  a.card:hover{border-color:var(--accent);transform:translateY(-3px);background:#20295180}
+  .ico{font-size:30px;display:block;margin-bottom:10px}
+  .ct{font-size:17px;font-weight:700;margin-bottom:5px}
+  .cd{font-size:14px;color:var(--dim);margin-bottom:12px}
+  .tag{
+    display:inline-block;font-size:11px;font-weight:600;letter-spacing:.05em;
+    background:#0d1533;border:1px solid var(--line);color:var(--accent2);
+    padding:4px 10px;border-radius:999px;
+  }
+  .lead{border-color:#3d4a86;background:linear-gradient(160deg,#1f2a55,#1a2246)}
+  .lead .ct{color:var(--accent)}
+  footer{
+    margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
+    text-align:center;color:var(--dim);font-size:13px;line-height:1.8;
+  }
+  .warn{
+    margin-top:26px;background:#2a1f0d;border:1px solid #6b4f14;border-radius:12px;
+    padding:14px 18px;font-size:13.5px;color:#ffd98a;
+  }
+  @media (max-width:520px){body{padding:22px 14px 48px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="shield">🛡️</div>
+    <h1 data-lt="Informacijos Gynėjai" data-en="Defenders of Information">Informacijos Gynėjai</h1>
+    <p class="sub"
+       data-lt="Medijų ir informacinio raštingumo programa pirmokams. 9 lygiai · 9 mėnesiai · vaikas tampa Informacijos Gynėju."
+       data-en="A media &amp; information literacy programme for 1st graders. 9 levels · 9 months · every child becomes a Defender of Information.">
+       Medijų ir informacinio raštingumo programa pirmokams. 9 lygiai · 9 mėnesiai · vaikas tampa Informacijos Gynėju.</p>
+    <p class="meta" data-lt="BrAIn Club Jr · Robotikos Akademija" data-en="BrAIn Club Jr · Robotikos Akademija">BrAIn Club Jr · Robotikos Akademija</p>
+  </header>
+
+  <div class="langbar"><button class="langbtn" id="lng" onclick="toggleLang()">EN</button></div>
+
+  <h2 data-lt="Pradėkite nuo šių" data-en="Start here">Pradėkite nuo šių</h2>
+  <div class="grid">
+    <a class="card lead" href="apzvalga.html">
+      <span class="ico">📄</span>
+      <div class="ct" data-lt="Apžvalga — 2 puslapiai" data-en="Overview — 2 pages">Apžvalga — 2 puslapiai</div>
+      <div class="cd" data-lt="Trumpiausias kelias suprasti, kas tai yra. Pradėkite nuo čia, jei turite 3 minutes."
+                      data-en="The fastest way to understand what this is. Start here if you have 3 minutes.">
+        Trumpiausias kelias suprasti, kas tai yra. Pradėkite nuo čia, jei turite 3 minutes.</div>
+      <span class="tag" data-lt="~3 min" data-en="~3 min">~3 min</span>
+    </a>
+    <a class="card lead" href="programa.html">
+      <span class="ico">🗺️</span>
+      <div class="ct" data-lt="Visa programa — 9 mėnesiai" data-en="Full programme — 9 months">Visa programa — 9 mėnesiai</div>
+      <div class="cd" data-lt="9 lygiai, temos, ženklai, kiekvieno mėnesio ritmas. Skirta mokytojams ir mentoriams."
+                      data-en="9 levels, topics, badges, the rhythm of each month. Written for teachers and mentors.">
+        9 lygiai, temos, ženklai, kiekvieno mėnesio ritmas. Skirta mokytojams ir mentoriams.</div>
+      <span class="tag" data-lt="LT / EN · ~10 min" data-en="LT / EN · ~10 min">LT / EN · ~10 min</span>
+    </a>
+  </div>
+
+  <h2 data-lt="Pamoka 1 — demonstracinė" data-en="Lesson 1 — the demo">Pamoka 1 — demonstracinė</h2>
+  <div class="grid">
+    <a class="card" href="pamoka-1.html">
+      <span class="ico">🎬</span>
+      <div class="ct" data-lt="Pamokos skaidrės" data-en="Lesson slides">Pamokos skaidrės</div>
+      <div class="cd" data-lt="Tai, kas buvo pristatyta gyvai: personažai, istorija, garsai, „Vieša ir slapta“."
+                      data-en="Exactly what was presented live: characters, story, sound, “Public vs private”.">
+        Tai, kas buvo pristatyta gyvai: personažai, istorija, garsai, „Vieša ir slapta“.</div>
+      <span class="tag" data-lt="LT / EN" data-en="LT / EN">LT / EN</span>
+    </a>
+    <a class="card" href="scenarijus.html">
+      <span class="ico">📋</span>
+      <div class="ct" data-lt="Mentoriaus scenarijus" data-en="Mentor script">Mentoriaus scenarijus</div>
+      <div class="cd" data-lt="Pamoka minutė po minutės — ką sako mokytojas, kiek trunka, kur dėti akcentus."
+                      data-en="The lesson minute by minute — what the teacher says, how long, where to put emphasis.">
+        Pamoka minutė po minutės — ką sako mokytojas, kiek trunka, kur dėti akcentus.</div>
+      <span class="tag" data-lt="Mokytojui" data-en="For the teacher">Mokytojui</span>
+    </a>
+    <a class="card" href="testas.html">
+      <span class="ico">🎮</span>
+      <div class="ct" data-lt="Gynėjo tipo testas" data-en="Defender-type test">Gynėjo tipo testas</div>
+      <div class="cd" data-lt="9 klausimai, 5–6 min. Parodo, koks žaidėjo tipas vaikas — mokytojas mato visą klasę."
+                      data-en="9 questions, 5–6 min. Shows each child’s player type — the teacher sees the whole class.">
+        9 klausimai, 5–6 min. Parodo, koks žaidėjo tipas vaikas — mokytojas mato visą klasę.</div>
+      <span class="tag" data-lt="Interaktyvu" data-en="Interactive">Interaktyvu</span>
+    </a>
+  </div>
+
+  <h2 data-lt="Medžiaga ir pagrindimas" data-en="Materials &amp; evidence">Medžiaga ir pagrindimas</h2>
+  <div class="grid">
+    <a class="card" href="komiksai.html">
+      <span class="ico">💥</span>
+      <div class="ct" data-lt="Komiksai" data-en="Comics">Komiksai</div>
+      <div class="cd" data-lt="Istorijos, per kurias vaikai mokosi — ir skaito. Klaidas klysta, vaikai jį pataiso."
+                      data-en="The stories kids learn from — and read. Klaidas makes mistakes, the kids correct him.">
+        Istorijos, per kurias vaikai mokosi — ir skaito. Klaidas klysta, vaikai jį pataiso.</div>
+      <span class="tag" data-lt="Vaikams" data-en="For kids">Vaikams</span>
+    </a>
+    <a class="card" href="vizualai.html">
+      <span class="ico">🎨</span>
+      <div class="ct" data-lt="Personažai ir pasaulis" data-en="Characters &amp; world">Personažai ir pasaulis</div>
+      <div class="cd" data-lt="Klaidas · Mistė · Baitas · Neuronas · Mok. Lekta — ir Kubijos pasaulis."
+                      data-en="Klaidas · Mistė · Baitas · Neuronas · Ms. Lekta — and the world of Kubija.">
+        Klaidas · Mistė · Baitas · Neuronas · Mok. Lekta — ir Kubijos pasaulis.</div>
+      <span class="tag" data-lt="Vizualai" data-en="Visuals">Vizualai</span>
+    </a>
+    <a class="card" href="tyrimas.html">
+      <span class="ico">🔬</span>
+      <div class="ct" data-lt="Kuo tai pagrįsta" data-en="What it’s based on">Kuo tai pagrįsta</div>
+      <div class="cd" data-lt="UNESCO MIL · Ofcom · EU Kids Online · Common Sense Media + LT bendrosios programos."
+                      data-en="UNESCO MIL · Ofcom · EU Kids Online · Common Sense Media + the LT national curriculum.">
+        UNESCO MIL · Ofcom · EU Kids Online · Common Sense Media + LT bendrosios programos.</div>
+      <span class="tag" data-lt="Šaltiniai" data-en="Sources">Šaltiniai</span>
+    </a>
+  </div>
+
+  <div class="warn"
+       data-lt="⚠️ Nuoroda neviešinama ir neindeksuojama paieškos sistemose — skirta komandai ir mokyklai peržiūrėti. Prašome nedalinti viešai, kol nesutarta dėl komunikacijos."
+       data-en="⚠️ This link is unlisted and not indexed by search engines — it is for the team and the school to review. Please don’t share it publicly until communication is agreed.">
+    ⚠️ Nuoroda neviešinama ir neindeksuojama paieškos sistemose — skirta komandai ir mokyklai peržiūrėti. Prašome nedalinti viešai, kol nesutarta dėl komunikacijos.</div>
+
+  <footer>
+    <div data-lt="Visi puslapiai atsidaro naršyklėje — nieko nereikia diegti ar atsisiųsti."
+         data-en="Every page opens in the browser — nothing to install or download.">
+      Visi puslapiai atsidaro naršyklėje — nieko nereikia diegti ar atsisiųsti.</div>
+    <div style="margin-top:8px;opacity:.7">BrAIn Club Jr · Robotikos Akademija · 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  var lang = 'lt';
+  function applyLang(){
+    document.querySelectorAll('[data-lt]').forEach(function(el){
+      var v = el.getAttribute('data-' + lang);
+      if(v !== null) el.innerHTML = v;
+    });
+    document.getElementById('lng').textContent = (lang === 'lt' ? 'EN' : 'LT');
+    document.documentElement.lang = lang;
+  }
+  function toggleLang(){ lang = (lang === 'lt' ? 'en' : 'lt'); applyLang(); }
+</script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!doctype html><title>Pamoka 1 — Mentoriaus scenarijus (Informacijos Gynėjai)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --paper:#FFFDF8;--paper-2:#F6EFE2;--card:#FFFFFF;
+    --ink:#241A32;--ink-soft:#574D6B;--ink-faint:#8A809E;
+    --line:#E8DECD;--line-strong:#D6C7AF;
+    --accent:#6E4BE8;--accent-ink:#4E2FC4;--accent-wash:#EFEAFD;
+    --clyde:#FF6E2E;--clyde-wash:#FFE7D6;
+    --neuron:#0E97B4;--neuron-wash:#DBF3F9;
+    --pub:#1F9E76;--pub-wash:#E1F4EC;--priv:#DB443C;--priv-wash:#FBE3E1;
+    --display:'SF Pro Rounded',ui-rounded,'Nunito','Segoe UI',system-ui,sans-serif;
+    --body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --hand:'Bradley Hand','Comic Sans MS','Segoe Print',cursive;
+    --mono:ui-monospace,'SF Mono',Menlo,monospace;
+    --shadow:0 1px 2px rgba(36,26,50,.06),0 10px 24px -14px rgba(36,26,50,.24);
+    --ol:2.5px solid var(--ink);--radius:15px;--maxw:820px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#141020;--paper-2:#1E1730;--card:#1F1832;
+    --ink:#F1ECFA;--ink-soft:#B8AED4;--ink-faint:#867CA6;
+    --line:#302644;--line-strong:#443761;
+    --accent:#9B82FF;--accent-ink:#B9A6FF;--accent-wash:#271E48;
+    --clyde:#FF8A54;--clyde-wash:#38200F;
+    --neuron:#3FC9E6;--neuron-wash:#0E2E37;
+    --pub:#3FBF97;--pub-wash:#123329;--priv:#F0716B;--priv-wash:#38191A;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 26px -14px rgba(0,0,0,.7);--ol:2.5px solid #0c0814;
+  }}
+  :root[data-theme="dark"]{
+    --paper:#141020;--paper-2:#1E1730;--card:#1F1832;
+    --ink:#F1ECFA;--ink-soft:#B8AED4;--ink-faint:#867CA6;
+    --line:#302644;--line-strong:#443761;
+    --accent:#9B82FF;--accent-ink:#B9A6FF;--accent-wash:#271E48;
+    --clyde:#FF8A54;--clyde-wash:#38200F;--neuron:#3FC9E6;--neuron-wash:#0E2E37;
+    --pub:#3FBF97;--pub-wash:#123329;--priv:#F0716B;--priv-wash:#38191A;--ol:2.5px solid #0c0814;
+  }
+  :root[data-theme="light"]{
+    --paper:#FFFDF8;--paper-2:#F6EFE2;--card:#FFFFFF;
+    --ink:#241A32;--ink-soft:#574D6B;--ink-faint:#8A809E;
+    --line:#E8DECD;--line-strong:#D6C7AF;
+    --accent:#6E4BE8;--accent-ink:#4E2FC4;--accent-wash:#EFEAFD;
+    --clyde:#FF6E2E;--clyde-wash:#FFE7D6;--neuron:#0E97B4;--neuron-wash:#DBF3F9;
+    --pub:#1F9E76;--pub-wash:#E1F4EC;--priv:#DB443C;--priv-wash:#FBE3E1;--ol:2.5px solid var(--ink);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:1.12;margin:0;text-wrap:balance}
+  p{margin:0}
+  a{color:var(--accent-ink)}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+
+  nav.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--paper) 88%,transparent);border-bottom:var(--ol)}
+  nav.top .wrap{display:flex;align-items:center;gap:12px;height:54px}
+  .brandmark{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:.95rem}
+  .shield{width:22px;height:25px;flex:0 0 auto}
+  nav .links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+  nav .links a{font-size:.78rem;color:var(--ink-soft);text-decoration:none;padding:5px 9px;border-radius:99px;font-weight:700}
+  nav .links a:hover{background:var(--accent-wash);color:var(--accent-ink)}
+  @media(max-width:760px){nav .links{display:none}}
+
+  header.hero{padding:38px 0 8px}
+  header .eyebrow{margin-bottom:8px}
+  header h1{font-size:clamp(2rem,5.4vw,3rem);letter-spacing:-.02em}
+  header h1 .u{color:var(--pub)}header h1 .s{color:var(--priv)}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .mchip{font-family:var(--mono);font-size:.7rem;padding:5px 11px;border-radius:99px;border:2px solid var(--line-strong);background:var(--card);color:var(--ink-soft);font-weight:700}
+  .mchip b{color:var(--ink)}
+
+  section{padding:30px 0;border-top:var(--ol)}
+  .sec-head h2{font-size:clamp(1.4rem,3.4vw,2rem);margin-bottom:6px}
+  .sec-head p{color:var(--ink-soft);font-size:1rem}
+
+  .box{background:var(--card);border:var(--ol);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+  .box+.box{margin-top:14px}
+  .lbl{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  ul.clean{margin:8px 0 0;padding-left:20px}ul.clean li{margin-bottom:6px;font-size:.95rem}
+  ul.clean li b{color:var(--ink)}
+  ol.out{margin:8px 0 0;padding-left:22px}ol.out li{margin-bottom:7px;font-size:.96rem}
+
+  /* beat */
+  .beat{border:var(--ol);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-top:16px;background:var(--card)}
+  .beat>.bh{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--paper-2);border-bottom:var(--ol)}
+  .beat>.bh .t{font-family:var(--mono);font-weight:800;font-size:.85rem;color:var(--accent-ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .beat>.bh h3{font-size:1.1rem}
+  .beat>.bh .slide{margin-left:auto;font-family:var(--mono);font-size:.64rem;font-weight:700;background:var(--accent);color:#fff;border-radius:99px;padding:3px 9px;white-space:nowrap}
+  .beat>.bb{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+
+  .do{font-size:.9rem;color:var(--ink-soft);font-style:italic;padding-left:26px;position:relative}
+  .do::before{content:"▸";position:absolute;left:6px;color:var(--accent);font-style:normal;font-weight:800}
+  .say{border-radius:12px;padding:10px 14px;font-size:.98rem}
+  .say .who{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:3px}
+  .say.m{background:var(--accent-wash);border-left:4px solid var(--accent)}
+  .say.m .who{color:var(--accent-ink)}
+  .say.c{background:var(--clyde-wash);border-left:4px solid var(--clyde);font-family:var(--hand);font-size:1.05rem}
+  .say.c .who{color:var(--clyde);font-family:var(--mono)}
+  .say.n{background:var(--neuron-wash);border-left:4px solid var(--neuron)}
+  .say.n .who{color:var(--neuron)}
+  .say.k{background:var(--pub-wash);border-left:4px solid var(--pub)}
+  .say.k .who{color:var(--pub)}
+  .ask{background:var(--paper-2);border:2px dashed var(--line-strong);border-radius:12px;padding:10px 14px;font-size:.95rem}
+  .ask b{color:var(--accent-ink)}
+  .ans{color:var(--pub);font-weight:700}
+
+  .twoby{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.twoby{grid-template-columns:1fr}}
+  .cell{border:var(--ol);border-radius:12px;padding:12px}
+  .cell.good{background:var(--pub-wash)}.cell.bad{background:var(--priv-wash)}
+  .cell .tg{font-family:var(--mono);font-size:.66rem;font-weight:800;padding:3px 8px;border-radius:99px;border:2px solid var(--ink);display:inline-block}
+  .cell.good .tg{background:var(--pub);color:#fff}.cell.bad .tg{background:var(--priv);color:#fff}
+  .cell .bub{font-family:var(--hand);font-size:1.02rem;margin-top:8px;display:block}
+  .cell .cap{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+
+  .safe{border:2px dashed var(--priv);background:var(--priv-wash);border-radius:12px;padding:12px 14px;font-size:.9rem}
+  .safe b{color:var(--priv)}
+
+  table{border-collapse:collapse;width:100%;background:var(--card);font-size:.9rem;border:var(--ol);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+  thead th{background:var(--paper-2);font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+  tbody tr:last-child td{border-bottom:none}
+  td .p{color:var(--pub);font-weight:700}td .s{color:var(--priv);font-weight:700}
+  .tblwrap{overflow-x:auto}
+
+  .print{border:var(--ol);border-radius:var(--radius);padding:16px 18px;background:repeating-linear-gradient(180deg,transparent,transparent 30px,var(--line) 30px,var(--line) 31px);box-shadow:var(--shadow)}
+  .print h4{font-family:var(--hand);font-size:1.3rem;color:var(--clyde)}
+  .hand{font-family:var(--hand)}
+  .hline{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.92rem}
+  .hbox{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:5px;flex:0 0 auto}
+
+  pre{background:#241A32;color:#F1ECFA;border-radius:12px;padding:14px;overflow-x:auto;font-family:var(--mono);font-size:.75rem;line-height:1.5;border:var(--ol)}
+  .flag{border-left:5px solid var(--priv);background:var(--priv-wash);border-radius:0 12px 12px 0;padding:12px 15px;margin-top:14px;font-size:.9rem}
+  .flag b{color:var(--priv)}
+  footer{border-top:var(--ol);padding:28px 0 54px;color:var(--ink-faint);font-size:.8rem;text-align:center}
+</style>
+
+<nav class="top"><div class="wrap">
+  <div class="brandmark"><svg class="shield" viewBox="0 0 26 29"><path d="M13 1 L24 5 V14 C24 21 19 26 13 28 C7 26 2 21 2 14 V5 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="2"/><path d="M8 14 l3.5 3.5 L18 9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Pamoka 1 · Scenarijus</div>
+  <div class="links">
+    <a href="#tikslai">Tikslai</a><a href="#eiga">Eiga</a><a href="#komiksai">Komiksai</a>
+    <a href="#misija">Misija</a><a href="#namu">Namų darbas</a><a href="#skaidres">Skaidrės</a><a href="#bup">🇱🇹 Programa</a>
+  </div>
+</div></nav>
+
+<header class="hero"><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow"><div class="wrap">
+  <div class="eyebrow">🛡️ Informacijos Gynėjai · BrAIn Club Jr · demo Jul 27 · Šiaurės Licėjus</div>
+  <h1>Pamoka 1 — Vieša ar <span class="s">Slapta?</span></h1>
+  <p style="color:var(--ink-soft);margin-top:12px;font-size:1.08rem;max-width:56ch">Pilnas <b>mentoriaus scenarijus</b> — ką sakyti, ką rodyti, ką daryti. 45 min, 1 mentorius. Vaikai tampa Gynėjais ir sugauna Clydeus'o klaidas.</p>
+  <div class="meta">
+    <span class="mchip">⏱ <b>45 min</b></span>
+    <span class="mchip">👤 <b>1 mentorius</b></span>
+    <span class="mchip">🎒 1 klasė (~20 vaikų)</span>
+    <span class="mchip">💻 web + ✍️ rašymas ranka</span>
+    <span class="mchip">🎯 Lygis 1 · Naujokas</span>
+  </div>
+</div></header>
+
+<main>
+
+<section id="tikslai"><div class="wrap">
+  <div class="box"><span class="lbl">🎯 Ko vaikas išmoks (mokymosi rezultatai)</span>
+    <ol class="out">
+      <li>Skiria, kuo galima <b>dalintis (VIEŠA)</b> ir ką reikia <b>saugoti (SLAPTA)</b> — ir paaiškina kodėl.</li>
+      <li>Pritaiko <b>auksinę taisyklę</b> naujam atvejui: „ar tai padeda nepažįstamam mane surasti?"</li>
+      <li>Įvardina <b>3 magiškus klausimus</b> + Spotuko taisyklę „didelis jausmas → STOP".</li>
+      <li>Parodo, kaip <b>saugiai pradėti draugystę</b> mokykloje ir žaidime.</li>
+      <li>Atpažįsta <b>„paslaptis nuo tėvų"</b> kaip raudoną vėliavą ir žino — pasakyti patikimam suaugusiam (<b>Rankos-5</b>).</li>
+    </ol>
+  </div>
+  <div class="box"><span class="lbl">🧰 Ko reikia (medžiagos)</span>
+    <ul class="clean">
+      <li><b>Žalios + raudonos kortelės</b> kiekvienam vaikui (VIEŠA / SLAPTA).</li>
+      <li>Du <b>kampų ženklai</b>: 🟢 VIEŠA · 🔴 SLAPTA.</li>
+      <li><b>Gynėjo sąsiuvinis</b> + pieštukai · <b>NAUJOKO ženkliukai</b> (kolekcijos pradžia).</li>
+      <li>Kompiuteris + projektorius (11 skaidrių) · <b>per-vaiko lapelis</b> + <b>namų darbo lapas</b> (spausdinti).</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="eiga"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Scenarijus · 45 min</span><h2>Pamokos eiga — žingsnis po žingsnio</h2>
+    <p style="margin-top:6px">Mentoriaus žodžiai — violetiniai. Veikėjų burbulai (skaityti garsiai, DIDŽIOSIOMIS) — oranžiniai. ▸ = ką daryti.</p></div>
+
+  <!-- 1 -->
+  <div class="beat"><div class="bh"><span class="t">0–3 min</span><h3>Kablys — tampame Gynėjais</h3><span class="slide">Skaidrė 1</span></div><div class="bb">
+    <div class="say m"><span class="who">Mentorius (susijaudinęs)</span>„Sveiki, būsimi <b>GYNĖJAI!</b> Šiandien pradedate slaptą misiją. Ar norite tapti Informacijos Gynėjais?"</div>
+    <div class="do">Išmokstam <b>Gynėjo saliūtą</b>: ranka prie kaktos → į priekį 🫡. „Kai parodysiu šį ženklą — visi sakot: <b>MES – GYNĖJAI!</b>" (Tai mūsų dėmesio signalas visai pamokai.)</div>
+    <div class="say n"><span class="who">Neuron (skaidrėje)</span>„Labas! Aš — Neuron, jūsų treneris. Šiandien išmoksim didžiausią Gynėjo galią: žinoti, kuo galima dalintis, o ką saugoti."</div>
+  </div></div>
+
+  <!-- 2 -->
+  <div class="beat"><div class="bh"><span class="t">3–7 min</span><h3>Komanda + Vieša/Slapta</h3><span class="slide">Skaidrės 2–5</span></div><div class="bb">
+    <div class="do">Pristatom komandą (Skaidrė 2): <b>Clydeus</b> (smagus, bet daug klysta — jūsų darbas pagauti!), <b>Mira</b> (drąsi draugė), <b>Spotus</b> (šuo — kai kažkas negerai, jis <b>URZGIA 🐕💢</b>), <b>Mokytoja Lekta</b>.</div>
+    <div class="say m"><span class="who">Mentorius</span>„Kai kuo galima dalintis su visais — tai <b style="color:var(--pub)">VIEŠA</b> (žalia). Kai kas tik tavo ir šeimos — tai <b style="color:var(--priv)">SLAPTA</b> (raudona)." <em>(Skaidrė 4 — du stulpeliai.)</em></div>
+    <div class="ask"><b>🗝️ Auksinė taisyklė:</b> „Ar tai padeda <b>nepažįstamam</b> žmogui mane <b>SURASTI</b> tikrame gyvenime? Jei taip — tai SLAPTA." <em>(Pakartojam kartu 1 kartą.)</em></div>
+  </div></div>
+
+  <!-- 3 -->
+  <div class="beat"><div class="bh"><span class="t">7–11 min</span><h3>3 magiški klausimai + Spotuko galia</h3><span class="slide">Skaidrė 6</span></div><div class="bb">
+    <div class="say n"><span class="who">Neuron</span>„Gynėjas visada klausia 3 magiškų klausimų: <b>1) Ar tai TIESA? 2) KAS tai pasakė? 3) KODĖL?</b>"</div>
+    <div class="say c"><span class="who">Spotus</span>„GRR! O mano galia — kai pajunti DIDELĮ jausmą (išgąstį, skubą, per didelį džiaugsmą) → <b>STOP!</b> Klausk suaugusio."</div>
+    <div class="do">Trumpai: kai Spotus urzgia — visi kartu darom „STOP" ženklą ranka ✋.</div>
+  </div></div>
+
+  <!-- 4 -->
+  <div class="beat"><div class="bh"><span class="t">11–16 min</span><h3>Komiksas A — kaip susirasti draugą</h3><span class="slide">Skaidrė 7 · 🏫</span></div><div class="bb">
+    <div class="twoby">
+      <div class="cell good"><span class="tg">✅ TEISINGA</span><span class="bub">CLYDEUS: „LABAS! AŠ CLYDEUS. MĖGSTU BLOKŲ ŽAIDIMUS – NORI ŽAISTI KARTU?"</span><span class="cap">Dalinasi VIEŠA: vardas + kas patinka + kvietimas.</span></div>
+      <div class="cell bad"><span class="tg">🔴 KLAIDA</span><span class="bub">CLYDEUS (ką tik sutiktam): „AŠ GYVENU BERŽŲ G. 5 IR PO PAMOKŲ BŪNU NAMIE VIENAS!" 🐕💢</span><span class="cap">Tai SLAPTA — padeda nepažįstamam surasti.</span></div>
+    </div>
+    <div class="ask"><b>Klausiu vaikų:</b> „Kuris Clydeus pasielgė kaip Gynėjas? Kelkit <b>žalią</b> arba <b>raudoną</b> kortelę!" → <span class="ans">Pirmas (žalias).</span> „Kodėl antras — klaida?" (Atsako: pasakė adresą / kad vienas.)</div>
+  </div></div>
+
+  <!-- 5 -->
+  <div class="beat"><div class="bh"><span class="t">16–21 min</span><h3>Komiksas B — kai prašo paslapties</h3><span class="slide">Skaidrė 8 · 🎨</span></div><div class="bb">
+    <div class="twoby">
+      <div class="cell good"><span class="tg">✅ TEISINGA</span><span class="bub">MIRA: „MAN KAŽKAS NEDRĄSU… PAKLAUSIU MOKYTOJOS LEKTOS IR PASAKYSIU MAMAI."</span><span class="cap">Naują suaugusį „patikrini" su tuo, kurį jau pažįsti.</span></div>
+      <div class="cell bad"><span class="tg">🔴 RAUDONA VĖLIAVA</span><span class="bub">KAŽKAS: „TIK NESAKYK TĖVAMS…" 🐕💢💢</span><span class="cap">Prašymas slėpti nuo mamos/tėčio = didžiausias signalas.</span></div>
+    </div>
+    <div class="ask"><b>Klausiu:</b> „Ką daro Gynėjas, kai kažkas prašo paslapties nuo tėvų?" → visi šaukia: <span class="ans">„PASAKYK SUAUGUSIAM!"</span></div>
+    <div class="safe"><b>🛡️ Ramybės beat (privaloma):</b> „Įkvėpkim su Spotuku… ir iškvėpkim." (3 kartus.) „Jūs saugūs. <b>Dauguma suaugusiųjų geri ir malonūs.</b> Tai tik mūsų supergalia retam keblumui. Geras suaugęs <b>niekada</b> neprašo slėpti paslapčių nuo tavo tėvų."</div>
+    <div class="safe" style="margin-top:8px"><b>📋 Jei vaikas ATSKLEIDŽIA (disclosure protokolas):</b> 1) Būk ramus, <b>neklausinėk</b> detalių. 2) Padėkok, kad pasakė. 3) <b>Tą pačią dieną</b> perduok mokyklos saugumo specialistui / psichologui (<b>DSL — įrašyk vardą</b>). Mentorius privalo žinoti šį žmogų PRIEŠ pamoką.</div>
+  </div></div>
+
+  <!-- 6 -->
+  <div class="beat"><div class="bh"><span class="t">21–24 min</span><h3>Komiksas C — draugas žaidime (žaibiškas)</h3><span class="slide">Skaidrė 9 · 🎮 Kubija</span></div><div class="bb">
+    <div class="twoby">
+      <div class="cell good"><span class="tg">✅ TEISINGA</span><span class="bub">CLYDEUS: žaidžia, malonus, naudoja slapyvardį „BLOKMEISTRAS7".</span></div>
+      <div class="cell bad"><span class="tg">🔴 KLAIDA</span><span class="bub">„DRAUGAS": „KOKS TAVO TIKRAS VARDAS? KUR MOKAIS? ATSIŲSK NUOTRAUKĄ." 🐕💢</span></div>
+    </div>
+    <div class="ask"><b>Greitas balsavimas kortelėmis.</b> Žinutė: <b>žmogus, kurio niekada nesutikai gyvai, — tas, su kuriuo reikia būti atsargiam. Tikram draugui nereikia tavo adreso.</b></div>
+  </div></div>
+
+  <!-- 7 -->
+  <div class="beat"><div class="bh"><span class="t">24–31 min</span><h3>MISIJA-TESTAS iPad'e / kompiuteriu (VIENAS pagrindinis vertinimas)</h3><span class="slide">Skaidrė 10</span></div><div class="bb">
+    <div class="do"><b>Vienas vertinimas</b> (kad vienas mentorius suvaldytų): kiekvienas vaikas atidaro <b>Gynėjo testą</b> įrenginyje ir bakstelėdamas atsako 8 „VIEŠA/SLAPTA". Rezultatas („jau moku / dar treniruokimės") = individualus pradinis lygis → įrodymas tėvams. Vaikams sakom <b>MISIJA</b>, ne „testas".</div>
+    <div class="do">⚠️ Atidaryk <b>vietinį failą „Gynejo-testas.html"</b> įrenginyje — <b>veikia be interneto</b> (mokyklos filtras gali blokuoti nuorodą). Nuoroda — tik atsarginė.</div>
+    <div class="do"><b>Be įrenginių?</b> Atsarginis variantas: „Vieša/Slapta" <b>kampų bėgimas</b> (🟢/🔴 kampai, tos pačios 8 kortelės) — linksma, bet be individualių duomenų. <b>Nedaryk abiejų</b> — pasirink vieną.</div>
+  </div></div>
+
+  <!-- 8 -->
+  <div class="beat"><div class="bh"><span class="t">31–38 min</span><h3>Artefaktas — NAUJOKO ženklas</h3><span class="slide">Skaidrė 11</span></div><div class="bb">
+    <div class="say n"><span class="who">Neuron</span>„Jūs pagavote visas Clydeus'o klaidas! Nuo šiol jūs — <b>Informacijos Gynėjai, Lygis 1: NAUJOKAS.</b>"</div>
+    <div class="do">Įteikiu <b>NAUJOKO ženkliuką</b> kiekvienam (kolekcijos pradžia — kas mėnesį naujas lygis, iki <b>Gynėjo</b>). Ženklas keliauja namo — tėvai pasirašo.</div>
+  </div></div>
+
+  <!-- 9 -->
+  <div class="beat"><div class="bh"><span class="t">38–45 min</span><h3>Namų darbas + kita savaitė + atsisveikinimas</h3><span class="slide">Skaidrė 12</span></div><div class="bb">
+    <div class="do">Išdalinu <b>namų darbo lapą</b> (žr. žemiau). Paaiškinu: 20 min <b>su tėvais, vieną kartą</b>.</div>
+    <div class="say c"><span class="who">Cliffhanger (Clydeus)</span>„O ne… kitą savaitę gavau žinutę: „TU LAIMĖJAI 1000 EURŲ!" … Ar tai TIESA?? Padėkit man, Gynėjai!"</div>
+    <div class="do"><b>Atsisveikinimo ritualas (individuali patikra):</b> iš klasės išeini tik pasakęs man <b>vieną VIEŠA arba vieną SLAPTA</b> dalyką + Gynėjo saliūtas 🫡.</div>
+  </div></div>
+</div></section>
+
+<!-- MISIJA CARDS -->
+<section id="misija"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Vertinimas = žaidimas</span><h2>Misijos kortelės (8) — bėgimui ir lapeliui</h2>
+    <p style="margin-top:6px">Vienas formatas: VIEŠA ar SLAPTA. Tos pačios kortelės = kampų žaidimas + baseline vertinimas.</p></div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>Kortelė</th><th>Atsakymas</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Mėgstama spalva</td><td class="p">🟢 VIEŠA</td></tr>
+      <tr><td>2</td><td>Namų adresas</td><td class="s">🔴 SLAPTA</td></tr>
+      <tr><td>3</td><td>Slapyvardis žaidime</td><td class="p">🟢 VIEŠA</td></tr>
+      <tr><td>4</td><td>Slaptažodis</td><td class="s">🔴 SLAPTA</td></tr>
+      <tr><td>5</td><td>Kad myli šunis</td><td class="p">🟢 VIEŠA</td></tr>
+      <tr><td>6</td><td>Mokyklos pavadinimas</td><td class="s">🔴 SLAPTA</td></tr>
+      <tr><td>7</td><td>Sava nuotrauka nepažįstamam</td><td class="s">🔴 SLAPTA</td></tr>
+      <tr><td>8</td><td>Savo piešinys</td><td class="p">🟢 VIEŠA</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box" style="margin-top:14px"><span class="lbl">📄 Per-vaiko lapelis (spausdinti)</span>
+    <p style="font-size:.92rem;margin-top:6px;color:var(--ink-soft)">4 paveikslėliai — apvesk 🟢 VIEŠA arba 🔴 SLAPTA: <b>(a)</b> spalva · <b>(b)</b> adresas · <b>(c)</b> slapyvardis · <b>(d)</b> slaptažodis. Vaikas pasilieka; parodo pradinį lygį + augimą.</p></div>
+</div></section>
+
+<!-- HOMEWORK -->
+<section id="namu"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Namų darbas · 20 min · su tėvais · KARTĄ</span><h2>„Išmokyk savo tėvus" (spausdinamas lapas)</h2></div>
+  <div class="print">
+    <h4>🛡️ Gynėjo namų misija — Lygis 1</h4>
+    <div class="hline"><span class="hbox"></span><span><b>1. Išmokyk tėvus.</b> Paaiškink, kas yra <b>VIEŠA</b> ir <b>SLAPTA</b> + auksinę taisyklę.</span></div>
+    <div class="hline"><span class="hbox"></span><span><b>2. Rankos-5.</b> Apvesk savo ranką ir ant 5 pirštų surašyk <b>5 patikimus suaugusius</b> (mama, tėtis, Mokytoja Lekta…). Pakabink ant šaldytuvo.</span></div>
+    <div class="hline"><span class="hbox"></span><span><b>3. Nupiešk</b> 1 VIEŠA + 1 SLAPTA dalyką (apvesk žodžius).</span></div>
+    <div class="hline"><span class="hbox"></span><span><b>4. Šeimos pokalbis</b> (žr. anketą apačioje) → susitarkit vieną <b>šaldytuvo taisyklę</b>.</span></div>
+    <div class="hline"><span class="hbox"></span><span><b>5. Tėvai pasirašo</b> NAUJOKO ženklą. ✍️ __________</span></div>
+  </div>
+  <div class="box" style="margin-top:14px"><span class="lbl">👪 Šeimos anketa — kartu atrandam (ne auditas)</span>
+    <ul class="clean">
+      <li>Ką mūsų šeima <b>jau darom gerai</b> internete?</li>
+      <li>Ar <b>patikrinam, kas parašė</b>, prieš patikėdami naujiena? <span style="color:var(--ink-faint)">(1–5)</span></li>
+      <li>Ar <b>žinom, su kuo</b> vaikas žaidžia / bendrauja? <span style="color:var(--ink-faint)">(1–5)</span></li>
+      <li>Kokią <b>vieną taisyklę</b> susitariam ir kabinam ant šaldytuvo?</li>
+    </ul>
+    <p style="font-size:.82rem;color:var(--ink-faint);margin-top:8px">Tikslas: vaikas moko tėvus, tėvai — vaiką. 20 min, vieną kartą — ne kassavaitinis darbas.</p>
+  </div>
+</div></section>
+
+<!-- SLIDES + GAMMA -->
+<section id="skaidres"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Skaidrių tekstai · Gamma</span><h2>11 skaidrių — trumpas tekstas</h2>
+    <p style="margin-top:6px">Mažai teksto, daug vaizdo. Įklijuok į Gamma, sugeneruok, įdėk Higgsfield vaizdus.</p></div>
+  <pre># Informacijos Gynėjai — Pamoka 1: Vieša ar Slapta?  (12 skaidrių)
+1. PASIRUOŠK, GYNĖJAU! — komanda + Neuron · Gynėjo saliūtas
+2. Susipažink: Clydeus · Mira · Spotus 🐕 · Neuron · Mokytoja Lekta
+3. 4 pasauliai: Mokykla · Namai · Būrelis · Kubija
+4. VIEŠA 🟢 vs SLAPTA 🔴 (du stulpeliai, paveikslėliai)
+5. 🗝️ Auksinė taisyklė: „ar padeda nepažįstamam mane surasti?"
+6. 3 magiški klausimai + Spotukas: didelis jausmas → STOP
+7. Komiksas A · Mokykla — teisinga vs klaida (kelk žalią/raudoną)
+8. Komiksas B · Būrelis — „nesakyk tėvams" = raudona vėliava + „Tu esi saugus"
+9. Komiksas C · Kubija — slapyvardis; saugokis nepažįstamo
+10. TESTAS iPad'e/kompiuteriu — 8 klausimai (pagrindinis vertinimas)
+11. NAUJOKO ženklas (Lygis 1)
+12. Namų darbas + kita savaitė — išmokyk tėvus · Rankos-5 · cliffhanger</pre>
+  <div class="flag"><b>⚠️ Prieš Jul 27:</b> (1) mokyklos <b>safeguarding</b> pritarimas Komiksui B; (2) <b>lietuvių kalbos korektūra</b> (Gabrielius/Kris — visas tekstas juodraštis); (3) patikrinti, kad skaidrės + veiklos veikia <b>mokyklos kompiuteriuose</b>. Vardai (Clydeus, Mira, Spotus, Kubija…) — pasiūlymai, keičiami.</div>
+</div></section>
+
+<section id="bup"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Pristatymui mokyklai · common core (LT)</span><h2>Atitiktis Lietuvos Bendrosioms programoms (2022 BUP)</h2>
+    <p style="margin-top:6px">Tai <b>integruota, tarpdalykinė, kompetencijomis grįsta</b> pamoka. Intensyviausiai ugdo <b>Skaitmeninę</b>, <b>Socialinę-emocinę ir sveikos gyvensenos</b> ir <b>Pažinimo</b> kompetencijas.</p></div>
+
+  <div class="tblwrap"><table>
+    <thead><tr><th>Pamokos pasiekimas (vaikas…)</th><th>Kompetencija</th><th>Dalykas / pasiekimų sritis</th></tr></thead>
+    <tbody>
+      <tr><td>Skiria <b>VIEŠĄ</b> ir <b>SLAPTĄ</b> informaciją ir paaiškina kodėl</td><td>Skaitmeninė · Soc.-emocinė</td><td>Informatika — <b>Saugus elgesys (F3.3)</b> „saugo asmens duomenis ir privatumą“ · Pasaulio paž. — Žmogaus sveikata ir sauga · Etika — Savisauga (Aš–Aš)</td></tr>
+      <tr><td>Taiko taisyklę „ar padeda nepažįstamam mane surasti → slapta“</td><td>Skaitmeninė · Soc.-emocinė</td><td>Informatika — Saugus elgesys (F3.3) · Tarpdalykinė tema <b>„Saugus elgesys“</b> (pavojaus numatymas/vengimas)</td></tr>
+      <tr><td>Įvardija 3 klausimus + „stipri emocija → STOP“</td><td>Pažinimo (kritinis mąstymas)</td><td>Informatika — <b>Duomenų tyryba ir informacija</b> „vertina informacijos patikimumą; skiria objektyvią nuo nuomonės“</td></tr>
+      <tr><td>Saugiai pradeda draugystę (gyvai ir žaidime)</td><td>Komunikavimo · Soc.-emocinė</td><td>Etika — Aš ir draugai / <b>Aš ir virtuali bendruomenė</b> · Informatika — Virtualioji komunikacija · Lietuvių k. — kalbos etiketas</td></tr>
+      <tr><td>Atpažįsta „paslaptis nuo tėvų“ kaip pavojų ir pasako patikimam suaugusiam</td><td>Soc.-emocinė · Skaitmeninė</td><td>Informatika — Saugus elgesys (kur kreiptis pagalbos) · Pasaulio paž. — Žmogaus sveikata ir sauga · Etika — Savisauga</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="box" style="margin-top:14px"><span class="lbl">🔑 Terminai, kuriuos mokykla nori girdėti</span>
+    <p style="font-size:.9rem;margin-top:6px;color:var(--ink-soft)">kompetencijų ugdymas · integralus / tarpdalykinis ugdymas · <b>skaitmeninė kompetencija · skaitmeninis raštingumas</b> · saugus elgesys internete · asmens duomenys · privatumas · skaitmeninė tapatybė · informacijos patikimumas · virtuali bendruomenė · elektroninės patyčios · pavojaus numatymas–vengimas–valdymas · patikimas suaugęs.</p></div>
+  <div class="flag"><b>⚠️ Kaip įvardinti dalyką:</b> 2022 BUP — „<b>Pasaulio pažinimas (Visuomeninis ugdymas + Gamtos mokslai)</b>“; <b>Informatika 1–2 kl. yra integruota, ne atskiras dalykas</b>. Būtent ši formuluotė (integruota, tarpdalykinė, kompetencijomis grįsta) — tai, ką BUP mokykla nori girdėti. Šaltiniai: oficialūs emokykla.lt / NŠA (Informatikos BP įgyvendinimo rekomendacijos — Pradinis ugdymas, 2024).</div>
+</div></section>
+
+</main>
+<footer><div class="wrap">
+  <p>🛡️ Informacijos Gynėjai · Pamoka 1 — mentoriaus scenarijus (juodraštis v1) · BrAIn Club Jr</p>
+  <p style="margin-top:6px;opacity:.8">Prieš spausdinant: LT korektūra + mokyklos safeguarding pritarimas.</p>
+</div></footer>
