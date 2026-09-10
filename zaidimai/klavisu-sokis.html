@@ -209,6 +209,7 @@
     <div class="hud-card"><span class="hud-label">Taškai</span><span class="hud-val" id="score">0</span></div>
     <div class="hud-card" id="comboCard"><span class="hud-label">Serija</span><span class="hud-val" id="combo">×1</span></div>
     <div class="hud-card"><span class="hud-label">Lygis</span><span class="hud-val" id="levelNum">1</span><span id="levelDots"></span></div>
+    <div class="hud-card" id="missCard" title="Klaidos šiame lygyje"><span class="hud-label">Klaidos</span><span class="hud-val" id="missNum">0</span></div>
     <button id="muteBtn" title="Garsas">🔊</button>
     <button id="teacherBtn" title="Mokytojui">👩‍🏫 Mokytojui</button>
   </div>
@@ -382,13 +383,14 @@ const S = {
   expected:null, retry:false,
   deadline:0, timer:null, promptT:0,
   stars:[], pos:2, oops:null, breakT:null,
+  missBy:{},               // klaidos pagal lygį: 0..9 — įprasti lygiai, s1/s2 — paslėpti kambariai
   fix:null,                // {r:[raidės], bad:klaidos vieta, cur:žymeklio vieta}
   secret:false, secret2:false, wCount:0   // paslėptas labirinto lygis — jokių užuominų sąsajoje
 };
 
 /* ---------- els ---------- */
 const el = {
-  score:$('score'), combo:$('combo'), levelNum:$('levelNum'), dots:$('levelDots'),
+  score:$('score'), combo:$('combo'), levelNum:$('levelNum'), dots:$('levelDots'), missNum:$('missNum'),
   word:$('promptWord'), cap:$('keycap'), cons:$('console'), hint:$('fixHint'),
   ringFg:$('ringFg'), ringNum:$('ringNum'),
   klaidas:$('klaidas'), baitas:$('baitas'),
@@ -591,7 +593,16 @@ function flashBaitas(c){
 function updateHud(){
   el.score.textContent = S.score;
   el.combo.textContent = '×' + (1 + Math.floor(S.combo/2)*0.5);
+  el.missNum.textContent = S.misses;
 }
+// Klaidų suvestinė pabaigai: 10 lygių + paslėpti kambariai, jei buvo žaisti šį kartą
+function missSummaryRows(){
+  const rows = LEVELS.map((L,i)=>({ name:`${i+1}. ${L.name}`, stars:S.stars[i]||0, miss:S.missBy[i] }));
+  if (S.missBy.s1!==undefined) rows.push({ name:'🔒 Labirintas', miss:S.missBy.s1 });
+  if (S.missBy.s2!==undefined) rows.push({ name:'🔒 Durys ir šuoliai', miss:S.missBy.s2 });
+  return rows;
+}
+function missTotal(){ return Object.values(S.missBy).reduce((a,b)=>a+(b||0),0); }
 
 /* ---------- level end / stars ---------- */
 function endLevel(){
@@ -600,8 +611,9 @@ function endLevel(){
   const acc = total ? S.hits/total : 0;
   const stars = acc>=.9 ? 3 : acc>=.7 ? 2 : 1;
   S.stars[S.level] = stars;
+  S.missBy[S.level] = S.misses;
   $('resultTitle').textContent = `Lygis ${S.level+1} įveiktas!`;
-  $('resultScore').textContent = `+${S.levelScore} taškų`;
+  $('resultScore').textContent = `+${S.levelScore} taškų · klaidų: ${S.misses}`;
   $('resultNote').textContent = stars===3 ? 'Nepriekaištinga! Baitas didžiuojasi tavimi. 🐶'
     : stars===2 ? 'Puiku! Dar truputis — ir trys žvaigždutės.'
     : 'Įveikta! Klaidos — normalu: pakartok ir bus geriau.';
@@ -635,9 +647,9 @@ function finale(){
   S.phase='final'; show('finalScreen');
   const allStars = S.stars.reduce((a,b)=>a+(b||0),0);
   $('finalTitle').textContent = allStars>=27 ? 'Tu — Klavišų MEISTRAS! 🏆' : allStars>=20 ? 'Tu — Klavišų Gynėjas!' : 'Treniruotė įveikta!';
-  $('resultScoreFinal').textContent = `${S.score} taškų · ${allStars}/30 ⭐`;
-  $('finalTable').innerHTML = LEVELS.map((L,i)=>
-    `<tr><td>${i+1}. ${L.name}</td><td>${'⭐'.repeat(S.stars[i]||0)}</td></tr>`).join('');
+  $('resultScoreFinal').textContent = `${S.score} taškų · ${allStars}/30 ⭐ · klaidų iš viso: ${missTotal()}`;
+  $('finalTable').innerHTML = missSummaryRows().map(r=>
+    `<tr><td>${r.name}</td><td>${'⭐'.repeat(r.stars||0)}</td><td>${r.miss===undefined ? '' : (r.miss===0 ? '✅ 0 klaidų' : r.miss+' kl.')}</td></tr>`).join('');
   let best = 0;
   try{
     best = +localStorage.getItem('ks-best')||0;
@@ -648,13 +660,15 @@ function finale(){
 }
 
 function resetGame(){
-  S.score=0; S.stars=[]; S.pos=2; updateHud();
+  S.score=0; S.stars=[]; S.pos=2;
+  for (let i=0;i<10;i++) delete S.missBy[i];   // paslėptų kambarių klaidos (s1/s2) lieka iki grįžimo į pradžią
+  S.misses=0; updateHud();
   el.klaidas.style.transform='translateX(-50%)';
   startLevel(0);
 }
 function backToStart(){
   // Baigus visus įprastus lygius — grįžtam į pradžios/pristatymo ekraną, ne tiesiai į 1 lygį.
-  S.score=0; S.stars=[]; S.pos=2; updateHud();
+  S.score=0; S.stars=[]; S.pos=2; S.missBy={}; S.misses=0; updateHud();
   el.klaidas.style.transform='translateX(-50%)';
   S.phase='start'; show('startScreen');
 }
@@ -691,7 +705,7 @@ function buildMazeGrid(){
   const doorOut = document.createElement('div');
   doorOut.className = 'doorBig exit'; doorOut.textContent = '🚪';
   const exitP = mazeXY(0, MAZE_COLS-1);
-  doorOut.style.left = (exitP.x+112)+'px'; doorOut.style.top = M_PAD+'px'; doorOut.style.height = doorH+'px';
+  doorOut.style.left = (exitP.x+64)+'px'; doorOut.style.top = M_PAD+'px'; doorOut.style.height = doorH+'px';
   g.appendChild(doorOut);
   const kl = document.createElement('img');
   kl.id = 'mazeKlaidas'; kl.src = el.klaidas.src;
@@ -719,6 +733,7 @@ function mazeHit(){
   kl.style.filter = 'drop-shadow(0 0 14px var(--bad))';
   setTimeout(()=>{ kl.style.filter=''; },300);
   M.r=3; M.c=0; placeMazeKlaidas();
+  S.misses++; S.missBy.s1 = S.misses; updateHud();
   $('mazeMsg').textContent = 'Ups! Bandyk dar kartą.';
 }
 function moveMaze(k){
@@ -736,6 +751,7 @@ function moveMaze(k){
 function enterSecret(){
   clearInterval(mazeInt);
   S.secret = true; S.phase = 'play';
+  S.misses = 0; S.missBy.s1 = 0; updateHud();
   show(null);
   $('promptZone').style.display='none'; $('cast').style.display='none';
   $('mazeStage').style.display='flex';
@@ -770,7 +786,7 @@ function enterSecret(){
 function winSecret(){
   clearInterval(mazeInt);
   sndLevel();
-  $('mazeMsg').textContent = '🎉 Radai paslėptą lygį! Bet tai dar ne viskas…';
+  $('mazeMsg').textContent = `🎉 Radai paslėptą lygį! Klaidų: ${S.misses}. Bet tai dar ne viskas…`;
   setTimeout(enterRoom2, 1800);
 }
 
@@ -853,6 +869,7 @@ function hitRoom2(){
   setTimeout(()=>{ kl.style.filter=''; },300);
   M2.r=2; M2.c=0; M2.facing='ArrowRight';
   placeRoom2Klaidas();
+  S.misses++; S.missBy.s2 = S.misses; updateHud();
   $('mazeMsg').textContent = 'Ups! Bandyk dar kartą.';
 }
 function checkRoom2Collision(){
@@ -917,6 +934,7 @@ function doorAction(key){
 }
 function enterRoom2(){
   S.secret2 = true;
+  S.misses = 0; S.missBy.s2 = 0; updateHud();
   M2.r=2; M2.c=0; M2.facing='ArrowRight'; M2.blocked=false; M2.hintShown=false;
   buildRoom2Grid();
   M2.obstacles = [1,3,5].map((c,i)=>({ c, r: i%2?1:3, dir: i%2?1:-1 }));
@@ -945,7 +963,7 @@ function winRoom2(){
   clearInterval(mazeInt2);
   M2.c = R2_FLOOR+1; placeRoom2Klaidas();
   sndLevel();
-  $('mazeMsg').textContent = '🎉🌈🐬 Radai antrą paslėptą lygį!';
+  $('mazeMsg').textContent = `🎉🌈🐬 Radai antrą paslėptą lygį! Klaidų: ${S.misses} (labirinte: ${S.missBy.s1||0}).`;
   setTimeout(()=>{
     S.secret2 = false; S.phase = 'start';
     $('mazeStage').style.display='none';
