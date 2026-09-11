@@ -1,0 +1,656 @@
+<!doctype html><html lang="lt"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pamoka 1 — mentoriaus scenarijus (V5)</title>
+<style>
+:root{--bg:#0C1030;--card:#1B1550;--ink:#fff;--soft:#C3B9F0;--purple:#8A6BFF;--klaidas:#FF8A3D;
+ --cyan:#24C9EC;--gold:#FFC53D;--green:#1FB47A;--red:#E8503F;
+ --f:'SF Pro Rounded',ui-rounded,'Nunito','Segoe UI',system-ui,sans-serif;--m:ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 20px 80px}
+header{border-bottom:3px solid var(--klaidas);padding-bottom:16px;margin-bottom:8px}
+.eyebrow{font-family:var(--m);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--klaidas);font-weight:800}
+h1{font-size:clamp(1.8rem,5vw,3rem);margin:.2em 0 .1em;line-height:1.1}
+h2{font-size:clamp(1.2rem,3vw,1.7rem);margin:2em 0 .5em;border-left:5px solid var(--klaidas);padding-left:12px}
+h3{font-size:1.05rem;margin:1.4em 0 .4em;color:var(--gold)}
+nav{position:sticky;top:0;background:#0C1030ee;backdrop-filter:blur(8px);padding:10px 0;z-index:9;
+ border-bottom:1px solid #ffffff1a;margin-bottom:10px}
+nav a{color:var(--soft);text-decoration:none;font-size:.82rem;margin-right:14px;font-weight:700;white-space:nowrap}
+nav a:hover{color:var(--gold)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pill{background:var(--card);border:2px solid #ffffff22;border-radius:99px;padding:4px 13px;font-size:.82rem;font-weight:700}
+.pill.tech{background:#3a2a10;border-color:var(--gold);color:var(--gold)}
+.blk{background:var(--card);border:2px solid #ffffff1f;border-radius:16px;padding:18px 20px;margin:18px 0}
+.blk.hi{border-color:var(--cyan);background:#12234a}
+.blk.warn{border-color:var(--gold);background:#2a2410}
+.blk.stop{border-color:var(--red);background:#2a1216}
+.blk.open{border-color:var(--gold);background:#2a2410;border-style:dashed;border-width:3px}
+.time{display:inline-block;font-family:var(--m);font-size:.78rem;background:var(--purple);
+ border-radius:99px;padding:3px 12px;font-weight:800;margin-right:8px}
+.bnum{font-family:var(--m);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:800}
+.sl{display:inline-block;font-family:var(--m);font-size:.72rem;background:#3a2210;color:var(--gold);
+ border:2px solid var(--gold);border-radius:99px;padding:2px 11px;font-weight:800;margin-left:6px}
+.say{background:#fff;color:#131735;border-radius:14px;padding:12px 16px;margin:10px 0;font-weight:700;border-left:6px solid var(--klaidas)}
+.say b.who{display:block;font-family:var(--m);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+ color:#a8541a;margin-bottom:5px}
+.do{border-left:5px solid var(--green);padding-left:14px;margin:10px 0}
+.ask{border-left:5px solid var(--cyan);padding-left:14px;margin:10px 0}
+.act{background:#0f3d2b;border:2px solid var(--green);border-radius:12px;padding:10px 14px;margin:12px 0}
+.act b{color:#7CF5C0}
+/* [EKRANE] / [SAKAU] — kiekviena eilutė sąmoningai priskirta (Kris, 2026-08-31, § 0) */
+.tagE,.tagS{font-family:var(--m);font-size:.64rem;letter-spacing:.11em;font-weight:800;
+ border-radius:99px;padding:2px 9px;margin-right:8px;white-space:nowrap;display:inline-block}
+.tagE{background:var(--cyan);color:#06202a}
+.tagS{background:#fff;color:#131735;border:2px solid var(--klaidas)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem}
+th,td{border:1px solid #ffffff26;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#ffffff12;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+td.a{color:var(--gold);font-weight:800;white-space:nowrap}
+.g{color:var(--green);font-weight:800}.r{color:var(--red);font-weight:800}
+ol,ul{padding-left:22px}li{margin:5px 0}
+.big{font-size:1.25rem;font-weight:900;color:var(--gold)}
+.sheet{background:#fff;color:#131735;border-radius:16px;padding:22px 24px;margin:18px 0}
+.sheet h3{color:#7a3d00;margin-top:1.1em}
+.sheet table th{background:#eee;color:#131735}
+.sheet table td,.sheet table th{border-color:#bbb}
+.sheet .box{border:2px dashed #999;border-radius:10px;padding:10px 14px;margin:10px 0}
+footer{margin-top:50px;padding-top:16px;border-top:1px solid #ffffff1a;font-size:.82rem;color:var(--soft)}
+@media print{body{background:#fff;color:#000}nav{display:none}.blk{border-color:#999;background:#f6f6f6;color:#000}
+ .say{border-color:#666}h2{border-color:#666}.act{background:#eaf7f0;color:#000}.sheet{border:2px solid #000}
+ .noprint{display:none}.tagE{background:#ddd;color:#000}.tagS{background:#fff;color:#000}}
+
+/* MOBILE */
+html{-webkit-text-size-adjust:100%}
+body{overflow-wrap:break-word}
+h2,h3,[id]{scroll-margin-top:70px}
+img,video{max-width:100%;height:auto}
+code{word-break:break-word}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border-radius:10px;background:#ffffff08}
+.tw table{margin:0;min-width:480px}
+nav{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:2px}
+nav::-webkit-scrollbar{display:none}
+nav a{margin-right:2px;padding:7px 11px;border-radius:99px;background:#ffffff12;flex:0 0 auto}
+@media (max-width:700px){
+ body{font-size:17px;line-height:1.6}
+ .wrap{padding:12px 14px 70px}
+ header{padding-bottom:12px}
+ h1{font-size:2rem;line-height:1.15}
+ h2{font-size:1.25rem;margin:1.7em 0 .5em;padding-left:10px;border-left-width:4px}
+ h3{font-size:1.02rem}
+ .blk{padding:14px 15px;border-radius:14px;margin:14px 0}
+ .sheet{padding:16px 15px;border-radius:14px}
+ .say{padding:11px 13px;margin:12px 0}
+ .do,.ask{padding-left:12px}
+ .act{padding:10px 13px}
+ .time{margin:0 8px 6px 0}
+ .sl{margin:0 0 0 4px}
+ .tagE,.tagS{margin-bottom:4px}
+ .pill{font-size:.78rem;padding:3px 11px}
+ ol,ul{padding-left:20px}
+ li{margin:7px 0}
+ .tw table{font-size:.88rem;min-width:440px}
+ th,td{padding:7px 9px}
+ .big{font-size:1.12rem}
+}
+@media print{.tw{overflow:visible;background:none}.tw table{min-width:0}nav a{background:none}}
+</style></head><body><div class="wrap">
+
+<header>
+  <div class="eyebrow">🛡️ Informacijos Gynėjai · Pamoka 1 iš 36 · mentoriaus scenarijus</div>
+  <h1>Įvadas į džiungles</h1>
+  <div class="meta">
+    <span class="pill">45 min</span>
+    <span class="pill tech">TECHNIKA: kompiuterių klasė</span>
+    <span class="pill">1–2 kl.</span>
+    <span class="pill">deck.html · 31 skaidrė</span>
+    <span class="pill">V3 · 2026-08-31</span>
+  </div>
+</header>
+
+<nav class="noprint">
+  <a href="#prep">Prieš pamoką</a><a href="#t0">0–3</a><a href="#t3">3–7</a><a href="#t7">7–14</a>
+  <a href="#t14">14–18</a><a href="#t18">18–21</a><a href="#t21">21–25</a><a href="#t25">25–43</a>
+  <a href="#t43">43–45</a><a href="#lapas">Mokytojos lapas</a><a href="#atviri">Atviri klausimai</a>
+</nav>
+
+<div class="blk warn">
+  <h3 style="margin-top:0">Kaip skaityti šitą scenarijų</h3>
+  <p>Kiekviena eilutė turi žymę. Ji sako, <b>kur tas sakinys gyvena</b>:</p>
+  <p><span class="tagE">EKRANE</span> — tai matyti skaidrėje. Nekartok balsu žodis žodin.<br>
+     <span class="tagS">SAKAU</span> — <b>ekrane šito NĖRA.</b> Tai tavo žodžiai. Jei nepasakysi — dings.</p>
+  <p class="big">Taisyklė: jei mentorius gali pasakyti žodžiu — skaidrėje to nėra.</p>
+  <p><b>V3 pakeitimas (Kris, 2026-08-31):</b> deck'as sutrumpintas nuo 45 iki <b>31 skaidrės</b>.
+  Nuorodos į skaidres žemiau <b>perskaičiuotos</b> — anksčiau jos nesutapo (scenarijus rodė į 27-ą,
+  o kompiuterio blokas prasidėdavo 33-ia).</p>
+</div>
+
+<h2 id="prep">Prieš pamoką — 15 min klasėje</h2>
+<div class="blk stop">
+  <h3 style="margin-top:0">🔴 Be šito pamoka neįvyks — patikrink DIENĄ PRIEŠ</h3>
+  <ul>
+    <li><b>Kompiuteriai įsijungia</b> — įjunk bent tris, pažiūrėk, per kiek laiko pasirodo darbastalis.
+        Realistinė prielaida: <b>~15 min</b>, ne 5. Nuo to priklauso visas 25–43 min blokas.</li>
+    <li><b>Kur yra įjungimo mygtukas</b> būtent šiuose korpusuose. Turi mokėti parodyti per projektorių.</li>
+    <li><b>Kokia ikona</b> bus atidaroma 39-ą minutę. Nuspręsk iš anksto, užsirašyk.</li>
+    <li><b>Projektorius</b> — ar persijungia iš tavo nešiojamo į klasės kompiuterį ir atgal.</li>
+    <li><b>Monitoriai pasukti arba uždengti</b> prieš vaikams įeinant. Šviečiantis ekranas nugali tave.</li>
+  </ul>
+</div>
+
+<div class="blk">
+  <h3 style="margin-top:0">Ko reikia</h3>
+  <ul>
+    <li><code>deck.html</code> — vienas failas, veikia be interneto (visi vaizdai ir video viduje)</li>
+    <li>Projektorius · klasės kompiuteriai · pelės</li>
+    <li>Atspausdintas <a href="#lapas">mokytojos lapas</a> (žemiau)</li>
+    <li>Klavišai: <b>→</b> pirmyn · <b>n</b> mentoriaus pastabos · <b>f</b> per visą ekraną · <b>l</b> LT/EN</li>
+  </ul>
+  <p><b>Garso pamokoje nėra sąmoningai</b> (Kris, 2026-08-31): „kalbės mentorius". mp3 reikalavimas
+  šiai pamokai netaikomas.</p>
+</div>
+
+<div class="blk hi">
+  <h3 style="margin-top:0">Šios pamokos VIENAS rezultatas</h3>
+  <p class="big">Kiekvienas vaikas pats <b>įėjo</b> į kompiuterį ir pats <b>išėjo</b> —
+  šešiais žingsniais, kuriuos moka pakartoti.</p>
+  <div class="tw"><table>
+    <tr><th></th><th>1</th><th>2</th><th>3</th></tr>
+    <tr><td class="a"><b>ĮEINAM</b></td><td>ekrano mygtukas</td><td>kompiuterio mygtukas ⏻</td><td>ENTER</td></tr>
+    <tr><td class="a"><b>IŠEINAM</b></td><td>POWER OFF</td><td>Windows klavišas</td><td>spragt pele</td></tr>
+  </table></div>
+  <p><b>Skaitom atbulai:</b> įeinant 1→2→3, išeinant 3→2→1. Tai vienintelis dalykas,
+  kurį vaikas turi atsiminti, kad neatliktų sekos atvirkščiai.</p>
+  <p>Visa kita — antraeiliai dalykai. Jei pritrūksta laiko, trumpinam diskusiją, ne kompiuterio bloką.
+  <b>IŠEINAM netrumpinam niekada</b> — be jo pamoka lieka be pabaigos.</p>
+</div>
+
+<div class="blk stop">
+  <h3 style="margin-top:0">Ko NEsakome</h3>
+  <ul>
+    <li><b>Nieko apie Klaido charakterį ar motyvaciją.</b> Tai P2 medžiaga. Šiandien jis tik vardas ir veidas.</li>
+    <li><b>Nieko apie tai, kokia Dingailė.</b> Tik kad ji Klaido sesė ir kad jos nėra.</li>
+    <li><b>Nežadam atsakymo</b>, kodėl Dingailė paklydo. „Sužinosim su laiku."</li>
+    <li><b>Jokio „o jeigu tu pasiklystum".</b> Draudžiama frazė (canon). Tai nuotykis, ne trileris.</li>
+    <li><b>Nesakom, ką reiškia saliutas.</b> Priežastis — mentoriui, ne vaikams (žr. 18–21 min).</li>
+    <li><b>Nesakom, kas bus kitą pamoką ir kodėl.</b> Mes žinom, kad kitą kartą mokomės klaviatūros —
+    jie nežino. Vienintelis pažadas: „kitą kartą žengsim giliau." Jei vaikas klausia — „pamatysit."</li>
+    <li><b>Nemokom dvigubo spragtelėjimo.</b> Šiandien tik vienas spragt. Dvigubas — P2.</li>
+  </ul>
+</div>
+
+<div class="blk">
+  <h3 style="margin-top:0">🔬 Šios pamokos eksperimentas — LOCKSTEP 3–2–1</h3>
+  <p>Kiekvienas kompiuterio žingsnis daromas <b>visos klasės kartu</b>, skaičiuojant 3–2–1, ir
+  <b>mentorius visada eina pirmas</b>, per projektorių, lėtai.</p>
+  <p>🔴 <b>Išeinant komanda kitokia:</b> ten trejetas jau reiškia žingsnio numerį, todėl
+  <b>nesakom „trys — du — vienas — spaudžiam"</b>, o tiesiog <b>„spaudžiam, visi kartu"</b>.</p>
+  <p><b>Hipotezė:</b> lockstep palieka mažiau vaikų įstrigusių nei „dirbam savo tempu", nes atsilikęs
+  vaikas mato, ko laukti, o ne tuščią ekraną.</p>
+  <p><b>Matuoja klasės mokytoja</b> ant savo lapo: <b>A</b> kiek vaikų reikėjo gelbėti po vieną ·
+  <b>B</b> kiek rankų pakilo klausiant „kam pavyko" · <b>C</b> kelintą minutę užsidegė paskutinis ekranas.</p>
+  <p><b>Kaip žinosim:</b> tie patys trys skaičiai renkami P2, P3 ir P4. Jei A krenta, o B auga — veikia.</p>
+</div>
+
+<h2 id="t0"><span class="time">0–3 min</span> <span class="bnum">Įėjimas</span><span class="sl">skaidrė 1</span></h2>
+<p><span class="tagS">SAKAU</span> Stovi <b>prie durų</b>, ne prie stalo. Kiekvienam įeinančiam — „penki“ ir tyliai:</p>
+<div class="say"><b class="who">Mentorius — kiekvienam atskirai</b>„Sveikas. Sėskis, bet nieko neliesk."</div>
+<div class="do"><b>DARYK:</b> spaudi <b>▶ PRADĖTI</b>, kai pirmas vaikas peržengia slenkstį.
+Taimeris nuo tos sekundės nebestoja — pauzės mygtuko nėra sąmoningai.</div>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 Patikrink dar kartą:</b> ar visi monitoriai pasukti arba uždengti?
+  Jei bent vienas šviečia — nueik ir išjunk. Šviečiantis ekranas nugali bet kokią tavo kalbą.</p>
+</div>
+
+<h2 id="t3"><span class="time">3–7 min</span> <span class="bnum">Kas aš</span><span class="sl">skaidrė 2</span></h2>
+<p><span class="tagE">EKRANE</span> Viena skaidrė: <b>AŠ — INFORMACIJOS GYNĖJAS</b>. Ji kabo visas keturias minutes.</p>
+<p><span class="tagS">SAKAU</span> Visa kita — žodžiu. Ekrane šito nėra:</p>
+<div class="say"><b class="who">Mentorius</b>„Aš Gabrielius. Ir ______________________________."
+<div style="font-size:.8rem;font-weight:600;color:#666;margin-top:6px">↑ ĮDOMUS FAKTAS APIE SAVE — įrašyk ranka prieš pamoką. Vienas sakinys, juokingas.</div></div>
+<div class="say"><b class="who">Mentorius</b>„Gyvenu Vilniuje, bet dažnai nukeliauju į kitą, visai kitokią,
+į Vilnių ar jokį miestą nepanašią vietą, kur dažnai būnate ir jūs. Tai skaitmeninis pasaulis."</div>
+<div class="say"><b class="who">Mentorius</b>„Tai jūs jau žinote, kas aš. O žinote, kokia čia pamoka?"</div>
+
+<div class="act">
+  <b>▲ AKTYVACIJA — KŪNO MĮSLĖS</b> <span style="font-size:.85rem">(~100 sek · skaidrės nėra, tai vyksta prie tos pačios)</span>
+  <ol>
+    <li><span class="tagS">SAKAU</span> „Aš Gabrielius ir mėgstu…" — ir vietoj žodžio <b>PARODAI KŪNU</b>
+        (pvz. plauki). Vaikai spėja garsiai.</li>
+    <li>Tada klausi <b>penkių</b> vaikų vardų. Kiekvienas pasako vardą ir <b>kūnu parodo</b>, ką mėgsta.
+        Klasė spėja.</li>
+    <li>Po penkto — iškart toliau. Nekomentuok, negirk atskirai.</li>
+  </ol>
+  <p style="margin-bottom:0"><b>Kodėl penki</b> (Kris, 2026-08-31): tai užpildo § 4.5 aktyvacijos langą
+  ties 5–7 min. Kaina — ~40 sek iš diskusijos. Jei klasė lėta, po trijų eik toliau.</p>
+</div>
+
+<p><span class="tagS">SAKAU</span> <b>Perėjimas — nepraleisk, be jo kita dalis pakimba:</b></p>
+<div class="say"><b class="who">Mentorius</b>„Tas pasaulis daug panašesnis į džiungles nei į miestą."</div>
+
+<h2 id="t7"><span class="time">7–14 min</span> <span class="bnum">Diskusija</span><span class="sl">skaidrės 3–7</span></h2>
+<div class="blk warn">
+  <p style="margin:0"><b>Nuotraukų skaidrėse NĖRA JOKIO TEKSTO.</b> Visi klausimai — tavo, žodžiu.
+  Rodai, <b>patyli 3 sekundes</b>, tik tada klausi. Tyla čia dirba.</p>
+</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 3</span> „Ką jūs žinote apie skaitmeninį pasaulį?"</p>
+<div class="ask"><b>KLAUSK ir LAUK.</b> Priimi 3–4 atsakymus.</div>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 Atsakymas nesvarbu.</b> Netaisyk, nevertink, nesakyk „teisingai".
+  Tikslas — kad jie prakalbtų, ne kad pataikytų. Šitas blokas yra apšilimas kalbėjimui,
+  ne žinių patikra.</p>
+</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 4</span> — <b>gatvės ženklai</b>
+<span style="color:var(--soft)">(iliustracija · ženklai be raidžių, vien piktogramos)</span></p>
+<div class="ask"><span class="tagS">SAKAU</span> „Kam jų reikia?" → priimi atsakymus → „O džiunglėse ar yra?"</div>
+<p><b>Vaikai turi patys pasakyti, kad nėra.</b> Neatsakyk už juos.</p>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 5</span> — <b>policininkas, reguliuojantis eismą</b></p>
+<div class="ask"><span class="tagS">SAKAU</span> „Ką jis daro?" → „Kam jo reikia?" → „O džiunglėse?"</div>
+<p style="font-size:.9rem;color:var(--soft)">Sankryža, zebras ir abipus laukiančios mašinos matomi kadre — vaikas gali parodyti pirštu.</p>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 6</span> — <b>vaizdas iš viršaus į gatvę su praeiviais</b></p>
+<div class="ask"><span class="tagS">SAKAU</span> „Ką matai pro langą?" → „Matai, kas šalia tavęs." →
+„O džiunglėse? Džiunglėse <b>tanku</b> — nematai, kas už krūmo."</div>
+<p><b>Neaiškink toliau.</b> Tegul lieka kabėti. Prie to grįšim Lygyje 2.</p>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 7</span> — <b>orchidėja</b></p>
+<div class="ask"><span class="tagS">SAKAU</span> „Ar matėt tokią gėlę Vilniuje, gatvėje?" →
+„Yra dalykų, kokių Vilniuje nepamatysi."</div>
+<div class="blk hi">
+  <p style="margin:0"><b>Šitos nuotraukos tonas svarbus.</b> Trys prieš tai buvo apie tai, ko džiunglėse
+  <b>trūksta</b>. Ši — apie tai, kas džiunglėse yra <b>gražaus</b>. Programa neturi prasidėti baime.</p>
+</div>
+
+<h2 id="t14"><span class="time">14–18 min</span> <span class="bnum">Portalas ir misija</span><span class="sl">skaidrės 8–13</span></h2>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 8</span> „Į šitas džiungles galima patekti bet kada. Ar žinote kaip?"</p>
+<div class="ask"><b>LAUK spėjimų. Neatsakyk.</b> Eik į kitą skaidrę.</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 9</span> — <b>VIDEO, sukasi kilpa</b></p>
+<div class="do"><b>Pirmą kartą — nieko nesakai.</b> Tegul žiūri.</div>
+<div class="say"><b class="who">Mentorius — po pirmo peržiūrėjimo</b>„Kaip į mišką. Nueini, pasižiūri,
+prisirenki grybų — ir grįžti namo vakarienės. Džiunglėse negyvenam. Ten nueinam ir pareinam."</div>
+<div class="say"><b class="who">Mentorius</b>„Ar pastebėjot kažką keisto? Pažiūrėkim dar kartą."</div>
+<div class="blk stop">
+  <h3 style="margin-top:0">🔴 Šita vieta yra visos pamokos ašis</h3>
+  <p><b>Vaikai turi PATYS pasakyti: įlipo du, išlipo vienas.</b></p>
+  <p><b>NEPASAKYK UŽ JUOS.</b> Video sukasi kilpa — lauk tiek, kiek reikia. Jei po trijų kartų niekas
+  nepastebi, susiaurink klausimą: „Kiek žmonių įėjo? … O kiek išėjo?" Bet skaičių pasako vaikas, ne tu.</p>
+</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 10</span> <b>ĮEINAM ir IŠEINAM</b></p>
+<div class="do"><b>Rodai tik TADA</b>, kai vaikai jau patys pasakė. ▲ Visa klasė pakartoja garsiai, du kartus.</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 11</span> — keturi pavojai</p>
+<div class="say"><b class="who">Mentorius</b>„Skaitmeniniame pasaulyje tyko daug pavojų. Štai keturi."</div>
+<div class="tw"><table>
+  <tr><td class="a">😵‍💫</td><td>Melas / dezinformacija</td></tr>
+  <tr><td class="a">💔</td><td>Įskaudinimas</td></tr>
+  <tr><td class="a">🎣</td><td>Apgaulės</td></tr>
+  <tr><td class="a">🗣️</td><td>Prisikalbėjimas</td></tr>
+</table></div>
+<p><b>Įvardyk po vieną, lėtai, be aiškinimų.</b> Šiandien tik pavadinimai. Kiekvienas iš jų gaus savo lygį.</p>
+<div class="say"><b class="who">Mentorius</b>„Kodėl Dingailė paklydo — nežinau. Gal nebuvo pasiruošusi.
+Gal prikalbėjo per daug ir negeri žmonės išgirdo. Viską sužinosim su laiku."</div>
+<div class="blk stop"><p style="margin:0"><b>🔴 Nežadėk atsakymo šiandien.</b> „Nežinau" čia yra teisingas
+mentoriaus atsakymas ir jis atidaro metus.</p></div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 12</span> — Klaidas ir Dingailė</p>
+<div class="say"><b class="who">Mentorius — ir daugiau nieko</b>„Čia mūsų herojus Klaidas ir jo sesė Dingailė."</div>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 JOKIOS KITOS INFORMACIJOS.</b> Ne apie charakterį, ne apie motyvaciją,
+  ne apie tai, kokie jie. Tai P2 medžiaga. Jei vaikas klausia — <b>„sužinosim kitą kartą".</b></p>
+</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 13</span> „Ar padėsim Klaidui rasti sesę?"</p>
+<div class="act"><b>▲ KLAUSK GARSIAI. LAUK, kol atsakys VISI.</b> Jei tyliai — paklausk dar kartą, garsiau.
+Tai metų misijos sutartis, ne retorinis klausimas.</div>
+
+<h2 id="t18"><span class="time">18–21 min</span> <span class="bnum">Saliutas</span><span class="sl">skaidrė 14</span></h2>
+<p><span class="tagE">EKRANE</span> Video su Klaidu, sukasi kilpa.</p>
+<div class="act">
+  <b>▲ MOKOM SALIUTĄ. Rodai PATS, lėtai, tris kartus.</b>
+  <ol>
+    <li><b>Gilus įkvėpimas.</b> Tai signalo dalis, ne pasiruošimas.</li>
+    <li><b>Kairės</b> rankos delnas prie burnos, alkūnė <b>prigludusi prie kūno</b>.</li>
+    <li><b>Dešinės</b> rankos delnas ant kairiojo, irgi ant burnos, bet dešinė alkūnė
+        <b>pakelta virš pečių</b>.</li>
+  </ol>
+  <p style="margin-bottom:0"><b>Rezultatas:</b> abu delnai dengia burną, viena alkūnė žemai, kita aukštai.</p>
+</div>
+<div class="blk hi">
+  <h3 style="margin-top:0">Klasės taisyklė — pasakyk ją garsiai</h3>
+  <p class="big" style="margin:0">Kai mentorius įkvepia ir užsidengia burną — visi daro tą patį ir nutyla.
+  Be paliepimo.</p>
+  <p>Kartok, kol visi 25 padarys kartu. Nepereik toliau, kol nepavyks. Šitas judesys pakeičia
+  „rankas ant kelių" ir bus naudojamas visus metus.</p>
+</div>
+<div class="blk stop">
+  <h3 style="margin-top:0">🔴 Kodėl būtent burna — MENTORIUI, NE VAIKAMS</h3>
+  <p>Gestas uždengia burną. Vėliau, kai vaikai bus pasiruošę, atskleisim, kad internete
+  <b>išsprūdę žodžiai turi pasekmių</b> — tai jungiasi su 🗣️ <b>Prisikalbėjimu</b> iš pavojų sąrašo.</p>
+  <p style="margin-bottom:0"><b>Šiandien to nesakom.</b> Šiandien tai tiesiog Gynėjų saliutas.</p>
+</div>
+
+<h2 id="t21"><span class="time">21–25 min</span> <span class="bnum">Portalas ir keturios taisyklės</span><span class="sl">skaidrės 15–19</span></h2>
+<div class="blk hi">
+  <p style="margin:0"><b>✅ Kris, 2026-09-01: KOMPIUTERIO TAISYKLĖS IŠBRAUKTOS VISIŠKAI.</b>
+  „Nieko neliečiam be komandos", „Laukiam trys–du–vienas", „Kompiuterio neišjunginėjam" —
+  jų nebėra nei čia, nei skaidrėse. Septynmečiui draudimas to, ko jis dar nedarė, yra tuščias garsas.
+  Kompiuteris nuo šiol mokomas per <b>👁️ RODAU → ▲ KARTOJAM</b> (design-standards.md § 4.6).</p>
+</div>
+
+<h3>~21 min · Portalas <span class="sl">skaidrė 15</span></h3>
+<div class="say"><b class="who">Mentorius</b>„Kompiuteris — tai portalas. Ir šiandien mes jį atidarysim visi kartu."</div>
+<div class="blk stop"><p style="margin:0"><b>🔴 Monitorių dar neliečiam.</b> Ekranai lieka atsukti dar keturias minutes.
+Pažadas duotas — bet dar neįvykdytas. Tai ir laiko klasę.</p></div>
+<div class="say"><b class="who">Mentorius — tyliau, lyg suabejojęs</b>„Okey. Bet ar jūs tam pasiruošę? Ar mes neklyksim tiesiog?"</div>
+<div class="do"><b>LAUKI.</b> Vaikai sakys „taip". Neatsakyk iš karto — palauk, kol nuskamba visa klasė.</div>
+<div class="say"><b class="who">Mentorius</b>„Tikrinam. Keturios taisyklės."</div>
+<div class="blk hi">
+  <p style="margin:0"><b>Čia ir yra viso bloko variklis.</b> Taisyklės nustoja būti tvarkos reikalavimas
+  ir tampa <b>pasiruošimo patikra</b>. Vaikas jų nebeklauso kaip drausmės — jis jomis įrodinėja,
+  kad yra vertas portalo.</p>
+</div>
+
+<h3>21–25 min · Keturios būrelio taisyklės <span class="sl">skaidrės 16–19</span></h3>
+<p><b>Šitos keturios galioja VISUS METUS</b> ir visur — ne tik prie kompiuterio.
+<span class="tagE">EKRANE</span> — tik emoji ir numeris. <b>Jokio teksto:</b> pirmokas neskaito,
+o taisyklę vis tiek ištari tu, balsu.</p>
+<p><b>Tvarka kiekvienai:</b> 1) pasakai vieną kartą, garsiai · 2) parodai pats · 3) „Visi kartu." · 4) palauki 3 sek.</p>
+<div class="tw"><table>
+  <tr><th>#</th><th>Ekrane</th><th>Ką sakau <span class="tagS">SAKAU</span></th><th>▲ Ką darom</th></tr>
+  <tr><td class="a">1</td><td>✋</td><td>„Keliam ranką."</td><td>visi pakelia ranką, laiko 3 sek.</td></tr>
+  <tr><td class="a">2</td><td>💬</td><td>„Kalbam po vieną."</td><td>klausi klasės ko nors lengvo („kas mėgsta šokoladą?") ir iškvieti <b>vieną</b>. Kiti laukia — tai ir yra repeticija</td></tr>
+  <tr><td class="a">3</td><td>💛</td><td>„Iš klaidų nesijuokiam."</td><td>delnas ant krūtinės, 3 sek.</td></tr>
+  <tr><td class="a">4</td><td>🤫</td><td>„Saliutas reiškia tylą."</td><td>saliutuoji tylėdamas ir lauki — klasė nutyla pati</td></tr>
+</table></div>
+<div class="blk stop">
+  <p style="margin:0"><b>Trečioji yra svarbiausia — ir vienintelė, kurią sakai DU KARTUS.</b>
+  Pasakai. Palauki. Pasakai dar kartą tyliau. Tada suriši su veikėju:</p>
+  <div class="say" style="margin-top:10px"><b class="who">Mentorius</b>„Mūsų herojaus vardas — Klaidas. Iš klaidų nesijuokiam."</div>
+  <p style="margin:10px 0 0"><b>🔴 Toliau nepaaiškink.</b> Tegul kabo. Visus metus ją vadinsim <b>širdies taisykle</b>.</p>
+</div>
+<div class="blk warn">
+  <p style="margin:0"><b>Ketvirtoji prireiks jau po dviejų minučių.</b> Kai užsidegs ekranai, klasė
+  pakils garsiu. Saliutas bus vienintelis dalykas, kuris ją nuleis — todėl jį repetuoji <b>du kartus,
+  kaskart greičiau</b>, ir antrą kartą <b>be jokio žodžio</b>.</p>
+</div>
+
+<h2 id="t25"><span class="time">25–43 min</span> <span class="bnum">KOMPIUTERIS · ĮEINAM ir IŠEINAM</span><span class="sl">skaidrės 20–34</span></h2>
+<div class="blk hi">
+  <p style="margin:0"><b>✅ Kris, 2026-09-01: viskas, ką jie turi mokėti po pirmos pamokos —
+  įjungti ir išjungti kompiuterį.</b> Ikonos atidarymas ir dvigubas spragtelėjimas
+  <b>išimti iš P1</b>. Dvigubas spragtelėjimas keliauja į P2.</p>
+  <div class="tw"><table style="margin-top:10px">
+    <tr><th></th><th>1</th><th>2</th><th>3</th></tr>
+    <tr><td class="a"><b>ĮEINAM</b> →</td><td>ekrano mygtukas</td><td>kompiuterio mygtukas ⏻</td><td>ENTER</td></tr>
+    <tr><td class="a"><b>IŠEINAM</b> ←</td><td>POWER OFF</td><td>Windows klavišas</td><td>spragt pele</td></tr>
+  </table></div>
+  <p style="margin:10px 0 0"><b>Įeinant skaičiuojam aukštyn, išeinant žemyn.</b> Išjungimas
+  pats yra atbulinis skaičiavimas — todėl vaikas jo neatlieka atvirkščiai.</p>
+</div>
+<div class="blk warn">
+  <p style="margin:0"><b>🔴 Dvi komandos, kurių nepainiok:</b></p>
+  <ul style="margin:8px 0 0">
+    <li><b>Įeinant:</b> „TRYS — DU — VIENAS — SPAUDŽIAM!"</li>
+    <li><b>Išeinant:</b> tik <b>„SPAUDŽIAM, visi kartu."</b> Ten trejetas jau reiškia žingsnio
+    numerį, ir dvigubas trejetas sujauktų viską.</li>
+  </ul>
+</div>
+
+<h3>25–26 min · Atsukam ekranus ir parodom žemėlapį <span class="sl">skaidrė 20</span></h3>
+<div class="do"><b>DABAR — ir tik dabar</b> leidi atsukti monitorius.</div>
+<div class="say"><b class="who">Mentorius</b>„Atsukam ekranus. Tik ekranus."</div>
+<div class="act"><b>▲ Kai visi atsuko — SALIUTAS. Be žodžių.</b> Palauki, kol nutyla.
+Ką tik išmokta ketvirta taisyklė suveikia pirmą kartą — vaikai tai pajus.</div>
+<div class="say"><b class="who">Mentorius</b>„Į džiungles įeinam per tris mygtukus. Vienas. Du. Trys."</div>
+<div class="blk stop"><p style="margin:0"><b>🔴 Neaiškink, kas yra kiekvienas.</b> Tuoj parodysi.
+Ši skaidrė yra žemėlapis, ne pamoka.</p></div>
+
+<h3>26–27 min · 👁️ ĮEINAM 1 · RODAU <span class="sl">skaidrė 21</span></h3>
+<div class="do"><b>Vaikų rankos ant stalo, nejuda.</b> Prieini prie vieno ekrano ir rodai lėtai.</div>
+<div class="say"><b class="who">Mentorius</b>„Štai ekranas. O štai — jo mygtukas." <i>(rodyk pirštu, palaikyk)</i></div>
+<div class="do">Paspaudi. Ekranas nušvinta.</div>
+<div class="say"><b class="who">Mentorius</b>„Matot? Nušvito."</div>
+<div class="blk hi"><p style="margin:0"><b>Padaryk DU KARTUS.</b> Antrą kartą tyliau ir lėčiau.
+Pirmas kartas yra įvykis, antras — instrukcija.</p></div>
+
+<h3>27 min · ▲ ĮEINAM 1 · KARTOJAM <span class="sl">skaidrė 22</span></h3>
+<div class="act">
+  <b>▲ VISI KARTU, DVIEM ŽINGSNIAIS:</b>
+  <ol>
+    <li>„Randam ekrano mygtuką. Rodom pirštu." <i>(apeini akimis visus 25 ir lauki)</i></li>
+    <li>„TRYS — DU — VIENAS — SPAUDŽIAM!"</li>
+  </ol>
+  <p style="margin-bottom:0">Kai nušvinta ekranai — <b>nieko nekomentuok</b>. Tegul pamato patys.</p>
+</div>
+
+<h3>27–28 min · 👁️ ĮEINAM 2 · RODAU <span class="sl">skaidrė 23</span></h3>
+<div class="say"><b class="who">Mentorius</b>„Ekranas nušvito, bet kompiuteris dar miega.
+Kompiuteris — ne ekranas. Tai dėžė." <i>(paliesk dėžę)</i></div>
+<div class="say"><b class="who">Mentorius</b>„Štai toks ženklas." <i>(rodyk pirštu)</i></div>
+<div class="do">Paspaudi. Rodai lemputę.</div>
+<div class="say"><b class="who">Mentorius</b>„Užsidegė lemputė — reiškia, pavyko."</div>
+<div class="blk hi"><p style="margin:0"><b>DU KARTUS.</b></p></div>
+
+<h3>28–29 min · ▲ ĮEINAM 2 · KARTOJAM <span class="sl">skaidrė 24</span></h3>
+<div class="act">
+  <b>▲ VISI KARTU, TRIMIS ŽINGSNIAIS:</b>
+  <ol>
+    <li>„Uždedam delną ant dėžės." <i>(palauk)</i></li>
+    <li>„Randam šitą ženklą. Rodom pirštu." <i>(apeini akimis)</i></li>
+    <li>„TRYS — DU — VIENAS — SPAUDŽIAM!"</li>
+  </ol>
+</div>
+<div class="blk warn"><p style="margin:0"><b>Kas nerado — kelia ranką.</b> To neprašai balsu:
+pats pakeli ranką, ir klasė supranta. Tai vienintelis „draudimo" likutis visoje pamokoje,
+ir jis įgyvendinamas gestu, ne sakiniu. Mokytoja eina prie pakeltos rankos.</p></div>
+<div class="blk stop"><p style="margin:0"><b>🔴 Realistinė prielaida: ~15 min iki darbastalio, ne 5.</b>
+Būtent todėl 29–34 min blokas nėra laukimas — jis yra pamoka.</p></div>
+
+<h3>29–34 min · Pelė ORE <span class="sl">skaidrės 25–26</span></h3>
+<div class="blk hi">
+  <p style="margin:0"><b>Kompiuteriai kraunasi. Tai ne prarastas laikas — tai pelės pamoka.</b>
+  Nė vienas vaikas nesėdi ir nelaukia. Vaikščiok tarp stalų ir taisyk delnus.</p>
+</div>
+<div class="act">
+  <b>▲ VISI KARTU, RANKOS ORE:</b>
+  <ol>
+    <li>„Įsivaizduokit, kad rankoje pelė. Suimam švelniai, nes ji gyva."</li>
+    <li>„Vedžiojam. Lėtai."</li>
+    <li>„Vieną kartą — spragt." <i>(padarom dešimt kartų, vis greičiau)</i></li>
+  </ol>
+</div>
+<div class="blk stop"><p style="margin:0"><b>🔴 Šiandien mokom TIK VIENĄ spragtelėjimą.</b>
+Dvigubas — P2 medžiaga. Jei vaikas pats padaro du, nekritikuok, tik negrįžk prie to.
+<b>Šito prireiks pačioje pabaigoje</b>, kai eisim laukan.</p></div>
+
+<h3>34–36 min · 👁️ ĮEINAM 3 · RODAU <span class="sl">skaidrė 27</span></h3>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 Ekranai užsidegė, bet dar neįleidžia.</b> Pasakyk tai garsiai,
+  kitaip pusė klasės nuspręs, kad sugedo, ir pradės spaudinėti viską iš eilės.</p>
+</div>
+<div class="say"><b class="who">Mentorius</b>„Kompiuteris pabudo, bet dar klausia: ar čia tikrai tu? Reikia pabelsti."</div>
+<div class="do">Rodai: „Štai klaviatūra." → „O štai — pats didžiausias klavišas."
+<i>(rodyk pirštu, palaikyk)</i> → paspaudi → ekranas įleidžia. <b>Du kartus.</b></div>
+
+<h3>36–38 min · ▲ ĮEINAM 3 · KARTOJAM <span class="sl">skaidrė 28</span></h3>
+<div class="act">
+  <b>▲ VISI KARTU:</b>
+  <ol>
+    <li>„Randam patį didžiausią klavišą. Rodom pirštu." <i>(apeini akimis, lauki)</i></li>
+    <li>„TRYS — DU — VIENAS — SPAUDŽIAM!"</li>
+  </ol>
+</div>
+<div class="blk stop"><p style="margin:0"><b>🔴 NEEIK TOLIAU, kol visi 25 neįėjo.</b>
+Šitas žingsnis skiria pamoką nuo chaoso.</p></div>
+
+<h3>38–39 min · 🎉 Įėjot <span class="sl">skaidrė 29</span></h3>
+<div class="say"><b class="who">Mentorius — stovėdamas priekyje, garsiai</b>„KAM PAVYKO ĮEITI? RANKAS AUKŠTYN!"</div>
+<div class="blk warn"><p style="margin:0"><b>🔴 Mokytoja skaičiuoja pakeltas rankas — tai matas B jos lape.</b>
+Kas nepakėlė — prieini, padarot kartu, ir tik tada eini toliau.</p></div>
+
+<h3>39–40 min · IŠEINAM · žemėlapis atbulai <span class="sl">skaidrė 30</span></h3>
+<div class="blk hi">
+  <p style="margin:0"><b>🔴 Čia užsidaro taisyklė iš 16 minutės.</b> Vaikai tada garsiai pakartojo
+  <i>„į džiungles ĮEINAM ir IŠEINAM"</i> — ir iki šiol tik įeidavo. Primink vienu sakiniu
+  ir daugiau neaiškink.</p>
+</div>
+<div class="say"><b class="who">Mentorius</b>„Įėjom per vienas-du-trys. Išeinam atbulai: trys-du-vienas."</div>
+
+<h3>40–41 min · 👁️ IŠEINAM · RODAU visą seką <span class="sl">skaidrė 31</span></h3>
+<div class="blk warn">
+  <p style="margin:0"><b>Išimtis iš „vienas žingsnis — viena pora" (design-standards § 4.6).</b>
+  Čia rodai <b>visus tris žingsnius iš karto</b>. Priežastis: tarp jų nėra jokio laukimo,
+  o klasė protokolą jau paleido tris kartus. Skaidyti reikštų sulaužyti ritmą.</p>
+</div>
+<div class="do">Rodai <b>tylėdamas</b>, per 15 sekundžių: spragt pele → Windows klavišas → POWER OFF.</div>
+<div class="do">Tada <b>dar kartą, lėčiau</b>, garsiai skaičiuodamas: „trys… du… vienas."</div>
+
+<h3>41 min · ▲ IŠEINAM 3 · pelė <span class="sl">skaidrė 32</span></h3>
+<div class="say"><b class="who">Mentorius</b>„Ekranas užmigo. Pažadinam."</div>
+<div class="act"><b>▲ VISI KARTU:</b> „Suimam pelę. Spragt — bet kur."</div>
+<div class="blk"><p style="margin:0">Jei kieno nors ekranas neužmigo — tegul vis tiek padaro
+spragtelėjimą. <b>Judesys svarbesnis už rezultatą:</b> jie mokosi seką, ne taisymą.</p></div>
+
+<h3>42 min · ▲ IŠEINAM 2 · Windows <span class="sl">skaidrė 33</span></h3>
+<div class="act">
+  <b>▲ VISI KARTU:</b>
+  <ol>
+    <li>„Randam šitą ženklą ant klaviatūros. Rodom pirštu." <i>(apeini akimis, lauki)</i></li>
+    <li>„SPAUDŽIAM, visi kartu."</li>
+  </ol>
+</div>
+<div class="blk stop"><p style="margin:0"><b>Atsidaro meniu. Nieko jame neaiškink</b> — tik vieną vietą,
+ir ta vieta yra kitoje skaidrėje.</p></div>
+
+<h3>42–43 min · ▲ IŠEINAM 1 · POWER OFF <span class="sl">skaidrė 34</span></h3>
+<div class="say"><b class="who">Mentorius</b>„Meniu ieškom šitų dviejų žodžių. Jie atrodo tiksliai taip."
+<i>(rodyk į ekraną)</i></div>
+<div class="blk hi"><p style="margin:0"><b>Vaikas jų neskaito — jis juos ATPAŽĮSTA kaip paveikslą.</b>
+Todėl skaidrėje jie parašyti didžiosiomis ir neišversti: ekrane jis matys lygiai tą patį.</p></div>
+<div class="act">
+  <b>▲ VISI KARTU:</b>
+  <ol>
+    <li>„Vedam rodyklę ant jų. NESPAUDŽIAM." <i>(apeini akimis visus 25)</i></li>
+    <li>„SPRAGT, visi kartu."</li>
+  </ol>
+</div>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 TYLA. Ekranai gęsta po vieną.</b> Nieko nesakyk 10 sekundžių —
+  leisk klasei tai išgirsti. <b>Džiunglės užsidaro jų akyse.</b> Skaidrė užgęsta kartu su jais.</p>
+  <p style="margin:8px 0 0">Tai ir yra išėjimo ritualas, kurio pamoka neturėjo iki 2026-09-01.</p>
+</div>
+
+<h2 id="t43"><span class="time">43–45 min</span> <span class="bnum">Pabaiga</span><span class="sl">skaidrės 35–37</span></h2>
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 35</span></p>
+<div class="say"><b class="who">Mentorius — lėtai</b>„Šiandien jūs išmokot įeiti į džiungles ir iš jų išeiti.
+Bet tik įkelti koją."</div>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 Padaryk pauzę.</b> Tegul „tik įkelti koją" pakabo.
+  Vaikai patys supras, kad yra daugiau — ir tai stipriau nei bet koks pažadas.</p>
+</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 36</span></p>
+<div class="say"><b class="who">Mentorius — vienas sakinys, ir sustoji</b>„Kitą kartą žengsim į džiungles giliau."</div>
+<div class="blk stop">
+  <p style="margin:0"><b>🔴 Jokio paaiškinimo.</b> Ne kas bus, ne su kuo, ne kodėl.
+  Vienintelis pažadas — <b>giliau</b>.</p>
+  <p style="margin:8px 0 0"><b>Mentoriui, ne vaikams:</b> kitą kartą mokomės klaviatūros.
+  Šito nesakom, nes „klaviatūra" nuskambėtų kaip pamoka, o „giliau" skamba kaip kelionė.
+  Jei vaikas klausia — „pamatysit."</p>
+</div>
+
+<p><span class="tagE">EKRANE</span> <span class="sl">skaidrė 37</span></p>
+<div class="act"><b>▲ PASKUTINIS VEIKSMAS:</b> visi atsistoja. SALIUTAS — įkvėpimas, kairė,
+dešinė alkūnė aukštyn. Garsiai.</div>
+<div class="say"><b class="who">Mentorius</b>„Gynėjai, iki kito karto."</div>
+
+<h2 id="lapas">Klasės mokytojos lapas</h2>
+<div class="blk warn">
+  <p style="margin:0"><b>Mokytoja šioje pamokoje yra instrumentas, ne auditorija.</b>
+  Atspausdink šitą puslapį ir paduok jai prieš pamoką. Trys darbai, trys skaičiai.</p>
+</div>
+<div class="sheet">
+  <h3 style="margin-top:0">Informacijos Gynėjai · Pamoka 1 — jūsų lapas</h3>
+  <p><b>Ačiū, kad esate klasėje.</b> Mentorius vaikams dar svetimas, todėl pirmas 25 minutes
+  drausmė lieka jūsų. Nuo 25-os — jūs gelbėjimo komanda prie kompiuterių.</p>
+  <h3>Trys jūsų darbai</h3>
+  <ol>
+    <li><b>0–25 min:</b> drausmė. Mentorius kalba, jūs laikote klasę.</li>
+    <li><b>25–43 min:</b> gelbėjimo komanda. Einate prie to, kuris pakėlė ranką.</li>
+    <li><b>Visą laiką:</b> surenkate tris skaičius žemiau.</li>
+  </ol>
+  <h3>Trys skaičiai</h3>
+  <div class="box"><b>A</b> — kiek vaikų reikėjo gelbėti po vieną (brūkšnelis kiekvienam kartui):
+  <br><br>________________________________________</div>
+  <div class="box"><b>B</b> — kiek rankų pakilo, kai mentorius paklausė „kam pavyko įeiti?":
+  <br><br>________________</div>
+  <div class="box"><b>C</b> — kelintą pamokos minutę užsidegė <b>paskutinis</b> ekranas (ir, jei spėjat, kelintą <b>užgeso paskutinis</b>):
+  <br><br>________________</div>
+  <h3>Vienas sakinys laisva forma</h3>
+  <div class="box" style="min-height:60px">Kas nustebino? Kas nesuveikė?<br><br><br></div>
+</div>
+
+<h2 id="atviri">Atviri klausimai ir statusai</h2>
+<div class="tw"><table>
+  <tr><th>#</th><th>Klausimas</th><th>Statusas</th></tr>
+  <tr><td class="a">1</td><td><b>Diskusijos vaizdai</b> (skaidrės 4–7)</td>
+      <td class="g">✅ 2026-09-01: keturios <b>iliustracijos</b>, suderintos su veikėjų stiliumi.
+      Ankstesnė taisyklė „tik tikros nuotraukos" panaikinta (Kris). Tikros nuotraukos išsaugotos
+      <code>foto/_tikros-nenaudojamos/</code></td></tr>
+  <tr><td class="a">2</td><td><b>Saliuto vizualas</b> — judesys užrakintas 2026-08-25, video priimtas 2026-08-31</td>
+      <td class="g">✅ deck'e</td></tr>
+  <tr><td class="a">3</td><td><b>Dingailė</b> — pervadinta iš „Ugnė" 2026-08-31, spalva užrakinta</td>
+      <td class="g">✅ canon'e</td></tr>
+  <tr><td class="a">4</td><td><b>Vardas „Ugnė" pakeistas į „Dingailė"</b></td>
+      <td class="r">🔴 8 failai, žr. <code>wiki/canon.md</code></td></tr>
+  <tr><td class="a">5</td><td><b>Ženklas</b> — ar įteikiamas šioje pamokoje</td>
+      <td>ne — ženklas įteikiamas P4</td></tr>
+  <tr><td class="a">6</td><td><b>Kompiuterio taisyklės</b></td>
+      <td class="g">✅ 2026-09-01 <b>IŠBRAUKTOS VISIŠKAI</b> (Kris). Pakeista į
+      👁️ RODAU → ▲ KARTOJAM, trys poros (design-standards.md § 4.6)</td></tr>
+  <tr><td class="a">7</td><td><b>Išėjimo iš džiunglių ritualas</b></td>
+      <td class="g">✅ <b>uždaryta 2026-09-01.</b> IŠEINAM 3·2·1 (pelė → Windows → POWER OFF)
+      ir yra išėjimas. Paskutinė skaidrė užgęsta kartu su vaikų ekranais</td></tr>
+  <tr><td class="a">8</td><td><b>Dvigubas spragtelėjimas ir ikonos atidarymas</b></td>
+      <td class="g">✅ 2026-09-01 <b>iškelta iš P1 į P2</b> (Kris). P1 moko tik vieną spragtelėjimą</td></tr>
+</table></div>
+
+<div class="blk open">
+  <h3 style="margin-top:0">🟡 Trys sprendimai, klaidingai priskirti Kris'ui — ištaisyta 2026-08-31</h3>
+  <p>Ankstesnėje scenarijaus versijoje šie trys buvo pažymėti kaip <b>Kris'o sprendimai (2026-08-25)</b>.
+  Peržiūra parodė, kad <b>du iš jų juo nebuvo</b>. Kol nepatvirtinta — 🟡:</p>
+  <div class="tw"><table>
+    <tr><th>Teiginys</th><th>Tikras statusas</th></tr>
+    <tr><td><b>Pradinis testas keliauja į P4</b></td>
+        <td class="g">✅ <b>išspręsta Kris'o 2026-09-10: testas lieka P1.</b> Pastatytas 5 min diagnostinis testas <code>testas.html?n=NR</code> (6 BP sritys × 3 pakopos, veda Klaidas). Langas: <b>37–42 min</b>, kompiuterių bloko pabaigoje, prieš IŠEINAM 3·2·1 — testas atidarytas iš anksto, vaikas spaudžia tik ▶. Pora: 👁️ mentorius parodo ▶ ir 🔊 → ▲ visi kartu „TRYS–DU–VIENAS". Kodus surašo į <code>suvestine.html</code> kodų lapą</td></tr>
+    <tr><td><b>Taisyklė repetuojama, ne sakoma</b> (21–25 min)</td>
+        <td class="g">✅ <b>patvirtinta Kris'o 2026-09-01</b>. Kartu išbrauktos KOMPIUTERIO taisyklės;
+        liko keturios būrelio taisyklės, ekrane tik emoji (design-standards.md § 4.7)</td></tr>
+    <tr><td><b>„Sesė pasiklydo ir turim ją surasti"</b> — misijos rėmas</td>
+        <td class="g">✅ tai <b>tikrai</b> Kris'o sprendimas (2026-08-25). Lieka žalias</td></tr>
+  </table></div>
+  <p style="margin-bottom:0"><b>Kodėl tai svarbu:</b> jei sprendimas pažymėtas „patvirtinta", niekas jo
+  nebekvestionuoja. Klaidingas priskyrimas užrakina tai, kas dar nebuvo nuspręsta.</p>
+</div>
+
+<footer>
+  <p><b>Pamoka 1 · scenarijus V5 · 2026-09-01.</b> Sinchronizuotas su <code>deck.html</code> (37 skaidrės).
+  Visos nuorodos į skaidres perskaičiuotos ir patikrintos.</p>
+  <p><b>V4 pakeitimai:</b> kompiuterio taisyklės išbrauktos; „Kompiuteris — tai portalas" perkelta
+  prieš taisykles ir tapo jų varikliu („Ar jūs tam pasiruošę?"); keturios būrelio taisyklės
+  (✋ 💬 💛 🤫), ekrane tik emoji; kompiuterio blokas perrašytas į poras
+  👁️ RODAU → ▲ KARTOJAM; § 0.3 — beveiksmažodinės nuotrupos ištaisytos.</p>
+  <p><b>V5 pakeitimai (tą pačią dieną):</b> pamokos rezultatas — <b>ĮEINAM 1·2·3 ir IŠEINAM 3·2·1</b>.
+  Ikonos atidarymas ir dvigubas spragtelėjimas iškelti į P2. Minimalistiniai vizualai vietoj
+  instrukcijų; juda tik pelė. <b>Atsirado išėjimo ritualas</b> — paskutinė skaidrė užgęsta.
+  Pabaiga: „Bet tik įkelti koją." → „Kitą kartą žengsim į džiungles giliau."</p>
+  <p>🇱🇹 <b>Lietuvių kalbos patikra — atlikta iki V3 (Kris, 2026-09-01). V4 tekstas — dar ne.</b>
+  Naujos eilutės (21–43 min) prieš klasę turi būti perskaitytos garsiai.</p>
+</footer>
+
+</div></body></html>
