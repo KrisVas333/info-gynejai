@@ -1,0 +1,3 @@
+# P1 medžiaga — sugeneruoti HTML su base64 viduje.
+# Be EOL konversijos: kitaip git kaskart perrašo failus ir gimsta tušti commit'ai.
+p1/*.html -text
