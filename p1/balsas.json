@@ -1,0 +1,265 @@
+{
+ "apie": "BCJR Pamoka 1 diagnostinis testas — įgarsinimo tekstai. Kiekvienam klausimui po vieną mp3.",
+ "balsas": "Klaidas (ElevenLabs, Kris'o paskyroje)",
+ "taisykles": [
+  "Vienas mp3 vienam id. Failo vardas — laukas `file`.",
+  "Skaityti TIKSLIAI lauką `tekstas`, nieko nepridedant ir nepraleidžiant.",
+  "Tonas: šiltas, draugiškas 7 metų berniukas Klaidas, kalba 6-7 metų vaikui. Ne skaitovas, ne reklama.",
+  "Tempas ramus (~0.92). Tarp sakinių trumpa pauzė.",
+  "Lietuvių kalba. Skaičiai ir raidės tariami taip, kaip parašyta."
+ ],
+ "atnaujinta": "2026-09-11",
+ "kiek": 50,
+ "items": [
+  {
+   "id": "R1",
+   "file": "47.mp3",
+   "tekstas": "Dėžėje yra katė. Krepšyje yra šuo. Spausk tą, kas yra DĖŽĖJE."
+  },
+  {
+   "id": "R2",
+   "file": "48.mp3",
+   "tekstas": "Klaidas paslėpė raktą po KEPURE. Spausk, kur raktas."
+  },
+  {
+   "id": "R3",
+   "file": "49.mp3",
+   "tekstas": "Katė užšoko ant stalo ir nuvertė puodelį. Ką nuvertė katė? Spausk: Vazą, Lėkštę, Puodelį."
+  },
+  {
+   "id": "LYTIS",
+   "file": "50.mp3",
+   "tekstas": "Ar tu berniukas, ar mergaitė? Čia nėra teisingo atsakymo. Spausk: Berniukas, Mergaitė, Nesakysiu."
+  },
+  {
+   "id": "A1a",
+   "file": "01.mp3",
+   "tekstas": "Nurašyk žodį LABAS klaviatūra. Raidės: L, A, B, A, S. Kai baigsi, spausk žalią mygtuką BAIGIAU."
+  },
+  {
+   "id": "A1b",
+   "file": "02.mp3",
+   "tekstas": "Kuriuo įrankiu kompiuteryje PIEŠIAMA? Spausk: Teptukas, Skaičiuotuvas, Laiškai."
+  },
+  {
+   "id": "A2a",
+   "file": "03.mp3",
+   "tekstas": "Klaidas nupiešė piešinį. Į kurį aplanką jį įdėsi? Spausk: Piešiniai, Muzika, Nuotraukos."
+  },
+  {
+   "id": "A2b",
+   "file": "04.mp3",
+   "tekstas": "Nori, kad piešinys liktų kompiuteryje ir rytoj. Kurį mygtuką spausi? Spausk: Spausdinti, Ištrinti, Įrašyti."
+  },
+  {
+   "id": "A3a",
+   "file": "05.mp3",
+   "tekstas": "Kuris iš šių failų yra filmukas? Pirmas: katinas pdf. Antras: katinas mp4. Trečias: katinas txt. Spausk filmuką."
+  },
+  {
+   "id": "A3v",
+   "file": "06.mp3",
+   "tekstas": "Kuris failas yra filmukas? Spausk jį."
+  },
+  {
+   "id": "A3b",
+   "file": "07.mp3",
+   "tekstas": "Radai internete gražią nuotrauką ir nori ją įdėti į savo darbą. Ką reikia padaryti? Spausk: Tiesiog nukopijuoti, Parašyti, kas autorius, Nieko."
+  },
+  {
+   "id": "B1a",
+   "file": "08.mp3",
+   "tekstas": "Robotukas vykdo komandas: aukštyn, aukštyn, dešinėn. Į kurį langelį jis atvažiuos? Spausk langelį su klaustuku."
+  },
+  {
+   "id": "B1b",
+   "file": "09.mp3",
+   "tekstas": "Sudėk žingsnius iš eilės: kaip plauname rankas? Kortelės: Muilinu, Šluostau, Atsuku vandenį."
+  },
+  {
+   "id": "B2a",
+   "file": "10.mp3",
+   "tekstas": "Robotukas du kartus kartoja: aukštyn, dešinėn. Į kurį langelį jis atvažiuos? Spausk langelį su klaustuku."
+  },
+  {
+   "id": "B2b",
+   "file": "11.mp3",
+   "tekstas": "Robotuko taisyklė: JEI lyja, TAI imk skėtį. Lauke lyja. Ką robotukas paims? Spausk: Akinius, Skėtį, Kepurę."
+  },
+  {
+   "id": "B3a",
+   "file": "12.mp3",
+   "tekstas": "Programa pradeda nuo dviejų ir tris kartus prideda po vieną. Koks skaičius bus pabaigoje?"
+  },
+  {
+   "id": "B3b",
+   "file": "13.mp3",
+   "tekstas": "Programa turėjo nupiešti kvadratą, bet nupiešė tik tris kraštines. Kiek kartų reikėjo kartoti komandą piešk kraštinę?"
+  },
+  {
+   "id": "C1a",
+   "file": "14.mp3",
+   "tekstas": "Klasė suskaičiavo vaisius. Kurių vaisių yra daugiausiai? Spausk tą vaisių."
+  },
+  {
+   "id": "C1b",
+   "file": "15.mp3",
+   "tekstas": "Čia vaisių grupė. Kuris daiktas į ją NETINKA? Spausk jį."
+  },
+  {
+   "id": "C2a",
+   "file": "16.mp3",
+   "tekstas": "Kuris slaptažodis stipriausias — kurį sunkiausia atspėti? Pirmas: ka, septyni, šauktukas, nas, brūkšnys, devyniasdešimt du. Antras: vienas du trys keturi. Trečias: katinas. Spausk stipriausią."
+  },
+  {
+   "id": "C2v",
+   "file": "17.mp3",
+   "tekstas": "Slaptažodis kaip spyna: kuo ilgesnis, tuo sunkiau atidaryti. Pirmas: keturi taškeliai. Antras: du taškeliai. Trečias: dešimt taškelių. Spausk stipriausią."
+  },
+  {
+   "id": "C2b",
+   "file": "18.mp3",
+   "tekstas": "Pažiūrėk į seką: raudonas, mėlynas, mėlynas, raudonas, mėlynas, mėlynas, raudonas. Kas bus toliau?"
+  },
+  {
+   "id": "C3a",
+   "file": "19.mp3",
+   "tekstas": "Kortelės: keturi, du ir vienas. Sudėk dvi korteles, kad gautum penkis. Kurios dvi?"
+  },
+  {
+   "id": "C3b",
+   "file": "20.mp3",
+   "tekstas": "Slaptas kodas: kiekviena raidė pasislenka per vieną. A virsta B, B virsta C, C virsta D. Kaip užšifruoti žodį A, B?"
+  },
+  {
+   "id": "D1a",
+   "file": "21.mp3",
+   "tekstas": "Kuris iš šių daiktų yra kompiuterio pelė? Spausk ją."
+  },
+  {
+   "id": "D1b",
+   "file": "22.mp3",
+   "tekstas": "Kuris mygtukas ĮJUNGIA kompiuterį? Spausk jį."
+  },
+  {
+   "id": "D2a",
+   "file": "23.mp3",
+   "tekstas": "Kompiuterio lemputė dega, bet ekranas juodas. Kas greičiausiai nutiko? Spausk: Ekranas išjungtas, Nėra interneto, Sugedo pelė."
+  },
+  {
+   "id": "D2b",
+   "file": "24.mp3",
+   "tekstas": "Kompiuteris neveikia, o tu nežinai kodėl. Ką darysi? Spausk: Pastuksensiu, Traukysiu laidus, Pakviesiu suaugusį."
+  },
+  {
+   "id": "D3a",
+   "file": "25.mp3",
+   "tekstas": "Nori padaryti skaidres pristatymui. Kurią programą atidarysi? Spausk: Piešimas, Skaidrės, Skaičiuotuvas."
+  },
+  {
+   "id": "D3b",
+   "file": "26.mp3",
+   "tekstas": "Kur kompiuteris laiko tavo failus, kai jis išjungtas? Spausk: Diske, Ekrane, Pelėje."
+  },
+  {
+   "id": "E1a",
+   "file": "27.mp3",
+   "tekstas": "Nori parašyti mamai žinutę. Kurią programą atidarysi? Spausk: Skaičiuotuvas, Piešimas, Žinutės."
+  },
+  {
+   "id": "E1b",
+   "file": "28.mp3",
+   "tekstas": "Draugas žaidime parašė tau: LABAS! Ką atrašysi? Spausk: Labas!, Eik šalin, Nieko."
+  },
+  {
+   "id": "E2a",
+   "file": "29.mp3",
+   "tekstas": "Nufotografavai draugą juokingai. Ką darysi su nuotrauka? Spausk: Siųsiu visiems, Įkelsiu į žaidimą, Pirma paklausiu draugo."
+  },
+  {
+   "id": "E2b",
+   "file": "30.mp3",
+   "tekstas": "Klasės pokalbyje kažkas rašo viską didžiosiomis raidėmis: ATEIK DABAR! GREIČIAU! Kaip tai skamba? Spausk: Kaip rėkimas, Kaip mandagu, Kaip tyla."
+  },
+  {
+   "id": "E3a",
+   "file": "31.mp3",
+   "tekstas": "Rašai el. laišką mokytojai. Laukeliai: Kam, Tema, Laiškas."
+  },
+  {
+   "id": "E3v",
+   "file": "32.mp3",
+   "tekstas": "Kuri programa skirta siųsti laiškus? Spausk ją."
+  },
+  {
+   "id": "E3b",
+   "file": "33.mp3",
+   "tekstas": "Su draugais kartu rašote vieną dokumentą internete. Draugas netyčia ištrynė tavo sakinį. Ką darysi? Spausk: Ištrinsiu jo sakinį, Parašysiu jam ir susitarsim, Išeisiu iš dokumento."
+  },
+  {
+   "id": "F1a",
+   "file": "34.mp3",
+   "tekstas": "Žaidime nepažįstamas žmogus klausia, kur tu gyveni. Ką darysi? Spausk: Pasakysiu adresą, Nesakysiu ir pasakysiu suaugusiam, Pasakysiu tik miestą."
+  },
+  {
+   "id": "F1b",
+   "file": "35.mp3",
+   "tekstas": "Ilgai žiūrėjai į ekraną ir akys pavargo. Ką darysi? Spausk: Žiūrėsiu toliau, Padidinsiu ryškumą, Padarysiu pertrauką."
+  },
+  {
+   "id": "F2a",
+   "file": "36.mp3",
+   "tekstas": "Atėjo žinutė: Laimėjai telefoną! Spausk čia! Ką darysi? Spausk: Spausiu, Atrašysiu, Parodysiu suaugusiam."
+  },
+  {
+   "id": "F2b",
+   "file": "37.mp3",
+   "tekstas": "Geriausias draugas prašo tavo slaptažodžio. Ką darysi? Spausk: Nesakysiu — slaptažodis tik mano, Pasakysiu, juk draugas, Užrašysiu jam ant lapelio."
+  },
+  {
+   "id": "F3a",
+   "file": "38.mp3",
+   "tekstas": "Nori įkelti į internetą nuotrauką, kurioje esi tu ir draugai. Kam leisi ją matyti? Spausk: Visiems internete, Šeimai ir draugams, jei draugai sutinka, Visiems, jei graži."
+  },
+  {
+   "id": "F3b",
+   "file": "39.mp3",
+   "tekstas": "Nori atsisiųsti žaidimą. Iš kur saugiausia? Spausk: Iš nuorodos žinutėje, Iš bet kur, jei nemokamas, Iš oficialios parduotuvės."
+  },
+  {
+   "id": "A3c",
+   "file": "40.mp3",
+   "tekstas": "Kuris aplankas sutvarkytas gerai? Spausk: , , —."
+  },
+  {
+   "id": "B3c",
+   "file": "41.mp3",
+   "tekstas": "Kiek obuolių bus iš viso? Spausk skaičių."
+  },
+  {
+   "id": "B3d",
+   "file": "42.mp3",
+   "tekstas": "Robotukas piešė kvadratą, bet nebaigė. Kiek kraštinių trūksta?"
+  },
+  {
+   "id": "C3c",
+   "file": "43.mp3",
+   "tekstas": "Slaptas kodas: trikampis reiškia vieną, apskritimas reiškia du. Kiek yra trikampis ir apskritimas kartu?"
+  },
+  {
+   "id": "E2c",
+   "file": "44.mp3",
+   "tekstas": "Kuri žinutė atrodo kaip rėkimas? Spausk: labas, Labas :), ATEIK!!!."
+  },
+  {
+   "id": "E3c",
+   "file": "45.mp3",
+   "tekstas": "Kurioje programoje galima rašyti KARTU su draugu?"
+  },
+  {
+   "id": "F2c",
+   "file": "46.mp3",
+   "tekstas": "Ekrane staiga iššoko toks langas. Ką darysi? Spausk: Spausiu, Atrašysiu, Parodysiu suaugusiam."
+  }
+ ]
+}
