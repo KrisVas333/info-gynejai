@@ -763,6 +763,10 @@ function finish(){
     lygis_bendras: overall, lygiai: Object.fromEntries(AREAS.map(a=>[a.k,lvl[a.k]])),
     klausimu: main.length, klaidu: klaidu, klaidos_sritimis: perArea,
     trukme_s: dur, pakartota: reviewList.length, pataisyta: reviewFixed,
+    /* nebaigta = ratas, kuris nebuvo atidarytas del 11 min ribos (0 = testas pilnas).
+       Butina statistikai: tokio vaiko lygis matuotas ne visomis pakopomis ir yra
+       sasliskas zemyn, tad klases vidurkis be sio filtro butu klaidingas. */
+    nebaigta: cappedAt,
     versija: VERSION,
     atsakymai: log.map(l=>({id:l.id,f:l.phase,ok:l.ok,ms:l.ms}))
   });
