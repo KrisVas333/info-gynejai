@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="lt">
+<meta charset="utf-8">
+<title>Klaido misija — rezultatų suvestinė</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root{--bg:#F6F7FC;--card:#FFFFFF;--ink:#171B3E;--ink2:#4B5180;--line:#DCE0F2;--soft:#EEF0FA;
+        --cyan:#0E8FAD;--gold:#B8860B;--orange:#D9511A;--good:#178F62;--bad:#C93E2F;
+        --l0:#C93E2F;--l1:#D9A21B;--l2:#0E8FAD;--l3:#178F62;
+        --display:'Nunito','Segoe UI',system-ui,sans-serif;--mono:Consolas,ui-monospace,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.45;padding-block:24px 60px;padding-inline:18px}
+  .wrap{max-width:1040px;margin:0 auto}
+  h1{font-size:1.8rem;margin:0;font-weight:900}
+  h2{font-size:1.15rem;margin:34px 0 10px;font-weight:800}
+  .sub{color:var(--ink2);margin:6px 0 0}
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0;padding:12px 14px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+  .bar label{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.95rem}
+  .bar select,.bar button{font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .bar button{cursor:pointer;font-weight:800}
+  .bar button:hover{border-color:var(--cyan)}
+  .bar .st{margin-left:auto;font-family:var(--mono);font-size:.8rem;color:var(--ink2)}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .tile .n{font-size:1.9rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.1}
+  .tile .l{font-size:.8rem;color:var(--ink2);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:.93rem}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  th{font-size:.78rem;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em;background:var(--soft)}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  tr.ne td{color:var(--ink2);background:#fafbff}
+  .lv{display:inline-flex;height:14px;width:120px;border-radius:4px;overflow:hidden;vertical-align:middle;background:var(--soft)}
+  .lv i{display:block;height:100%}
+  .lv .a{background:var(--l0)}.lv .b{background:var(--l1)}.lv .c{background:var(--l2)}.lv .d{background:var(--l3)}
+  .legend{font-size:.8rem;color:var(--ink2);margin-top:6px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 3px 0 10px;vertical-align:middle}
+  .hbar{display:grid;grid-template-columns:150px 1fr 60px;gap:8px;align-items:center;font-size:.93rem;padding:4px 0}
+  .hbar .t{height:14px;background:var(--soft);border-radius:4px;overflow:hidden}
+  .hbar .t i{display:block;height:100%;background:var(--orange)}
+  .hbar .v{font-family:var(--mono);font-size:.82rem;text-align:right}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .empty{padding:26px;text-align:center;color:var(--ink2)}
+  .foot{font-size:.82rem;color:var(--ink2);margin-top:30px;line-height:1.5}
+  .err{background:#fde8e6;color:var(--bad);padding:10px 14px;border-radius:8px;font-weight:700}
+  code{font-family:var(--mono);font-size:.85em;background:var(--soft);padding:1px 5px;border-radius:4px}
+</style>
+
+<div class="wrap">
+  <h1>🛡️ Klaido misija — rezultatų suvestinė</h1>
+  <p class="sub">Pamoka 1 · diagnostinis testas. Rodomi tik apibendrinimai: nė vieno vaiko atskirai, nė vieno vardo.</p>
+
+  <div class="bar">
+    <label><input type="checkbox" id="onlyWin" checked> tik pamokų langas (kt./pn. 13:00–15:30)</label>
+    <label>grupė <select id="grp"><option value="">visos</option></select></label>
+    <button id="csv">⬇ CSV</button>
+    <button id="reload">↻ Atnaujinti</button>
+    <span class="st" id="status">kraunama…</span>
+  </div>
+
+  <div id="err" class="err" hidden></div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <h2>Pagal dienas</h2>
+  <div class="tw"><table id="days">
+    <thead><tr><th>Diena</th><th>Grupė</th><th class="n">Vaikai</th><th class="n">👦</th><th class="n">👧</th><th class="n">Vaizdinė</th><th class="n">Nebaigė</th><th class="n">Klaidų vid.</th><th class="n">Min. vid.</th><th>Lygiai</th><th class="n">Kartojimai</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <div class="legend">Lygiai: <i style="background:var(--l0)"></i>pradedantis <i style="background:var(--l1)"></i>1–2 kl. <i style="background:var(--l2)"></i>3–4 kl. <i style="background:var(--l3)"></i>5–6 kl. · Pilkos eilutės — už pamokų lango (Kris'o bandymai).</div>
+
+  <div class="two" style="margin-top:20px">
+    <div class="card"><h2 style="margin-top:0">Kur daugiausiai klaidų</h2><div id="areas"></div></div>
+    <div class="card"><h2 style="margin-top:0">Sunkiausi klausimai</h2><div id="qs"></div></div>
+  </div>
+
+  <p class="foot">
+    Šaltinis: Supabase <code>bcjr_suvestine_*</code> rodiniai — jie grąžina tik sumas ir vidurkius; atskirų eilučių šis puslapis pasiekti negali.
+    Skaičiuojami tik pirmi bandymai (<code>bandymas = 1</code>): mygtukas „Dar kartą" siunčia 2, 3…, o „Kitas vaikas" pradeda nuo 1.
+    Grupė ateina iš nuorodos, kurią atidaro mentorius: <code>testas.html?g=1a</code>.
+    Lygiai — nesvertinis šešių sričių vidurkis; vieno vaiko ženkliukas nėra verdiktas (žr. <code>bcjr-testo-statistika.md</code>).
+  </p>
+</div>
+
+<script>
+const B="https://iiekmeylpppczicrsxho.supabase.co/rest/v1";
+const K="sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF"; /* viešas: apibendrinimus skaityti gali, eilučių — ne */
+const AREAS={A:"🎨 Kūrimas",B:"🤖 Komandos",C:"📊 Duomenys",D:"🔧 Įrenginiai",E:"💬 Bendravimas",F:"🛡️ Saugumas"};
+const DOW=["","pr","an","tr","kt","pn","št","sk"];
+let D=[],S=[],Qs=[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function get(v,q){
+  const r=await fetch(`${B}/${v}?${q}`,{headers:{apikey:K,Authorization:"Bearer "+K}});
+  if(!r.ok)throw new Error(v+" → HTTP "+r.status);
+  return r.json();
+}
+async function load(){
+  $("status").textContent="kraunama…";$("err").hidden=true;
+  try{
+    [D,S,Qs]=await Promise.all([
+      get("bcjr_suvestine_dienos","select=*&order=diena.desc"),
+      get("bcjr_suvestine_sritys","select=*"),
+      get("bcjr_suvestine_klausimai","select=*")]);
+    const g=[...new Set(D.map(r=>r.grupe).filter(Boolean))].sort();
+    const sel=$("grp");const cur=sel.value;sel.innerHTML='<option value="">visos</option>'+g.map(x=>`<option${x===cur?" selected":""}>${esc(x)}</option>`).join("");
+    render();
+    $("status").textContent="atnaujinta "+new Date().toLocaleTimeString("lt-LT",{hour:"2-digit",minute:"2-digit"});
+  }catch(e){$("err").hidden=false;$("err").textContent="Nepavyko gauti duomenų: "+e.message;$("status").textContent="klaida";}
+}
+function keep(r){
+  if($("onlyWin").checked&&!r.pamokos_langas)return false;
+  const g=$("grp").value;if(g&&r.grupe!==g)return false;
+  return true;
+}
+function lv(r){
+  const t=r.l0+r.l1+r.l2+r.l3;if(!t)return"";
+  const w=n=>(100*n/t).toFixed(1)+"%";
+  return `<span class="lv" title="${r.l0} · ${r.l1} · ${r.l2} · ${r.l3}"><i class="a" style="width:${w(r.l0)}"></i><i class="b" style="width:${w(r.l1)}"></i><i class="c" style="width:${w(r.l2)}"></i><i class="d" style="width:${w(r.l3)}"></i></span>`;
+}
+function render(){
+  const rows=D.filter(keep);
+  /* kortelės */
+  const sum=k=>rows.reduce((s,r)=>s+(+r[k]||0),0);
+  const vaikai=sum("vaikai");
+  const wavg=k=>vaikai?(rows.reduce((s,r)=>s+(+r[k]||0)*r.vaikai,0)/vaikai):0;
+  const tot={l0:sum("l0"),l1:sum("l1"),l2:sum("l2"),l3:sum("l3")};
+  $("tiles").innerHTML=[
+    ["Vaikų",vaikai],["Dienų",new Set(rows.map(r=>r.diena)).size],["👦 / 👧",sum("berniukai")+" / "+sum("mergaites")],
+    ["Vaizdinė šaka",vaikai?Math.round(100*sum("vaizdine")/vaikai)+" %":"–"],
+    ["Klaidų vid.",vaikai?wavg("klaidu_vid").toFixed(1):"–"],["Trukmė vid.",vaikai?wavg("min_vid").toFixed(1)+" min":"–"],
+    ["5–6 kl. lygis",vaikai?tot.l3+" ("+Math.round(100*tot.l3/vaikai)+" %)":"–"],["Kartojimų",sum("pakartojimai")]
+  ].map(([l,n])=>`<div class="tile"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+  /* dienos */
+  const tb=$("days").querySelector("tbody");
+  tb.innerHTML=rows.length?rows.map(r=>`<tr class="${r.pamokos_langas?"":"ne"}">
+    <td>${r.diena} <span style="color:var(--ink2)">${DOW[r.sav_diena]||""}</span>${r.pamokos_langas?"":" ·&nbsp;už lango"}</td>
+    <td>${esc(r.grupe||"–")}</td><td class="n"><b>${r.vaikai}</b></td><td class="n">${r.berniukai}</td><td class="n">${r.mergaites}</td>
+    <td class="n">${r.vaizdine}</td><td class="n">${r.nebaigtu}</td><td class="n">${r.klaidu_vid??"–"}</td><td class="n">${r.min_vid??"–"}</td>
+    <td>${lv(r)}</td><td class="n">${r.pakartojimai}</td></tr>`).join("")
+    :`<tr><td colspan="11" class="empty">Dar nėra nė vieno rezultato šiame filtre.</td></tr>`;
+  /* sritys */
+  const sf=S.filter(keep);const agg={};
+  for(const r of sf){const a=agg[r.sritis]||(agg[r.sritis]={klaidu:0,vaiku:0,lyg:0});a.klaidu+=r.klaidu;a.vaiku+=r.vaiku;a.lyg+=r.lygis_vid*r.vaiku;}
+  const ar=Object.entries(agg).sort((a,b)=>b[1].klaidu-a[1].klaidu);const mx=Math.max(1,...ar.map(([,a])=>a.klaidu));
+  $("areas").innerHTML=ar.length?ar.map(([k,a])=>`<div class="hbar"><span>${AREAS[k]||k}</span><span class="t"><i style="width:${100*a.klaidu/mx}%"></i></span><span class="v">${a.klaidu} kl. · lyg. ${(a.lyg/a.vaiku).toFixed(1)}</span></div>`).join("")
+    :`<div class="empty">Nėra duomenų.</div>`;
+  /* klausimai */
+  const qf=Qs.filter(keep);const qa={};
+  for(const r of qf){const a=qa[r.klausimas]||(qa[r.klausimas]={kartu:0,klaidu:0,sek:0});a.kartu+=r.kartu;a.klaidu+=r.klaidu;a.sek+=r.sek_vid*r.kartu;}
+  const qr=Object.entries(qa).map(([k,a])=>({k,kartu:a.kartu,proc:a.kartu?100*a.klaidu/a.kartu:0,sek:a.kartu?a.sek/a.kartu:0}))
+    .filter(x=>x.kartu>=2).sort((a,b)=>b.proc-a.proc||b.sek-a.sek).slice(0,10);
+  $("qs").innerHTML=qr.length?qr.map(x=>`<div class="hbar"><span><code>${esc(x.k)}</code> · ${x.kartu}×</span><span class="t"><i style="width:${x.proc}%;background:var(--bad)"></i></span><span class="v">${Math.round(x.proc)} % · ${x.sek.toFixed(1)} s</span></div>`).join("")
+    :`<div class="empty">Reikia bent 2 atsakymų į klausimą.</div>`;
+}
+$("csv").onclick=()=>{
+  const rows=D.filter(keep);
+  const h=["diena","sav_diena","pamokos_langas","grupe","vaikai","berniukai","mergaites","vaizdine","nebaigtu","klaidu_vid","klausimu_vid","min_vid","l0","l1","l2","l3","pakartojimai"];
+  const csv=[h.join(";")].concat(rows.map(r=>h.map(k=>String(r[k]??"").replace(/;/g,",")).join(";"))).join("\n");
+  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,﻿"+encodeURIComponent(csv);a.download="klaido-misija-suvestine.csv";a.click();
+};
+$("reload").onclick=load;$("onlyWin").onchange=render;$("grp").onchange=render;
+load();
+</script>
+</html>
