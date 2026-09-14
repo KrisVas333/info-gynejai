@@ -428,7 +428,9 @@
     if (every > 0) { state.quizEvery = every; state.quizFirst = every; }
     state.autoStart = p.get('auto') === '1';
     state.fastForward = Math.min(600, +p.get('ff') || 0); // seconds to simulate before the first frame
-    state.nosend = p.get('nosend') === '1' || state.autoStart || state.fastForward > 0 || (every > 0); // demo runs never report
+    // only the school copy on GitHub Pages reports; demo switches, the artifact, localhost and files never do
+    const onPages = /(^|\.)github\.io$/.test(location.hostname || '');
+    state.nosend = !onPages || p.get('nosend') === '1' || state.autoStart || state.fastForward > 0 || (every > 0);
   } catch (e) { state.nosend = true; }
 
   for (let i = 0; i < 28; i++) state.pebbles.push({ x: rand(0, W), w: randInt(2, 6), dy: randInt(6, 14) });
