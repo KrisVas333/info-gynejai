@@ -768,6 +768,8 @@ function finish(){
        sasliskas zemyn, tad klases vidurkis be sio filtro butu klaidingas. */
     nebaigta: cappedAt,
     versija: VERSION,
+    grupe: (Q.get("g")||"").slice(0,20)||null,   /* klasė iš URL ?g=1a — nustato mentorius, ne vaikas */
+    bandymas: bandymoNr(),                         /* 1 = pirmas; „Dar kartą" → 2, 3… statistika ima tik 1 */
     atsakymai: log.map(l=>({id:l.id,f:l.phase,ok:l.ok,ms:l.ms}))
   });
 
@@ -781,6 +783,10 @@ function finish(){
 const SB_URL="https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_testas";
 const SB_KEY="sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF";
 const QKEY="bcjr_p1_eile";
+/* Kelintas bandymas šioje naršyklės sesijoje: „Dar kartą" perkrauna puslapį, bet
+   sessionStorage išlieka, tad antras baigimas siunčia bandymas=2 ir suvestinėje
+   neskaičiuojamas kaip antras vaikas. Naujas skirtukas = nauja sesija = 1. */
+function bandymoNr(){try{const n=(Number(sessionStorage.getItem("bcjr_p1_bandymas"))||0)+1;sessionStorage.setItem("bcjr_p1_bandymas",String(n));return n;}catch(e){return 1;}}
 function post(row){
   return fetch(SB_URL,{method:"POST",keepalive:true,
     headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},
