@@ -109,6 +109,13 @@
   const COL_START_X = COL_LOCK_X + 420;
   const COL_W = 300;
 
+  // anonymous run statistics -> Supabase (same table pattern as the P1 test: public key can only INSERT,
+  // the server stamps the time, and lesson-window filtering happens in the bcjr_miste_v view)
+  const VERSION = 'miste-2026-09-14';
+  const SB_URL = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_miste';
+  const SB_KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
+  const QKEY = 'miste-eile';
+
   const BG = '#f7f7f7', INK = '#535353', MUTED = '#8f8f8f', GUIDE = '#c9c9c9', CLOUD = '#dcdcdc';
   const FONT = '"Press Start 2P", "Courier New", monospace';
 
@@ -160,6 +167,7 @@
   }
   function speak(q) {
     if (!q) return;
+    if (state.run) state.run.garsas++;
     stopSpeech();
     const src = AUDIO[q.id];
     if (src && player) {
@@ -394,6 +402,8 @@
     quizFirst: QUIZ_FIRST,
     quizEvery: QUIZ_EVERY,
     autoRead: loadAuto(),
+    nosend: false,
+    run: null,                // { t0, answers: [], garsas, sent }
     quiz: {
       phase: 'none',          // none | pending | approach | wait | feedback | exit
       nextAt: QUIZ_FIRST,     // score that triggers the next question
@@ -418,7 +428,8 @@
     if (every > 0) { state.quizEvery = every; state.quizFirst = every; }
     state.autoStart = p.get('auto') === '1';
     state.fastForward = Math.min(600, +p.get('ff') || 0); // seconds to simulate before the first frame
-  } catch (e) {}
+    state.nosend = p.get('nosend') === '1' || state.autoStart || state.fastForward > 0 || (every > 0); // demo runs never report
+  } catch (e) { state.nosend = true; }
 
   for (let i = 0; i < 28; i++) state.pebbles.push({ x: rand(0, W), w: randInt(2, 6), dy: randInt(6, 14) });
   for (let i = 0; i < 3; i++) state.clouds.push({ x: rand(0, W), y: rand(36, 96) });
@@ -446,6 +457,45 @@
     Object.assign(state.miste, { y: GROUND_Y, onGround: true, jumpT: 0, v0: 0, level: 0, animT: 0, frame: 0, apexDone: true });
     stopSpeech();
     resetQuiz();
+    state.run = { t0: state.time, answers: [], garsas: 0, sent: false };
+  }
+
+  // ---------- run report (one anonymous row per run; nothing that identifies the child) ----------
+  function runRow(unfinished) {
+    const r = state.run, a = r.answers;
+    return {
+      versija: VERSION,
+      taskai: Math.floor(state.score),
+      trukme_s: Math.round(state.time - r.t0),
+      klausimu: a.length,
+      teisingai: a.filter(x => x.ok === true).length,
+      klaidu: a.filter(x => x.ok === false).length,
+      garsas: r.garsas,
+      auto_garsas: !!state.autoRead,
+      nebaigta: !!unfinished,
+      atsakymai: a,
+    };
+  }
+  function post(row) {
+    return fetch(SB_URL, { method: 'POST', keepalive: true,
+      headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify(row) }).then(res => { if (!res.ok) throw new Error(res.status); return true; });
+  }
+  function qadd(row) { try { const q = JSON.parse(localStorage.getItem(QKEY) || '[]'); q.push(row); localStorage.setItem(QKEY, JSON.stringify(q.slice(-50))); } catch (e) {} }
+  function sendRun(unfinished) {
+    const r = state.run;
+    if (!r || r.sent || typeof fetch !== 'function') return;
+    r.sent = true;
+    const row = runRow(unfinished);
+    if (state.nosend) { console.log('(nesiunčiama — bandymas)', row); return; }
+    post(row).catch(() => qadd(row));
+  }
+  function flushQueue() {
+    if (typeof fetch !== 'function') return;
+    let q; try { q = JSON.parse(localStorage.getItem(QKEY) || '[]'); } catch (e) { return; }
+    if (!q.length) return;
+    Promise.all(q.map(r => post(r).then(() => null).catch(() => r)))
+      .then(left => { try { localStorage.setItem(QKEY, JSON.stringify(left.filter(Boolean))); } catch (e) {} });
   }
 
   function jump(k) {
@@ -464,6 +514,7 @@
     stopSpeech();
     const s = Math.floor(state.score);
     if (s > state.hi) { state.hi = s; saveHi(s); }
+    sendRun(false);
   }
 
   // ---------- quiz ----------
@@ -483,6 +534,7 @@
     z.phase = 'approach';
     z.colX = COL_START_X;
     z.chosen = 0; z.result = ''; z.msg = '';
+    z.shownAt = state.time; z.lockedAt = 0;
     z.asked++;
     if (state.autoRead) speak(z.q);
   }
@@ -500,6 +552,8 @@
     if (q.ok === 0) { z.result = 'any'; z.msg = q.reply[level - 1]; state.score += QUIZ_BONUS; dur = 2; }
     else if (level === q.ok) { z.result = 'ok'; z.msg = 'TEISINGAI! +' + QUIZ_BONUS; state.score += QUIZ_BONUS; dur = 1.5; }
     else { z.result = 'bad'; z.msg = 'NE. TEISINGAI: ' + q.a[q.ok - 1]; dur = 2.5; }
+    // ok: true/false for real questions, null for comedic ones; ms = time from the column locking to the jump
+    if (state.run) state.run.answers.push({ id: q.id, pasirinkta: level, ok: q.ok === 0 ? null : level === q.ok, ms: Math.round((state.time - (z.lockedAt || z.shownAt)) * 1000) });
     z.phase = 'feedback';
     z.feedbackUntil = state.time + dur;
     stopSpeech();
@@ -522,7 +576,7 @@
         break;
       case 'approach':
         z.speedMult = Math.max(QUIZ_SLOW, z.speedMult - dt / 1.0);
-        if (z.colX <= COL_LOCK_X) { z.colX = COL_LOCK_X; z.phase = 'wait'; z.speedMult = 0; }
+        if (z.colX <= COL_LOCK_X) { z.colX = COL_LOCK_X; z.phase = 'wait'; z.speedMult = 0; z.lockedAt = state.time; }
         break;
       case 'wait':
         z.speedMult = 0;
@@ -858,6 +912,9 @@
     requestAnimationFrame(frame);
   }
   document.addEventListener('visibilitychange', () => { last = performance.now(); });
+  // a run cut short by closing the tab still counts as a play (nebaigta = true)
+  window.addEventListener('pagehide', () => { if (state.mode === 'running' && state.score >= 1) sendRun(true); });
+  try { flushQueue(); } catch (e) {}
   if (state.autoStart) {
     start();
     for (let i = 0; i < (state.fastForward || 0) * 60; i++) update(1 / 60);
