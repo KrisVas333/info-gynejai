@@ -65,7 +65,7 @@
 </style>
 
 <div class="stage">
-  <canvas id="game" width="900" height="300" tabindex="0" aria-label="Miste Runner. Spausk 1–5, kad peršoktum į liniuotės žymą. Tarpas pradeda žaidimą."></canvas>
+  <canvas id="game" width="900" height="332" tabindex="0" aria-label="Miste Runner. Spausk 1–5, kad peršoktum į liniuotės žymą. Tarpas pradeda žaidimą."></canvas>
   <p class="keys">
     <span class="group"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><kbd>5</kbd> ŠUOLIS Į LINIUOTĖS ŽYMĄ</span>
     <span class="sep"></span>
@@ -88,8 +88,9 @@
   const W = canvas.width, H = canvas.height;
 
   // ---------- geometry & tuning ----------
-  const GROUND_Y = 250;          // y of the ground line (Miste's feet when standing)
-  const STEP = 32;               // px between ruler marks
+  const GROUND_Y = 282;          // y of the ground line (Miste's feet when standing)
+  const STEP = 32;               // px between ruler marks; jump k lifts the feet k*STEP
+  const lineY = k => GROUND_Y - (k + 1) * STEP; // ruler mark k = where Miste's HEAD peaks on key k (feet at k*STEP + head 32)
   const MISTE_X = 160;
   const MISTE_W = 20, MISTE_H = 32;
   const GRAVITY = 1260;          // px/s^2  -> jump 1 ~0.45 s, jump 5 ~1.0 s airtime
@@ -647,11 +648,11 @@
     const color = z.phase === 'feedback' && z.result === 'bad' ? MUTED : INK;
     w.lines.forEach((ln, i) => text(ln, W / 2, y0 + i * lineH, w.size, 'center', color));
 
-    // answer rows between ruler marks: option k sits between marks k and k+1
+    // answer rows: option k hangs just under ruler mark k, exactly where Miste's body is at the apex of jump k
     if (z.phase === 'exit' && z.colX + COL_W < 0) return;
     const x = Math.round(z.colX);
     for (let k = 1; k <= q.a.length; k++) {
-      const top = GROUND_Y - (k + 1) * STEP + 3, h = STEP - 5;
+      const top = lineY(k) + 3, h = STEP - 5;
       const chosen = z.chosen === k && (z.phase === 'feedback' || z.phase === 'exit');
       const isRight = q.ok === k && z.result === 'bad' && (z.phase === 'feedback' || z.phase === 'exit');
       ctx.fillStyle = chosen ? INK : BG;
@@ -689,16 +690,16 @@
     ctx.lineWidth = 2;
     ctx.setLineDash([2, 4]);
     for (const k of state.lines) {
-      const y = GROUND_Y - k * STEP + 1;
+      const y = lineY(k) + 1;
       ctx.beginPath(); ctx.moveTo(RULER_X + 2, y); ctx.lineTo(W, y); ctx.stroke();
     }
     ctx.setLineDash([]);
 
     // ruler
     ctx.fillStyle = MUTED;
-    ctx.fillRect(RULER_X, GROUND_Y - 5 * STEP - 6, 2, 5 * STEP + 8);
+    ctx.fillRect(RULER_X, lineY(5) - 6, 2, GROUND_Y - lineY(5) + 8);
     for (let k = 1; k <= 5; k++) {
-      const y = GROUND_Y - k * STEP;
+      const y = lineY(k);
       ctx.fillStyle = MUTED;
       ctx.fillRect(RULER_X - 6, y, 8, 2);
       text(String(k), RULER_X - 11, y + 5, 10, 'right', INK);
