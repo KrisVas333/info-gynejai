@@ -375,6 +375,15 @@
   };
   window.__miste = state;
 
+  // demo switches for class or checks: ?quiz=5 asks a question every 5 s, ?auto=1 starts at once
+  try {
+    const p = new URLSearchParams(location.search);
+    const every = +p.get('quiz');
+    if (every > 0) state.quizEvery = every;
+    state.autoStart = p.get('auto') === '1';
+    state.fastForward = Math.min(600, +p.get('ff') || 0); // seconds to simulate before the first frame
+  } catch (e) {}
+
   for (let i = 0; i < 28; i++) state.pebbles.push({ x: rand(0, W), w: randInt(2, 6), dy: randInt(6, 14) });
   for (let i = 0; i < 3; i++) state.clouds.push({ x: rand(0, W), y: rand(36, 96) });
 
@@ -662,7 +671,7 @@
       text(q.a[k - 1], x + h + 4, top + h / 2 + size / 2 - 1, size, 'left', chosen ? BG : INK);
     }
     // gentle pulse on the hint while waiting for the jump
-    if (z.phase === 'wait' && Math.floor(t * 2) % 2 === 0) text('ŠOK Į ATSAKYMĄ: 1, 2 AR 3', W - 16, 46, 8, 'right', MUTED);
+    if (z.phase === 'wait' && Math.floor(t * 2) % 2 === 0) text('ŠOK Į ATSAKYMĄ: SPAUSK 1, 2 AR 3', W - 16, GROUND_Y + 32, 8, 'right', MUTED);
   }
 
   function render() {
@@ -672,7 +681,7 @@
     const m = state.miste;
     const z = state.quiz;
 
-    for (const c of state.clouds) drawMap(CLOUD_MAP, c.x, c.y, CLOUD);
+    if (!z.q) for (const c of state.clouds) drawMap(CLOUD_MAP, c.x, c.y, CLOUD); // clear sky behind a question
 
     // guide lines
     ctx.strokeStyle = GUIDE;
@@ -789,6 +798,10 @@
     requestAnimationFrame(frame);
   }
   document.addEventListener('visibilitychange', () => { last = performance.now(); });
+  if (state.autoStart) {
+    start();
+    for (let i = 0; i < (state.fastForward || 0) * 60; i++) update(1 / 60);
+  }
   requestAnimationFrame(frame);
 })();
 </script>
