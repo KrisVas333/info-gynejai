@@ -163,6 +163,7 @@ $("csv").onclick=()=>{
   const csv=[h.join(";")].concat(rows.map(r=>h.map(k=>String(r[k]??"").replace(/;/g,",")).join(";"))).join("\n");
   const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,﻿"+encodeURIComponent(csv);a.download="klaido-misija-suvestine.csv";a.click();
 };
+if(new URLSearchParams(location.search).get("viskas")==="1")$("onlyWin").checked=false; /* ?viskas=1 — rodyti ir bandymus už lango */
 $("reload").onclick=load;$("onlyWin").onchange=render;$("grp").onchange=render;
 load();
 </script>
