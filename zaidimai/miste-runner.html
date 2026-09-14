@@ -2,7 +2,6 @@
 <html lang="lt">
 <head>
 <meta charset="utf-8">
-<script src="../track.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Miste Runner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,60 +62,7 @@
   .keys label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
   .keys input[type="checkbox"] { width: 14px; height: 14px; margin: 0; accent-color: var(--ink); }
   .keys .sep { width: 2px; height: 14px; background: var(--guide); }
-
-  /* ---------- pradžios rinkiklis: TIK lytis + amžius, jokio vardo (Kris 2026-09-14; taisyta 2026-09-14 — skaidrus dangtis virš žaidimo titulo, apvali raidė dėl Ė) ---------- */
-  #pick {
-    position: fixed; inset: 0; z-index: 9;
-    background: rgba(10, 10, 10, 0.74);
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-    gap: 16px; padding: 20px 16px; overflow-y: auto; text-align: center;
-    font-family: 'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI', system-ui, sans-serif;
-  }
-  #pick[hidden] { display: none; }
-  #pick > *:first-child { margin-top: auto; }
-  #pick > *:last-child { margin-bottom: auto; }
-  #pick .lab { font-size: 13px; line-height: 1.6; color: #fff; letter-spacing: 0.02em; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
-  #pick .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-  #pick button {
-    cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700; line-height: 1.3; color: #fff;
-    background: rgba(255,255,255,0.10); border: 2px solid rgba(255,255,255,0.55); border-bottom-width: 4px;
-    border-radius: 10px;
-    padding: 10px 8px; min-width: 84px; min-height: 76px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
-  }
-  #pick button .e { font-size: 28px; line-height: 1; }
-  #pick button[aria-pressed="true"] { color: #0a0a0a; background: #fff; border-color: #fff; }
-  #pick button:active { border-bottom-width: 2px; transform: translateY(2px); }
-  #pick button:focus-visible { outline: 2px dashed #fff; outline-offset: 2px; }
-  #pick .go {
-    min-width: 220px; min-height: 76px; font-size: 20px; font-weight: 800; letter-spacing: 0.02em;
-    color: #0a0a0a; background: #fff; border-color: #fff; border-radius: 12px;
-  }
-  #pick .goHint { font-size: 10px; color: rgba(255,255,255,0.8); letter-spacing: 0.04em; margin-top: -8px; font-weight: 600; }
-  @media (max-width: 560px) {
-    #pick { gap: 10px; }
-    #pick button { min-width: 68px; font-size: 11px; }
-    #pick .go { min-width: 180px; }
-  }
 </style>
-
-<div id="pick">
-  <p class="lab" id="labLytis">KAS TU?</p>
-  <div class="row" role="group" aria-labelledby="labLytis" data-kind="lytis">
-    <button type="button" data-v="b" aria-pressed="false"><span class="e">👦</span>BERNIUKAS</button>
-    <button type="button" data-v="m" aria-pressed="false"><span class="e">👧</span>MERGAITĖ</button>
-    <button type="button" data-v="x" aria-pressed="false"><span class="e">🤐</span>NESAKYSIU</button>
-  </div>
-  <p class="lab" id="labAmzius">KIEK TAU METŲ?</p>
-  <div class="row" role="group" aria-labelledby="labAmzius" data-kind="amzius">
-    <button type="button" data-v="6" aria-pressed="false"><span class="e">6</span></button>
-    <button type="button" data-v="7" aria-pressed="false"><span class="e">7</span></button>
-    <button type="button" data-v="8" aria-pressed="false"><span class="e">8</span></button>
-    <button type="button" data-v="9" aria-pressed="false"><span class="e">9+</span></button>
-  </div>
-  <button type="button" class="go" id="pickGo">▶ PRADĖTI</button>
-  <p class="goHint">arba TARPAS</p>
-</div>
 
 <div class="stage">
   <canvas id="game" width="900" height="332" tabindex="0" aria-label="Miste Runner. Spausk 1–5, kad peršoktum į liniuotės žymą. Tarpas pradeda žaidimą."></canvas>
@@ -166,13 +112,6 @@
   // anonymous run statistics -> Supabase (same table pattern as the P1 test: public key can only INSERT,
   // the server stamps the time, and lesson-window filtering happens in the bcjr_miste_v view)
   const VERSION = 'miste-2026-09-14';
-
-  // ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ----------
-  const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
-  const igB = (v, steps) => { for (const [max, label] of steps) if (v < max) return label; return steps[steps.length-1][1]; };
-  const igTaskai = s => igB(s, [[50,'<50'],[100,'50-99'],[200,'100-199'],[400,'200-399'],[Infinity,'400+']]);
-  const igLaikas = s => igB(s, [[15,'<15s'],[30,'15-30s'],[60,'30-60s'],[120,'1-2min'],[Infinity,'2min+']]);
-  let igSuoliai = 0;                       // stabdis: daugiausiai 200 „suolis" įvykių per bėgimą
   const SB_URL = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_miste';
   const SB_KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
   const QKEY = 'miste-eile';
@@ -227,7 +166,6 @@
     if (typeof speechSynthesis !== 'undefined') { try { speechSynthesis.cancel(); } catch (e) {} }
   }
   function speak(q) {
-    IG.ev('garsas_perskaityk', { klausimas: q && q.id ? q.id : 'na' });
     if (!q) return;
     if (state.run) state.run.garsas++;
     stopSpeech();
@@ -504,56 +442,7 @@
     z.chosen = 0; z.result = ''; z.msg = ''; z.feedbackUntil = 0;
   }
 
-  // ---------- demografija: lytis + amžius, NIEKADA vardas (Kris, 2026-09-14) ----------
-  // Laikoma tik sessionStorage (dingsta uždarius kortelę), kad „dar kartą" nebeklaustų.
-  // TARPAS visada paleidžia žaidimą, net nieko nepasirinkus -> žyma „nepasirinko", Supabase NULL.
-  const DEMO = { lytis: null, amzius: null, sent: false };
-  try { DEMO.lytis  = sessionStorage.getItem('ig-lytis')  || null;
-        DEMO.amzius = sessionStorage.getItem('ig-amzius') || null; } catch (e) {}
-  const pickEl = document.getElementById('pick');
-  function paintPicks() {
-    if (!pickEl) return;
-    pickEl.querySelectorAll('.row').forEach(row => {
-      const val = DEMO[row.dataset.kind];
-      row.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === val)));
-    });
-  }
-  function hidePick() { if (pickEl) pickEl.hidden = true; }
-  function setPick(kind, val) {
-    DEMO[kind] = val;
-    try { sessionStorage.setItem('ig-' + kind, val); } catch (e) {}
-    paintPicks();
-    canvas.focus();   // TARPAS toliau PRADEDA žaidimą, o ne perjungia pasirinkimą
-  }
-  // Clarity 'set' su ta pačia žyma KAUPIA reikšmes -> žymim tik vieną kartą per seansą
-  function tagDemo() {
-    if (DEMO.sent) return; DEMO.sent = true;
-    IG.tag('lytis',  DEMO.lytis  || 'nepasirinko');
-    IG.tag('amzius', DEMO.amzius || 'nepasirinko');
-  }
-  if (pickEl) {
-    paintPicks();
-    pickEl.addEventListener('click', e => {
-      const b = e.target.closest && e.target.closest('button'); if (!b) return;
-      if (b.id === 'pickGo') { hidePick(); if (state.mode === 'title') start(); canvas.focus(); return; }
-      if (!b.dataset.v) return;
-      setPick(b.closest('.row').dataset.kind, b.dataset.v);
-    });
-    // ENTER/TARPAS ant pasirinkimo mygtuko pasirenka ČIA ir nepasiekia globalaus klavišo
-    pickEl.addEventListener('keydown', e => {
-      if (e.key !== 'Enter' && e.key !== ' ') return;
-      const b = e.target.closest && e.target.closest('button[data-v]'); if (!b) return;
-      e.preventDefault(); e.stopPropagation();
-      setPick(b.closest('.row').dataset.kind, b.dataset.v);
-    });
-    if (state.autoStart || (DEMO.lytis && DEMO.amzius)) hidePick();
-  }
-
   function start() {
-    tagDemo();
-    hidePick();
-    IG.ev('zaidimas_pradeta', { versija: VERSION, rekordas: igTaskai(state.hi) });
-    igSuoliai = 0;
     state.mode = 'running';
     state.score = 0;
     state.speed = BASE_SPEED;
@@ -577,10 +466,7 @@
   function runRow(unfinished) {
     const r = state.run, a = r.answers;
     return {
-      clarity_sesija: (window.ig && ig.sesija) || null,   // sąsaja su Clarity įrašu; nieko apie vaiką
       versija: VERSION,
-      lytis: DEMO.lytis || null,                                  // b | m | x | null (nepasirinko)
-      amzius: DEMO.amzius ? Number(DEMO.amzius) : null,           // 6 | 7 | 8 | 9 | null
       taskai: Math.floor(state.score),
       trukme_s: Math.round(state.time - r.t0),
       klausimu: a.length,
@@ -617,7 +503,6 @@
   function jump(k) {
     const m = state.miste;
     if (state.mode !== 'running' || !m.onGround) return;
-    if (++igSuoliai <= 200) IG.ev('suolis', { klavisas: String(k) });   // riba: ilgas bėgimas neužtvindo Clarity
     m.onGround = false;
     m.jumpT = 0;
     m.v0 = jumpV0(k);
@@ -630,14 +515,7 @@
     state.deadAt = state.time;
     stopSpeech();
     const s = Math.floor(state.score);
-    const igTrukme = Math.round(state.time - (state.run ? state.run.t0 : state.time));
-    IG.ev('mirtis', { taskai: igTaskai(s), laikas_s: igLaikas(igTrukme), klausimu: String(state.quiz.asked) });
-    if (s > state.hi) {
-      // „parodyk draugui" momentas — naujas rekordas. Šie įrašai peržiūrimi pirmi.
-      IG.ev('naujas_rekordas', { taskai: igTaskai(s), pirmas: state.hi > 0 ? 'ne' : 'taip' });
-      IG.upgrade('naujas_rekordas');
-      state.hi = s; saveHi(s);
-    }
+    if (s > state.hi) { state.hi = s; saveHi(s); }
     sendRun(false);
   }
 
@@ -677,9 +555,7 @@
     else if (level === q.ok) { z.result = 'ok'; z.msg = 'TEISINGAI! +' + QUIZ_BONUS; state.score += QUIZ_BONUS; dur = 1.5; }
     else { z.result = 'bad'; z.msg = 'NE. TEISINGAI: ' + q.a[q.ok - 1]; dur = 2.5; }
     // ok: true/false for real questions, null for comedic ones; ms = time from the column locking to the jump
-    const igOk = q.ok === 0 ? null : level === q.ok;
-    if (state.run) state.run.answers.push({ id: q.id, pasirinkta: level, ok: igOk, ms: Math.round((state.time - (z.lockedAt || z.shownAt)) * 1000) });
-    if (igOk !== null) IG.ev(igOk ? 'klausimas_ok' : 'klausimas_klaida', { klausimas: q.id });
+    if (state.run) state.run.answers.push({ id: q.id, pasirinkta: level, ok: q.ok === 0 ? null : level === q.ok, ms: Math.round((state.time - (z.lockedAt || z.shownAt)) * 1000) });
     z.phase = 'feedback';
     z.feedbackUntil = state.time + dur;
     stopSpeech();
@@ -993,7 +869,7 @@
     if (!level && !isStart) return;
     e.preventDefault();
     if (state.mode === 'title') { start(); if (level) jump(level); }
-    else if (state.mode === 'dead') { if (state.time - state.deadAt > RESTART_LOCK) { IG.ev('dar_karta'); start(); if (level) jump(level); } }
+    else if (state.mode === 'dead') { if (state.time - state.deadAt > RESTART_LOCK) { start(); if (level) jump(level); } }
     else if (level) {
       const z = state.quiz;
       if (z.phase === 'wait' && level > z.q.a.length) return; // nothing to jump into up there
@@ -1020,7 +896,7 @@
   if (sayBtn) sayBtn.addEventListener('click', () => { if (questionActive()) speak(state.quiz.q); canvas.focus(); });
   if (autoBox) {
     autoBox.checked = state.autoRead;
-    autoBox.addEventListener('change', () => { state.autoRead = !!autoBox.checked; IG.ev('garsas_auto', { ijungta: state.autoRead ? 'taip' : 'ne' }); saveAuto(state.autoRead); canvas.focus(); });
+    autoBox.addEventListener('change', () => { state.autoRead = !!autoBox.checked; saveAuto(state.autoRead); canvas.focus(); });
   }
   function syncControls() {
     if (sayBtn) sayBtn.disabled = !questionActive();
