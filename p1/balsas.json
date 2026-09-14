@@ -59,7 +59,7 @@
   {
    "id": "A3v",
    "file": "06.mp3",
-   "tekstas": "Kuris failas yra filmukas? Spausk jį."
+   "tekstas": "Kuris failas yra filmukas? Variantai: paveikslėlis, filmo juosta, nata. Spausk filmo juostą."
   },
   {
    "id": "A3b",
@@ -89,22 +89,22 @@
   {
    "id": "B3a",
    "file": "12.mp3",
-   "tekstas": "Programa pradeda nuo dviejų ir tris kartus prideda po vieną. Koks skaičius bus pabaigoje?"
+   "tekstas": "Programa pradeda nuo dviejų ir tris kartus prideda po vieną. Koks skaičius bus pabaigoje? Variantai: trys, šeši, penki."
   },
   {
    "id": "B3b",
    "file": "13.mp3",
-   "tekstas": "Programa turėjo nupiešti kvadratą, bet nupiešė tik tris kraštines. Kiek kartų reikėjo kartoti komandą piešk kraštinę?"
+   "tekstas": "Programa turėjo nupiešti kvadratą, bet nupiešė tik tris kraštines. Kiek kartų reikėjo kartoti komandą piešk kraštinę? Variantai: trys, keturi, penki."
   },
   {
    "id": "C1a",
    "file": "14.mp3",
-   "tekstas": "Klasė suskaičiavo vaisius. Kurių vaisių yra daugiausiai? Spausk tą vaisių."
+   "tekstas": "Klasė suskaičiavo vaisius. Kurių vaisių yra daugiausiai? Variantai: bananas, obuolys, kriaušė. Spausk tą vaisių."
   },
   {
    "id": "C1b",
    "file": "15.mp3",
-   "tekstas": "Čia vaisių grupė. Kuris daiktas į ją NETINKA? Spausk jį."
+   "tekstas": "Čia vaisių grupė. Kuris daiktas į ją NETINKA? Variantai: vynuogės, mašina, apelsinas. Spausk jį."
   },
   {
    "id": "C2a",
@@ -119,27 +119,27 @@
   {
    "id": "C2b",
    "file": "18.mp3",
-   "tekstas": "Pažiūrėk į seką: raudonas, mėlynas, mėlynas, raudonas, mėlynas, mėlynas, raudonas. Kas bus toliau?"
+   "tekstas": "Pažiūrėk į seką: raudonas, mėlynas, mėlynas, raudonas, mėlynas, mėlynas, raudonas. Kas bus toliau? Variantai: raudonas, žalias, mėlynas."
   },
   {
    "id": "C3a",
    "file": "19.mp3",
-   "tekstas": "Kortelės: keturi, du ir vienas. Sudėk dvi korteles, kad gautum penkis. Kurios dvi?"
+   "tekstas": "Kortelės: keturi, du ir vienas. Sudėk dvi korteles, kad gautum penkis. Kurios dvi? Variantai: keturi plius vienas, keturi plius du, du plius vienas."
   },
   {
    "id": "C3b",
    "file": "20.mp3",
-   "tekstas": "Slaptas kodas: kiekviena raidė pasislenka per vieną. A virsta B, B virsta C, C virsta D. Kaip užšifruoti žodį A, B?"
+   "tekstas": "Slaptas kodas: kiekviena raidė pasislenka per vieną. A virsta B, B virsta C, C virsta D. Kaip užšifruoti žodį A, B? Variantai: B C, A B, C D."
   },
   {
    "id": "D1a",
    "file": "21.mp3",
-   "tekstas": "Kuris iš šių daiktų yra kompiuterio pelė? Spausk ją."
+   "tekstas": "Kuris iš šių daiktų yra kompiuterio pelė? Variantai: klaviatūra, ekranas, pelė. Spausk pelę."
   },
   {
    "id": "D1b",
    "file": "22.mp3",
-   "tekstas": "Kuris mygtukas ĮJUNGIA kompiuterį? Spausk jį."
+   "tekstas": "Kuris mygtukas ĮJUNGIA kompiuterį? Variantai: garsiakalbis, apskritimas su brūkšneliu, rodyklė. Spausk jį."
   },
   {
    "id": "D2a",
@@ -184,12 +184,12 @@
   {
    "id": "E3a",
    "file": "31.mp3",
-   "tekstas": "Rašai el. laišką mokytojai. Laukeliai: Kam, Tema, Laiškas."
+   "tekstas": "Rašai el. laišką mokytojai. Laukeliai: Kam, Tema, Laiškas. Spausk laukelį, kur įrašysi gavėją — tą, kuriam siunti."
   },
   {
    "id": "E3v",
    "file": "32.mp3",
-   "tekstas": "Kuri programa skirta siųsti laiškus? Spausk ją."
+   "tekstas": "Kuri programa skirta siųsti laiškus? Variantai: žaidimų pultas, vokas, dažų paletė. Spausk ją."
   },
   {
    "id": "E3b",
@@ -229,22 +229,22 @@
   {
    "id": "A3c",
    "file": "40.mp3",
-   "tekstas": "Kuris aplankas sutvarkytas gerai? Spausk: , , —."
+   "tekstas": "Kuris aplankas sutvarkytas gerai? Pirmas: piešinys, daina ir nuotrauka kartu. Antras: trys piešiniai. Trečias: tuščias. Spausk jį."
   },
   {
    "id": "B3c",
    "file": "41.mp3",
-   "tekstas": "Kiek obuolių bus iš viso? Spausk skaičių."
+   "tekstas": "Kiek obuolių bus iš viso? Variantai: trys, šeši, penki. Spausk skaičių."
   },
   {
    "id": "B3d",
    "file": "42.mp3",
-   "tekstas": "Robotukas piešė kvadratą, bet nebaigė. Kiek kraštinių trūksta?"
+   "tekstas": "Robotukas piešė kvadratą, bet nebaigė. Kiek kraštinių trūksta? Variantai: vienas, du, trys."
   },
   {
    "id": "C3c",
    "file": "43.mp3",
-   "tekstas": "Slaptas kodas: trikampis reiškia vieną, apskritimas reiškia du. Kiek yra trikampis ir apskritimas kartu?"
+   "tekstas": "Slaptas kodas: trikampis reiškia vieną, apskritimas reiškia du. Kiek yra trikampis ir apskritimas kartu? Variantai: du, trys, keturi."
   },
   {
    "id": "E2c",
@@ -254,7 +254,7 @@
   {
    "id": "E3c",
    "file": "45.mp3",
-   "tekstas": "Kurioje programoje galima rašyti KARTU su draugu?"
+   "tekstas": "Kurioje programoje galima rašyti KARTU su draugu? Variantai: lapas su dviem žmogučiais, žaidimų pultas, skaičiuotuvas."
   },
   {
    "id": "F2c",
