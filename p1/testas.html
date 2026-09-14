@@ -197,7 +197,10 @@
     <div class="rev" id="revBox" hidden></div>
     <div class="say" id="endSay"></div>
     <div class="foot" id="mentorFoot" hidden></div>
-    <button class="big-btn ghost" onclick="location.reload()">🔁 Dar kartą</button>
+    <div class="two" style="max-width:520px">
+      <button class="big-btn ghost" onclick="location.reload()">🔁 Dar kartą</button>
+      <button class="big-btn ghost" onclick="try{sessionStorage.removeItem('bcjr_p1_bandymas')}catch(e){};location.reload()">👉 Kitas vaikas</button>
+    </div>
   </div>
 </div>
 
