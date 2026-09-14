@@ -4,14 +4,14 @@ Clarity projektas `yi612dyhxe`. Vienas failas [`track.js`](track.js) — visuose
 **Kam:** ar vaikai grįžta prie įrankių **namie**, kur stringa, ką spaudžia. Nieko daugiau.
 
 ## Privatumas (nekeičiama — naudotojai 6–8 m.)
-Jokių vardų, įrenginio ID ar pastovių identifikatorių · `track.js` nieko nerašo į `localStorage` ir nededa sausainėlių · `clarity("identify")` **niekada** · testo „rašyk žodį" režime **įvestas tekstas nesiunčiamas** (tik ok/klaida) · Clarity pusėje **Strict masking**.
+Jokių vardų, įrenginio ID ar pastovių identifikatorių · `track.js` nieko nerašo į `localStorage` ir nededa sausainėlių · `clarity("identify")` **niekada** · testo „rašyk žodį" režime **įvestas tekstas nesiunčiamas** (tik ok/klaida) · Clarity pusėje **Balanced masking** (įvestys maskuojamos, klausimų tekstas matomas — kad įrašus būtų galima analizuoti).
 
 ## Automatinės seanso žymos (visur)
 | Žyma | Reikšmės | Ką sako |
 |---|---|---|
 | `irankis` | `testas`·`deck`·`suvestine`·`scenarijus`·`miste-runner`·`klavisu-sokis`·`miste-statistika`·`hub`… | kuris įrankis |
 | `kelias` | `p1/testas.html`… | pilnas kelias; šakniniai dublikatai = `hub-testas`/`hub-scenarijus` |
-| **`kontekstas`** | `pamoka`·`namai` | **ar žaidžia namie.** `pamoka` = ketv./penkt. 13–16 val. Europe/Vilnius (šaltinis: Supabase `bcjr_tvarkarastis`, įrašyta kietai) |
+| **`kontekstas`** | `pamoka`·`namai` | **ar žaidžia namie.** `pamoka` = **Kt 12:45–14:25 · Pn 12:55–16:00** Europe/Vilnius (= Supabase `bcjr_tvarkarastis` langų aprėptis, įrašyta kietai — keičiant tvarkaraštį keisti abu) |
 | `ivestis` | `touch`·`pele` | per pirmą sąlytį |
 | `ekranas` | `tel`(<600px)·`plansete`(<1024)·`kompas` | |
 | `saltinis` | `hub`·`tiesiogiai`·`vidinis`·domenas | iš kur atėjo |
@@ -20,7 +20,8 @@ Jokių vardų, įrenginio ID ar pastovių identifikatorių · `track.js` nieko n
 | `grupe` | iš `?g=` | klasė (nustato mentorius) |
 | `sesija` | UUID | **nesaugomas niekur**; tik sąsajai su Supabase |
 
-> **Filtruok visada `rezimas = vaikas`** — iškrenta Kris'o ir Gabrieliaus bandymai.
+> **Filtruok visada `rezimas = vaikas`** — iškrenta Kris'o ir Gabrieliaus bandymai. Hub'as (`infogynejai.lt`) žymi `rezimas=dev` tik su `?dev=1` — Kris/Gabrielius hub'ą atidaro su šiuo parametru.
+> ⚠️ `kortele_click` / `nuoroda_click` šauna prieš pat pereinant į kitą domeną — dalis pradingsta. Patikimesnis hub'o signalas: `saltinis = hub` paskirties puslapyje.
 > Namų signalas: **`kontekstas = namai`**.
 
 ## Įvykiai (⭐ = `upgrade`, Clarity rodo pirmiausia)

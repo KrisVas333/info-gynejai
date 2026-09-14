@@ -9,7 +9,8 @@
    · šis failas NIEKO nerašo į localStorage ir nededa jokių sausainėlių
    · clarity("identify", …) NENAUDOJAMAS niekada
    · įvesto teksto (testo „rašyk žodį“ režimas) NESIUNČIAM — tik ok/klaida
-   · Clarity pusėje įjungtas Strict masking (visas tekstas užmaskuotas)
+   · Clarity pusėje: Balanced masking (įvestys ir jautrus tekstas maskuojami;
+     klausimų tekstas matomas, kad įrašai būtų analizuojami — sprendimas 2026-09-14)
 
    window.ig API (saugu kviesti bet kada, niekada nemeta klaidos):
      ig.ev(name, tags?)   — custom event (+ nebūtinos žymos prieš jį)
@@ -87,15 +88,22 @@
   function kontekstas() {
     try {
       var f = new Intl.DateTimeFormat('en-GB', {
-        timeZone: 'Europe/Vilnius', weekday: 'short', hour: '2-digit', hour12: false
+        timeZone: 'Europe/Vilnius', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
       }).formatToParts(new Date());
-      var wd = '', hh = -1;
+      var wd = '', hh = -1, mm = 0;
       f.forEach(function (part) {
         if (part.type === 'weekday') wd = part.value;
         if (part.type === 'hour') hh = parseInt(part.value, 10);
+        if (part.type === 'minute') mm = parseInt(part.value, 10);
       });
-      var pamokosDiena = (wd === 'Thu' || wd === 'Fri');
-      return (pamokosDiena && hh >= 13 && hh < 16) ? 'pamoka' : 'namai';
+      var t = hh * 60 + mm;
+      /* Langai = Supabase bcjr_tvarkarastis (2026-09-14):
+         Kt: 1 kl. 12:45–13:30 · 2 kl. 13:40–14:25  → 12:45–14:25
+         Pn: 3 kl. 12:55–13:40 · 4 kl. 13:50–14:35 · 5 kl. 14:45–16:00 → 12:55–16:00
+         Pasikeitus tvarkaraščiui — keisti ČIA ir lentelėje kartu. */
+      var langai = { Thu: [12 * 60 + 45, 14 * 60 + 25], Fri: [12 * 60 + 55, 16 * 60] };
+      var l = langai[wd];
+      return (l && t >= l[0] && t < l[1]) ? 'pamoka' : 'namai';
     } catch (e) { return 'nezinoma'; }
   }
 
