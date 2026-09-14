@@ -100,7 +100,8 @@
   const RESTART_LOCK = 0.4;      // s after death before a key restarts
 
   // quiz gates
-  const QUIZ_EVERY = 30;         // s of running between questions
+  const QUIZ_FIRST = 150;        // score at which the first question comes
+  const QUIZ_EVERY = 120;        // points between the end of one question and the next
   const QUIZ_SLOW = 0.4;         // world speed multiplier while the question approaches
   const QUIZ_BONUS = 30;
   const COL_LOCK_X = MISTE_X - 30;   // answer column stops here, so Miste jumps into it
@@ -356,11 +357,12 @@
     deadAt: 0,
     pebbles: [],
     clouds: [],
+    quizFirst: QUIZ_FIRST,
     quizEvery: QUIZ_EVERY,
     autoRead: loadAuto(),
     quiz: {
       phase: 'none',          // none | pending | approach | wait | feedback | exit
-      timer: 0,
+      nextAt: QUIZ_FIRST,     // score that triggers the next question
       q: null,
       colX: 0,
       speedMult: 1,
@@ -375,11 +377,11 @@
   };
   window.__miste = state;
 
-  // demo switches for class or checks: ?quiz=5 asks a question every 5 s, ?auto=1 starts at once
+  // demo switches for class or checks: ?quiz=40 asks the first question at 40 points and then every 40, ?auto=1 starts at once
   try {
     const p = new URLSearchParams(location.search);
     const every = +p.get('quiz');
-    if (every > 0) state.quizEvery = every;
+    if (every > 0) { state.quizEvery = every; state.quizFirst = every; }
     state.autoStart = p.get('auto') === '1';
     state.fastForward = Math.min(600, +p.get('ff') || 0); // seconds to simulate before the first frame
   } catch (e) {}
@@ -389,7 +391,7 @@
 
   function resetQuiz() {
     const z = state.quiz;
-    z.phase = 'none'; z.timer = 0; z.q = null; z.colX = 0; z.speedMult = 1;
+    z.phase = 'none'; z.nextAt = state.quizFirst; z.q = null; z.colX = 0; z.speedMult = 1;
     z.chosen = 0; z.result = ''; z.msg = ''; z.feedbackUntil = 0;
   }
 
@@ -479,8 +481,7 @@
     switch (z.phase) {
       case 'none':
         z.speedMult = 1;
-        z.timer += dt;
-        if (z.timer >= state.quizEvery) z.phase = 'pending';
+        if (state.score >= z.nextAt) z.phase = 'pending';
         break;
       case 'pending':
         if (state.obstacles.length === 0) beginQuestion();
@@ -498,7 +499,7 @@
         break;
       case 'exit':
         z.speedMult = Math.min(1, z.speedMult + dt / 1.5);
-        if (z.colX + COL_W < -10) { z.phase = 'none'; z.timer = 0; z.q = null; z.speedMult = 1; }
+        if (z.colX + COL_W < -10) { z.phase = 'none'; z.nextAt = state.score + state.quizEvery; z.q = null; z.speedMult = 1; }
         break;
     }
   }
