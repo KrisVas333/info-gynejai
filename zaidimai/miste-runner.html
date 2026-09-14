@@ -2,6 +2,7 @@
 <html lang="lt">
 <head>
 <meta charset="utf-8">
+<script src="../track.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Miste Runner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,6 +113,13 @@
   // anonymous run statistics -> Supabase (same table pattern as the P1 test: public key can only INSERT,
   // the server stamps the time, and lesson-window filtering happens in the bcjr_miste_v view)
   const VERSION = 'miste-2026-09-14';
+
+  // ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ----------
+  const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
+  const igB = (v, steps) => { for (const [max, label] of steps) if (v < max) return label; return steps[steps.length-1][1]; };
+  const igTaskai = s => igB(s, [[50,'<50'],[100,'50-99'],[200,'100-199'],[400,'200-399'],[Infinity,'400+']]);
+  const igLaikas = s => igB(s, [[15,'<15s'],[30,'15-30s'],[60,'30-60s'],[120,'1-2min'],[Infinity,'2min+']]);
+  let igSuoliai = 0;                       // stabdis: daugiausiai 200 „suolis" įvykių per bėgimą
   const SB_URL = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_miste';
   const SB_KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
   const QKEY = 'miste-eile';
@@ -166,6 +174,7 @@
     if (typeof speechSynthesis !== 'undefined') { try { speechSynthesis.cancel(); } catch (e) {} }
   }
   function speak(q) {
+    IG.ev('garsas_perskaityk', { klausimas: q && q.id ? q.id : 'na' });
     if (!q) return;
     if (state.run) state.run.garsas++;
     stopSpeech();
@@ -443,6 +452,8 @@
   }
 
   function start() {
+    IG.ev('zaidimas_pradeta', { versija: VERSION, rekordas: igTaskai(state.hi) });
+    igSuoliai = 0;
     state.mode = 'running';
     state.score = 0;
     state.speed = BASE_SPEED;
@@ -466,6 +477,7 @@
   function runRow(unfinished) {
     const r = state.run, a = r.answers;
     return {
+      clarity_sesija: (window.ig && ig.sesija) || null,   // sąsaja su Clarity įrašu; nieko apie vaiką
       versija: VERSION,
       taskai: Math.floor(state.score),
       trukme_s: Math.round(state.time - r.t0),
@@ -503,6 +515,7 @@
   function jump(k) {
     const m = state.miste;
     if (state.mode !== 'running' || !m.onGround) return;
+    if (++igSuoliai <= 200) IG.ev('suolis', { klavisas: String(k) });   // riba: ilgas bėgimas neužtvindo Clarity
     m.onGround = false;
     m.jumpT = 0;
     m.v0 = jumpV0(k);
@@ -515,7 +528,14 @@
     state.deadAt = state.time;
     stopSpeech();
     const s = Math.floor(state.score);
-    if (s > state.hi) { state.hi = s; saveHi(s); }
+    const igTrukme = Math.round(state.time - (state.run ? state.run.t0 : state.time));
+    IG.ev('mirtis', { taskai: igTaskai(s), laikas_s: igLaikas(igTrukme), klausimu: String(state.quiz.asked) });
+    if (s > state.hi) {
+      // „parodyk draugui" momentas — naujas rekordas. Šie įrašai peržiūrimi pirmi.
+      IG.ev('naujas_rekordas', { taskai: igTaskai(s), pirmas: state.hi > 0 ? 'ne' : 'taip' });
+      IG.upgrade('naujas_rekordas');
+      state.hi = s; saveHi(s);
+    }
     sendRun(false);
   }
 
@@ -555,7 +575,9 @@
     else if (level === q.ok) { z.result = 'ok'; z.msg = 'TEISINGAI! +' + QUIZ_BONUS; state.score += QUIZ_BONUS; dur = 1.5; }
     else { z.result = 'bad'; z.msg = 'NE. TEISINGAI: ' + q.a[q.ok - 1]; dur = 2.5; }
     // ok: true/false for real questions, null for comedic ones; ms = time from the column locking to the jump
-    if (state.run) state.run.answers.push({ id: q.id, pasirinkta: level, ok: q.ok === 0 ? null : level === q.ok, ms: Math.round((state.time - (z.lockedAt || z.shownAt)) * 1000) });
+    const igOk = q.ok === 0 ? null : level === q.ok;
+    if (state.run) state.run.answers.push({ id: q.id, pasirinkta: level, ok: igOk, ms: Math.round((state.time - (z.lockedAt || z.shownAt)) * 1000) });
+    if (igOk !== null) IG.ev(igOk ? 'klausimas_ok' : 'klausimas_klaida', { klausimas: q.id });
     z.phase = 'feedback';
     z.feedbackUntil = state.time + dur;
     stopSpeech();
@@ -869,7 +891,7 @@
     if (!level && !isStart) return;
     e.preventDefault();
     if (state.mode === 'title') { start(); if (level) jump(level); }
-    else if (state.mode === 'dead') { if (state.time - state.deadAt > RESTART_LOCK) { start(); if (level) jump(level); } }
+    else if (state.mode === 'dead') { if (state.time - state.deadAt > RESTART_LOCK) { IG.ev('dar_karta'); start(); if (level) jump(level); } }
     else if (level) {
       const z = state.quiz;
       if (z.phase === 'wait' && level > z.q.a.length) return; // nothing to jump into up there
@@ -896,7 +918,7 @@
   if (sayBtn) sayBtn.addEventListener('click', () => { if (questionActive()) speak(state.quiz.q); canvas.focus(); });
   if (autoBox) {
     autoBox.checked = state.autoRead;
-    autoBox.addEventListener('change', () => { state.autoRead = !!autoBox.checked; saveAuto(state.autoRead); canvas.focus(); });
+    autoBox.addEventListener('change', () => { state.autoRead = !!autoBox.checked; IG.ev('garsas_auto', { ijungta: state.autoRead ? 'taip' : 'ne' }); saveAuto(state.autoRead); canvas.focus(); });
   }
   function syncControls() {
     if (sayBtn) sayBtn.disabled = !questionActive();

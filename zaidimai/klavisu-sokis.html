@@ -1,5 +1,6 @@
 <title>Klavišų Šokis</title>
 <meta charset="utf-8">
+<script src="../track.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;800&display=swap">
@@ -374,6 +375,11 @@ const sndMiss = () => beep(150,.22,'sawtooth',.12);
 const sndStar = i => beep(660+i*160,.18);
 const sndLevel= () => { beep(523,.1); setTimeout(()=>beep(659,.1),110); setTimeout(()=>beep(784,.2),220); };
 
+/* ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ---------- */
+const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
+const KS_VERSION = 'ks-2026-09-14';
+IG.tag('versija', KS_VERSION);
+
 /* ---------- state ---------- */
 const S = {
   phase:'start',           // start | intro | play | result | break | final
@@ -556,6 +562,9 @@ function hit(){
 
 function miss(timeout){
   cancelAnimationFrame(S.timer);
+  /* klavisas = KOKIO klavišo buvo tikimasi, ne ką vaikas paspaudė — jokio įvesto turinio */
+  IG.ev('klaida', { klavisas: String(S.expected || (timeout ? 'laikas-baigesi' : 'nezinomas')),
+                    lygis: String(S.level+1) });
   S.misses++; S.combo = 0;
   sndMiss();
   el.cap.classList.add('miss');
@@ -612,6 +621,7 @@ function endLevel(){
   const stars = acc>=.9 ? 3 : acc>=.7 ? 2 : 1;
   S.stars[S.level] = stars;
   S.missBy[S.level] = S.misses;
+  IG.ev('raunda_baigta', { lygis: String(S.level+1), zvaigzdes: String(stars), klaidu: String(S.misses) });
   $('resultTitle').textContent = `Lygis ${S.level+1} įveiktas!`;
   $('resultScore').textContent = `+${S.levelScore} taškų · klaidų: ${S.misses}`;
   $('resultNote').textContent = stars===3 ? 'Nepriekaištinga! Baitas didžiuojasi tavimi. 🐶'
@@ -650,16 +660,23 @@ function finale(){
   $('resultScoreFinal').textContent = `${S.score} taškų · ${allStars}/30 ⭐ · klaidų iš viso: ${missTotal()}`;
   $('finalTable').innerHTML = missSummaryRows().map(r=>
     `<tr><td>${r.name}</td><td>${'⭐'.repeat(r.stars||0)}</td><td>${r.miss===undefined ? '' : (r.miss===0 ? '✅ 0 klaidų' : r.miss+' kl.')}</td></tr>`).join('');
+  IG.ev('zaidimas_baigta', { zvaigzdes: String(allStars), klaidu: String(missTotal()) });
   let best = 0;
   try{
     best = +localStorage.getItem('ks-best')||0;
-    if (S.score>best){ localStorage.setItem('ks-best', S.score); best = S.score; }
+    if (S.score>best){
+      // „parodyk draugui" momentas — naujas rekordas. Šie įrašai peržiūrimi pirmi.
+      IG.ev('naujas_rekordas', { zvaigzdes: String(allStars), pirmas: best>0 ? 'ne' : 'taip' });
+      IG.upgrade('naujas_rekordas');
+      localStorage.setItem('ks-best', S.score); best = S.score;
+    }
   }catch(e){}
   $('bestLine').textContent = best ? (S.score>=best ? '🎉 Naujas rekordas!' : `Rekordas: ${best} taškų`) : '';
   sndLevel();
 }
 
 function resetGame(){
+  IG.ev('zaidimas_pradeta', { versija: KS_VERSION });
   S.score=0; S.stars=[]; S.pos=2;
   for (let i=0;i<10;i++) delete S.missBy[i];   // paslėptų kambarių klaidos (s1/s2) lieka iki grįžimo į pradžią
   S.misses=0; updateHud();
@@ -667,6 +684,7 @@ function resetGame(){
   startLevel(0);
 }
 function backToStart(){
+  IG.ev('dar_karta');
   // Baigus visus įprastus lygius — grįžtam į pradžios/pristatymo ekraną, ne tiesiai į 1 lygį.
   S.score=0; S.stars=[]; S.pos=2; S.missBy={}; S.misses=0; updateHud();
   el.klaidas.style.transform='translateX(-50%)';

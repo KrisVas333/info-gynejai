@@ -1,5 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
+<script src="../track.js"></script>
 <title>Klaido misija — Pamoka 1 (diagnostinis testas)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
@@ -198,8 +199,8 @@
     <div class="say" id="endSay"></div>
     <div class="foot" id="mentorFoot" hidden></div>
     <div class="two" style="max-width:520px">
-      <button class="big-btn ghost" onclick="location.reload()">🔁 Dar kartą</button>
-      <button class="big-btn ghost" onclick="try{sessionStorage.removeItem('bcjr_p1_bandymas')}catch(e){};location.reload()">👉 Kitas vaikas</button>
+      <button class="big-btn ghost" onclick="igNudge('dar_karta')">🔁 Dar kartą</button>
+      <button class="big-btn ghost" onclick="igNudge('kitas_vaikas')">👉 Kitas vaikas</button>
     </div>
   </div>
 </div>
@@ -224,6 +225,13 @@
    Minksta laiko riba: po 11 min naujas ratas neatidaromas (pradetas visada baigiamas). Šaltinis: wiki/content/informatikos-bp-2022-pasiekimai-1-6.md
    ===================================================================== */
 const VERSION="p1-diag-v3";
+
+/* ---------- analitika (track.js) — tik įvykiai, jokio turinio ----------
+   Niekada nesiunčiam įvesto teksto: „rašyk žodį" klausime matuojam tik ok/klaida. */
+const IG = window.ig || {ev:function(){},tag:function(){},upgrade:function(){},sesija:null};
+function igBucket(ms){ return ms<1000?"<1s" : ms<3000?"1-3s" : ms<8000?"3-8s" : ">8s"; }
+function igTrukme(s){ return s<180?"<3min" : s<300?"3-5min" : s<600?"5-10min" : s<900?"10-15min" : ">15min"; }
+let igBaigta=false;
 const AREAS=[
  {k:"A",ic:"🎨",nm:"Kūrimas",   skill:"kurti kompiuteriu: rašyti, piešti, tvarkyti failus"},
  {k:"B",ic:"🤖",nm:"Komandos",  skill:"duoti komandas robotukui ir rasti klaidas"},
@@ -476,6 +484,7 @@ if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pick
 let vo=null;
 function readAloud(){
   if(!cur)return;
+  IG.ev("garsas_perskaityk",{klausimas:cur.id});
   try{if(vo){vo.pause();vo=null;}if("speechSynthesis" in window)speechSynthesis.cancel();}catch(e){}
   const t=cur.say||cur.q;
   if(AUDIO[cur.id]){ try{vo=new Audio(AUDIO[cur.id]);vo.play();return;}catch(e){} }
@@ -497,6 +506,7 @@ const LINES={
   noReview:"Ne visai. Žiūrėk, kur teisingas."
 };
 function begin(){
+  IG.ev("testas_pradeta");
   document.getElementById("start").hidden=true;
   t0=Date.now();
   if(MENTOR){document.getElementById("clock").hidden=false;clockTimer=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);document.getElementById("clock").textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");},500);}
@@ -513,6 +523,7 @@ function startRead(){
 }
 function endRead(){
   track=FORCE!==null?(FORCE==="1"?"v":"r"):(readScore>=READ_PASS?"r":"v");
+  IG.ev("testas_skaitymas_baigta",{saka:track,skaitymo_balas:readScore});
   phase="main";round=0;buildProg();
   document.getElementById("phaseTag").textContent="misija";
   overlay("round","🚀",LINES.mainStart,1300,nextRound);
@@ -536,7 +547,7 @@ function nextRound(){
   /* minksta laiko riba: pradeto rato niekada nenutraukiam, bet naujo nebeatidarom.
      Prarandami tik auksciausiu pakopu duomenys ir tik letiems vaikams, kurie tas
      pakopas vis tiek beveik visada pralaimi. */
-  if(round>1&&t0&&(Date.now()-t0)/1000>SOFT_CAP){cappedAt=round;startReview();return;}
+  if(round>1&&t0&&(Date.now()-t0)/1000>SOFT_CAP){cappedAt=round;IG.ev("laiko_riba",{nutraukta_ties:"ratas-"+round});startReview();return;}
   /* per ratą — visos aktyvios sritys, po 2 klausimus: A,B,C…(pirmi) tada A,B,C…(antri).
      3 pakopa — tik VIENAS klausimas sričiai: antrasis ten niekada nieko nebepakeisdavo
      (atsakius teisingai lygis jau 3, atsakius klaidingai sritis vis tiek užsidaro),
@@ -564,6 +575,7 @@ function closeTier(k){
 
 /* ---------- 3) pakartojimas ---------- */
 function startReview(){
+  IG.ev("pakartojimas_pradetas");
   phase="review";
   /* tik klaidos — teisingai atsakytų nekartojam. Daugiausiai REVIEW_MAX, pirmiausia
      žemiausios pakopos: ten spraga svarbiausia, ir silpnas vaikas nesėdi 14 klaidų rate. */
@@ -662,12 +674,17 @@ function record(ok,ans){
   /* Lyties klausimas: teisingo atsakymo nėra — įsimenam ir einam toliau be vertinimo */
   if(cur.skip){
     lytis=["b","m","x"][ans]||"x";
+    IG.ev("testas_lytis",{lytis:lytis});
     log.push({id:cur.id,phase:"read",area:"R",tier:0,ok:null,ans:lytis,ms:Date.now()-cur._t,item:cur});
     beep(true);showFb("round","🙂","Ačiū!",false);
     fbTimer=setTimeout(()=>fbClick(true),800);
     return;
   }
-  log.push({id:cur.id,phase:phase,area:cur.area,tier:cur.tier||0,ok:ok,ans:ans,ms:Date.now()-cur._t,item:cur});
+  const igMs=Date.now()-cur._t;
+  log.push({id:cur.id,phase:phase,area:cur.area,tier:cur.tier||0,ok:ok,ans:ans,ms:igMs,item:cur});
+  /* NIEKADA nesiunčiam `ans` — įvestas žodis liktų vaiko tekstas. Tik ok/klaida. */
+  IG.ev(ok?"atsakymas_ok":"atsakymas_klaida",
+        {klausimas:cur.id,pakopa:cur.tier||0,sritis:cur.area,dvejone_ms:igBucket(igMs),faze:phase});
   beep(ok);
   if(phase==="read"){ if(ok)readScore++; }
   else if(phase==="main"){
@@ -761,7 +778,12 @@ function finish(){
      Viena anoniminė eilutė: jokio vardo, jokio įrenginio ID. Laiką rašo serveris,
      tad pamokos langą (kt./pn. 13–15 Vilniaus laiku) atfiltruojam vėliau.
      atsakymai[].ms = kiek sekundžių truko TAS klausimas. */
+  igBaigta=true;
+  IG.ev("testas_baigta",{lygis_bendras:overall,trukme_s:igTrukme(dur),klaidu:String(klaidu),saka:track,nebaigta:String(cappedAt)});
+  IG.upgrade("testas_baigta");
+
   send({
+    clarity_sesija: (window.ig && ig.sesija) || null,   /* sąsaja su Clarity įrašu; nieko apie vaiką */
     lytis: lytis, saka: track, skaitymo_balas: readScore,
     lygis_bendras: overall, lygiai: Object.fromEntries(AREAS.map(a=>[a.k,lvl[a.k]])),
     klausimu: main.length, klaidu: klaidu, klaidos_sritimis: perArea,
@@ -817,6 +839,22 @@ addEventListener("keydown",e=>{
   if(!cur||answered||cur.mode==="type")return;
   if(["1","2","3"].includes(e.key)){ if(cur.mode==="order")orderTap(cur.show[Number(e.key)-1]); else answer(Number(e.key)-1); }
 });
+
+/* ---------- analitika: perkrovimo mygtukai ir nutraukimas ---------- */
+function igNudge(name){
+  IG.ev(name);
+  if(name==="kitas_vaikas"){try{sessionStorage.removeItem("bcjr_p1_bandymas");}catch(e){}}
+  setTimeout(function(){location.reload();},60);   /* trumpa pauzė, kad įvykis spėtų išeiti */
+}
+/* Nutraukimo taškas: kur vaikas pasitraukė NEBAIGĘS. Tai pagrindinis UX signalas. */
+function igNutraukta(){
+  if(igBaigta||!t0)return;
+  igBaigta=true;
+  IG.ev("testas_nutrauktas",{nutraukta_ties:(cur?cur.id:"pradzia")+"|"+phase});
+  IG.upgrade("nutrauktas");
+}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")igNutraukta();});
+window.addEventListener("pagehide",igNutraukta);
 
 /* ---------- simuliacija (tik kūrėjui) ---------- */
 function simAnswer(){

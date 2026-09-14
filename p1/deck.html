@@ -1,4 +1,5 @@
 <!doctype html><html lang="lt"><head><meta charset="utf-8">
+<script src="../track.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Pamoka 1 — Įvadas į džiungles (V4)</title>
@@ -681,6 +682,8 @@ h2{font-size:clamp(.92rem,2.5vw,1.75rem);margin:0;color:var(--soft);font-weight:
 <script>
 var S=[].slice.call(document.querySelectorAll(".slide"));
 var n=0, lang="lt", revealed={};
+/* ---------- analitika (track.js): mentoriaus deck'as — tik eiga, jokio turinio ---------- */
+var IG = window.ig || {ev:function(){},tag:function(){},upgrade:function(){},sesija:null};
 document.getElementById("tot").textContent=S.length;
 
 /* ══ ŠEŠI SKAIDRIŲ TIPAI · § 8 ══════════════════════════════════════════
@@ -712,6 +715,7 @@ try{ var s=localStorage.getItem(KEY); if(s){ T0=parseInt(s,10);
 
 function startLesson(){
   if(T0) return;
+  IG.ev("taimeris_startas");
   T0=Date.now();
   try{ localStorage.setItem(KEY,String(T0)); }catch(e){}
   document.getElementById("start").classList.add("hide");
@@ -719,6 +723,7 @@ function startLesson(){
   tick();
 }
 function resetLesson(){                 /* repeticijai. Klasėje NENAUDOTI. */
+  IG.ev("taimeris_reset");
   T0=null; try{ localStorage.removeItem(KEY); }catch(e){}
   document.getElementById("start").classList.remove("hide");
   document.getElementById("clock").classList.add("idle");
@@ -768,7 +773,7 @@ function applyLang(){
   document.getElementById("lng").textContent=(lang==="lt")?"EN":"LT";
   paintNote(); paintType(); tick(); paintReset();
 }
-function toggleLang(){ lang=(lang==="lt")?"en":"lt"; applyLang(); }
+function toggleLang(){ lang=(lang==="lt")?"en":"lt"; IG.ev("kalba",{kalba:lang}); applyLang(); }
 function paintNote(){ document.getElementById("notes").textContent=S[n].getAttribute("data-"+lang+"-note")||""; }
 function paintType(){
   var t=TYPE[S[n].getAttribute("data-type")]||TYPE.kalba;
@@ -816,6 +821,7 @@ function litTile(s){
 }
 function go(d){
   if(d>0 && !T0) startLesson();          /* taimeris paleidžiamas ir pirmu perėjimu */
+  IG.ev("skaidre", {nr: String(n), kryptis: d>0 ? "pirmyn" : "atgal"});
   var s=S[n];
   if(d>0 && needsReveal(s) && !revealed[n]){ revealed[n]=true; litTile(s); return; }
   n=Math.max(0,Math.min(S.length-1,n+d)); paint();
