@@ -71,7 +71,7 @@
 <main>
   <header>
     <h1>Miste Runner · statistika<small>BrAIn Club Jr · kas sekasi ir kas ne, iš vaikų žaidimų pamokose</small></h1>
-    <div class="window">Skaičiuojama tik iš <b>pamokų</b>: ketvirtadieniais ir penktadieniais 13:00–16:00.<br>Viskas, kas už šio lango — bandymai, į statistiką nepatenka.</div>
+    <div class="window">Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį: kt. 12:45–13:30 (1 kl.), 13:40–14:25 (2 kl.) · pn. 12:55–13:40 (3 kl.), 13:50–14:35 (4 kl.), 14:45–16:00 (5 kl.).<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.</div>
   </header>
 
   <div id="empty" class="empty" hidden>Pamokų duomenų dar nėra. Pirmi skaičiai atsiras po pirmos pamokos, kurioje vaikai žais.</div>
@@ -79,6 +79,10 @@
 
   <section id="content" hidden>
     <div class="tiles" id="tiles"></div>
+
+    <h2>Klasės</h2>
+    <p class="lead">Klasė nustatoma pagal laiką, kada žaista. Kiekviena klasė turi savo langą tvarkaraštyje, todėl vaikų klausti nereikia.</p>
+    <div class="tablewrap"><table id="classes"><thead><tr><th>Klasė</th><th>Bėgimų</th><th>Dienų</th><th>Taškai vid.</th><th>Teisingai</th><th>Su garsu</th><th>Silpniausias klausimas</th></tr></thead><tbody></tbody></table></div>
 
     <h2>Gebėjimai</h2>
     <p class="lead">Kiek procentų atsakymų teisingi. Klavišai — ką daro ENTER, ESC, BACKSPACE, rodyklės, raidės. Istorija — kas nutiko Klaidui ir Dingailei P1–P2.</p>
@@ -94,7 +98,7 @@
 
     <h2>Pamokų dienos</h2>
     <p class="lead">Kiek žaista, kaip sekėsi ir ar vaikai naudojo garsą. Bėgimas — ne vaikas: tas pats vaikas per pamoką bėga kelis kartus.</p>
-    <div class="tablewrap"><table id="days"><thead><tr><th>Diena</th><th>Bėgimų</th><th>Nutraukta</th><th>Taškai vid. / max</th><th>Trukmė vid.</th><th>Teisingai</th><th>Su garsu</th></tr></thead><tbody></tbody></table></div>
+    <div class="tablewrap"><table id="days"><thead><tr><th>Diena</th><th>Klasė</th><th>Bėgimų</th><th>Nutraukta</th><th>Taškai vid. / max</th><th>Trukmė vid.</th><th>Teisingai</th><th>Su garsu</th></tr></thead><tbody></tbody></table></div>
   </section>
 
   <div class="note"><b>Kaip skaityti šiuos skaičius</b>
@@ -161,12 +165,14 @@
     const qs = Q.filter(q => q.ok).map((q, i) => { const n = 18 + (i * 7) % 15, ok = Math.round(n * (0.45 + ((i * 37) % 50) / 100)); const wrong = [1, 2, 3].filter(k => k !== q.ok); return { id: q.id, kartu: n, teisingai: ok, klaidu: n - ok, teisingai_proc: Math.round(100 * ok / n), sek_mediana: (1.5 + (i % 5) * 0.6).toFixed(1), greitos_klaidos: (i * 3) % 5, dazniausia_klaida: wrong[i % 2], dazniausia_klaida_n: Math.max(1, Math.round((n - ok) * 0.7)) }; });
     return {
       s: { begimu: 63, nutraukta: 4, dienu: 3, pirma_diena: '2026-09-18', paskutine_diena: '2026-09-26', klausimu: 350, teisingai: 241, klaidu: 109, tasku_vid: 412, tasku_max: 1350, sek_vid: 74, su_garsu: 27, auto_garsas: 9 },
-      d: [{ diena: '2026-09-26', begimu: 24, nutraukta: 1, tasku_vid: 470, tasku_max: 1350, sek_vid: 81, klausimu: 140, teisingai: 101, klaidu: 39, su_garsu: 9 }, { diena: '2026-09-25', begimu: 21, nutraukta: 2, tasku_vid: 398, tasku_max: 980, sek_vid: 70, klausimu: 118, teisingai: 79, klaidu: 39, su_garsu: 10 }, { diena: '2026-09-18', begimu: 18, nutraukta: 1, tasku_vid: 350, tasku_max: 760, sek_vid: 66, klausimu: 92, teisingai: 61, klaidu: 31, su_garsu: 8 }],
+      d: [{ diena: '2026-09-25', klase: 4, begimu: 13, nutraukta: 1, tasku_vid: 470, tasku_max: 1350, sek_vid: 81, klausimu: 74, teisingai: 55, klaidu: 19, su_garsu: 4 }, { diena: '2026-09-25', klase: 3, begimu: 11, nutraukta: 0, tasku_vid: 410, tasku_max: 900, sek_vid: 75, klausimu: 66, teisingai: 46, klaidu: 20, su_garsu: 5 }, { diena: '2026-09-24', klase: 2, begimu: 21, nutraukta: 2, tasku_vid: 398, tasku_max: 980, sek_vid: 70, klausimu: 118, teisingai: 79, klaidu: 39, su_garsu: 10 }, { diena: '2026-09-17', klase: 1, begimu: 18, nutraukta: 1, tasku_vid: 350, tasku_max: 760, sek_vid: 66, klausimu: 92, teisingai: 61, klaidu: 31, su_garsu: 8 }],
+      k: [{ klase: 1, begimu: 18, dienu: 1, tasku_vid: 350, teisingai: 61, klaidu: 31, su_garsu: 8 }, { klase: 2, begimu: 21, dienu: 1, tasku_vid: 398, teisingai: 79, klaidu: 39, su_garsu: 10 }, { klase: 3, begimu: 11, dienu: 1, tasku_vid: 410, teisingai: 46, klaidu: 20, su_garsu: 5 }, { klase: 4, begimu: 13, dienu: 1, tasku_vid: 470, teisingai: 55, klaidu: 19, su_garsu: 4 }],
+      kq: [{ klase: 1, id: 'q01', teisingai: 3, klaidu: 6 }, { klase: 2, id: 'q04', teisingai: 4, klaidu: 5 }, { klase: 3, id: 'q12', teisingai: 2, klaidu: 4 }, { klase: 4, id: 'q08', teisingai: 5, klaidu: 6 }],
       q: qs,
     };
   }
 
-  function render({ s, d, q }) {
+  function render({ s, d, q, k, kq }) {
     const hasData = s && s.begimu > 0;
     $('empty').hidden = hasData; $('content').hidden = !hasData;
     if (!hasData) return;
@@ -180,6 +186,16 @@
       ['Bėgimo trukmė', mmss(s.sek_vid), 'vidurkis'],
       ['Naudojo garsą', fmtPct(pct(s.su_garsu, s.begimu)), `${s.su_garsu} bėg. · auto ${s.auto_garsas}`],
     ].map(([l, v, sub]) => `<div class="tile"><div class="lbl">${l}</div><div class="val">${v}</div><div class="sub">${sub}</div></div>`).join('');
+
+    // classes: one row per class, weakest real question per class (needs >= 3 answers to be named)
+    const classes = (k || []).slice().sort((a, b) => a.klase - b.klase);
+    $('classes').querySelector('tbody').innerHTML = classes.map(c => {
+      const n = c.teisingai + c.klaidu, p = pct(c.teisingai, n);
+      const worst = (kq || []).filter(r => r.klase === c.klase && byId[r.id] && byId[r.id].ok && r.teisingai + r.klaidu >= 3)
+        .map(r => ({ id: r.id, p: pct(r.teisingai, r.teisingai + r.klaidu), n: r.teisingai + r.klaidu })).sort((a, b) => a.p - b.p)[0];
+      const worstTxt = worst ? `${esc(byId[worst.id].q)} <span class="pill ${pillFor(worst.p)}">${fmtPct(worst.p)}</span> <small>${worst.n} ats.</small>` : '<small>dar per mažai atsakymų</small>';
+      return `<tr><td class="q">${c.klase} klasė</td><td class="num">${c.begimu}</td><td class="num">${c.dienu}</td><td class="num">${c.tasku_vid ?? '—'}</td><td><span class="pill ${pillFor(p)}">${fmtPct(p)}</span> <small>${c.teisingai}/${n}</small></td><td class="num">${fmtPct(pct(c.su_garsu, c.begimu))}</td><td>${worstTxt}</td></tr>`;
+    }).join('') || '<tr><td colspan="7">Dar nė viena klasė nežaidė.</td></tr>';
 
     const qmap = Object.fromEntries(q.map(r => [r.id, r]));
     const group = g => { const rows = q.filter(r => byId[r.id] && byId[r.id].g === g); const ok = rows.reduce((a, r) => a + r.teisingai, 0), n = rows.reduce((a, r) => a + r.teisingai + r.klaidu, 0); return { ok, n, p: pct(ok, n) }; };
@@ -203,7 +219,7 @@
 
     $('days').querySelector('tbody').innerHTML = d.map(r => {
       const n = r.teisingai + r.klaidu, p = pct(r.teisingai, n);
-      return `<tr><td class="q">${ltDate(r.diena)}<small>${dow(r.diena)}</small></td><td class="num">${r.begimu}</td><td class="num">${r.nutraukta}</td><td class="num">${r.tasku_vid ?? '—'} / ${r.tasku_max ?? '—'}</td><td class="num">${mmss(r.sek_vid)}</td><td><span class="pill ${pillFor(p)}">${fmtPct(p)}</span> <small>${r.teisingai}/${n}</small></td><td class="num">${fmtPct(pct(r.su_garsu, r.begimu))}</td></tr>`;
+      return `<tr><td class="q">${ltDate(r.diena)}<small>${dow(r.diena)}</small></td><td class="num">${r.klase ?? '—'}</td><td class="num">${r.begimu}</td><td class="num">${r.nutraukta}</td><td class="num">${r.tasku_vid ?? '—'} / ${r.tasku_max ?? '—'}</td><td class="num">${mmss(r.sek_vid)}</td><td><span class="pill ${pillFor(p)}">${fmtPct(p)}</span> <small>${r.teisingai}/${n}</small></td><td class="num">${fmtPct(pct(r.su_garsu, r.begimu))}</td></tr>`;
     }).join('');
   }
 
@@ -212,8 +228,8 @@
     const demo = new URLSearchParams(location.search).get('demo') === '1';
     try {
       const data = demo ? demoData() : await (async () => {
-        const [s, d, q] = await Promise.all([get('bcjr_miste_suvestine'), get('bcjr_miste_dienos', 'diena.desc'), get('bcjr_miste_klausimai')]);
-        return { s: s[0], d, q };
+        const [s, d, q, k, kq] = await Promise.all([get('bcjr_miste_suvestine'), get('bcjr_miste_dienos', 'diena.desc,klase.asc'), get('bcjr_miste_klausimai'), get('bcjr_miste_klases'), get('bcjr_miste_klausimai_klases')]);
+        return { s: s[0], d, q, k, kq };
       })();
       render(data);
       $('updated').textContent = (demo ? 'PAVYZDINIAI skaičiai (?demo=1) · ' : '') + 'Atnaujinta ' + new Date().toLocaleString('lt-LT');
