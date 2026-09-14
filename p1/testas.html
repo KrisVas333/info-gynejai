@@ -68,6 +68,9 @@
   .opts button.hint,.grid button.hint,.mail button.hint{opacity:1!important;border-color:var(--yes)!important;box-shadow:0 0 0 4px #1FB47A66;background:#1FB47A33!important}
   .opts.big button .ic{font-size:3.2rem}
   .opts.num button .ic{font-size:3rem;color:var(--gold)}
+  .opts.num4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .opts.num4 button{min-height:112px}
+  .opts.num4 button .ic{font-family:var(--mono);font-weight:900;font-size:2.9rem;color:var(--gold)}
   .opts.color button .ic{font-size:3.6rem}
 
   /* iliustracija virš pasirinkimų */
@@ -224,7 +227,7 @@
    3) Pakartojimas: tik klaidos, daugiausiai 5 (žemiausios pakopos pirma). Klaida parodo teisingą atsakymą.
    Minksta laiko riba: po 11 min naujas ratas neatidaromas (pradetas visada baigiamas). Šaltinis: wiki/content/informatikos-bp-2022-pasiekimai-1-6.md
    ===================================================================== */
-const VERSION="p1-diag-v3";
+const VERSION="p1-diag-v4";
 
 /* ---------- analitika (track.js) — tik įvykiai, jokio turinio ----------
    Niekada nesiunčiam įvesto teksto: „rašyk žodį" klausime matuojam tik ok/klaida. */
@@ -259,7 +262,12 @@ const READ=[
   q:"Ar tu berniukas, ar mergaitė?",
   say:"Ar tu berniukas, ar mergaitė? Čia nėra teisingo atsakymo. Spausk: Berniukas, Mergaitė, Nesakysiu.",
   opts:[{ic:"👦",tx:"Berniukas"},{ic:"👧",tx:"Mergaitė"},{ic:"🤐",tx:"Nesakysiu"}],correct:-1,
-  ko:"neskaičiuojamas — teisingo atsakymo nėra; ketvirtas, po skaitymo patikros"}
+  ko:"neskaičiuojamas — teisingo atsakymo nėra; ketvirtas, po skaitymo patikros"},
+ {id:"AMZIUS",area:"R",mode:"pick3",skip:true,cls:"num4",
+  q:"Kiek tau metų?",
+  say:"Kiek tau metų? Spausk savo skaičių. Šeši. Septyni. Aštuoni. Arba devyni ir daugiau.",
+  opts:[{ic:"6",tx:"🎂 metai"},{ic:"7",tx:"🎂 metai"},{ic:"8",tx:"🎂 metai"},{ic:"9+",tx:"🎂 ir daugiau"}],correct:-1,
+  ko:"neskaičiuojamas — teisingo atsakymo nėra; penktas, iš karto po lyties. Vardo neklausiam niekada."}
 ];
 const READ_PASS=3;
 const READ_SCORED=READ.filter(x=>!x.skip).length;   /* lyties klausimas neįskaičiuojamas */
@@ -456,7 +464,7 @@ const FORCE=Q.get("v");   /* ?v=1 — vaizdinė versija iš karto · ?v=0 — sk
 
 /* ---------- būsena ---------- */
 let phase="read", track="r", queue=[], cur=null, round=0, answered=false, t0=0, log=[], clockTimer=null, fbTimer=null;
-let readScore=0, reviewList=[], reviewDone=0, reviewFixed=0, orderPick=[], cappedAt=0, lytis=null;
+let readScore=0, reviewList=[], reviewDone=0, reviewFixed=0, orderPick=[], cappedAt=0, lytis=null, amzius=null;
 const lvl={}, done={}, tried={}, tierRes={};   /* tierRes[k][tier] = teisingų skaičius */
 AREAS.forEach(a=>{lvl[a.k]=0;done[a.k]=false;tried[a.k]=false;tierRes[a.k]={1:null,2:null,3:null};});
 
@@ -612,7 +620,7 @@ function nextItem(){
   if(cur.area!=="R"&&document.getElementById("pa-"+cur.area))document.getElementById("pa-"+cur.area).classList.add("now");
   document.getElementById("qtext").innerHTML=(phase==="review"?'<span class="rv">🔁 Dar kartą</span>':"")+esc(cur.q);
   const spk=document.getElementById("spkBtn");
-  if(spk)spk.hidden=(phase==="read")||(!AUDIO[cur.id]&&!("speechSynthesis" in window));
+  if(spk)spk.hidden=(phase==="read"&&!cur.skip)||(!AUDIO[cur.id]&&!("speechSynthesis" in window));
   renderStage(cur);
   cur._t=Date.now();
   if(SIM)setTimeout(simAnswer,120);
@@ -673,9 +681,19 @@ function record(ok,ans){
   document.querySelectorAll("#stage button").forEach(b=>b.disabled=true);
   /* Lyties klausimas: teisingo atsakymo nėra — įsimenam ir einam toliau be vertinimo */
   if(cur.skip){
+    /* Demografija — TIK lytis ir amžius, jokio vardo (Kris, 2026-09-14).
+       Žymos dedamos per IG.tag (SEANSO žymos Clarity), tad IG.ev jų nebekartoja. */
+    if(cur.id==="AMZIUS"){
+      amzius=[6,7,8,9][ans]||null;
+      IG.tag("amzius",String(amzius||"nepasirinko"));
+      IG.ev("testas_amzius");
+      log.push({id:cur.id,phase:"read",area:"R",tier:0,ok:null,ans:amzius,ms:Date.now()-cur._t,item:cur});
+    }else{
     lytis=["b","m","x"][ans]||"x";
-    IG.ev("testas_lytis",{lytis:lytis});
+    IG.tag("lytis",lytis);
+    IG.ev("testas_lytis");
     log.push({id:cur.id,phase:"read",area:"R",tier:0,ok:null,ans:lytis,ms:Date.now()-cur._t,item:cur});
+    }
     beep(true);showFb("round","🙂","Ačiū!",false);
     fbTimer=setTimeout(()=>fbClick(true),800);
     return;
@@ -784,7 +802,7 @@ function finish(){
 
   send({
     clarity_sesija: (window.ig && ig.sesija) || null,   /* sąsaja su Clarity įrašu; nieko apie vaiką */
-    lytis: lytis, saka: track, skaitymo_balas: readScore,
+    lytis: lytis, amzius: amzius, saka: track, skaitymo_balas: readScore,
     lygis_bendras: overall, lygiai: Object.fromEntries(AREAS.map(a=>[a.k,lvl[a.k]])),
     klausimu: main.length, klaidu: klaidu, klaidos_sritimis: perArea,
     trukme_s: dur, pakartota: reviewList.length, pataisyta: reviewFixed,
@@ -858,7 +876,7 @@ window.addEventListener("pagehide",igNutraukta);
 
 /* ---------- simuliacija (tik kūrėjui) ---------- */
 function simAnswer(){
-  if(cur.skip){answer(Math.floor(Math.random()*3));return;}
+  if(cur.skip){answer(Math.floor(Math.random()*cur.opts.length));return;}
   let right;
   if(phase==="read")right=(SIMREAD==="ok");
   else if(phase==="review")right=true;
@@ -871,10 +889,10 @@ function simAnswer(){
 }
 /* peržiūros režimas (tik kūrėjui): ?auto=B1a rodo klausimą, ?auto=end — pabaigą su pavyzdiniais lygiais */
 (function(){const a=Q.get("auto");if(!a)return;
-  if(a==="lytis"){document.getElementById("start").hidden=true;document.getElementById("pbar").hidden=false;document.getElementById("genderBox").hidden=false;return;}document.getElementById("start").hidden=true;t0=Date.now();buildProg();document.getElementById("pbar").hidden=false;document.getElementById("pfill").style.width="40%";
+  const ALIAS={lytis:"LYTIS",amzius:"AMZIUS"};const aid=ALIAS[a]||a;document.getElementById("start").hidden=true;t0=Date.now();buildProg();document.getElementById("pbar").hidden=false;document.getElementById("pfill").style.width="40%";
   if(a==="end"){["A","B","C","D","E","F"].forEach((k,i)=>{tried[k]=true;lvl[k]=[2,1,3,1,0,2][i];done[k]=true;});reviewList=[1,2,3];reviewFixed=2;finish();return;}
-  const it=[...READ,...ITEMS].find(x=>x.id===a);if(!it)return;phase=it.area==="R"?"read":"main";cur=it;answered=false;round=it.tier||1;document.getElementById("cardBox").hidden=false;
+  const it=[...READ,...ITEMS].find(x=>x.id===aid);if(!it)return;phase=it.area==="R"?"read":"main";cur=it;answered=false;round=it.tier||1;document.getElementById("cardBox").hidden=false;
   if(it.area!=="R")document.getElementById("pa-"+it.area).classList.add("now");document.getElementById("qtext").textContent=it.q;renderStage(it);
-  document.getElementById("spkBtn").hidden=(phase==="read");cur._t=Date.now();})();
+  document.getElementById("spkBtn").hidden=(phase==="read"&&!it.skip);cur._t=Date.now();})();
 if(SIM)setTimeout(begin,300);
 </script>
