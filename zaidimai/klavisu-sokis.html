@@ -493,7 +493,7 @@ const sndLevel= () => { beep(523,.1); setTimeout(()=>beep(659,.1),110); setTimeo
 
 /* ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ---------- */
 const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
-const KS_VERSION = 'ks-2026-09-18c';
+const KS_VERSION = 'ks-2026-09-18d';
 IG.tag('versija', KS_VERSION);
 
 /* ---------- anoniminė žaidimų statistika -> Supabase (tas pats kelias kaip Miste Runner):
@@ -513,7 +513,11 @@ try {
 } catch(e){ NOSEND = true; }
 let R = null;               // { etapas, t0, score0, levels:[{id,teisingai,klaidu,zvaigzdes,ms}], sent }
 let levelT0 = 0;            // kada prasidėjo dabartinis lygis / kambarys (be intro ekrano)
-function startRun(etapas){ R = { etapas, t0: performance.now(), score0: S.score, levels: [], sent:false }; }
+/* zaidimas = atsitiktinis uuid VIENAM žaidimui (ne vaikui, ne įrenginiui): po kiekvieno lygio siunčiama
+   momentinė eilutė su ta pačia reikšme, o rodiniai ima naujausią — progresas matomas, net jei vaikas
+   niekada nepasiekė etapo pabaigos (Kris 2026-09-18). */
+function newId(){ try{ return crypto.randomUUID(); }catch(e){ return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&3|8)).toString(16);}); } }
+function startRun(etapas){ R = { etapas, zaidimas: newId(), t0: performance.now(), score0: S.score, levels: [], sent:false }; }
 function pushLevel(id, teisingai, klaidu, zvaigzdes, nebaigta){
   if (!R) return;
   R.levels.push({ id, teisingai, klaidu, zvaigzdes, ms: Math.round(performance.now()-levelT0), ...(nebaigta ? {nebaigta:true} : {}) });
@@ -524,6 +528,7 @@ function runRow(unfinished){
   const amzius = (typeof DEMO !== 'undefined' && DEMO.amzius) ? Number(DEMO.amzius) : null;
   return {
     versija: KS_VERSION,
+    zaidimas: R.zaidimas,
     etapas: R.etapas,
     lygiu: done.length,
     taskai: R.etapas==='slaptas' ? null : Math.max(0, S.score - R.score0),
@@ -547,6 +552,13 @@ function sendRun(unfinished){
   R.sent = true;
   const row = runRow(unfinished);
   if (NOSEND){ console.log('(nesiunčiama — bandymas)', row); return; }
+  post(row).catch(()=>qadd(row));
+}
+/* momentinė eilutė po lygio: etapas dar nebaigtas (nebaigta:true), R.sent neliečiamas */
+function sendSnapshot(){
+  if (!R || R.sent || typeof fetch !== 'function' || !R.levels.length) return;
+  const row = runRow(true);
+  if (NOSEND){ console.log('(nesiunčiama — momentinė)', row); return; }
   post(row).catch(()=>qadd(row));
 }
 function flushQueue(){
@@ -919,6 +931,7 @@ function endLevel(){
   S.stars[S.level] = stars;
   S.missBy[S.level] = S.misses;
   pushLevel('l'+(S.level+1), S.hits, S.misses, stars);
+  if (S.level!==4 && S.level!==9) sendSnapshot();   // 5 ir 10 lygio pabaigoje eina pilna etapo eilutė
   IG.ev('raunda_baigta', { lygis: String(S.level+1), zvaigzdes: String(stars), klaidu: String(S.misses) });
   $('resultTitle').textContent = `Lygis ${S.level+1} įveiktas!`;
   $('resultScore').textContent = `+${S.levelScore} taškų · klaidų: ${S.misses}`;
@@ -1107,7 +1120,7 @@ function enterSecret(){
 }
 function winSecret(){
   clearInterval(mazeInt);
-  pushLevel('s1', null, S.misses, null);
+  pushLevel('s1', null, S.misses, null); sendSnapshot();
   sndLevel();
   $('mazeMsg').textContent = `🎉 Radai paslėptą lygį! Klaidų: ${S.misses}. Bet tai dar ne viskas…`;
   setTimeout(enterRoom2, 1800);
