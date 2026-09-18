@@ -72,7 +72,7 @@
 <main>
   <header>
     <h1>Miste Runner · statistika<small>BrAIn Club Jr · kas sekasi ir kas ne, iš vaikų žaidimų pamokose</small></h1>
-    <div class="window">Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį: kt. 12:45–13:30 (1 kl.), 13:40–14:25 (2 kl.) · pn. 12:55–13:40 (3 kl.), 13:50–14:35 (4 kl.), 14:45–16:00 (5 kl.).<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.</div>
+    <div class="window" id="window">Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį (skaitoma iš lentelės)…<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.</div>
   </header>
 
   <div id="empty" class="empty" hidden>Pamokų duomenų dar nėra. Pirmi skaičiai atsiras po pirmos pamokos, kurioje vaikai žais.</div>
@@ -155,6 +155,14 @@
   const ltDate = d => { const [y, m, dd] = d.split('-'); return `${y}-${m}-${dd}`; };
   const DOW = ['', 'pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis', 'šeštadienis', 'sekmadienis'];
   const dow = d => DOW[(new Date(d + 'T12:00:00').getDay() + 6) % 7 + 1];
+  const DOWS = ['', 'pr.', 'an.', 'tr.', 'kt.', 'pn.', 'št.', 'sk.'];
+  const hhmm = t => String(t).slice(0, 5);
+  // pamokų langai — iš tvarkaraščio lentelės, ne iš teksto: pasikeitus lentelei pasikeičia ir čia
+  function windowText(rows) {
+    const days = {};
+    (rows || []).forEach(r => { (days[r.sav_diena] = days[r.sav_diena] || []).push(`${hhmm(r.nuo)}–${hhmm(r.iki)} (${r.klase} kl.)`); });
+    return Object.keys(days).sort().map(d => `${DOWS[d]} ${days[d].join(', ')}`).join(' · ');
+  }
 
   async function get(view, order) {
     const r = await fetch(SB + view + '?select=*' + (order ? '&order=' + order : ''), { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } });
@@ -165,6 +173,7 @@
   function demoData() { // ?demo=1 — sample numbers to see the layout before the first lesson
     const qs = Q.filter(q => q.ok).map((q, i) => { const n = 18 + (i * 7) % 15, ok = Math.round(n * (0.45 + ((i * 37) % 50) / 100)); const wrong = [1, 2, 3].filter(k => k !== q.ok); return { id: q.id, kartu: n, teisingai: ok, klaidu: n - ok, teisingai_proc: Math.round(100 * ok / n), sek_mediana: (1.5 + (i % 5) * 0.6).toFixed(1), greitos_klaidos: (i * 3) % 5, dazniausia_klaida: wrong[i % 2], dazniausia_klaida_n: Math.max(1, Math.round((n - ok) * 0.7)) }; });
     return {
+      t: [{ klase: 1, sav_diena: 4, nuo: '13:30', iki: '14:20' }, { klase: 2, sav_diena: 4, nuo: '14:20', iki: '15:15' }, { klase: 3, sav_diena: 5, nuo: '12:55', iki: '13:40' }, { klase: 4, sav_diena: 5, nuo: '13:50', iki: '14:35' }, { klase: 5, sav_diena: 5, nuo: '14:45', iki: '16:00' }],
       s: { begimu: 63, nutraukta: 4, dienu: 3, pirma_diena: '2026-09-18', paskutine_diena: '2026-09-26', klausimu: 350, teisingai: 241, klaidu: 109, tasku_vid: 412, tasku_max: 1350, sek_vid: 74, su_garsu: 27, auto_garsas: 9 },
       d: [{ diena: '2026-09-25', klase: 4, begimu: 13, nutraukta: 1, tasku_vid: 470, tasku_max: 1350, sek_vid: 81, klausimu: 74, teisingai: 55, klaidu: 19, su_garsu: 4 }, { diena: '2026-09-25', klase: 3, begimu: 11, nutraukta: 0, tasku_vid: 410, tasku_max: 900, sek_vid: 75, klausimu: 66, teisingai: 46, klaidu: 20, su_garsu: 5 }, { diena: '2026-09-24', klase: 2, begimu: 21, nutraukta: 2, tasku_vid: 398, tasku_max: 980, sek_vid: 70, klausimu: 118, teisingai: 79, klaidu: 39, su_garsu: 10 }, { diena: '2026-09-17', klase: 1, begimu: 18, nutraukta: 1, tasku_vid: 350, tasku_max: 760, sek_vid: 66, klausimu: 92, teisingai: 61, klaidu: 31, su_garsu: 8 }],
       k: [{ klase: 1, begimu: 18, dienu: 1, tasku_vid: 350, teisingai: 61, klaidu: 31, su_garsu: 8 }, { klase: 2, begimu: 21, dienu: 1, tasku_vid: 398, teisingai: 79, klaidu: 39, su_garsu: 10 }, { klase: 3, begimu: 11, dienu: 1, tasku_vid: 410, teisingai: 46, klaidu: 20, su_garsu: 5 }, { klase: 4, begimu: 13, dienu: 1, tasku_vid: 470, teisingai: 55, klaidu: 19, su_garsu: 4 }],
@@ -173,7 +182,8 @@
     };
   }
 
-  function render({ s, d, q, k, kq }) {
+  function render({ t, s, d, q, k, kq }) {
+    $('window').innerHTML = `Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį: ${esc(windowText(t) || '—')}.<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.`;
     const hasData = s && s.begimu > 0;
     $('empty').hidden = hasData; $('content').hidden = !hasData;
     if (!hasData) return;
@@ -229,8 +239,8 @@
     const demo = new URLSearchParams(location.search).get('demo') === '1';
     try {
       const data = demo ? demoData() : await (async () => {
-        const [s, d, q, k, kq] = await Promise.all([get('bcjr_miste_suvestine'), get('bcjr_miste_dienos', 'diena.desc,klase.asc'), get('bcjr_miste_klausimai'), get('bcjr_miste_klases'), get('bcjr_miste_klausimai_klases')]);
-        return { s: s[0], d, q, k, kq };
+        const [t, s, d, q, k, kq] = await Promise.all([get('bcjr_tvarkarastis_v'), get('bcjr_miste_suvestine'), get('bcjr_miste_dienos', 'diena.desc,klase.asc'), get('bcjr_miste_klausimai'), get('bcjr_miste_klases'), get('bcjr_miste_klausimai_klases')]);
+        return { t, s: s[0], d, q, k, kq };
       })();
       render(data);
       $('updated').textContent = (demo ? 'PAVYZDINIAI skaičiai (?demo=1) · ' : '') + 'Atnaujinta ' + new Date().toLocaleString('lt-LT');

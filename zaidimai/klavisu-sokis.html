@@ -72,16 +72,19 @@
   #ringNum{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; font-size:1.5rem; font-variant-numeric:tabular-nums}
 
   /* typed console for letter levels */
-  #console{display:none; align-items:center; gap:4px; background:var(--ink); color:#fff; border-radius:14px; padding:10px 18px; font-family:var(--display); font-weight:700; font-size:1.7rem; letter-spacing:.15em; min-height:54px; min-width:240px; justify-content:center}
-  #console .cursor{display:inline-block; width:3px; height:1.4rem; background:var(--cyan); animation:blink 1s steps(1) infinite}
-  #console .oops{color:var(--bad)}
+  #console,.cons{display:none; align-items:center; gap:4px; background:var(--ink); color:#fff; border-radius:14px; padding:10px 18px; font-family:var(--display); font-weight:700; font-size:1.7rem; letter-spacing:.15em; min-height:54px; min-width:240px; justify-content:center}
+  .cons{display:flex; min-width:200px; font-size:1.5rem; padding:8px 16px; min-height:48px; transition:background .2s}
+  .cons.ok{background:#177a45}
+  #console .cursor,.cons .cursor{display:inline-block; width:3px; height:1.4rem; background:var(--cyan); animation:blink 1s steps(1) infinite}
+  #console .oops,.cons .oops{color:var(--bad)}
   /* kelias iki klaidos: kiek rodyklių dar liko paspausti */
-  #fixHint{display:none; align-items:center; justify-content:center; gap:6px;
+  #fixHint,.fh{display:none; align-items:center; justify-content:center; gap:6px;
     min-height:46px; margin-top:8px; font-family:var(--display); font-weight:800}
-  #fixHint .ar{font-size:2rem; line-height:1; color:var(--ink-soft); opacity:.35}
-  #fixHint .ar.next{color:var(--hero); opacity:1; animation:pop .4s}
-  #fixHint .go{font-size:1.7rem; color:var(--good); letter-spacing:.06em}
-  #console.nudge{animation:shake .3s}   /* ⌫ ne toje vietoje — tik krusteli */
+  .fh{display:flex; min-height:40px; margin-top:0}
+  #fixHint .ar,.fh .ar{font-size:2rem; line-height:1; color:var(--ink-soft); opacity:.35}
+  #fixHint .ar.next,.fh .ar.next{color:var(--hero); opacity:1; animation:pop .4s}
+  #fixHint .go,.fh .go{font-size:1.7rem; color:var(--good); letter-spacing:.06em}
+  #console.nudge,.cons.nudge{animation:shake .3s}   /* ⌫ ne toje vietoje — tik krusteli */
   @keyframes blink{50%{opacity:0}}
 
   /* characters row */
@@ -142,6 +145,58 @@
 
   /* level intro key preview */
   #introKeys{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
+  /* įžangos ekranas dabar aukštesnis (klaviatūra + bandomasis ėjimas) — slinkimas žemam ekranui */
+  #introScreen{justify-content:flex-start; overflow-y:auto; gap:14px}
+  #introScreen>*:first-child{margin-top:auto}
+  #introScreen>*:last-child{margin-bottom:auto}
+  /* 5 lygio įžanga ilgesnė — viską suspaudžiam, kad tilptų į mokyklinio nešiojamo ekraną */
+  #introScreen.fix{gap:8px}
+  #introScreen.fix .neuron-row img{width:90px}
+  #introScreen.fix .bubble{font-size:1rem; padding:10px 16px}
+  #introScreen.fix h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+  #introScreen.fix #kbd{--k:24px; --g:3px; padding:6px 10px}
+  #introScreen.fix .kk{font-size:.62rem} #introScreen.fix .kk.new{font-size:.8rem}
+  #introScreen.fix .kbdLab{font-size:.85rem}
+  #introScreen.fix .big-btn{font-size:1.25rem; padding:10px 32px}
+  .big-btn:disabled{opacity:.35; cursor:not-allowed; transform:none; box-shadow:0 8px 0 var(--hero-deep)}
+
+  /* ---------- mini klaviatūra: KUR yra šio lygio klavišai (Kris, 2026-09-18) ----------
+     .use — šiame lygyje naudojamas, .new — pirmą kartą pristatomas (krusteli), .press — demonstracija spaudžia */
+  #kbdWrap{display:flex; flex-direction:column; align-items:center; gap:6px}
+  .kbdLab{font-family:var(--display); font-weight:800; font-size:.95rem; color:var(--ink-soft)}
+  #kbd{display:flex; gap:12px; align-items:flex-end; justify-content:center; --k:32px; --g:4px;
+    background:#e6e9f5; border:3px solid var(--ink); border-radius:16px; padding:10px 12px; box-shadow:var(--shadow)}
+  #kbdMain{display:flex; flex-direction:column; gap:var(--g)}
+  #kbdMain .row{display:flex; gap:var(--g)}
+  #kbdMain .row.r1{margin-left:calc(var(--k)*.5)} #kbdMain .row.r2{margin-left:calc(var(--k)*.75)}
+  #kbdMain .row.r3{margin-left:calc(var(--k)*1.25)} #kbdMain .row.r4{margin-left:calc(var(--k)*2.5)}
+  #kbdArrows{display:grid; grid-template-columns:repeat(3,var(--k)); gap:var(--g)}
+  .kk{width:var(--k); height:var(--k); flex:none; border:2px solid #b7bedb; border-radius:7px; background:var(--card); color:#9aa2c6;
+    display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; font-size:.8rem; line-height:1;
+    box-shadow:0 2px 0 #b7bedb; transition:background .12s, transform .12s}
+  .kk.w2{width:calc(var(--k)*2 + var(--g))} .kk.sp{width:calc(var(--k)*5 + var(--g)*4)} .kk.none{visibility:hidden}
+  .kk.use{border-color:var(--ink); color:var(--ink); background:#fff3e6; box-shadow:0 2px 0 var(--ink)}
+  .kk.new{background:var(--hero); color:#fff; border-color:var(--ink); font-size:.95rem; position:relative; z-index:1;
+    box-shadow:0 3px 0 var(--hero-deep), 0 0 0 4px rgba(255,138,30,.4); animation:jiggle 1s ease-in-out infinite}
+  .kk.press{background:var(--good); color:#fff; border-color:var(--ink); transform:translateY(2px) scale(1.08); box-shadow:0 0 0 var(--ink); animation:none}
+  @keyframes jiggle{0%,100%{transform:rotate(0) scale(1)} 20%{transform:rotate(-8deg) scale(1.18)} 40%{transform:rotate(7deg) scale(1.18)} 60%{transform:rotate(-4deg) scale(1.1)} 80%{transform:rotate(3deg) scale(1.04)}}
+
+  /* ---------- 5 lygio pamokėlė: judanti demonstracija + bandomasis ėjimas ---------- */
+  #tut{display:flex; flex-direction:column; align-items:center; gap:8px}
+  #tut[hidden]{display:none}
+  .tutRow{display:flex; align-items:center; gap:14px}
+  .tutLab{font-family:var(--display); font-weight:800; font-size:1.05rem; color:var(--ink)}
+  .tutLab.demo{font-size:.9rem; color:var(--ink-soft)}
+  #tutKey{min-width:76px; height:76px; font-size:2.2rem; border-width:4px; box-shadow:0 6px 0 var(--ink); padding:0 14px}
+  #tutKey .sub{font-size:.6rem; bottom:5px}
+  #tutKey.hit{box-shadow:0 6px 0 var(--good)}
+  #trialBox{background:var(--card); border:4px solid var(--hero); border-radius:20px; padding:12px 22px; display:flex; flex-direction:column; align-items:center; gap:6px; box-shadow:var(--shadow)}
+  #trialBox.done{border-color:var(--good)}
+  @media(max-width:720px){
+    #kbd{--k:22px; --g:3px; padding:8px} .kk{font-size:.62rem; border-radius:5px} .kk.new{font-size:.72rem}
+    #tutKey{min-width:60px; height:60px; font-size:1.7rem}
+    .cons{font-size:1.2rem; min-width:150px}
+  }
 
   /* results */
   #stars{font-size:3.6rem; letter-spacing:.1em}
@@ -315,8 +370,22 @@
       <div class="bubble" id="introText"></div>
     </div>
     <div id="introKeys"></div>
+    <div id="kbdWrap">
+      <div class="kbdLab" id="kbdLab">👇 Rask šiuos klavišus ant SAVO klaviatūros</div>
+      <div id="kbd" aria-hidden="true"><div id="kbdMain"></div><div id="kbdArrows"></div></div>
+    </div>
+    <!-- 5 lygio pamokėlė (Kris, 2026-09-18): vaikai neskaito — rodom judančią demonstraciją ir reikalaujam bandomojo ėjimo -->
+    <div id="tut" hidden>
+      <div class="tutLab demo">👀 Žiūrėk: rodyklė veda žymeklį, ⌫ ištrina raudoną raidę</div>
+      <div class="tutRow"><div class="keycap small" id="tutKey"></div><div class="cons" id="tutCons"></div></div>
+      <div id="trialBox">
+        <div class="tutLab" id="trialLab">✋ Dabar TU: nuvesk žymeklį už raudonos raidės ir spausk ⌫</div>
+        <div class="cons" id="trialCons"></div>
+        <div class="fh" id="trialHint"></div>
+      </div>
+    </div>
     <button class="big-btn" id="introBtn">PIRMYN</button>
-    <p class="hint">spausk <span class="keychip">ENTER</span></p>
+    <p class="hint" id="introHint">spausk <span class="keychip">ENTER</span></p>
   </div>
 
   <!-- LEVEL RESULT -->
@@ -358,7 +427,7 @@
         <tr><th>Lygiai</th><th>Ko mokoma</th><th>BP pasiekimai</th></tr>
         <tr><td>1–3</td><td>Rodyklių klavišai kaip <b>komandos</b> („eiti kairėn, dešinėn, aukštyn, žemyn“) — komanda → veiksmas ekrane.</td><td><span class="code b">B1</span><span class="code b">B2</span><span class="code b">B3</span><span class="code d">D1</span></td></tr>
         <tr><td>4</td><td><b>Enter</b> — komandos patvirtinimas, kompiuteris vykdo nurodymą.</td><td><span class="code b">B1</span><span class="code d">D1</span></td></tr>
-        <tr><td>5</td><td><b>Rodyklės + Backspace</b> — klaida yra normalu. Ji ne gale, o žodžio viduryje: rodyklėmis nuvedame žymeklį ir tik tada triname.</td><td><span class="code b">B4</span><span class="code">A2</span></td></tr>
+        <tr><td>5</td><td><b>Rodyklės + Backspace</b> — klaida yra normalu. Ji ne gale, o žodžio viduryje: rodyklėmis nuvedame žymeklį ir tik tada triname. Prieš lygį — judanti demonstracija ir privalomas bandomasis ėjimas.</td><td><span class="code b">B4</span><span class="code">A2</span></td></tr>
         <tr><td>Pertrauka</td><td>Sveikatą tausojantis darbas įrenginiu: pertraukėlė, akių ir rankų mankšta.</td><td><span class="code f">F1</span></td></tr>
         <tr><td>6–8</td><td>Pažintis su klaviatūra: raidės ir skaičiai, teksto rinkimo pradmenys.</td><td><span class="code">A2</span><span class="code d">D1</span></td></tr>
         <tr><td>9–10</td><td>Visų komandų derinimas ribotu laiku — reakcija, tikslumas, įsivertinimas žvaigždutėmis.</td><td><span class="code b">B3</span><span class="code">A3</span></td></tr>
@@ -425,8 +494,69 @@ const sndLevel= () => { beep(523,.1); setTimeout(()=>beep(659,.1),110); setTimeo
 
 /* ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ---------- */
 const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
-const KS_VERSION = 'ks-2026-09-14';
+const KS_VERSION = 'ks-2026-09-18b';
 IG.tag('versija', KS_VERSION);
+
+/* ---------- anoniminė žaidimų statistika -> Supabase (tas pats kelias kaip Miste Runner):
+   viešas raktas gali TIK įrašyti, laiką deda serveris, pamokos langą ir klasę duoda
+   bcjr_tvarkarastis per bcjr_klase(created_at). Viena eilutė per ETAPĄ:
+   pamoka = 1–5 lygiai · tesinys = 6–10 (atrakina mentorius) · slaptas = du paslėpti kambariai. ---------- */
+const SB_URL = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_klavisai';
+const SB_KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
+const QKEY = 'ks-eile';
+/* siunčia tik mokyklos kopija GitHub Pages; ?nosend=1, deck'o iframe (mentoriaus demonstracija),
+   artefaktas, localhost ir file:// — niekada */
+let NOSEND = true;
+try {
+  const onPages = /(^|.)github.io$/.test(location.hostname || '');
+  const embedded = window.self !== window.top;
+  NOSEND = !onPages || embedded || new URLSearchParams(location.search).get('nosend') === '1';
+} catch(e){ NOSEND = true; }
+let R = null;               // { etapas, t0, score0, levels:[{id,teisingai,klaidu,zvaigzdes,ms}], sent }
+let levelT0 = 0;            // kada prasidėjo dabartinis lygis / kambarys (be intro ekrano)
+function startRun(etapas){ R = { etapas, t0: performance.now(), score0: S.score, levels: [], sent:false }; }
+function pushLevel(id, teisingai, klaidu, zvaigzdes, nebaigta){
+  if (!R) return;
+  R.levels.push({ id, teisingai, klaidu, zvaigzdes, ms: Math.round(performance.now()-levelT0), ...(nebaigta ? {nebaigta:true} : {}) });
+}
+function runRow(unfinished){
+  const done = R.levels.filter(l=>!l.nebaigta);
+  const lytis = (typeof DEMO !== 'undefined' && DEMO.lytis) || null;
+  const amzius = (typeof DEMO !== 'undefined' && DEMO.amzius) ? Number(DEMO.amzius) : null;
+  return {
+    versija: KS_VERSION,
+    etapas: R.etapas,
+    lygiu: done.length,
+    taskai: R.etapas==='slaptas' ? null : Math.max(0, S.score - R.score0),
+    zvaigzdes: done.reduce((a,l)=>a+(l.zvaigzdes||0),0),
+    klaidu: R.levels.reduce((a,l)=>a+(l.klaidu||0),0),
+    trukme_s: Math.round((performance.now()-R.t0)/1000),
+    nebaigta: !!unfinished,
+    atsakymai: R.levels,
+    clarity_sesija: (window.ig && ig.sesija) || null,   // sąsaja su Clarity įrašu; nieko apie vaiką
+    lytis, amzius                                        // b | m | x | null · 6 | 7 | 8 | 9 | null
+  };
+}
+function post(row){
+  return fetch(SB_URL, { method:'POST', keepalive:true,
+    headers:{ apikey:SB_KEY, Authorization:'Bearer '+SB_KEY, 'Content-Type':'application/json', Prefer:'return=minimal' },
+    body: JSON.stringify(row) }).then(res=>{ if(!res.ok) throw new Error(res.status); return true; });
+}
+function qadd(row){ try{ const q=JSON.parse(localStorage.getItem(QKEY)||'[]'); q.push(row); localStorage.setItem(QKEY, JSON.stringify(q.slice(-50))); }catch(e){} }
+function sendRun(unfinished){
+  if (!R || R.sent || typeof fetch !== 'function') return;
+  R.sent = true;
+  const row = runRow(unfinished);
+  if (NOSEND){ console.log('(nesiunčiama — bandymas)', row); return; }
+  post(row).catch(()=>qadd(row));
+}
+function flushQueue(){
+  if (typeof fetch !== 'function' || NOSEND) return;
+  let q; try{ q=JSON.parse(localStorage.getItem(QKEY)||'[]'); }catch(e){ return; }
+  if (!q.length) return;
+  Promise.all(q.map(r=>post(r).then(()=>null).catch(()=>r)))
+    .then(left=>{ try{ localStorage.setItem(QKEY, JSON.stringify(left.filter(Boolean))); }catch(e){} });
+}
 
 /* ---------- state ---------- */
 const S = {
@@ -477,14 +607,136 @@ function startLevel(i){
     const f = KEYFACE[k];
     return `<div class="keycap small">${f.g}${f.sub?`<span class="sub">${f.sub}</span>`:''}</div>`;
   }).join('');
+  renderKbd(i);
+  /* 5 lygis („Rask klaidą"): vietoj didelių klavišų — demonstracija + bandomasis ėjimas.
+     PIRMYN užrakintas, kol vaikas pats ištrina raudoną raidę. */
+  const fix = L.mode==='fix';
+  tutStop(); trial = null;
+  $('introKeys').style.display = fix ? 'none' : '';
+  el.intro.classList.toggle('fix', fix);
+  $('tut').hidden = !fix;
+  $('introBtn').disabled = false; $('introHint').hidden = false;
+  if (fix){ trialStart(); tutDemoLoop(0); }
   S.phase = 'intro'; show('introScreen');
 }
 
+/* ---------- mini klaviatūra įžangoje ----------
+   Šio lygio klavišai pažymėti; pirmą kartą pasirodantys (nebuvo nė viename ankstesniame lygyje) krusteli. */
+const KBD_ROWS = [
+  ['1','2','3','4','5','6','7','8','9','0',{k:'Backspace',g:'⌫',c:'w2'}],
+  ['Q','W','E','R','T','Y','U','I','O','P'],
+  ['A','S','D','F','G','H','J','K','L',{k:'Enter',g:'⏎',c:'w2'}],
+  ['Z','X','C','V','B','N','M'],
+  [{k:' ',g:'',c:'sp'}]
+];
+function buildKbd(){
+  const main = $('kbdMain'); main.innerHTML = '';
+  KBD_ROWS.forEach((row, ri)=>{
+    const d = document.createElement('div'); d.className = 'row r'+ri;
+    row.forEach(x=>{
+      const o = typeof x==='string' ? {k:x, g:x} : x;
+      const e = document.createElement('div'); e.className = 'kk'+(o.c?' '+o.c:''); e.dataset.k = o.k; e.textContent = o.g;
+      d.appendChild(e);
+    });
+    main.appendChild(d);
+  });
+  const ar = $('kbdArrows'); ar.innerHTML = '';
+  [null,'ArrowUp',null,'ArrowLeft','ArrowDown','ArrowRight'].forEach(k=>{
+    const e = document.createElement('div');
+    if (!k) e.className = 'kk none';
+    else { e.className = 'kk'; e.dataset.k = k; e.textContent = KEYFACE[k].g; }
+    ar.appendChild(e);
+  });
+}
+function renderKbd(i){
+  const seen = new Set();
+  for (let j=0; j<i; j++) LEVELS[j].keys.forEach(k=>seen.add(k));
+  const use = new Set(LEVELS[i].keys);
+  const fresh = new Set([...use].filter(k=>!seen.has(k)));
+  document.querySelectorAll('#kbd .kk').forEach(e=>{
+    const k = e.dataset.k; e.classList.remove('use','new','press');
+    if (k===undefined || !use.has(k)) return;
+    e.classList.add(fresh.has(k) ? 'new' : 'use');
+  });
+  $('kbdLab').textContent = fresh.size ? '👇 NAUJI klavišai — rask juos ant SAVO klaviatūros' : '👇 Šio lygio klavišai ant klaviatūros';
+}
+/* trumpas „paspaudimas" ant mini klaviatūros — demonstracijai ir bandomajam ėjimui */
+function kbdPress(k){
+  document.querySelectorAll('#kbd .kk.press').forEach(e=>e.classList.remove('press'));
+  if (!k) return;
+  const e = document.querySelector('#kbd .kk[data-k="'+k+'"]'); if (!e) return;
+  e.classList.add('press');
+  tutT.push(setTimeout(()=>e.classList.remove('press'), 320));
+}
+
+/* ---------- 5 lygio pamokėlė ----------
+   Demonstracija sukasi ratu: žymeklis iš pradžios (→→→→ ⌫), paskui iš galo (←←← ⌫) — abi rodyklės.
+   Bandomasis ėjimas: tas pats žodis, ta pati užuomina kaip žaidime; PIRMYN atsirakina tik ištrynus. */
+const TUT_DEMO = [ {w:'KATTĖ', i:3, from:0}, {w:'NAMMAI', i:3, from:6} ];
+const TUT_TRIAL = { w:'ŠUUO', i:2, from:0 };
+let tutT = [];        // demonstracijos laikmačiai — nutraukiami išėjus iš įžangos
+let trial = null;     // {r, bad, cur, done}
+function tutStop(){ tutT.forEach(clearTimeout); tutT = []; }
+function demoKey(k){
+  const f = KEYFACE[k], key = $('tutKey');
+  key.innerHTML = f.g + (f.sub ? '<span class="sub">'+f.sub+'</span>' : '');
+  key.className = 'keycap small'; void key.offsetWidth; key.classList.add('hit');
+  kbdPress(k);
+}
+function tutDemoLoop(n){
+  const d = TUT_DEMO[n % TUT_DEMO.length];
+  const r = d.w.split(''), target = d.i + 1, cons = $('tutCons'), key = $('tutKey');
+  const at = (ms, fn)=> tutT.push(setTimeout(fn, ms));
+  const paint = (rr, bad, cur)=>{ cons.innerHTML = fixHTML(rr, bad, cur); };
+  at(0, ()=>{ key.innerHTML = ''; key.className = 'keycap small'; cons.classList.remove('ok'); paint(r, d.i, d.from); });
+  let t = 900;
+  const dir = d.from < target ? 1 : -1, k = dir > 0 ? 'ArrowRight' : 'ArrowLeft';
+  for (let c = d.from + dir; dir > 0 ? c <= target : c >= target; c += dir){
+    const cc = c;
+    at(t, ()=>{ demoKey(k); paint(r, d.i, cc); });
+    t += 650;
+  }
+  t += 350;
+  at(t, ()=>{ demoKey('Backspace'); const rr = r.slice(); rr.splice(d.i, 1); paint(rr, -1, target - 1); cons.classList.add('ok'); });
+  t += 1700;
+  at(t, ()=>tutDemoLoop(n + 1));
+}
+function trialStart(){
+  trial = { r:TUT_TRIAL.w.split(''), bad:TUT_TRIAL.i, cur:TUT_TRIAL.from, done:false };
+  $('trialBox').className = ''; $('trialCons').classList.remove('ok');
+  $('trialLab').textContent = '✋ Dabar TU: nuvesk žymeklį už raudonos raidės ir spausk ⌫';
+  trialRender();
+  $('introBtn').disabled = true; $('introHint').hidden = true;
+}
+function trialRender(){
+  $('trialCons').innerHTML = fixHTML(trial.r, trial.bad, trial.cur);
+  $('trialHint').innerHTML = hintHTML(trial);
+}
+function trialKey(k){
+  const f = trial; if (!f || f.done) return;
+  if (k==='ArrowLeft'){  f.cur = Math.max(0, f.cur-1); trialRender(); kbdPress(k); return; }
+  if (k==='ArrowRight'){ f.cur = Math.min(f.r.length, f.cur+1); trialRender(); kbdPress(k); return; }
+  if (k!=='Backspace') return;
+  kbdPress(k);
+  if (f.cur>0 && f.cur-1===f.bad){
+    f.r.splice(f.bad, 1); f.bad = -1; f.done = true; trialRender();
+    sndStar(2); $('trialCons').classList.add('ok'); $('trialBox').className = 'done';
+    $('trialLab').textContent = '🎉 ŠAUNU! Dabar — PIRMYN';
+    $('trialHint').innerHTML = '<span class="go">⌫ PADARYTA</span>';
+    $('introBtn').disabled = false; $('introHint').hidden = false; $('introBtn').focus({preventScroll:true});
+  } else {
+    const c = $('trialCons'); c.classList.remove('nudge'); void c.offsetWidth; c.classList.add('nudge'); sndMiss();
+  }
+}
+
 function beginPlay(){
+  if (trial && !trial.done) return;            // 5 lygis: pirmiau bandomasis ėjimas
+  tutStop(); trial = null;
   S.secret = false; S.secret2 = false; clearInterval(mazeInt); clearInterval(mazeInt2);
   $('mazeStage').style.display='none';
   $('promptZone').style.display=''; $('cast').style.display='';
   S.phase = 'play'; show(null); sndLevel();
+  levelT0 = performance.now();
   const L0 = LEVELS[S.level];
   const letters = L0.keys.some(k=>/^[A-D1-4]$/.test(k)) || L0.mode==='fix';
   el.cons.style.display = letters ? 'flex' : 'none';
@@ -530,21 +782,19 @@ function renderFix(){
 /* Kelias iki klaidos. Žymeklis turi atsidurti IŠ KART UŽ klaidingos raidės,
    tai yra vietoje bad+1 — tada ⌫ ištrins būtent ją.
    Rodom likusias rodykles: pirmoji ryški, kitos blankios. Vaikas jas gali suskaičiuoti. */
-function renderHint(f){
-  if (!f || f.bad < 0){ el.hint.style.display='flex';
-    el.hint.innerHTML = '<span class="go">⌫ PADARYTA</span>'; return; }
+function hintHTML(f){
+  if (!f || f.bad < 0) return '<span class="go">⌫ PADARYTA</span>';
   const need = (f.bad + 1) - f.cur;
+  if (need === 0) return '<span class="go">DABAR SPAUSK ⌫</span>';
+  const gl = need < 0 ? '⬅️' : '➡️';
   let out = '';
-  if (need === 0){
-    out = '<span class="go">DABAR SPAUSK ⌫</span>';
-  } else {
-    const gl = need < 0 ? '⬅️' : '➡️';
-    const n = Math.abs(need);
-    for (let i = 0; i < n; i++)
-      out += '<span class="ar' + (i===0 ? ' next' : '') + '">' + gl + '</span>';
-  }
+  for (let i = 0, n = Math.abs(need); i < n; i++)
+    out += '<span class="ar' + (i===0 ? ' next' : '') + '">' + gl + '</span>';
+  return out;
+}
+function renderHint(f){
   el.hint.style.display = 'flex';
-  el.hint.innerHTML = out;
+  el.hint.innerHTML = hintHTML(f);
 }
 
 function nextPrompt(){
@@ -669,6 +919,7 @@ function endLevel(){
   const stars = acc>=.9 ? 3 : acc>=.7 ? 2 : 1;
   S.stars[S.level] = stars;
   S.missBy[S.level] = S.misses;
+  pushLevel('l'+(S.level+1), S.hits, S.misses, stars);
   IG.ev('raunda_baigta', { lygis: String(S.level+1), zvaigzdes: String(stars), klaidu: String(S.misses) });
   $('resultTitle').textContent = `Lygis ${S.level+1} įveiktas!`;
   $('resultScore').textContent = `+${S.levelScore} taškų · klaidų: ${S.misses}`;
@@ -690,6 +941,7 @@ function afterResult(){
 /* ---------- break (F1) ---------- */
 function startBreak(){
   S.phase='break'; show('breakScreen');
+  sendRun(false);                                  // pamokos etapas (1–5) baigtas
   let n = 15; $('breakCount').textContent = n;
   clearInterval(S.breakT);
   S.breakT = setInterval(()=>{
@@ -703,6 +955,7 @@ function startBreak(){
 /* ---------- finale ---------- */
 function finale(){
   S.phase='final'; show('finalScreen');
+  sendRun(false);                                  // tęsinio etapas (6–10) baigtas
   const allStars = S.stars.reduce((a,b)=>a+(b||0),0);
   $('finalTitle').textContent = allStars>=27 ? 'Tu — Klavišų MEISTRAS! 🏆' : allStars>=20 ? 'Tu — Klavišų Gynėjas!' : 'Treniruotė įveikta!';
   $('resultScoreFinal').textContent = `${S.score} taškų · ${allStars}/30 ⭐ · klaidų iš viso: ${missTotal()}`;
@@ -727,6 +980,7 @@ function resetGame(){
   tagDemo();
   IG.ev('zaidimas_pradeta', { versija: KS_VERSION });
   S.score=0; S.stars=[]; S.pos=2;
+  startRun('pamoka');
   for (let i=0;i<10;i++) delete S.missBy[i];   // paslėptų kambarių klaidos (s1/s2) lieka iki grįžimo į pradžią
   S.misses=0; updateHud();
   el.klaidas.style.transform='translateX(-50%)';
@@ -818,6 +1072,7 @@ function moveMaze(k){
 function enterSecret(){
   clearInterval(mazeInt);
   S.secret = true; S.phase = 'play';
+  startRun('slaptas'); levelT0 = performance.now();
   S.misses = 0; S.missBy.s1 = 0; updateHud();
   show(null);
   $('promptZone').style.display='none'; $('cast').style.display='none';
@@ -852,6 +1107,7 @@ function enterSecret(){
 }
 function winSecret(){
   clearInterval(mazeInt);
+  pushLevel('s1', null, S.misses, null);
   sndLevel();
   $('mazeMsg').textContent = `🎉 Radai paslėptą lygį! Klaidų: ${S.misses}. Bet tai dar ne viskas…`;
   setTimeout(enterRoom2, 1800);
@@ -1001,6 +1257,7 @@ function doorAction(key){
 }
 function enterRoom2(){
   S.secret2 = true;
+  levelT0 = performance.now();
   S.misses = 0; S.missBy.s2 = 0; updateHud();
   M2.r=2; M2.c=0; M2.facing='ArrowRight'; M2.blocked=false; M2.hintShown=false;
   buildRoom2Grid();
@@ -1028,6 +1285,8 @@ function enterRoom2(){
 }
 function winRoom2(){
   clearInterval(mazeInt2);
+  pushLevel('s2', null, S.misses, null);
+  sendRun(false);                                  // slaptas etapas baigtas
   M2.c = R2_FLOOR+1; placeRoom2Klaidas();
   sndLevel();
   $('mazeMsg').textContent = `🎉🌈🐬 Radai antrą paslėptą lygį! Klaidų: ${S.misses} (labirinte: ${S.missBy.s1||0}).`;
@@ -1051,7 +1310,10 @@ document.addEventListener('keydown', e=>{
       if (e.key.toLowerCase()==='w'){ S.wCount++; if (S.wCount>=3){ S.wCount=0; enterSecret(); } }
       else S.wCount = 0;
       break;
-    case 'intro':  if (k==='Enter') beginPlay(); break;
+    case 'intro':
+      if (trial && !trial.done){ trialKey(k); break; }   // 5 lygio bandomasis ėjimas — rodyklės ir ⌫
+      if (k==='Enter') beginPlay();
+      break;
     case 'result': if (k==='Enter') afterResult(); break;
     /* ENTER čia SĄMONINGAI neveikia: vaikai juo spaudė visą žaidimą,
        ir klasė nusiristų į 6 lygį anksčiau, nei mentorius spėtų ką pasakyti.
@@ -1093,7 +1355,7 @@ $('startBtn').onclick  = ()=>{ S.phase='x'; resetGame(); };
 $('introBtn').onclick  = beginPlay;
 $('resultBtn').onclick = afterResult;
 $('againBtn').onclick  = backToStart;
-$('breakBtn').onclick  = ()=>{ clearInterval(S.breakT); startLevel(5); };
+$('breakBtn').onclick  = ()=>{ clearInterval(S.breakT); startRun('tesinys'); startLevel(5); };
 $('muteBtn').onclick   = e=>{ muted=!muted; e.target.textContent = muted?'🔇':'🔊'; };
 $('teacherBtn').onclick= ()=>{ $('teacherPanel').hidden=false; };
 $('teacherClose').onclick = ()=>{ $('teacherPanel').hidden=true; };
@@ -1141,6 +1403,19 @@ function tagDemo(){
   IG.tag('amzius', DEMO.amzius || 'nepasirinko');
 }
 
-show('startScreen'); refreshDots();
+buildKbd(); show('startScreen'); refreshDots();
+
+/* Skirtukas uždarytas nepabaigus etapo — eilutė vis tiek išeina (nebaigta = true),
+   su dabartiniu, nebaigtu lygiu, kad matytųsi, KUR vaikas sustojo. */
+window.addEventListener('pagehide', ()=>{
+  if (!R || R.sent) return;
+  if (S.phase==='play'){
+    if (S.secret2) pushLevel('s2', null, S.misses, null, true);
+    else if (S.secret) pushLevel('s1', null, S.misses, null, true);
+    else pushLevel('l'+(S.level+1), S.hits, S.misses, null, true);
+  }
+  if (R.levels.length) sendRun(true);
+});
+try{ flushQueue(); }catch(e){}
 })();
 </script>

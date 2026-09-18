@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<script src="../track.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klavišų Šokis statistika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{
+    --ground:#F4F6FC; --card:#FFFFFF; --ink:#1B2140; --ink-soft:#5A628A; --line:#DDE2F3;
+    --hero:#FF8A1E; --hero-soft:#FFE7D1; --good:#2FBF71; --good-soft:#E2F8EC; --bad:#F04438; --bad-soft:#FDE8E6;
+    --neuron:#7C4DFF; --neuron-soft:#EFE9FF;
+    --display:'Baloo 2','Trebuchet MS',sans-serif; --body:'Nunito','Trebuchet MS',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45}
+  main{max-width:1040px;margin:0 auto;padding:28px 20px 60px}
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:22px}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4vw,2.6rem);margin:0;line-height:1.05;text-wrap:balance}
+  h1 small{display:block;font-family:var(--body);font-weight:600;font-size:.95rem;color:var(--ink-soft);margin-top:6px}
+  .window{font-size:.85rem;color:var(--ink-soft);text-align:right}
+  .window b{color:var(--ink)}
+  h2{font-family:var(--display);font-weight:800;font-size:1.35rem;margin:34px 0 4px}
+  .lead{margin:0 0 14px;color:var(--ink-soft);max-width:64ch}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .tile{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px}
+  .tile .lbl{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+  .tile .val{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums;margin-top:4px}
+  .tile .sub{font-size:.82rem;color:var(--ink-soft);margin-top:2px}
+  .meters{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .meter{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px}
+  .meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .meter .name{font-family:var(--display);font-weight:800;font-size:1.15rem}
+  .meter .pct{font-family:var(--display);font-weight:800;font-size:1.6rem;font-variant-numeric:tabular-nums}
+  .track{height:14px;background:var(--line);border-radius:7px;overflow:hidden;margin:10px 0 6px}
+  .fill{height:100%;background:var(--hero);border-radius:7px 4px 4px 7px;transition:width .4s}
+  .meter .n{font-size:.82rem;color:var(--ink-soft)}
+  .bars{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:8px 18px}
+  .bar{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr 64px;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .bar:last-child{border-bottom:0}
+  .bar .k{font-weight:800}
+  .bar .k small{display:block;font-weight:600;color:var(--ink-soft);font-size:.78rem}
+  .bar .track{margin:0;height:12px}
+  .bar .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
+  .bar .v small{display:block;font-weight:600;color:var(--ink-soft);font-size:.75rem}
+  .tablewrap{overflow-x:auto;background:var(--card);border:2px solid var(--line);border-radius:16px}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+  th{font-family:var(--display);text-align:left;padding:10px 12px;border-bottom:2px solid var(--line);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);white-space:nowrap}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:middle;font-variant-numeric:tabular-nums}
+  tr:last-child td{border-bottom:0}
+  td.q{font-weight:800}
+  td.q small{display:block;font-weight:600;color:var(--ink-soft);font-size:.78rem}
+  td.num{text-align:right;white-space:nowrap}
+  .pill{display:inline-block;border-radius:8px;padding:2px 8px;font-weight:800;font-size:.8rem}
+  .pill.good{background:var(--good-soft);color:#177a45}.pill.bad{background:var(--bad-soft);color:#a12b22}.pill.mid{background:var(--hero-soft);color:#b25a00}.pill.na{background:var(--line);color:var(--ink-soft)}
+  .mini{display:inline-block;width:90px;height:9px;background:var(--line);border-radius:5px;vertical-align:middle;margin-right:8px;overflow:hidden}
+  .mini i{display:block;height:100%;background:var(--good)}
+  .mini.bad i{background:var(--bad)}
+  .empty{background:var(--card);border:2px dashed var(--line);border-radius:16px;padding:26px;text-align:center;color:var(--ink-soft)}
+  .note{background:var(--neuron-soft);border-radius:14px;padding:14px 18px;font-size:.9rem;margin-top:30px}
+  .note ul{margin:6px 0 0;padding-left:20px}.note li{margin:3px 0}
+  .foot{margin-top:24px;font-size:.8rem;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  button{font:inherit;font-weight:800;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:6px 12px;cursor:pointer}
+  button:hover{border-color:var(--ink-soft)}
+  [hidden]{display:none!important}
+  @media (max-width:600px){.bar{grid-template-columns:1fr;gap:6px}.bar .v{text-align:left}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Klavišų Šokis · statistika<small>BrAIn Club Jr · kurie lygiai sekasi ir kurie ne, iš vaikų žaidimų pamokose</small></h1>
+    <div class="window" id="window">Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį (skaitoma iš lentelės)…<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.</div>
+  </header>
+
+  <div id="empty" class="empty" hidden>Pamokų duomenų dar nėra. Pirmi skaičiai atsiras po pirmos pamokos, kurioje vaikai žais.</div>
+  <div id="error" class="empty" hidden>Nepavyko gauti duomenų. Patikrink internetą ir paspausk „Atnaujinti".</div>
+
+  <section id="content" hidden>
+    <div class="tiles" id="tiles"></div>
+
+    <h2>Klasės</h2>
+    <p class="lead">Klasė nustatoma pagal laiką, kada žaista. Kiekviena klasė turi savo langą tvarkaraštyje, todėl vaikų klausti nereikia. „Žaidimas" — vienas etapas: pamoka (1–5 lygiai), tęsinys (6–10, atrakina mentorius) arba slapti kambariai.</p>
+    <div class="tablewrap"><table id="classes"><thead><tr><th>Klasė</th><th>Žaidimų</th><th>Dienų</th><th>Lygių įveikta</th><th>⭐ per lygį</th><th>Klaidų per lygį</th><th>Taškai vid.</th><th>Slapti</th><th>Sunkiausias lygis</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>Gebėjimai</h2>
+    <p class="lead">Kiek procentų paspaudimų teisingi. Rodyklės (1–3 lygiai) · ENTER (4) · žymeklis + BACKSPACE (5) · raidės ir skaičiai (6–8) · viskas kartu (9–10).</p>
+    <div class="meters" id="meters"></div>
+
+    <h2>Lygių lenta</h2>
+    <p class="lead">Sunkiausi viršuje. „Klaidų" — vidutiniškai per vieną žaidimą tame lygyje. „3 ⭐" — kokia dalis žaidimų lygį įveikė beveik be klaidų (≥ 90 % teisingų). „Laikas" — lygio trukmės mediana.</p>
+    <div class="tablewrap"><table id="levels"><thead><tr><th>Lygis</th><th>Teisingai</th><th>Žaista</th><th>Klaidų</th><th>⭐ vid.</th><th>3 ⭐</th><th>Laikas</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>Slapti kambariai</h2>
+    <p class="lead">Labirintas (rodyklės) ir „Durys ir šuoliai" (TARPAS, ENTER, ESC). Įeinama iš pradžios ekrano — jokių užuominų sąsajoje.</p>
+    <div class="tablewrap"><table id="secret"><thead><tr><th>Kambarys</th><th>Žaista</th><th>Klaidų vid.</th><th>Laikas</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>Pamokų dienos</h2>
+    <p class="lead">Kiek žaista ir kaip sekėsi. Žaidimas — ne vaikas: tas pats vaikas per pamoką gali pradėti kelis kartus.</p>
+    <div class="tablewrap"><table id="days"><thead><tr><th>Diena</th><th>Klasė</th><th>Žaidimų</th><th>Nutraukta</th><th>Lygių</th><th>⭐ per lygį</th><th>Klaidų per lygį</th><th>Taškai vid. / max</th><th>Trukmė vid.</th><th>Slapti</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <div class="note"><b>Kaip skaityti šiuos skaičius</b>
+    <ul>
+      <li>Žaidimų skaičius ≠ vaikų skaičius. Vienas vaikas per pamoką dažnai pradeda kelis kartus; nutrauktas žaidimas (uždarytas skirtukas) irgi skaičiuojasi — su tuo lygiu, kuriame sustojo.</li>
+      <li>Procentai per lygį patikimi nuo maždaug 20 žaidimų. Kol mažiau — žiūrėk kryptį, ne skaičių.</li>
+      <li>Klaida žaidime — ne tas klavišas ARBA nespėta per laiką. Abu — reakcijos, ne žinių, matas: 5 lygis (rask klaidą) — vienintelis, kur klaida rodo supratimą.</li>
+      <li>Taškai priklauso nuo greičio, todėl lygink tą patį lygį tarp klasių, ne klases tarpusavyje.</li>
+    </ul>
+  </div>
+
+  <div class="foot"><span id="updated"></span><span><button id="refresh" type="button">↻ Atnaujinti</button></span></div>
+</main>
+
+<script>
+(() => {
+  'use strict';
+  const SB = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/';
+  const KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
+
+  // lygiai — tie patys pavadinimai kaip žaidime; g = gebėjimų grupė
+  const L = [
+    { id: 'l1',  n: 1,  name: 'Kairėn ir dešinėn',      g: 'rodykles' },
+    { id: 'l2',  n: 2,  name: 'Aukštyn ir žemyn',       g: 'rodykles' },
+    { id: 'l3',  n: 3,  name: 'Visos kryptys',          g: 'rodykles' },
+    { id: 'l4',  n: 4,  name: 'ENTER — patvirtink!',    g: 'enter' },
+    { id: 'l5',  n: 5,  name: 'Rask klaidą ir ištrink', g: 'backspace' },
+    { id: 'l6',  n: 6,  name: 'Raidės A B C D',         g: 'raides' },
+    { id: 'l7',  n: 7,  name: 'Skaičiai 1 2 3 4',       g: 'raides' },
+    { id: 'l8',  n: 8,  name: 'Raidės ir skaičiai',     g: 'raides' },
+    { id: 'l9',  n: 9,  name: 'Viskas kartu',           g: 'viskas' },
+    { id: 'l10', n: 10, name: 'GYNĖJO EGZAMINAS',       g: 'viskas' },
+    { id: 's1',  n: 0,  name: '🔒 Labirintas',          g: 'slaptas' },
+    { id: 's2',  n: 0,  name: '🔒 Durys ir šuoliai',    g: 'slaptas' },
+  ];
+  const byId = Object.fromEntries(L.map(l => [l.id, l]));
+  const GROUPS = [['rodykles', 'Rodyklės (1–3)'], ['enter', 'ENTER (4)'], ['backspace', 'Žymeklis + BACKSPACE (5)'], ['raides', 'Raidės ir skaičiai (6–8)'], ['viskas', 'Viskas kartu (9–10)']];
+
+  const $ = id => document.getElementById(id);
+  const pct = (a, b) => b > 0 ? Math.round(100 * a / b) : null;
+  const fmtPct = p => p === null || p === undefined ? '—' : p + ' %';
+  const pillFor = p => p === null || p === undefined ? 'na' : p >= 75 ? 'good' : p >= 50 ? 'mid' : 'bad';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const mmss = s => s === null || s === undefined ? '—' : Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  const per = (a, b) => b > 0 ? (a / b).toFixed(1) : '—';
+  const DOW = ['', 'pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis', 'šeštadienis', 'sekmadienis'];
+  const DOWS = ['', 'pr.', 'an.', 'tr.', 'kt.', 'pn.', 'št.', 'sk.'];
+  const dow = d => DOW[(new Date(d + 'T12:00:00').getDay() + 6) % 7 + 1];
+  const hhmm = t => String(t).slice(0, 5);
+
+  async function get(view, order) {
+    const r = await fetch(SB + view + '?select=*' + (order ? '&order=' + order : ''), { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } });
+    if (!r.ok) throw new Error(view + ' ' + r.status);
+    return r.json();
+  }
+
+  // pamokų langai — iš tvarkaraščio lentelės, ne iš teksto: pasikeitus lentelei pasikeičia ir čia
+  function windowText(rows) {
+    const days = {};
+    (rows || []).forEach(r => { (days[r.sav_diena] = days[r.sav_diena] || []).push(`${hhmm(r.nuo)}–${hhmm(r.iki)} (${r.klase} kl.)`); });
+    return Object.keys(days).sort().map(d => `${DOWS[d]} ${days[d].join(', ')}`).join(' · ');
+  }
+
+  function demoData() { // ?demo=1 — pavyzdiniai skaičiai maketui
+    const lv = L.map((l, i) => {
+      const secret = l.g === 'slaptas';
+      const n = secret ? 6 + i : 30 - i * 2;
+      const ok = secret ? 0 : Math.round(n * 9 * (0.6 + (i % 4) / 10));
+      const bad = secret ? n * 3 : Math.round(n * (0.4 + (i % 5) / 6));
+      return { id: l.id, kartu: n, teisingai: ok, klaidu: bad, teisingai_proc: secret ? null : pct(ok, ok + bad), klaidu_vid: (bad / n).toFixed(1), zvaigzdes_vid: secret ? null : (2.9 - (i % 4) * 0.4).toFixed(2), trys_zvaigzdes: secret ? 0 : Math.round(n * (0.5 - (i % 4) / 10)), sek_mediana: (l.id === 'l5' ? 62 : 24 + i * 2).toFixed(1) };
+    });
+    return {
+      t: [{ klase: 1, sav_diena: 4, nuo: '13:30', iki: '14:20' }, { klase: 2, sav_diena: 4, nuo: '14:20', iki: '15:15' }, { klase: 3, sav_diena: 5, nuo: '12:55', iki: '13:40' }, { klase: 4, sav_diena: 5, nuo: '13:50', iki: '14:35' }, { klase: 5, sav_diena: 5, nuo: '14:45', iki: '16:00' }],
+      s: { zaidimu: 58, nutraukta: 6, pamoka: 41, tesinys: 9, slaptas: 8, dienu: 3, pirma_diena: '2026-09-17', paskutine_diena: '2026-09-25', lygiu: 236, zvaigzdes: 531, klaidu: 302, tasku_vid: 5120, tasku_max: 14300, sek_vid: 205 },
+      d: [{ diena: '2026-09-25', klase: 4, zaidimu: 14, nutraukta: 1, lygiu: 60, zvaigzdes: 140, klaidu: 70, tasku_vid: 5300, tasku_max: 9800, sek_vid: 210, slaptas: 2 }, { diena: '2026-09-24', klase: 2, zaidimu: 22, nutraukta: 3, lygiu: 90, zvaigzdes: 200, klaidu: 120, tasku_vid: 4900, tasku_max: 14300, sek_vid: 200, slaptas: 3 }, { diena: '2026-09-17', klase: 1, zaidimu: 22, nutraukta: 2, lygiu: 86, zvaigzdes: 191, klaidu: 112, tasku_vid: 5100, tasku_max: 11000, sek_vid: 205, slaptas: 3 }],
+      k: [{ klase: 1, zaidimu: 22, dienu: 1, lygiu: 86, lygiu_zv: 80, zvaigzdes: 191, klaidu: 112, tasku_vid: 5100, slaptas: 3 }, { klase: 2, zaidimu: 22, dienu: 1, lygiu: 90, zvaigzdes: 200, klaidu: 120, tasku_vid: 4900, slaptas: 3 }, { klase: 4, zaidimu: 14, dienu: 1, lygiu: 60, zvaigzdes: 140, klaidu: 70, tasku_vid: 5300, slaptas: 2 }],
+      kl: [{ klase: 1, id: 'l5', kartu: 12, teisingai: 40, klaidu: 30 }, { klase: 2, id: 'l3', kartu: 18, teisingai: 120, klaidu: 60 }, { klase: 4, id: 'l4', kartu: 9, teisingai: 60, klaidu: 35 }],
+      l: lv,
+    };
+  }
+
+  function render({ t, s, d, l, k, kl }) {
+    $('window').innerHTML = `Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį: ${esc(windowText(t) || '—')}.<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.`;
+    const hasData = s && s.zaidimu > 0;
+    $('empty').hidden = hasData; $('content').hidden = !hasData;
+    if (!hasData) return;
+
+    $('tiles').innerHTML = [
+      ['Žaidimų', s.zaidimu, `${s.dienu} pamok. dien.${s.nutraukta ? ' · ' + s.nutraukta + ' nutraukta' : ''}`],
+      ['Etapai', `${s.pamoka} · ${s.tesinys} · ${s.slaptas}`, 'pamoka (1–5) · tęsinys (6–10) · slapti'],
+      ['Lygių įveikta', s.lygiu, `${per(s.lygiu, s.zaidimu)} per žaidimą`],
+      ['⭐ per lygį', per(s.zvaigzdes, s.lygiu_zv ?? s.lygiu), `${s.zvaigzdes} iš ${(s.lygiu_zv ?? s.lygiu) * 3} galimų`],
+      ['Klaidų per lygį', per(s.klaidu, s.lygiu), `${s.klaidu} iš viso`],
+      ['Taškai', s.tasku_vid ?? '—', `vidurkis · rekordas ${s.tasku_max ?? '—'}`],
+      ['Etapo trukmė', mmss(s.sek_vid), 'vidurkis'],
+    ].map(([lbl, v, sub]) => `<div class="tile"><div class="lbl">${lbl}</div><div class="val">${v}</div><div class="sub">${sub}</div></div>`).join('');
+
+    // klasės: sunkiausias lygis klasei — tik nuo 3 žaidimų tame lygyje
+    const classes = (k || []).slice().sort((a, b) => a.klase - b.klase);
+    $('classes').querySelector('tbody').innerHTML = classes.map(c => {
+      const worst = (kl || []).filter(r => r.klase === c.klase && byId[r.id] && byId[r.id].n > 0 && r.kartu >= 3)
+        .map(r => ({ id: r.id, p: pct(r.teisingai, r.teisingai + r.klaidu), n: r.kartu })).filter(r => r.p !== null).sort((a, b) => a.p - b.p)[0];
+      const worstTxt = worst ? `${byId[worst.id].n}. ${esc(byId[worst.id].name)} <span class="pill ${pillFor(worst.p)}">${fmtPct(worst.p)}</span> <small>${worst.n} žaid.</small>` : '<small>dar per mažai žaidimų</small>';
+      return `<tr><td class="q">${c.klase} klasė</td><td class="num">${c.zaidimu}</td><td class="num">${c.dienu}</td><td class="num">${c.lygiu}</td><td class="num">${per(c.zvaigzdes, c.lygiu_zv ?? c.lygiu)}</td><td class="num">${per(c.klaidu, c.lygiu)}</td><td class="num">${c.tasku_vid ?? '—'}</td><td class="num">${c.slaptas}</td><td>${worstTxt}</td></tr>`;
+    }).join('') || '<tr><td colspan="9">Dar nė viena klasė nežaidė.</td></tr>';
+
+    const rows = l || [];
+    $('meters').innerHTML = GROUPS.map(([g, name]) => {
+      const rs = rows.filter(r => byId[r.id] && byId[r.id].g === g);
+      const ok = rs.reduce((a, r) => a + r.teisingai, 0), n = rs.reduce((a, r) => a + r.teisingai + r.klaidu, 0), p = pct(ok, n);
+      return `<div class="meter"><div class="top"><span class="name">${name}</span><span class="pct">${fmtPct(p)}</span></div><div class="track"><div class="fill" style="width:${p || 0}%"></div></div><div class="n">${ok} teisingų iš ${n} paspaudimų</div></div>`;
+    }).join('');
+
+    const lv = rows.filter(r => byId[r.id] && byId[r.id].n > 0).sort((a, b) => (a.teisingai_proc ?? 101) - (b.teisingai_proc ?? 101) || b.kartu - a.kartu);
+    $('levels').querySelector('tbody').innerHTML = lv.map(r => {
+      const m = byId[r.id], p = r.teisingai_proc, three = pct(r.trys_zvaigzdes, r.kartu);
+      return `<tr><td class="q">${m.n}. ${esc(m.name)}<small>${r.id} · ${r.teisingai} teisingų / ${r.klaidu} klaidų</small></td><td><span class="mini ${p !== null && p < 50 ? 'bad' : ''}"><i style="width:${p || 0}%"></i></span><span class="pill ${pillFor(p)}">${fmtPct(p)}</span></td><td class="num">${r.kartu}</td><td class="num">${r.klaidu_vid ?? '—'}</td><td class="num">${r.zvaigzdes_vid ?? '—'}</td><td class="num">${fmtPct(three)}</td><td class="num">${r.sek_mediana ?? '—'} s</td></tr>`;
+    }).join('') || '<tr><td colspan="7">Lygių dar nežaista.</td></tr>';
+
+    const sr = rows.filter(r => byId[r.id] && byId[r.id].g === 'slaptas').sort((a, b) => a.id < b.id ? -1 : 1);
+    $('secret').querySelector('tbody').innerHTML = sr.map(r => `<tr><td class="q">${esc(byId[r.id].name)}</td><td class="num">${r.kartu}</td><td class="num">${r.klaidu_vid ?? '—'}</td><td class="num">${r.sek_mediana ?? '—'} s</td></tr>`).join('')
+      || '<tr><td colspan="4">Slaptų kambarių dar niekas nerado pamokos metu.</td></tr>';
+
+    $('days').querySelector('tbody').innerHTML = (d || []).map(r =>
+      `<tr><td class="q">${esc(r.diena)}<small>${dow(r.diena)}</small></td><td class="num">${r.klase ?? '—'}</td><td class="num">${r.zaidimu}</td><td class="num">${r.nutraukta}</td><td class="num">${r.lygiu}</td><td class="num">${per(r.zvaigzdes, r.lygiu_zv ?? r.lygiu)}</td><td class="num">${per(r.klaidu, r.lygiu)}</td><td class="num">${r.tasku_vid ?? '—'} / ${r.tasku_max ?? '—'}</td><td class="num">${mmss(r.sek_vid)}</td><td class="num">${r.slaptas}</td></tr>`).join('');
+  }
+
+  async function load() {
+    $('error').hidden = true;
+    const demo = new URLSearchParams(location.search).get('demo') === '1';
+    try {
+      const data = demo ? demoData() : await (async () => {
+        const [t, s, d, l, k, kl] = await Promise.all([get('bcjr_tvarkarastis_v'), get('bcjr_klavisai_suvestine'), get('bcjr_klavisai_dienos', 'diena.desc,klase.asc'), get('bcjr_klavisai_lygiai'), get('bcjr_klavisai_klases'), get('bcjr_klavisai_lygiai_klases')]);
+        return { t, s: s[0], d, l, k, kl };
+      })();
+      render(data);
+      $('updated').textContent = (demo ? 'PAVYZDINIAI skaičiai (?demo=1) · ' : '') + 'Atnaujinta ' + new Date().toLocaleString('lt-LT');
+    } catch (e) {
+      $('error').hidden = false; $('content').hidden = true; $('empty').hidden = true;
+      $('updated').textContent = 'Klaida: ' + e.message;
+    }
+  }
+  $('refresh').addEventListener('click', load);
+  load();
+})();
+</script>
+</body>
+</html>

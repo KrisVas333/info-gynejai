@@ -8,8 +8,8 @@
   "Tempas ramus (~0.92). Tarp sakinių trumpa pauzė.",
   "Lietuvių kalba. Skaičiai ir raidės tariami taip, kaip parašyta."
  ],
- "atnaujinta": "2026-09-14",
- "kiek": 51,
+ "atnaujinta": "2026-09-11",
+ "kiek": 50,
  "items": [
   {
    "id": "R1",
@@ -30,11 +30,6 @@
    "id": "LYTIS",
    "file": "50.mp3",
    "tekstas": "Ar tu berniukas, ar mergaitė? Čia nėra teisingo atsakymo. Spausk: Berniukas, Mergaitė, Nesakysiu."
-  },
-  {
-   "id": "AMZIUS",
-   "file": "51.mp3",
-   "tekstas": "Kiek tau metų? Spausk savo skaičių. Šeši. Septyni. Aštuoni. Arba devyni ir daugiau."
   },
   {
    "id": "A1a",
@@ -266,8 +261,5 @@
    "file": "46.mp3",
    "tekstas": "Ekrane staiga iššoko toks langas. Ką darysi? Spausk: Spausiu, Atrašysiu, Parodysiu suaugusiam."
   }
- ],
- "pastabos": [
-  "2026-09-14: LYTIS (50) ir AMZIUS (51) įgarsinti ElevenLabs Klaidas voice_id ytARIPxr985DUzw1udo1, eleven_v3, įkepti į testas.html AUDIO. ⚠️ Kris dar neperklausė ausimi."
  ]
 }
