@@ -931,7 +931,7 @@ function endLevel(){
   S.stars[S.level] = stars;
   S.missBy[S.level] = S.misses;
   pushLevel('l'+(S.level+1), S.hits, S.misses, stars);
-  if (S.level!==4 && S.level!==9) sendSnapshot();   // 5 ir 10 lygio pabaigoje eina pilna etapo eilutė
+  sendSnapshot();   // pilna etapo eilutė (po 5/10 lygio) ateis vėliau ir rodiniuose ją pakeis
   IG.ev('raunda_baigta', { lygis: String(S.level+1), zvaigzdes: String(stars), klaidu: String(S.misses) });
   $('resultTitle').textContent = `Lygis ${S.level+1} įveiktas!`;
   $('resultScore').textContent = `+${S.levelScore} taškų · klaidų: ${S.misses}`;
