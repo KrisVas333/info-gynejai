@@ -165,7 +165,7 @@
 
   // anonymous run statistics -> Supabase (same table pattern as the P1 test: public key can only INSERT,
   // the server stamps the time, and lesson-window filtering happens in the bcjr_miste_v view)
-  const VERSION = 'miste-2026-09-14';
+  const VERSION = 'miste-2026-09-18';
 
   // ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ----------
   const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
@@ -1040,6 +1040,12 @@
   document.addEventListener('visibilitychange', () => { last = performance.now(); });
   // a run cut short by closing the tab still counts as a play (nebaigta = true)
   window.addEventListener('pagehide', () => { if (state.mode === 'running' && state.score >= 1) sendRun(true); });
+  /* Pamokos pabaigos laikrodis (blokas puslapio gale) užrakina žaidimą: bėgimas baigiasi be restarto, progresas išsiunčiamas. */
+  window.__pamokaUzrakinta = () => {
+    if (state.mode === 'running' && state.score >= 1) sendRun(true);
+    stopSpeech();
+    state.mode = 'locked';                 // nei 'title', nei 'dead' — joks klavišas nebepaleidžia bėgimo
+  };
   try { flushQueue(); } catch (e) {}
   if (state.autoStart) {
     start();
@@ -1048,5 +1054,82 @@
   requestAnimationFrame(frame);
 })();
 </script>
+<!-- ═══════ PAMOKOS PABAIGOS LAIKRODIS (Kris 2026-09-18) ═══════
+     Laikai gyvena Supabase lentelėje bcjr_tvarkarastis (stulpeliai ispejimas / atrakinti) — čia jų NĖRA.
+     ispejimas ≤ t < ispejimas+60 s  → juosta „60 paskutinių sekundžių", žaidimas tęsiasi
+     ispejimas+60 s ≤ t < atrakinti  → visas ekranas „Gerai, Info Gynėjai, grįžkim!", jokių klavišų, jokio restarto
+     t ≥ atrakinti                   → puslapis persikrauna — švarus pradžios ekranas
+     Laikas — serverio (Date antraštė), ne vaiko kompiuterio. Nepavykus nuskaityti — nieko nedaro.
+     Testui: ?laikas=13:33:50 (šiandienos diena) arba ?laikas=5@13:33:50 (penktadienis). Tas pats blokas abiejuose žaidimuose. -->
+<style>
+  #pbJuosta{position:fixed;top:0;left:0;right:0;z-index:2147483000;background:#B42318;color:#fff;
+    font:800 clamp(18px,3.2vw,30px)/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;
+    padding:12px 16px;display:none;letter-spacing:.02em;box-shadow:0 4px 18px #0006}
+  #pbJuosta b{font-size:1.5em;font-variant-numeric:tabular-nums;margin-left:.3em}
+  #pbUzraktas{position:fixed;inset:0;z-index:2147483001;background:#141414;color:#fff;display:none;
+    align-items:center;justify-content:center;text-align:center;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px;cursor:default}
+  #pbUzraktas h1{font-size:clamp(30px,7vw,76px);margin:0 0 14px;line-height:1.1}
+  #pbUzraktas p{font-size:clamp(16px,2.6vw,24px);opacity:.75;margin:0}
+</style>
+<div id="pbJuosta" role="status" aria-live="polite">⏱ 60 paskutinių sekundžių <b id="pbSek">60</b></div>
+<div id="pbUzraktas" role="alertdialog" aria-modal="true"><div><h1>Gerai, Info Gynėjai, grįžkim! 🧠</h1><p>Rankos nuo klaviatūros, akys į mentorių.</p></div></div>
+<script>
+(function(){
+  'use strict';
+  const SB = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_tvarkarastis_v?select=sav_diena,ispejimas,atrakinti';
+  const KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
+  let rows = null, offset = 0, simDow = 0, locked = false, was = '';
+  const juosta = document.getElementById('pbJuosta'), sek = document.getElementById('pbSek'), uzraktas = document.getElementById('pbUzraktas');
+  const toSec = t => { const p = String(t).split(':').map(Number); return p[0]*3600 + (p[1]||0)*60 + (p[2]||0); };
+
+  function dabar(){                       // Vilniaus laikas: {dow: ISO 1–7, sec: sekundės nuo vidurnakčio}
+    const d = new Date(Date.now() + offset);
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/Vilnius', weekday:'short', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false }).formatToParts(d);
+    const g = t => parts.find(p => p.type === t);
+    const dow = ({Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6,Sun:7})[g('weekday').value] || 0;
+    return { dow: simDow || dow, sec: (+g('hour').value % 24)*3600 + (+g('minute').value)*60 + (+g('second').value) };
+  }
+  function busena(){                      // '' | 'ispejimas' | 'uzrakinta', + kiek sekundžių liko iki užrakto
+    const { dow, sec } = dabar();
+    for (const r of rows){
+      if (!r.ispejimas || !r.atrakinti || +r.sav_diena !== dow) continue;
+      const a = toSec(r.ispejimas), b = toSec(r.atrakinti);
+      if (sec >= a && sec < b) return sec < a + 60 ? { f:'ispejimas', liko: a + 60 - sec } : { f:'uzrakinta', liko: 0 };
+    }
+    return { f:'', liko: 0 };
+  }
+  function tick(){
+    if (!rows) return;
+    const { f, liko } = busena();
+    juosta.style.display = f === 'ispejimas' ? 'block' : 'none';
+    if (f === 'ispejimas') sek.textContent = liko;
+    uzraktas.style.display = f === 'uzrakinta' ? 'flex' : 'none';
+    if (f === 'uzrakinta' && !locked){
+      locked = true;
+      try { if (typeof window.__pamokaUzrakinta === 'function') window.__pamokaUzrakinta(); } catch(e){}
+      try { uzraktas.focus(); } catch(e){}
+    }
+    if (f !== 'uzrakinta' && locked){ locked = false; location.reload(); }   // atrakinta — švarus startas
+    was = f;
+  }
+  // užrakinus — jokio klavišo, pelės ar lietimo nepasiekia žaidimo (capture fazė ant window eina PRIEŠ document)
+  ['keydown','keyup','keypress','pointerdown','pointerup','mousedown','mouseup','click','dblclick','touchstart','touchend','wheel','contextmenu']
+    .forEach(t => window.addEventListener(t, e => { if (locked){ e.stopImmediatePropagation(); e.preventDefault(); } }, { capture:true, passive:false }));
+
+  const sim = new URLSearchParams(location.search).get('laikas');
+  fetch(SB, { headers:{ apikey:KEY, Authorization:'Bearer '+KEY } })
+    .then(r => { const d = r.headers.get('Date'); if (d) offset = new Date(d).getTime() - Date.now(); return r.json(); })
+    .then(j => {
+      rows = Array.isArray(j) ? j : [];
+      if (sim){                           // testo jungiklis: perstumia laikrodį į nurodytą Vilniaus laiką
+        const m = sim.match(/^(?:(\d)@)?(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+        if (m){ simDow = +(m[1]||0); const want = (+m[2])*3600 + (+m[3])*60 + (+(m[4]||0)); offset += (want - dabar().sec) * 1000; }
+      }
+      tick(); setInterval(tick, 1000);
+    })
+    .catch(() => {});                     // nėra ryšio / lentelės — laikrodžio nėra, žaidimas veikia kaip visada
+})();
+</script>
+<!-- ═══════ /PAMOKOS PABAIGOS LAIKRODIS ═══════ -->
 
 </html>
