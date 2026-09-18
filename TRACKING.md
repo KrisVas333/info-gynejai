@@ -12,7 +12,7 @@ Jokių vardų, įrenginio ID ar pastovių identifikatorių · `track.js` nieko n
 |---|---|---|
 | `irankis` | `testas`·`deck`·`suvestine`·`scenarijus`·`miste-runner`·`klavisu-sokis`·`miste-statistika`·`hub`… | kuris įrankis |
 | `kelias` | `p1/testas.html`… | pilnas kelias; šakniniai dublikatai = `hub-testas`/`hub-scenarijus` |
-| **`kontekstas`** | `pamoka`·`namai` | **ar žaidžia namie.** `pamoka` = **Kt 12:45–14:25 · Pn 12:55–16:00** Europe/Vilnius (= Supabase `bcjr_tvarkarastis` langų aprėptis, įrašyta kietai — keičiant tvarkaraštį keisti abu) |
+| **`kontekstas`** | `pamoka`·`namai` | **ar žaidžia namie.** `pamoka` = **Kt 13:30–15:15 · Pn 12:55–16:00** Europe/Vilnius (= Supabase `bcjr_tvarkarastis` langų aprėptis, įrašyta kietai — keičiant tvarkaraštį keisti abu) |
 | `ivestis` | `touch`·`pele` | per pirmą sąlytį |
 | `ekranas` | `tel`(<600px)·`plansete`(<1024)·`kompas` | |
 | `saltinis` | `hub`·`tiesiogiai`·`vidinis`·domenas | iš kur atėjo |

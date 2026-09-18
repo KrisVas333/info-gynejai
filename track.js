@@ -81,7 +81,7 @@
   }
 
   /* kontekstas = pamoka | namai.
-     Pamokos langas: ketvirtadienis ir penktadienis 13:00–16:00 Europe/Vilnius.
+     Pamokos langas: ketvirtadienis 13:30–15:15, penktadienis 12:55–16:00 Europe/Vilnius.
      Šaltinis: Supabase lentelė bcjr_tvarkarastis (BC Jr Šiaurės licėjaus tvarkaraštis).
      Įrašyta kietai sąmoningai — puslapis neturi teisės skaityti tvarkaraščio.
      TAI yra pagrindinis signalas „ar vaikai žaidžia NAMIE". */
@@ -97,11 +97,11 @@
         if (part.type === 'minute') mm = parseInt(part.value, 10);
       });
       var t = hh * 60 + mm;
-      /* Langai = Supabase bcjr_tvarkarastis (2026-09-14):
-         Kt: 1 kl. 12:45–13:30 · 2 kl. 13:40–14:25  → 12:45–14:25
+      /* Langai = Supabase bcjr_tvarkarastis (2026-09-18):
+         Kt: 1 kl. 13:30–14:20 · 2 kl. 14:20–15:15  → 13:30–15:15
          Pn: 3 kl. 12:55–13:40 · 4 kl. 13:50–14:35 · 5 kl. 14:45–16:00 → 12:55–16:00
          Pasikeitus tvarkaraščiui — keisti ČIA ir lentelėje kartu. */
-      var langai = { Thu: [12 * 60 + 45, 14 * 60 + 25], Fri: [12 * 60 + 55, 16 * 60] };
+      var langai = { Thu: [13 * 60 + 30, 15 * 60 + 15], Fri: [12 * 60 + 55, 16 * 60] };
       var l = langai[wd];
       return (l && t >= l[0] && t < l[1]) ? 'pamoka' : 'namai';
     } catch (e) { return 'nezinoma'; }
