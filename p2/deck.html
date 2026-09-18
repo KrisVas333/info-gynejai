@@ -1021,9 +1021,8 @@ h2{font-size:clamp(.92rem,2.5vw,1.75rem);margin:0;color:var(--soft);font-weight:
     <h2>💪 Gynėjo mankšta!</h2>
     <p>Akys ir rankos irgi treniruojasi. Atsistok, <b>papurtyk rankas</b> ir <b>pažiūrėk pro langą</b> — kuo toliau!</p>
     <div id=&quot;breakCount&quot;>15</div>
-    <p><b>Čia pamokos pabaiga.</b> Rankos nuo klaviatūros, ant kelių.</p>
-    <button class=&quot;big-btn&quot; id=&quot;breakBtn&quot; style=&quot;font-size:1rem;padding:8px 20px&quot;>6 LYGIS — TIK SU MOKYTOJU</button>
-    <p class=&quot;hint&quot;>Klavišai čia neveikia. Toliau — tik pele, per šitą mygtuką.</p>
+    <button class=&quot;big-btn&quot; id=&quot;breakBtn&quot; disabled>PIRMYN — 6 LYGIS</button>
+    <p class=&quot;hint&quot;>Mygtukas įsijungs, kai baigsis skaičiuotė.</p>
   </div>
 
   <!-- FINAL -->
@@ -1112,7 +1111,7 @@ const sndLevel= () => { beep(523,.1); setTimeout(()=>beep(659,.1),110); setTimeo
 
 /* ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ---------- */
 const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
-const KS_VERSION = 'ks-2026-09-18b';
+const KS_VERSION = 'ks-2026-09-18c';
 IG.tag('versija', KS_VERSION);
 
 /* ---------- anoniminė žaidimų statistika -> Supabase (tas pats kelias kaip Miste Runner):
@@ -1561,12 +1560,13 @@ function startBreak(){
   S.phase='break'; show('breakScreen');
   sendRun(false);                                  // pamokos etapas (1–5) baigtas
   let n = 15; $('breakCount').textContent = n;
+  $('breakBtn').disabled = true;
   clearInterval(S.breakT);
   S.breakT = setInterval(()=>{
     n--; $('breakCount').textContent = Math.max(0,n);
-    /* Skaičiuotei pasibaigus NIEKUR neinam. 1–5 lygiai yra pamoka;
-       6–10 atrakina mentorius (arba vaikas namie) — pele, ne klavišu. */
-    if (n<=0){ clearInterval(S.breakT); $('breakCount').textContent = '✓'; }
+    /* Skaičiuotei pasibaigus 6 lygis — kaip bet kuris kitas: ENTER arba mygtukas.
+       „Tik su mokytoju&quot; pašalinta (Kris 2026-09-18). */
+    if (n<=0){ clearInterval(S.breakT); $('breakCount').textContent = '✓'; $('breakBtn').disabled = false; $('breakBtn').focus(); }
   }, 1000);
 }
 
@@ -1933,10 +1933,7 @@ document.addEventListener('keydown', e=>{
       if (k==='Enter') beginPlay();
       break;
     case 'result': if (k==='Enter') afterResult(); break;
-    /* ENTER čia SĄMONINGAI neveikia: vaikai juo spaudė visą žaidimą,
-       ir klasė nusiristų į 6 lygį anksčiau, nei mentorius spėtų ką pasakyti.
-       Toliau veda tik pelės paspaudimas ant mygtuko. */
-    case 'break':  break;
+    case 'break':  if (k==='Enter' &amp;&amp; !$('breakBtn').disabled) $('breakBtn').click(); break;
     case 'final':  if (k==='Enter') backToStart(); break;
     case 'play': {
       if (S.secret2){
