@@ -493,7 +493,7 @@ const sndLevel= () => { beep(523,.1); setTimeout(()=>beep(659,.1),110); setTimeo
 
 /* ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ---------- */
 const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
-const KS_VERSION = 'ks-2026-09-18e';
+const KS_VERSION = 'ks-2026-09-18f';
 IG.tag('versija', KS_VERSION);
 
 /* ---------- anoniminė žaidimų statistika -> Supabase (tas pats kelias kaip Miste Runner):
@@ -1438,29 +1438,40 @@ try{ flushQueue(); }catch(e){}
 <!-- ═══════ PAMOKOS PABAIGOS LAIKRODIS (Kris 2026-09-18) ═══════
      Laikai gyvena Supabase lentelėje bcjr_tvarkarastis (stulpeliai ispejimas / atrakinti) — čia jų NĖRA.
      ispejimas ≤ t < ispejimas+60 s  → juosta „60 paskutinių sekundžių", žaidimas tęsiasi
-     ispejimas+60 s ≤ t < atrakinti  → visas ekranas „Gerai, Info Gynėjai, grįžkim!", jokių klavišų, jokio restarto
+     ispejimas+60 s ≤ t < atrakinti  → juosta „Gerai, Info Gynėjai, grįžkim!", žaidimas sustabdytas ir pritemdytas, bet
+                                        matomas; jokių klavišų, pelės, lietimo — jokio restarto (Kris: „less aggressive, just a banner")
      t ≥ atrakinti                   → puslapis persikrauna — švarus pradžios ekranas
      Laikas — serverio (Date antraštė), ne vaiko kompiuterio. Nepavykus nuskaityti — nieko nedaro.
      Testui: ?laikas=13:33:50 (šiandienos diena) arba ?laikas=5@13:33:50 (penktadienis). Tas pats blokas abiejuose žaidimuose. -->
 <style>
-  #pbJuosta{position:fixed;top:0;left:0;right:0;z-index:2147483000;background:#B42318;color:#fff;
-    font:800 clamp(18px,3.2vw,30px)/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;
-    padding:12px 16px;display:none;letter-spacing:.02em;box-shadow:0 4px 18px #0006}
-  #pbJuosta b{font-size:1.5em;font-variant-numeric:tabular-nums;margin-left:.3em}
-  #pbUzraktas{position:fixed;inset:0;z-index:2147483001;background:#141414;color:#fff;display:none;
-    align-items:center;justify-content:center;text-align:center;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px;cursor:default}
-  #pbUzraktas h1{font-size:clamp(30px,7vw,76px);margin:0 0 14px;line-height:1.1}
-  #pbUzraktas p{font-size:clamp(16px,2.6vw,24px);opacity:.75;margin:0}
+  /* juosta viršuje; kad neuždengtų žaidimo teksto, body gauna padding-top tokio pat aukščio (žr. JS) */
+  #pbJuosta{position:fixed;top:0;left:0;right:0;z-index:2147483000;color:#fff;
+    font:800 clamp(15px,2.4vw,22px)/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;
+    padding:9px 14px;display:none;letter-spacing:.02em;box-shadow:0 3px 12px #0005;box-sizing:border-box}
+  #pbJuosta.ispejimas{background:#B42318}
+  #pbJuosta.uzrakinta{background:#141414}
+  #pbJuosta b{font-size:1.35em;font-variant-numeric:tabular-nums;margin-left:.3em}
+  #pbJuosta small{font-weight:600;opacity:.8;margin-left:.6em;font-size:.8em}
+  body.pb-uzrakinta > :not(#pbJuosta){filter:grayscale(.6) opacity(.55);pointer-events:none}
 </style>
-<div id="pbJuosta" role="status" aria-live="polite">⏱ 60 paskutinių sekundžių <b id="pbSek">60</b></div>
-<div id="pbUzraktas" role="alertdialog" aria-modal="true"><div><h1>Gerai, Info Gynėjai, grįžkim! 🧠</h1><p>Rankos nuo klaviatūros, akys į mentorių.</p></div></div>
+<div id="pbJuosta" role="status" aria-live="assertive"></div>
 <script>
 (function(){
   'use strict';
   const SB = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_tvarkarastis_v?select=sav_diena,ispejimas,atrakinti';
   const KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
   let rows = null, offset = 0, simDow = 0, locked = false, was = '';
-  const juosta = document.getElementById('pbJuosta'), sek = document.getElementById('pbSek'), uzraktas = document.getElementById('pbUzraktas');
+  const juosta = document.getElementById('pbJuosta');
+  function rodyk(f, liko){
+    if (!f){ juosta.style.display = 'none'; juosta.className = ''; document.body.style.paddingTop = ''; document.body.classList.remove('pb-uzrakinta'); return; }
+    juosta.className = f;
+    juosta.innerHTML = f === 'ispejimas'
+      ? '⏱ 60 paskutinių sekundžių <b>' + liko + '</b>'
+      : '🧠 Gerai, Info Gynėjai, grįžkim! <small>rankos nuo klaviatūros, akys į mentorių</small>';
+    juosta.style.display = 'block';
+    document.body.style.paddingTop = juosta.offsetHeight + 'px';   // turinys nusileidžia, nieko neuždengiam
+    document.body.classList.toggle('pb-uzrakinta', f === 'uzrakinta');
+  }
   const toSec = t => { const p = String(t).split(':').map(Number); return p[0]*3600 + (p[1]||0)*60 + (p[2]||0); };
 
   function dabar(){                       // Vilniaus laikas: {dow: ISO 1–7, sec: sekundės nuo vidurnakčio}
@@ -1482,13 +1493,11 @@ try{ flushQueue(); }catch(e){}
   function tick(){
     if (!rows) return;
     const { f, liko } = busena();
-    juosta.style.display = f === 'ispejimas' ? 'block' : 'none';
-    if (f === 'ispejimas') sek.textContent = liko;
-    uzraktas.style.display = f === 'uzrakinta' ? 'flex' : 'none';
+    rodyk(f, liko);
     if (f === 'uzrakinta' && !locked){
       locked = true;
       try { if (typeof window.__pamokaUzrakinta === 'function') window.__pamokaUzrakinta(); } catch(e){}
-      try { uzraktas.focus(); } catch(e){}
+      try { document.activeElement && document.activeElement.blur(); } catch(e){}
     }
     if (f !== 'uzrakinta' && locked){ locked = false; location.reload(); }   // atrakinta — švarus startas
     was = f;
