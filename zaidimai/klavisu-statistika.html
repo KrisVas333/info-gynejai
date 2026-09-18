@@ -93,18 +93,22 @@
     <p class="lead">Sunkiausi viršuje. „Klaidų" — vidutiniškai per vieną žaidimą tame lygyje. „3 ⭐" — kokia dalis žaidimų lygį įveikė beveik be klaidų (≥ 90 % teisingų). „Laikas" — lygio trukmės mediana.</p>
     <div class="tablewrap"><table id="levels"><thead><tr><th>Lygis</th><th>Teisingai</th><th>Žaista</th><th>Klaidų</th><th>⭐ vid.</th><th>3 ⭐</th><th>Laikas</th></tr></thead><tbody></tbody></table></div>
 
+    <h2>Kur vaikai sustoja</h2>
+    <p class="lead">Kiek žaidimų pasiekė kurį lygį. Žaidimas skaičiuojasi nuo pirmo įveikto lygio — net jei vaikas niekada nepasiekė 5 lygio, jo pirmų lygių klaidos jau yra lentoje aukščiau. Pamoka = 1–5 lygiai · tęsinys = 6–10.</p>
+    <div class="bars" id="stops"></div>
+
     <h2>Slapti kambariai</h2>
     <p class="lead">Labirintas (rodyklės) ir „Durys ir šuoliai" (TARPAS, ENTER, ESC). Įeinama iš pradžios ekrano — jokių užuominų sąsajoje.</p>
     <div class="tablewrap"><table id="secret"><thead><tr><th>Kambarys</th><th>Žaista</th><th>Klaidų vid.</th><th>Laikas</th></tr></thead><tbody></tbody></table></div>
 
     <h2>Pamokų dienos</h2>
     <p class="lead">Kiek žaista ir kaip sekėsi. Žaidimas — ne vaikas: tas pats vaikas per pamoką gali pradėti kelis kartus.</p>
-    <div class="tablewrap"><table id="days"><thead><tr><th>Diena</th><th>Klasė</th><th>Žaidimų</th><th>Nutraukta</th><th>Lygių</th><th>⭐ per lygį</th><th>Klaidų per lygį</th><th>Taškai vid. / max</th><th>Trukmė vid.</th><th>Slapti</th></tr></thead><tbody></tbody></table></div>
+    <div class="tablewrap"><table id="days"><thead><tr><th>Diena</th><th>Klasė</th><th>Žaidimų</th><th>Nebaigė etapo</th><th>Lygių</th><th>⭐ per lygį</th><th>Klaidų per lygį</th><th>Taškai vid. / max</th><th>Trukmė vid.</th><th>Slapti</th></tr></thead><tbody></tbody></table></div>
   </section>
 
   <div class="note"><b>Kaip skaityti šiuos skaičius</b>
     <ul>
-      <li>Žaidimų skaičius ≠ vaikų skaičius. Vienas vaikas per pamoką dažnai pradeda kelis kartus; nutrauktas žaidimas (uždarytas skirtukas) irgi skaičiuojasi — su tuo lygiu, kuriame sustojo.</li>
+      <li>Žaidimų skaičius ≠ vaikų skaičius. Vienas vaikas per pamoką dažnai pradeda kelis kartus. Žaidimas įrašomas po <b>kiekvieno</b> lygio, todėl 3 lygius įveikęs ir išėjęs vaikas lentoje yra su visais trimis; „nebaigė etapo" — nepasiekė 5 (ar 10) lygio pabaigos.</li>
       <li>Procentai per lygį patikimi nuo maždaug 20 žaidimų. Kol mažiau — žiūrėk kryptį, ne skaičių.</li>
       <li>Klaida žaidime — ne tas klavišas ARBA nespėta per laiką. Abu — reakcijos, ne žinių, matas: 5 lygis (rask klaidą) — vienintelis, kur klaida rodo supratimą.</li>
       <li>Taškai priklauso nuo greičio, todėl lygink tą patį lygį tarp klasių, ne klases tarpusavyje.</li>
@@ -178,17 +182,18 @@
       k: [{ klase: 1, zaidimu: 22, dienu: 1, lygiu: 86, lygiu_zv: 80, zvaigzdes: 191, klaidu: 112, tasku_vid: 5100, slaptas: 3 }, { klase: 2, zaidimu: 22, dienu: 1, lygiu: 90, zvaigzdes: 200, klaidu: 120, tasku_vid: 4900, slaptas: 3 }, { klase: 4, zaidimu: 14, dienu: 1, lygiu: 60, zvaigzdes: 140, klaidu: 70, tasku_vid: 5300, slaptas: 2 }],
       kl: [{ klase: 1, id: 'l5', kartu: 12, teisingai: 40, klaidu: 30 }, { klase: 2, id: 'l3', kartu: 18, teisingai: 120, klaidu: 60 }, { klase: 4, id: 'l4', kartu: 9, teisingai: 60, klaidu: 35 }],
       l: lv,
+      stops: [{ etapas: 'pamoka', pasiekta_lygiu: 2, nebaigta: true, zaidimu: 6 }, { etapas: 'pamoka', pasiekta_lygiu: 3, nebaigta: true, zaidimu: 9 }, { etapas: 'pamoka', pasiekta_lygiu: 4, nebaigta: true, zaidimu: 8 }, { etapas: 'pamoka', pasiekta_lygiu: 5, nebaigta: false, zaidimu: 18 }, { etapas: 'tesinys', pasiekta_lygiu: 3, nebaigta: true, zaidimu: 4 }, { etapas: 'tesinys', pasiekta_lygiu: 5, nebaigta: false, zaidimu: 5 }],
     };
   }
 
-  function render({ t, s, d, l, k, kl }) {
+  function render({ t, s, d, l, k, kl, stops }) {
     $('window').innerHTML = `Skaičiuojama tik iš <b>pamokų</b> pagal tvarkaraštį: ${esc(windowText(t) || '—')}.<br>Viskas, kas už šių langų — bandymai, į statistiką nepatenka.`;
     const hasData = s && s.zaidimu > 0;
     $('empty').hidden = hasData; $('content').hidden = !hasData;
     if (!hasData) return;
 
     $('tiles').innerHTML = [
-      ['Žaidimų', s.zaidimu, `${s.dienu} pamok. dien.${s.nutraukta ? ' · ' + s.nutraukta + ' nutraukta' : ''}`],
+      ['Žaidimų', s.zaidimu, `${s.dienu} pamok. dien.${s.nutraukta ? ' · ' + s.nutraukta + ' nebaigė etapo' : ''}`],
       ['Etapai', `${s.pamoka} · ${s.tesinys} · ${s.slaptas}`, 'pamoka (1–5) · tęsinys (6–10) · slapti'],
       ['Lygių įveikta', s.lygiu, `${per(s.lygiu, s.zaidimu)} per žaidimą`],
       ['⭐ per lygį', per(s.zvaigzdes, s.lygiu_zv ?? s.lygiu), `${s.zvaigzdes} iš ${(s.lygiu_zv ?? s.lygiu) * 3} galimų`],
@@ -219,6 +224,19 @@
       return `<tr><td class="q">${m.n}. ${esc(m.name)}<small>${r.id} · ${r.teisingai} teisingų / ${r.klaidu} klaidų</small></td><td><span class="mini ${p !== null && p < 50 ? 'bad' : ''}"><i style="width:${p || 0}%"></i></span><span class="pill ${pillFor(p)}">${fmtPct(p)}</span></td><td class="num">${r.kartu}</td><td class="num">${r.klaidu_vid ?? '—'}</td><td class="num">${r.zvaigzdes_vid ?? '—'}</td><td class="num">${fmtPct(three)}</td><td class="num">${r.sek_mediana ?? '—'} s</td></tr>`;
     }).join('') || '<tr><td colspan="7">Lygių dar nežaista.</td></tr>';
 
+    // kur sustoja: kiek žaidimų pasiekė bent N lygių (pamoka 1–5, tęsinys 6–10)
+    const st = stops || [];
+    const stopRows = [['pamoka', 'Pamoka', 1, 5], ['tesinys', 'Tęsinys', 6, 10]].map(([et, name, from, to]) => {
+      const games = st.filter(r => r.etapas === et);
+      const total = games.reduce((a, r) => a + r.zaidimu, 0);
+      const levels = [];
+      for (let n = from; n <= to; n++) { const k = n - from + 1; const reached = games.filter(r => r.pasiekta_lygiu >= k).reduce((a, r) => a + r.zaidimu, 0); levels.push({ n, reached, p: pct(reached, total) }); }
+      return { name, total, levels };
+    }).filter(g => g.total > 0);
+    $('stops').innerHTML = stopRows.map(g => g.levels.map(l =>
+      `<div class="bar"><div class="k">${g.name} · ${l.n} lygis<small>${byId['l' + l.n].name}</small></div><div class="track"><div class="fill" style="width:${l.p || 0}%"></div></div><div class="v">${l.reached}<small>iš ${g.total} · ${fmtPct(l.p)}</small></div></div>`).join('')).join('')
+      || '<div class="bar"><div class="k">Dar nėra žaidimų.</div></div>';
+
     const sr = rows.filter(r => byId[r.id] && byId[r.id].g === 'slaptas').sort((a, b) => a.id < b.id ? -1 : 1);
     $('secret').querySelector('tbody').innerHTML = sr.map(r => `<tr><td class="q">${esc(byId[r.id].name)}</td><td class="num">${r.kartu}</td><td class="num">${r.klaidu_vid ?? '—'}</td><td class="num">${r.sek_mediana ?? '—'} s</td></tr>`).join('')
       || '<tr><td colspan="4">Slaptų kambarių dar niekas nerado pamokos metu.</td></tr>';
@@ -232,8 +250,8 @@
     const demo = new URLSearchParams(location.search).get('demo') === '1';
     try {
       const data = demo ? demoData() : await (async () => {
-        const [t, s, d, l, k, kl] = await Promise.all([get('bcjr_tvarkarastis_v'), get('bcjr_klavisai_suvestine'), get('bcjr_klavisai_dienos', 'diena.desc,klase.asc'), get('bcjr_klavisai_lygiai'), get('bcjr_klavisai_klases'), get('bcjr_klavisai_lygiai_klases')]);
-        return { t, s: s[0], d, l, k, kl };
+        const [t, s, d, l, k, kl, stops] = await Promise.all([get('bcjr_tvarkarastis_v'), get('bcjr_klavisai_suvestine'), get('bcjr_klavisai_dienos', 'diena.desc,klase.asc'), get('bcjr_klavisai_lygiai'), get('bcjr_klavisai_klases'), get('bcjr_klavisai_lygiai_klases'), get('bcjr_klavisai_sustojo')]);
+        return { t, s: s[0], d, l, k, kl, stops };
       })();
       render(data);
       $('updated').textContent = (demo ? 'PAVYZDINIAI skaičiai (?demo=1) · ' : '') + 'Atnaujinta ' + new Date().toLocaleString('lt-LT');
