@@ -154,9 +154,15 @@
   #introScreen.fix .neuron-row img{width:90px}
   #introScreen.fix .bubble{font-size:1rem; padding:10px 16px}
   #introScreen.fix h2{font-size:clamp(1.3rem,3vw,1.8rem)}
-  #introScreen.fix #kbd{--k:24px; --g:3px; padding:6px 10px}
-  #introScreen.fix .kk{font-size:.62rem} #introScreen.fix .kk.new{font-size:.8rem}
-  #introScreen.fix .kbdLab{font-size:.85rem}
+  /* ══ 5 LYGIO IZANGA — mažiau teksto (Kris 2026-09-22) ═══════════════════
+     Per daug eilučių: veikėjas su burbulu ir dvi pilkos etiketės tik atitolino
+     tai, kas iš tikrųjų moko — demonstraciją ir bandomąjį ėjimą. Klaviatūra
+     padidinta, kad klavišus matytų iš toliau. */
+  #introScreen.fix .neuron-row{display:none}
+  #introScreen.fix .kbdLab{display:none}
+  #introScreen.fix .tutLab.demo{display:none}
+  #introScreen.fix #kbd{--k:44px; --g:5px; padding:12px 16px}
+  #introScreen.fix .kk{font-size:1rem} #introScreen.fix .kk.new{font-size:1.2rem}
   #introScreen.fix .big-btn{font-size:1.25rem; padding:10px 32px}
   .big-btn:disabled{opacity:.35; cursor:not-allowed; transform:none; box-shadow:0 8px 0 var(--hero-deep)}
 
