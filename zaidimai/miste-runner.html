@@ -979,6 +979,35 @@
   }
 
   // ---------- input ----------
+  /* ── „test" — paslėptas šuolių sąrašas (Kris 2026-09-22) ──────────────
+     Bėgikas neturi lygių, tad šokama į BŪSENAS: bėgimas, konkretus klausimas,
+     žūtis, pamokos pabaiga. Klausimas paleidžiamas iš karto, nelaukiant taškų. */
+  let testBuf = '';
+  const $t = id => document.getElementById(id);
+  function openTestMenu() {
+    const list = $t('testList'); list.innerHTML = '';
+    const item = (label, fn) => {
+      const b = document.createElement('button');
+      b.textContent = label;
+      b.onclick = () => { closeTestMenu(); fn(); };
+      list.appendChild(b);
+    };
+    item('▶ Bėgimas nuo pradžios', () => { start(); });
+    item('🏁 Žūtis (pabaigos ekranas)', () => { if (state.mode !== 'running') start(); die(); });
+    item('🔒 Pamokos pabaiga (užrakinta)', () => { state.mode = 'locked'; });
+    QUIZ.forEach((q, i) => item('❓ ' + String(i + 1).padStart(2, '0') + ' · ' + q.q, () => {
+      if (state.mode !== 'running') start();
+      const z = state.quiz;
+      z.order = [q]; z.idx = 0;          // kitas klausimas — būtent šis
+      z.phase = 'none'; z.nextAt = 0;    // paleidžiam nedelsiant
+      beginQuestion();
+    }));
+    $t('testMenu').hidden = false;
+  }
+  function closeTestMenu() { $t('testMenu').hidden = true; testBuf = ''; }
+  $t('testClose').onclick = closeTestMenu;
+  $t('testMenu').onclick = e => { if (e.target.id === 'testMenu') closeTestMenu(); };
+
   function levelFromEvent(e) {
     const c = /^(?:Digit|Numpad)([1-5])$/.exec(e.code || '');
     if (c) return +c[1];
@@ -987,6 +1016,12 @@
   }
   const questionActive = () => state.mode === 'running' && !!state.quiz.q && state.quiz.phase !== 'exit';
   window.addEventListener('keydown', e => {
+    /* „test" — pirmiau už viską, kad veiktų bet kurioje būsenoje */
+    if (!$t('testMenu').hidden) { if (e.key === 'Escape') closeTestMenu(); return; }
+    if (e.key && e.key.length === 1) {
+      testBuf = (testBuf + e.key.toLowerCase()).slice(-4);
+      if (testBuf === 'test') { testBuf = ''; e.preventDefault(); openTestMenu(); return; }
+    }
     if (e.repeat) return;
     const level = levelFromEvent(e);
     const isStart = e.code === 'Space' || e.code === 'Enter' || e.key === ' ';
@@ -1141,4 +1176,21 @@
 </script>
 <!-- ═══════ /PAMOKOS PABAIGOS LAIKRODIS ═══════ -->
 
+<!-- ═══ „test" — paslėptas šuolių sąrašas. Vaikui nerodomas, sąmoningai nešukuotas.
+     Surink t-e-s-t bet kurioje vietoje. Standartas: bcjr-pamoka § Žaidimai. ═══ -->
+<style>
+#testMenu{position:fixed;inset:0;z-index:99;background:#000a;display:flex;align-items:center;justify-content:center}
+#testMenu[hidden]{display:none}
+#testCard{background:#fff;border:3px solid #151a35;border-radius:14px;padding:16px 18px;max-width:560px;font-family:system-ui,sans-serif}
+#testCard h3{margin:0 0 10px;font-size:1rem}
+#testList{display:flex;flex-direction:column;gap:5px;max-height:60vh;overflow:auto}
+#testList button{text-align:left;padding:7px 10px;border:1px solid #9aa2c6;border-radius:8px;background:#f4f6fc;cursor:pointer;font:inherit;font-size:.9rem}
+#testList button:hover{background:#ffe9d6}
+#testClose{margin-top:12px;padding:6px 12px;border:1px solid #9aa2c6;border-radius:8px;background:#eee;cursor:pointer;font:inherit}
+</style>
+<div id="testMenu" hidden><div id="testCard">
+  <h3>test · šokti į vietą</h3>
+  <div id="testList"></div>
+  <button id="testClose">Uždaryti (Esc)</button>
+</div></div>
 </html>
