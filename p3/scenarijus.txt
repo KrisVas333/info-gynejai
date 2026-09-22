@@ -299,6 +299,9 @@ ateina prie tavo klaviatūros; kiti sėdi prie lentos ir žiūri.
 Ekrane penki žodžiai iš mūsų pamokų, kiekviename **viena perteklinė raidė**:
 **EEKRANAS · KLAVIIATŪRA · BAITTAS · FAILASS · ŽINNOVAS**
 
+Skaidrės kairėje **ratu sukasi animacija**: rankos kontūras smiliumi paspaudžia ⬅, paskui ⌫.
+Tai vaiko atmintinė — jei užmiršta, rodyk į ją, o ne sakyk.
+
 Kiekvienam vaikui ta pati tvarka:
 - ❓ **„Kur klaida?"** ▲ Vaikas pirma **parodo pirštu ekrane** — tik tada liečia klaviatūrą.
 - ▲ ⬅️ ➡️ nuveda žymeklį, ⌫ ištrina. **Ištaisytas žodis pats užsidega žaliai** — tau sakyti

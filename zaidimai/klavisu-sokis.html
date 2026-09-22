@@ -276,6 +276,16 @@
     padding:8px 22px; box-shadow:0 4px 0 rgba(0,0,0,.25)}
   #room2Intro.on{display:flex}
 
+  /* ── „test" lygių sąrašas — įrankis suaugusiam, be dizaino ── */
+  #testMenu{position:fixed; inset:0; z-index:99; background:#000a; display:flex; align-items:center; justify-content:center}
+  #testMenu[hidden]{display:none}
+  #testCard{background:#fff; border:3px solid #151a35; border-radius:14px; padding:16px 18px; max-width:520px; font-family:system-ui,sans-serif}
+  #testCard h3{margin:0 0 10px; font-size:1rem}
+  #testList{display:flex; flex-direction:column; gap:5px; max-height:60vh; overflow:auto}
+  #testList button{text-align:left; padding:7px 10px; border:1px solid #9aa2c6; border-radius:8px; background:#f4f6fc; cursor:pointer; font:inherit; font-size:.9rem}
+  #testList button:hover{background:#ffe9d6}
+  #testClose{margin-top:12px; padding:6px 12px; border:1px solid #9aa2c6; border-radius:8px; background:#eee; cursor:pointer; font:inherit}
+
   /* ── TARPO demonstracija: klaviatūros fragmentas + tapšintis pirštas ── */
   #room2Intro .spaceDemo{margin-top:16px; display:flex; flex-direction:column; align-items:center; gap:5px}
   #room2Intro .kkrow{display:flex; gap:5px}
@@ -470,6 +480,13 @@
   </div>
 
   <!-- TEACHER PANEL -->
+  <!-- Paslėptas lygių sąrašas: surink „test". Vaikui nerodomas, nešukuotas sąmoningai. -->
+  <div id="testMenu" hidden><div id="testCard">
+    <h3>test · šokti į lygį</h3>
+    <div id="testList"></div>
+    <button id="testClose">Uždaryti (Esc)</button>
+  </div></div>
+
   <div id="teacherPanel" hidden>
     <div id="teacherCard">
       <h2>👩‍🏫 Mokytojui — atitiktis BP</h2>
@@ -546,7 +563,7 @@ const sndLevel= () => { beep(523,.1); setTimeout(()=>beep(659,.1),110); setTimeo
 
 /* ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ---------- */
 const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
-const KS_VERSION = 'ks-2026-09-22a';
+const KS_VERSION = 'ks-2026-09-22b';
 IG.tag('versija', KS_VERSION);
 
 /* ---------- anoniminė žaidimų statistika -> Supabase (tas pats kelias kaip Miste Runner):
@@ -1411,8 +1428,51 @@ function winRoom2(){
   }, 2200);
 }
 
+/* ── „test" — paslėptas lygių sąrašas (Kris 2026-09-22) ──────────────────
+   Surinkus t-e-s-t bet kurioje fazėje. Vaikai jo neras; mentoriui nerodom niekur.
+   ⚠️ Žaidimo metu raidės t/e/s vis tiek skaičiuojamos kaip klaidos — tai
+   testavimo įrankis, ne lygių praleidimas klasėje. */
+let testBuf = '';
+function openTestMenu(){
+  cancelAnimationFrame(S.timer); clearInterval(mazeInt); clearInterval(mazeInt2); clearInterval(S.breakT);
+  const list = $('testList'); list.innerHTML = '';
+  LEVELS.forEach((L,i)=>{
+    const b = document.createElement('button');
+    b.textContent = (i+1) + ' · ' + L.name;
+    b.onclick = ()=>{ closeTestMenu(); jumpToLevel(i); };
+    list.appendChild(b);
+  });
+  [['Slaptas 1 — labirintas', ()=>enterSecret()],
+   ['Slaptas 2 — šuoliai ir durys', ()=>{ enterSecret(); setTimeout(enterRoom2, 50); }],
+   ['Pertrauka (prieš 6 lygį)', ()=>{ S.phase='break'; show('breakScreen'); }],
+   ['Pradžios ekranas', ()=>{ backToStart(); }]
+  ].forEach(([t,fn])=>{
+    const b = document.createElement('button');
+    b.textContent = t; b.onclick = ()=>{ closeTestMenu(); fn(); };
+    list.appendChild(b);
+  });
+  $('testMenu').hidden = false;
+}
+function closeTestMenu(){ $('testMenu').hidden = true; testBuf = ''; }
+function jumpToLevel(i){
+  S.secret = false; S.secret2 = false;
+  $('mazeStage').style.display='none';
+  $('promptZone').style.display=''; $('cast').style.display='';
+  startRun(i>=5 ? 'tesinys' : 'pamoka');
+  startLevel(i);
+  beginPlay();
+}
+$('testClose').onclick = closeTestMenu;
+$('testMenu').onclick = e=>{ if (e.target.id==='testMenu') closeTestMenu(); };
+
 /* ---------- input ---------- */
 document.addEventListener('keydown', e=>{
+  /* „test" — pirmiau už viską, kad veiktų bet kurioje fazėje */
+  if (!$('testMenu').hidden){ if (e.key==='Escape') closeTestMenu(); return; }
+  if (e.key && e.key.length===1){
+    testBuf = (testBuf + e.key.toLowerCase()).slice(-4);
+    if (testBuf === 'test'){ testBuf=''; e.preventDefault(); openTestMenu(); return; }
+  }
   if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Backspace','Delete',' ','Enter'].includes(e.key)) e.preventDefault();
   if (e.repeat) return;
   if (!$('teacherPanel').hidden){ if (e.key==='Escape'||e.key==='Enter') $('teacherPanel').hidden=true; return; }
