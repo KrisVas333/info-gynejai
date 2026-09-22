@@ -1582,7 +1582,9 @@ try{
   var qp=new URLSearchParams(location.search);
   if(LOCAL && qp.get("startas")){
     var lv=Math.max(1,Math.min(LEVELS.length,parseInt(qp.get("startas"),10)||1))-1;
-    setTimeout(function(){ startRun(lv>=5?"tesinys":"pamoka"); startLevel(lv); beginPlay();
+    setTimeout(function(){ startRun(lv>=5?"tesinys":"pamoka"); startLevel(lv);
+      if(qp.get("intro")) return;   // sustojam įžangos ekrane
+      beginPlay();
       if(qp.get("klaidos")){ var n=parseInt(qp.get("klaidos"),10)||3; for(var i=0;i<n;i++) miss(false); }
     }, 300);
   }
