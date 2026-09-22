@@ -220,23 +220,23 @@ h2{font-size:clamp(.92rem,2.5vw,1.75rem);margin:0;color:var(--soft);font-weight:
    Smilius paspaudžia ⬅, paskui ⌫, ir taip ratu. Tik CSS, be JS. */
 .tb5wrap{display:flex;align-items:center;justify-content:center;
   gap:clamp(10px,2.6vw,38px);width:min(90vw,980px)}
-.handkeys{flex:none;width:min(24vw,280px)}
+.handkeys{flex:none;width:min(28vw,330px)}
 .handkeys svg{display:block;width:100%;height:auto;overflow:visible}
 .hk-key{color:#ffffff4d}                       /* tuščiaviduris klavišas */
-.hk-key *{stroke:currentColor;fill:none;stroke-width:6;
+.hk-key *{stroke:currentColor;fill:none;stroke-width:7;
   stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.hk-hand *{stroke:var(--soft);fill:none;stroke-width:7;
+.hk-hand *{stroke:var(--soft);fill:none;stroke-width:8;
   stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .hk-k1{animation:hkPress1 6.4s linear infinite}
 .hk-k2{animation:hkPress2 6.4s linear infinite}
 .hk-hand{animation:hkHand 6.4s ease-in-out infinite}
 @keyframes hkHand{
   0%,8%   {transform:translate(0px,0px)}
-  14%,22% {transform:translate(0px,16px)}
+  14%,22% {transform:translate(0px,18px)}
   28%     {transform:translate(0px,0px)}
-  42%     {transform:translate(56px,148px)}
-  48%,58% {transform:translate(56px,164px)}
-  64%,80% {transform:translate(56px,148px)}
+  42%     {transform:translate(34px,158px)}
+  48%,58% {transform:translate(34px,176px)}
+  64%,80% {transform:translate(34px,158px)}
   94%,100%{transform:translate(0px,0px)}
 }
 /* klavišas „nusileidžia" ir nušvinta ta pačia žalia kaip ištaisytas žodis */
@@ -476,28 +476,29 @@ h2{font-size:clamp(.92rem,2.5vw,1.75rem);margin:0;color:var(--soft);font-weight:
   <h1><span data-lt="Penki žodžiai — penkios klaidos" data-en="Five words — five mistakes">Penki žodžiai — penkios klaidos</span></h1>
   <div class="tb5wrap">
     <div class="handkeys" aria-hidden="true">
-      <svg viewBox="0 0 300 440" role="presentation">
+      <svg viewBox="0 0 320 470" role="presentation">
         <!-- ⬅ klavišas -->
         <g class="hk-key hk-k1">
-          <rect x="34" y="150" width="124" height="118" rx="10"/>
-          <rect x="48" y="164" width="96" height="90" rx="6"/>
-          <path d="M122 209 H74"/>
-          <path d="M92 191 L74 209 L92 227"/>
+          <rect x="62" y="172" width="140" height="128" rx="12"/>
+          <rect x="78" y="188" width="108" height="96" rx="7"/>
+          <path d="M162 236 H104"/>
+          <path d="M124 216 L104 236 L124 256"/>
         </g>
         <!-- ⌫ klavišas -->
         <g class="hk-key hk-k2">
-          <rect x="34" y="300" width="232" height="112" rx="10"/>
-          <rect x="48" y="314" width="204" height="84" rx="6"/>
-          <path d="M132 330 H222 V382 H132 L104 356 Z"/>
-          <path d="M152 344 L178 368 M178 344 L152 368"/>
+          <rect x="30" y="330" width="256" height="118" rx="12"/>
+          <rect x="46" y="346" width="224" height="86" rx="7"/>
+          <path d="M136 364 H236 V414 H136 L106 389 Z"/>
+          <path d="M158 377 L186 401 M186 377 L158 401"/>
         </g>
-        <!-- ranka: delnas, sulenkti pirštai, nykštys, ištiestas smilius -->
+        <!-- ranka: rankogalis, delnas, sulenkti pirštai, nykštys, ištiestas smilius -->
         <g class="hk-hand">
-          <rect x="70" y="10" width="86" height="64" rx="18"/>
-          <path d="M156 26 a15 15 0 0 1 0 30"/>
-          <path d="M156 50 a15 15 0 0 1 0 30"/>
-          <path d="M70 46 q-26 8 -22 32"/>
-          <rect x="78" y="62" width="26" height="74" rx="13"/>
+          <path d="M96 12 H182"/>
+          <rect x="88" y="26" width="98" height="78" rx="22"/>
+          <rect x="102" y="74" width="34" height="86" rx="17"/>
+          <path d="M150 104 h22 a16 16 0 0 1 0 32 h-26"/>
+          <path d="M146 136 h18 a14 14 0 0 1 0 28 h-22"/>
+          <path d="M88 84 q-30 10 -32 42"/>
         </g>
       </svg>
     </div>
@@ -2055,6 +2056,20 @@ function tagDemo(){
 }
 
 buildKbd(); buildKbd('kbd2Main','kbd2Arrows'); show('startScreen'); refreshDots();
+
+/* ── PATIKRA: automatinis paleidimas TIK iš localhost (tools/ks-patikra.js).
+   Klasėje neveikia — hostname ten niekada nėra 127.0.0.1, tad vaikas lygių nepraleis. ── */
+try{
+  var LOCAL=/^(127.0.0.1|localhost)$/.test(location.hostname||&quot;&quot;);
+  var qp=new URLSearchParams(location.search);
+  if(LOCAL &amp;&amp; qp.get(&quot;startas&quot;)){
+    var lv=Math.max(1,Math.min(LEVELS.length,parseInt(qp.get(&quot;startas&quot;),10)||1))-1;
+    setTimeout(function(){ startRun(lv>=5?&quot;tesinys&quot;:&quot;pamoka&quot;); startLevel(lv); beginPlay();
+      if(qp.get(&quot;klaidos&quot;)){ var n=parseInt(qp.get(&quot;klaidos&quot;),10)||3; for(var i=0;i<n;i++) miss(false); }
+    }, 300);
+  }
+  if(LOCAL &amp;&amp; qp.get(&quot;slaptas&quot;)) setTimeout(enterSecret, 300);
+}catch(e){}
 
 /* Skirtukas uždarytas nepabaigus etapo — eilutė vis tiek išeina (nebaigta = true),
    su dabartiniu, nebaigtu lygiu, kad matytųsi, KUR vaikas sustojo. */
