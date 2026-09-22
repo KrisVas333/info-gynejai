@@ -279,6 +279,40 @@ Sakyk aiškiai ir sustok — tegul įsimena kaip atskirą sakinį.)*
 
 *(Ši tiltinė eilutė perveda į Bloko 4 Klavišų Šokį.)*
 
+### 🆕 24:40 · RAŠOM PRIE MANO KLAVIATŪROS *(skaidrė „Rašom!")*
+
+*(P2 rašymo demo — vaikai ją mėgo labiausiai, todėl ji grįžta. Vaikai tebesėdi prie lentos;
+prie savo kompiuterių dar neinam. Klaviatūra — tavo, prie projektoriaus.)*
+
+1. Rašai **KATĖ** — lėtai, garsiai vardydamas raides.
+2. 🔴 Rašai antrą **T** viduryje: **KATTĖ**.
+   > **„Oi. Apsirikau — ir ne gale, o viduryje."**
+3. ❓ **„Ar BACKSPACE ištrins tą raidę iš čia?"** ▲ Leisk pabandyti — ištrina **Ė**, ne T.
+4. ⬅️ Nuvedi žymeklį prie klaidos, skaičiuodamas garsiai. ⌫ — dingsta tik T.
+5. 💬 **„Žymeklis pirma. Trynimas antra."**
+
+### 🆕 25:20 · 🔴 PENKI TAISYTOJAI *(skaidrė „Penki žodžiai — penkios klaidos")*
+
+🔴 **Čia atsiperka P2 sunkiausias lygis** — klaida žodžio viduryje. Penki vaikai **po vieną**
+ateina prie tavo klaviatūros; kiti sėdi prie lentos ir žiūri.
+
+Ekrane penki žodžiai iš mūsų pamokų, kiekviename **viena perteklinė raidė**:
+**EEKRANAS · KLAVIIATŪRA · BAITTAS · FAILASS · ŽINNOVAS**
+
+Kiekvienam vaikui ta pati tvarka:
+- ❓ **„Kur klaida?"** ▲ Vaikas pirma **parodo pirštu ekrane** — tik tada liečia klaviatūrą.
+- ▲ ⬅️ ➡️ nuveda žymeklį, ⌫ ištrina. **Ištaisytas žodis pats užsidega žaliai** — tau sakyti
+  nieko nereikia *(§ 8.1 — atsakymas rodomas spalva, ne tekstu)*.
+- 💬 **„Žymeklis pirma, trynimas antra."**
+- ⭾ **TAB** (arba spustelėjimas pele) perduoda eilę kitam laukeliui. Aktyvus laukelis šviečia.
+
+⚠️ **Paskutinis — ŽINNOVAS — sunkiausias** (ilgas žodis, klaida giliai viduryje): palik
+drąsesniam. Jei kuris užstringa ilgiau nei 30 s — **padeda visa klasė balsu, ne tu.**
+Tai ta pati šios pamokos taisyklė: kai pats nežinai, randi tą, kuris žino.
+
+📄 **MOKYTOJAI:** pasižymėk, kiek iš penkių rado klaidą **be pagalbos** — tai tiesioginis
+P2 sunkiausio lygio matavimas.
+
 ---
 
 ## 26–38 min · BLOKAS 4 · TRENIRUOTĖ
@@ -442,14 +476,15 @@ keisto — parodyk suaugusiam", uždarant P3→P4 loką.)*
 
 ## 📄 Klasės mokytojos lapas *(spausdinamas, 1 psl.)*
 
-**Keturi darbai per pamoką.**
+**Penki darbai per pamoką.**
 
 1. **A** — kiek vaikų prireikė gelbėti po vieną per **ĮEINAM** (27:00–29:00): `____`
 2. **B** — kiek rankų pakilo prie *„Kam pavyko dėl draugo pagalbos?"* po **8 lygio** (~37:30): `____`
 3. **C** — kelintą minutę užsidegė **paskutinis** ekranas: `____`
 4. **D** — kiek kartų mokytoja PATI turėjo įsikišti Bloke 4 (ne žinovas-padėjėjas): `____`
+5. 🆕 **E** — kiek iš penkių taisytojų (25:20) rado klaidą **be pagalbos**: `____`
 
-*Šitie keturi skaičiai — lockstep + peer-support matavimas kartu. Nuo P3 lyginimas
+*Šitie skaičiai — lockstep + peer-support matavimas kartu. Nuo P3 lyginimas
 jau nebėra švarus vieno kintamojo eksperimentas (žr. `frontier.md`). Jei lapas
 nesurenkamas, D niekada neišmatuojamas.*
 
