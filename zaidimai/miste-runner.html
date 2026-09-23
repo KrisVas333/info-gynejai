@@ -132,6 +132,24 @@
   </p>
 </div>
 
+<!-- ═══ „test" — paslėptas šuolių sąrašas. Vaikui nerodomas, sąmoningai nešukuotas.
+     Surink t-e-s-t bet kurioje vietoje. Standartas: bcjr-pamoka § Žaidimai. ═══ -->
+<style>
+#testMenu{position:fixed;inset:0;z-index:99;background:#000a;display:flex;align-items:center;justify-content:center}
+#testMenu[hidden]{display:none}
+#testCard{background:#fff;border:3px solid #151a35;border-radius:14px;padding:16px 18px;max-width:560px;font-family:system-ui,sans-serif}
+#testCard h3{margin:0 0 10px;font-size:1rem}
+#testList{display:flex;flex-direction:column;gap:5px;max-height:60vh;overflow:auto}
+#testList button{text-align:left;padding:7px 10px;border:1px solid #9aa2c6;border-radius:8px;background:#f4f6fc;cursor:pointer;font:inherit;font-size:.9rem}
+#testList button:hover{background:#ffe9d6}
+#testClose{margin-top:12px;padding:6px 12px;border:1px solid #9aa2c6;border-radius:8px;background:#eee;cursor:pointer;font:inherit}
+</style>
+<div id="testMenu" hidden><div id="testCard">
+  <h3>test · šokti į vietą</h3>
+  <div id="testList"></div>
+  <button id="testClose">Uždaryti (Esc)</button>
+</div></div>
+
 <script>
 (() => {
   'use strict';
@@ -1272,21 +1290,4 @@
 </script>
 <!-- ═══════ /PAMOKOS PABAIGOS LAIKRODIS ═══════ -->
 
-<!-- ═══ „test" — paslėptas šuolių sąrašas. Vaikui nerodomas, sąmoningai nešukuotas.
-     Surink t-e-s-t bet kurioje vietoje. Standartas: bcjr-pamoka § Žaidimai. ═══ -->
-<style>
-#testMenu{position:fixed;inset:0;z-index:99;background:#000a;display:flex;align-items:center;justify-content:center}
-#testMenu[hidden]{display:none}
-#testCard{background:#fff;border:3px solid #151a35;border-radius:14px;padding:16px 18px;max-width:560px;font-family:system-ui,sans-serif}
-#testCard h3{margin:0 0 10px;font-size:1rem}
-#testList{display:flex;flex-direction:column;gap:5px;max-height:60vh;overflow:auto}
-#testList button{text-align:left;padding:7px 10px;border:1px solid #9aa2c6;border-radius:8px;background:#f4f6fc;cursor:pointer;font:inherit;font-size:.9rem}
-#testList button:hover{background:#ffe9d6}
-#testClose{margin-top:12px;padding:6px 12px;border:1px solid #9aa2c6;border-radius:8px;background:#eee;cursor:pointer;font:inherit}
-</style>
-<div id="testMenu" hidden><div id="testCard">
-  <h3>test · šokti į vietą</h3>
-  <div id="testList"></div>
-  <button id="testClose">Uždaryti (Esc)</button>
-</div></div>
 </html>
