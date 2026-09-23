@@ -347,13 +347,15 @@ P2 sunkiausio lygio matavimas.
 > spėliotojai.** Sąmoningai priimtas antras kintamasis lockstep lange — žr.
 > `frontier.md` § Adopted by decision.
 
-### 26:00 · Štai jis, vėl
+### 26:00 · 💻 Portalas — jis vėl čia
 
-> **„Štai jis vėl — Klavišų Šokis, jūsų darbastalyje."**
+*(Skaidrėje tik 💻 — antraštės nėra. Kalba mentorius.)*
 
-Rodyk į ikoną skaidrėje. **Vaikai vis dar sėdi prie lentos — ekranai tamsūs, nelieti.**
+> **„Klavišų Šokis — jūsų darbastalyje."**
 
-### 27:00 · 🔴 ĮEINAM 1·2·3 — pirmas ekrano prisilietimas
+Rodyk į ikoną. **Vaikai vis dar sėdi prie lentos — ekranai tamsūs, nelieti.**
+
+### 27:00 · 🔴 PEREINAM PRIE KOMPIUTERIŲ *(skaidrės nėra — tik tavo žodžiai)*
 
 🔴 **Nuo šitos minutės — ir ne anksčiau — vaikai turi ekraną.**
 
@@ -361,13 +363,12 @@ Rodyk į ikoną skaidrėje. **Vaikai vis dar sėdi prie lentos — ekranai tams�
 > **„Dabar tyliai keliamės, kėdę stumiam prie savo kompiuterio ir sėdamės.
 > Rankos ant kelių, kol pasakysiu."**
 
-*(Palauk, kol VISI sėdi ir rankos ant kelių. Tik tada — 1·2·3.)*
+*(Palauk, kol VISI sėdi ir rankos ant kelių.)*
 
-👁️ **RODAU** pirmas, projektoriuje → ▲ **KARTOJAM:**
-> **„TRYS — DU — VIENAS — SPAUDŽIAM."**
+👁️ **RODAU** pirmas, projektoriuje → ▲ **KARTOJAM:** **„TRYS — DU — VIENAS — SPAUDŽIAM."**
+*(Skaidrės šitam nebėra — seka jau mokyta P1, čia tik naudojam.)*
 
-📄 **MOKYTOJAI:** skaičiuojam **A** (kiek vaikų reikėjo gelbėti po vieną) ir
-**C** (kelintą minutę užsidegė paskutinis ekranas).
+📄 **MOKYTOJAI:** skaičiuojam **C** (kelintą minutę užsidegė paskutinis ekranas).
 
 ### 28:00 · 🔴 ŽINOVAI IR SLAPTI LYGIAI *(atskleidimas VISAI klasei)*
 
@@ -504,7 +505,7 @@ keisto — parodyk suaugusiam", uždarant P3→P4 loką.)*
 
 **Penki darbai per pamoką.**
 
-1. **A** — kiek vaikų prireikė gelbėti po vieną per **ĮEINAM** (27:00–29:00): `____`
+1. **A** — kiek vaikų prireikė gelbėti po vieną pereinant prie kompiuterių (27:00–29:00): `____`
 2. **B** — kiek rankų pakilo prie *„Kam pavyko dėl draugo pagalbos?"* po **8 lygio** (~37:30): `____`
 3. **C** — kelintą minutę užsidegė **paskutinis** ekranas: `____`
 4. **D** — kiek kartų mokytoja PATI turėjo įsikišti Bloke 4 (ne žinovas-padėjėjas): `____`
