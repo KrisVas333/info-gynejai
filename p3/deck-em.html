@@ -2145,6 +2145,10 @@ try{
     }, 300);
   }
   if(LOCAL &amp;&amp; qp.get(&quot;slaptas&quot;)) setTimeout(enterSecret, 300);
+  if(LOCAL &amp;&amp; qp.get(&quot;sim&quot;)===&quot;timer&quot;) setTimeout(function(){
+    document.dispatchEvent(new KeyboardEvent(&quot;keydown&quot;));
+    [&quot;t&quot;,&quot;i&quot;,&quot;m&quot;,&quot;e&quot;,&quot;r&quot;].forEach(function(k){ window.dispatchEvent(new KeyboardEvent(&quot;keydown&quot;,{key:k})); });
+  }, 600);
 }catch(e){}
 
 /* Skirtukas uždarytas nepabaigus etapo — eilutė vis tiek išeina (nebaigta = true),
@@ -2245,6 +2249,7 @@ try{ flushQueue(); }catch(e){}
   const SB = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_tvarkarastis_v?select=sav_diena,ispejimas,atrakinti';
   const KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
   let rows = null, offset = 0, simDow = 0, locked = false, was = '';
+  let pbSim = null;                      // „timer“ bandymo pradžia (ms) arba null
   const juosta = document.getElementById('pbJuosta');
   /* Paskutinės 15 s — laikrodis centre; užrakinus — Klaidas su burbulu.
      Abu ekranai pointer-events:none, tad nieko neblokuoja patys; blokuoja užraktas. */
@@ -2281,6 +2286,10 @@ try{ flushQueue(); }catch(e){}
     return { dow: simDow || dow, sec: (+g('hour').value % 24)*3600 + (+g('minute').value)*60 + (+g('second').value) };
   }
   function busena(){                      // '' | 'ispejimas' | 'uzrakinta', + kiek sekundžių liko iki užrakto
+    if (pbSim !== null){                 // „timer&quot; bandymas — 60 s įspėjimas, tada užraktas
+      const t = (Date.now() + offset - pbSim) / 1000;
+      return t < 60 ? { f:'ispejimas', liko: Math.max(1, Math.ceil(60 - t)) } : { f:'uzrakinta', liko: 0 };
+    }
     const { dow, sec } = dabar();
     for (const r of rows){
       if (!r.ispejimas || !r.atrakinti || +r.sav_diena !== dow) continue;
@@ -2290,7 +2299,7 @@ try{ flushQueue(); }catch(e){}
     return { f:'', liko: 0 };
   }
   function tick(){
-    if (!rows) return;
+    if (!rows &amp;&amp; pbSim === null) return;
     const { f, liko } = busena();
     rodyk(f, liko);
     if (f === 'uzrakinta' &amp;&amp; !locked){
@@ -2301,11 +2310,35 @@ try{ flushQueue(); }catch(e){}
     if (f !== 'uzrakinta' &amp;&amp; locked){ locked = false; location.reload(); }   // atrakinta — švarus startas
     was = f;
   }
+  /* ── „timer&quot; — pabaigos sekos bandymas bet kada (Kris 2026-09-23) ──────
+     Vaikui nematomas, kaip ir „test&quot;. Nieko nerašo į duomenų bazę: seka
+     sukasi tik šitame lange, tad tikrų pamokų laikai lieka nepaliesti. */
+  let pbBuf = '';
+  window.addEventListener('keydown', e => {
+    if (pbSim !== null &amp;&amp; e.key === 'Escape'){       // nutraukiam — švarus startas
+      pbSim = null; locked = false; e.stopImmediatePropagation(); e.preventDefault();
+      location.reload(); return;
+    }
+    if (!e.key || e.key.length !== 1) return;
+    pbBuf = (pbBuf + e.key.toLowerCase()).slice(-5);
+    if (pbBuf === 'timer'){
+      pbBuf = ''; e.stopImmediatePropagation(); e.preventDefault();
+      pbSim = Date.now() + offset; tick();
+    }
+  }, { capture:true });
+
   // užrakinus — jokio klavišo, pelės ar lietimo nepasiekia žaidimo (capture fazė ant window eina PRIEŠ document)
   ['keydown','keyup','keypress','pointerdown','pointerup','mousedown','mouseup','click','dblclick','touchstart','touchend','wheel','contextmenu']
     .forEach(t => window.addEventListener(t, e => { if (locked){ e.stopImmediatePropagation(); e.preventDefault(); } }, { capture:true, passive:false }));
 
   const sim = new URLSearchParams(location.search).get('laikas');
+  /* Tvarkaraštis persiimamas kas 60 s. Anksčiau jis buvo imamas tik atidarant
+     puslapį, tad pakeitus laikus atidarytas langas apie tai nesužinodavo. */
+  setInterval(() => {
+    fetch(SB, { headers:{ apikey:KEY, Authorization:'Bearer '+KEY }, cache:'no-store' })
+      .then(r => r.json()).then(j => { if (Array.isArray(j) &amp;&amp; j.length) rows = j; }).catch(()=>{});
+  }, 60000);
+
   fetch(SB, { headers:{ apikey:KEY, Authorization:'Bearer '+KEY } })
     .then(r => { const d = r.headers.get('Date'); if (d) offset = new Date(d).getTime() - Date.now(); return r.json(); })
     .then(j => {
