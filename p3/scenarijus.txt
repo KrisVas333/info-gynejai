@@ -75,10 +75,10 @@ delnai ant burnos (kaip visada, canon.md § Saliutas). *(~30 sek. Tai ritualas, 
 > A — pritupiam. B — apsisukam ratu. C — rankos į viršų.
 > Aš skaičiuoju TRYS – DU – VIENAS, ir visi kartu."**
 
-### 2:00 · 1/5 — Kiek žingsnių reikia, kad ĮEITUM į džiungles?
+### 2:00 · 1/5 — Kodėl skubėti kartais būna lėčiau?
 
-**A** vieną → *pritūpk* · **B** du → *apsisuk* · **C** tris → *rankos į viršų* — ✅ **C**
-> 💬 **„Trys. Ekranas, dėžutė, ENTER."**
+**A** nes pavargsti → *pritūpk* · **B** nes kompiuteris sulėtėja → *apsisuk* · **C** nes taip dažnai priveliame klaidų → *rankos į viršų* — ✅ **C**
+> 💬 **„Nes taip dažnai priveliame klaidų. O klaidas paskui reikia taisyti."**
 
 ### 2:40 · 2/5 — Ką daro ENTER klavišas?
 
@@ -87,7 +87,7 @@ delnai ant burnos (kaip visada, canon.md § Saliutas). *(~30 sek. Tai ritualas, 
 
 ### 3:20 · 3/5 — Klavišų Šokyje, kai raidėje buvo klaida VIDURYJE, ką darėt pirmiausia?
 
-**A** iškart BACKSPACE → *pritūpk* · **B** rodyklėmis nuvedėm žymeklį → *apsisuk* ·
+**A** iškart tryniau raides → *pritūpk* · **B** rodyklėmis nuvedėm žymeklį → *apsisuk* ·
 **C** pradėjom žodį iš naujo → *rankos į viršų* — ✅ **B**
 > 💬 **„Žymeklis pirma. Trynimas antra. Šiandien tai vėl prireiks."**
 
@@ -296,21 +296,32 @@ prie savo kompiuterių dar neinam. Klaviatūra — tavo, prie projektoriaus.)*
 🔴 **Čia atsiperka P2 sunkiausias lygis** — klaida žodžio viduryje. Penki vaikai **po vieną**
 ateina prie tavo klaviatūros; kiti sėdi prie lentos ir žiūri.
 
-Ekrane penki žodžiai iš mūsų pamokų, kiekviename **viena perteklinė raidė**:
-**EEKRANAS · KLAVIIATŪRA · BAITTAS · FAILASS · ŽINNOVAS**
+Ekrane penki laukeliai su mūsų pamokų žodžiais — **dvi skirtingos užduotys**:
 
-Skaidrės kairėje **ratu sukasi animacija**: rankos kontūras smiliumi paspaudžia ⬅, paskui ⌫.
+| # | Laukelyje | Ką reikia padaryti |
+|---|---|---|
+| 1 | **EEKRANAS** | perteklinė raidė pradžioje → ⌫ |
+| 2 | **BAITTAS** | perteklinė raidė viduryje → ⌫ |
+| 3 | **ŽINNOVAS** | perteklinė raidė viduryje → ⌫ |
+| 4 | **KLAVIŠŲŠOKIS** | 🆕 du žodžiai surašyti kartu → **TARPAS** reikiamoje vietoje |
+| 5 | **MOKYTOJALEKTA** | 🆕 du žodžiai surašyti kartu → **TARPAS** reikiamoje vietoje |
+
+Skaidrės kairėje **ratu sukasi animacija**: rankos kontūras smiliumi paspaudžia ⬅, paskui ⌫,
+paskui **tarpo klavišą** — trys judesiai, kurių reikia šiai skaidrei.
 Tai vaiko atmintinė — jei užmiršta, rodyk į ją, o ne sakyk.
 
 Kiekvienam vaikui ta pati tvarka:
-- ❓ **„Kur klaida?"** ▲ Vaikas pirma **parodo pirštu ekrane** — tik tada liečia klaviatūrą.
+- ❓ **„Kas čia negerai?"** ▲ Vaikas pirma **parodo pirštu ekrane** — tik tada liečia klaviatūrą.
+  *(4 ir 5 klausimas kitoks: „Kiek čia žodžių? Kur jie turi išsiskirti?")*
 - ▲ ⬅️ ➡️ nuveda žymeklį, ⌫ ištrina. **Ištaisytas žodis pats užsidega žaliai** — tau sakyti
   nieko nereikia *(§ 8.1 — atsakymas rodomas spalva, ne tekstu)*.
 - 💬 **„Žymeklis pirma, trynimas antra."**
 - ⭾ **TAB** (arba spustelėjimas pele) perduoda eilę kitam laukeliui. Aktyvus laukelis šviečia.
+- ⚠️ **Šitoje skaidrėje TARPAS rašo tarpą** (jis yra užduoties dalis), todėl skaidrę verčia
+  **ENTER** arba ➡️ mygtukas apačioje kairėje — ne tarpas.
 
-⚠️ **Paskutinis — ŽINNOVAS — sunkiausias** (ilgas žodis, klaida giliai viduryje): palik
-drąsesniam. Jei kuris užstringa ilgiau nei 30 s — **padeda visa klasė balsu, ne tu.**
+⚠️ **Sunkiausi — 4 ir 5**: ten nieko trinti nereikia, reikia **pridėti** tarpą, o vaikai pirmiausia
+griebiasi ⌫. Palik juos drąsesniems ir neskubėk pasakyti — tegul klasė pasiūlo. Jei kuris užstringa ilgiau nei 30 s — **padeda visa klasė balsu, ne tu.**
 Tai ta pati šios pamokos taisyklė: kai pats nežinai, randi tą, kuris žino.
 
 📄 **MOKYTOJAI:** pasižymėk, kiek iš penkių rado klaidą **be pagalbos** — tai tiesioginis
