@@ -122,7 +122,7 @@ iš jo prasideda visa diskusija.
 
 > **„Ir dabar aš jums pasakysiu apie Klaidą vieną dalyką, kurį reikia atsiminti visiems metams."**
 
-> **„Klaidas nori visko iškart. Jis nemėgsta laukti, ir jam viskas reikia tą pačią sekundę."**
+> **„Klaidas nori visko iškart. Jis nemėgsta laukti, ir jam visko reikia tą pačią sekundę."**
 
 ❓ **„Ar pažįstat ką nors tokio?"** *(Kelios rankos. Nekomentuok.)*
 
