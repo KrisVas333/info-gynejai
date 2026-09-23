@@ -2195,23 +2195,23 @@ try{ flushQueue(); }catch(e){}
      Juostos viršuje nebėra — ji uždengdavo tekstą ir atrodė kaip klaida.
      Ratas stovi kairiame krašte, vertikaliai per vidurį: ten nei viename
      žaidime nėra nei teksto, nei veikėjų. */
-  #pbLaikrodis{position:fixed;left:clamp(8px,1.6vw,26px);top:50%;transform:translateY(-50%);
+  #pbLaikrodis{position:fixed;left:15.5vw;top:50%;transform:translate(-50%,-50%);
     z-index:2147482900;display:none;pointer-events:none}
   #pbLaikrodis.on{display:block}
-  #pbLaikrodis .ratas{width:clamp(74px,11vmin,124px);height:clamp(74px,11vmin,124px);border-radius:50%;
-    background:rgba(255,235,233,.82);border:5px solid rgba(180,35,24,.34);
+  #pbLaikrodis .ratas{width:clamp(370px,55vmin,620px);height:clamp(370px,55vmin,620px);border-radius:50%;
+    background:rgba(255,235,233,.58);border:10px solid rgba(180,35,24,.30);
     box-shadow:0 6px 18px rgba(21,26,53,.14);
     display:flex;align-items:center;justify-content:center;flex-direction:column;
     font-family:var(--display,system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif);
     transition:width .3s,height .3s,background .3s,border-color .3s}
-  #pbLaikrodis .sk{font-size:clamp(30px,5.2vmin,58px);font-weight:900;line-height:1;
+  #pbLaikrodis .sk{font-size:clamp(150px,26vmin,290px);font-weight:900;line-height:1;
     color:rgba(180,35,24,.72);font-variant-numeric:tabular-nums;transition:color .3s,font-size .3s}
-  #pbLaikrodis .zo{font-size:clamp(8px,1.25vmin,12px);font-weight:800;letter-spacing:.12em;
+  #pbLaikrodis .zo{font-size:clamp(40px,6.2vmin,60px);font-weight:800;letter-spacing:.12em;
     text-transform:uppercase;color:rgba(180,35,24,.6);margin-top:.35em}
   /* paskutinės 15 s — tas pats ratas, tik ryškesnis ir didesnis. Vis tiek šone. */
-  #pbLaikrodis.fin .ratas{width:clamp(104px,16vmin,178px);height:clamp(104px,16vmin,178px);
-    background:rgba(255,255,255,.95);border-color:#B42318}
-  #pbLaikrodis.fin .sk{color:#B42318;font-size:clamp(46px,8vmin,92px);
+  #pbLaikrodis.fin .ratas{width:clamp(520px,80vmin,890px);height:clamp(520px,80vmin,890px);
+    background:rgba(255,255,255,.72);border-color:#B42318}
+  #pbLaikrodis.fin .sk{color:#B42318;font-size:clamp(230px,40vmin,460px);
     animation:pbTiksi 1s steps(1,end) infinite}
   @keyframes pbTiksi{0%{transform:scale(1)}12%{transform:scale(1.13)}40%{transform:scale(1)}}
 
