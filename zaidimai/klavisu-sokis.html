@@ -1595,6 +1595,10 @@ try{
     }, 300);
   }
   if(LOCAL && qp.get("slaptas")) setTimeout(enterSecret, 300);
+  if(LOCAL && qp.get("sim")==="timer") setTimeout(function(){
+    document.dispatchEvent(new KeyboardEvent("keydown"));
+    ["t","i","m","e","r"].forEach(function(k){ window.dispatchEvent(new KeyboardEvent("keydown",{key:k})); });
+  }, 600);
 }catch(e){}
 
 /* Skirtukas uždarytas nepabaigus etapo — eilutė vis tiek išeina (nebaigta = true),
