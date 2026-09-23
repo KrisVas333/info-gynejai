@@ -1,7 +1,7 @@
 # P3 · Mentoriaus scenarijus — „Mistė norėjo padėti"
 
 **PAMOKA 3 · LYGIS 0 ▸ ŽINOVAS · KLAVIATŪRA** *(srities etiketė 🟡 pasiūlyta, nepatvirtinta)*
-**45 min · kompiuterių klasė · V3 JUODRAŠTIS · 2026-09-08**
+**45 min · kompiuterių klasė · V3.1 · 2026-09-23** *(istorijos blokas perrašytas pagal Kris'o srautą)*
 **Mentorius be patirties turi pravesti vien iš šito failo.**
 
 > **Žymėjimas:** **„taip"** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
@@ -38,12 +38,14 @@
 > abu delnai ant burnos (kairė pirma, alkūnė prigludusi; dešinė ant jos, alkūnė pakelta virš
 > pečių). **Jokio „ranka prie kaktos" ir jokio „MES – GYNĖJAI" šūksnio.**
 
-### 🆕 Papildomas pasiruošimas — GREITIEJI PADĖJĖJAI
+### 🆕 Papildomas pasiruošimas — ŽINOVAI IR SLAPTI LYGIAI
 
-- [ ] **Prieš pamoką** peržiūrėk P2 rezultatus — pasižymėk **2–4 vaikus**, kurie P2
-  Klavišų Šokį baigė greičiausiai. Jie taps šios pamokos **GREITAISIAIS PADĖJĖJAIS**
-  (žr. Blokas 4) — jie skiriasi nuo Mistės tuo, kad **jie JAU MOKA.**
-- [ ] Jei nežinai — klausi klasės Bloke 4 pradžioje ir renkiesi pagal pakeltas rankas.
+- [ ] **Niekas nerenkamas iš anksto** *(Kris, 2026-09-23)*. Žinovu tampa tas, kuris **pirmas
+  pereina visus lygius** — ir tada eina padėti kitiems. Tavo darbas — pastebėti, kas pabaigė,
+  ir pasiųsti jį prie to, kas užstrigo.
+- [ ] **Žinai slaptų lygių kodą:** žaidimo pradžios ekrane surinkti **`w w w`**. Rodai jį **tik
+  tada, kai VISI pabaigė** — tai pamokos prizas, ne užuomina viduryje.
+- [ ] Prieš pamoką pats nueik iki slapto kambario, kad žinotum, ką vaikai pamatys.
 
 ---
 
@@ -102,8 +104,29 @@ delnai ant burnos (kaip visada, canon.md § Saliutas). *(~30 sek. Tai ritualas, 
 **A** užmigo → *pritūpk* · **B** spaudinėjo viską iš eilės ir viskas dingo → *apsisuk* ·
 **C** išjungė kompiuterį → *rankos į viršų* — ✅ **B**
 
-🔴 **SUSTOK ČIA.** Klaidas vėl sėdi prie klaviatūros šiandien, ir vėl skuba. Bet šįkart
-šalia jo bus kažkas — draugė, kuri labai nori padėti.
+🔴 **SUSTOK ČIA — TILTAS Į ISTORIJĄ.** Klaidas vėl sėdi prie klaviatūros šiandien, ir vėl skuba.
+
+### 🆕 5:00 · 🖼️ KODĖL JIS SKUBĖJO *(komikso skaidrė)*
+
+*(Kadre: Klaidas liūdnas prie kompiuterio, virš galvos minties burbulas su sesės Dingailės
+veidu. Antrame plane Mistė jį pastebi ir nustemba.)*
+
+> **„O spaudinėjo todėl, kad norėjo kuo greičiau įeiti į džiungles ir rasti savo sesę
+> Dingailę. Bet niekaip negalėjo įeiti."**
+
+▶ Rodyk į minties burbulą. Palauk, kol kas nors pastebės mergaitę antrame plane —
+*(jei paklaus „o kas ten?" — „Tuoj sužinosit.")*
+
+### 🆕 5:15 · 🖼️ MISTĖ PRISISTATO *(komikso skaidrė)*
+
+*(Kadre: Mistė žvaliai tiesia ranką, virš jos tuščias kalbos burbulas; Klaidas nustebęs —
+jis jos nepažįsta.)*
+
+> **„Sveikas! Aš tau padėsiu!"** *(sakyk žvaliai, Mistės balsu)*
+
+> **„Klaidas jos net nepažįsta. O ji jau tiesia ranką."**
+
+⚠️ Vardo dar NESAKOM — ji prisistato Bloke 1.
 
 ---
 
@@ -142,8 +165,12 @@ delnai ant burnos (kaip visada, canon.md § Saliutas). *(~30 sek. Tai ritualas, 
 
 > **„Ir dabar aš jums pasakysiu apie Mistę vieną dalyką, kurį reikia atsiminti visiems metams."**
 
-> **„Mistė nori turėti tikrų draugų. Ir kad juos turėtum, reikia jiems padėti.
-> Todėl ji padeda — visada, visiems, iškart."**
+> **„Mistė nori turėti tikrų draugų. Ji galvoja, kad padėjus žmonėms, jie norės tapti
+> mūsų draugais. Todėl ji padeda — visada, visiems, iškart."**
+
+*(Skaidrėje: 🤝 · MISTĖ NORI TURĖTI TIKRŲ DRAUGŲ · paantraštė „ji galvoja, kad padėjus
+žmonėms, jie norės tapti mūsų draugais" — P2 „Klaidas nori visko iškart" maketas,
+paantraštė dvigubai didesnė.)*
 
 ❓ **„Ar tai gerai?"** *(Kelios rankos — leisk pasiginčyti, netaisyk dar.)*
 
@@ -157,34 +184,25 @@ delnai ant burnos (kaip visada, canon.md § Saliutas). *(~30 sek. Tai ritualas, 
 klaviatūros. Tonas šiltas ir juokingas — klaida čia grąžina komišką „vėl nepavyko",
 ne baimę.)*
 
-### 9:10 · 🖼️ KOMIKSAS 1 — Klaidas bando vėl
+### 9:10 · 🎞️ KAS IŠ TO IŠĖJO *(animuotas kadras — tas pats, kaip išvadoje)*
 
-> **„Klaidas vėl sėdėjo prie klaviatūros. Jis atsiminė — nereikia skubėti.
-> Bet raidės vis tiek maišėsi, ir jis nebuvo tikras, ką spausti."**
+*(Kadras sukasi ratu: Mistė spaudžia klavišus, klavišai lakioja, ekrane raizgalynė,
+abu susipainioję.)*
 
-*(✅ Sugeneruota 2026-09-08 — `assets/brainclub-jr-v2/comics/p03-miste-norejo-padeti/01-klaidas-bando-vel.png`, deck'e.)*
+> **„Ji galvojo, kad padeda, bet iš tiesų dar labiau sujaukė reikalus."**
 
-### 10:00 · ❓ Ką jūs darytumėt jo vietoje?
+⚠️ Vienas sakinys ir toliau — visos istorijos čia dar nepasakojam.
 
-▲ **Keli vaikai atsako balsu.** *(Priimk viską. NETEISINK. Tikslas — kad prakalbtų.)*
+### 11:30 · 🖼️ 🔴 VIS DAR PRIE VARTŲ *(komikso skaidrė)*
 
-### 10:40 · 🖼️ KOMIKSAS 2 — Mistė pasisiūlo padėti
-
-> **„Tada prišoko Mistė. 'Aš žinau! Aš tau padėsiu!' — pasakė ji labai užtikrintai.
-> Ir pati pradėjo spausti klavišus už Klaidą — greitai, vieną po kito."**
-
-*(✅ Sugeneruota 2026-09-08 — `assets/brainclub-jr-v2/comics/p03-miste-norejo-padeti/02-miste-spaudzia.png`, deck'e.)*
-
-### 11:30 · 🔴 Dar labiau susipainiojo
+*(Kadre: Klaidas piktas ant Mistės, o ji drovisi ir raudonuoja. Ekrane — raizgalynė.)*
 
 > **„Bet Mistė iš tikrųjų NEŽINOJO klaviatūros taip gerai, kaip pati manė.
-> Ir viskas dar labiau susimaišė — dar daugiau raidžių, dar didesnė netvarka."**
+> Ir viskas dar labiau susimaišė."**
 
-> **„Klaidas žiūrėjo į ekraną. Mistė žiūrėjo į ekraną. Nei vienas nesuprato, kas vyksta."**
+🎭 *(Sakyk su šypsena, ne su nusivylimu — komiška pauzė:)*
 
-🎭 *(Sakyk su šypsena, ne su nusivylimu — komiška pauzė, mentoriaus žodžiai, ne skaidrė:)*
-
-> **„Ir taip... trys pamokos praėjo, o Klaidas su Mistė vis dar stovi prie tų pačių
+> **„Ir taip... trys pamokos praėjo, o Klaidas su Miste vis dar stovi prie tų pačių
 > džiunglių vartų!"**
 
 *(Klasė turi nusijuokti čia — tai savikritiškas juokas apie tempą, ne apie vaikus.)*
@@ -197,10 +215,17 @@ ne baimę.)*
 
 > 💬 **„Mistė NORĖJO padėti. Bet norėti padėti ir MOKĖTI padėti — ne tas pats."**
 
-> **„Tai ką reikia daryti, kai nei Klaidas, nei Mistė nežino, ką spausti?
-> Ir jūs tuoj sužinosit."**
+🔴 **IR ČIA — SAVAIS ŽODŽIAIS, ramiai:**
 
-🔴 *(Taisyklės NESAKOM. Ji gimsta Bloke 3.)*
+> **„Kai nežinai, ką darai, tu niekam nepadedi. O kartais net draugystę sugadini —
+> žiūrėkit, kaip dabar jiedu stovi."**
+
+> **„Tai ką daryti? Reikia paklausti to, kuris ŽINO. Toks žmogus vadinasi ŽINOVAS."**
+
+> **„Mokytojai žino daug. Bet šiandien mokytojas čia tik vienas — o jūsų daug.
+> Tai kur rasti daugiau žinovų? Tuoj pamatysit."**
+
+🔴 *(Taisyklės dar NESAKOM. Ji gimsta po termino kortelės.)*
 
 ---
 
@@ -226,42 +251,15 @@ ne baimę.)*
 
 > **„Dabar patys pamatysim, kaip skiriasi spėjimas nuo žinojimo."**
 
-### 16:00 · ❓ Prognozė
-
-❓ **„Jeigu du draugai spėlioja kartu, ar spėjimas tampa teisingas?"**
-
-▲ Rankos. *(Priimk abu atsakymus — atsakymas ateis iš demonstracijos.)*
-
-### 16:50 · 👁️ FIZINĖ DEMONSTRACIJA — Spėjimas prieš žinojimą
-
-*(Klasė kūnu parodo atsakymą, be jokios įrangos — § 7 reikalavimas.)*
-
-**1.** Pasikviesk **du savanorius** priešais klasę. > **„Atsisukit į mane nugarom.
-Dabar — parodykit pirštu, kur yra langas."** ▲ Abu rodo — greičiausiai skirtingai,
-ir bent vienas neteisingai.
-
-**2.** ❓ **„Kuris teisus?"** ▲ *(Klasė nežino — nei vienas savanoris nematė.)*
-
-> 💬 **„Jie abu spėlioja. Ir du spėjimai kartu — vis tiek spėjimas."**
-
-**3.** > **„Dabar aš — aš MATAU langą."** ▶ Parodyk teisingai, iškart, be dvejonės.
-
-**4.** ❓ **„Ar aš spėliojau?"** ▲ *(Ne.)* ❓ **„Kodėl man pavyko iškart?"** ▲ *(Nes žinai / matai.)*
-
-> 💬 **„Aš nespėliojau. Aš žinojau. Tas pats klaviatūroje — jeigu nežinai, spėjimas
-> nepadės, net jeigu spėlioji kartu su draugu."**
-
-### 20:00 · ❓ Tai ką daryti, kai nei vienas nežino?
+### 20:00 · ❓ Tai ką daryti, kai nei vienas nežino? *(viena skaidrė su Lekta)*
 
 ❓ **„Tai ką daro Klaidas ir Mistė, kai nei vienas jų nežino?"**
 
-▲ Leisk pasiūlyti. *(Kryptis: paklausti kažko, kuris žino.)*
+▲ Leisk pasiūlyti. *(Kryptis: paklausti to, kuris žino.)*
 
-> 💬 **„Reikia rasti ŽINOVĄ — tą, kuris tikrai žino."**
+> 💬 **„Reikia rasti ŽINOVĄ."**
 
-### 22:00 · 🔴 Atomazga — Mokytoja Lekta
-
-🖼️ *(Rodyk Mokytoją Lektą — nauja skaidrė.)*
+▶ **Toje pačioje skaidrėje — Mokytoja Lekta.**
 
 > **„Ir tada džiunglėse pasirodė Mokytoja Lekta. Ji ŽINO klaviatūrą — ne spėja, ŽINO.
 > Ji parodė Klaidui ir Mistei tikrą kelią."**
@@ -275,9 +273,16 @@ Sakyk aiškiai ir sustok — tegul įsimena kaip atskirą sakinį.)*
 
 > **„Kai nei vienas nežino — randi tą, kuris žino."**
 
-> **„Dabar pažiūrėsim, kaip patys galim būti žinovais vieni kitiems prie klaviatūros!"**
+🆕 **PEREINAM Į INTERAKTYVĄ — klausimu, ne paaiškinimu:**
 
-*(Ši tiltinė eilutė perveda į Bloko 4 Klavišų Šokį.)*
+> **„Tai gal kas nors, kuris ŽINO, man primins — kaip veikia tarpas? O kaip veikia
+> BACKSPACE?"**
+
+▲ Vaikai atsako balsu. *(Priimk bet kokį teisingą — svarbu, kad atsakytų jie.)*
+
+> 💬 **„Va. Žinovas jau yra šitoj klasėj."**
+
+*(Ir iškart — prie mentoriaus klaviatūros.)*
 
 ### 🆕 24:40 · RAŠOM PRIE MANO KLAVIATŪROS *(skaidrė „Rašom!")*
 
@@ -364,22 +369,29 @@ Rodyk į ikoną skaidrėje. **Vaikai vis dar sėdi prie lentos — ekranai tams�
 📄 **MOKYTOJAI:** skaičiuojam **A** (kiek vaikų reikėjo gelbėti po vieną) ir
 **C** (kelintą minutę užsidegė paskutinis ekranas).
 
-### 28:00 · 🆕 GREITIEJI PADĖJĖJAI — atskiras instruktažas
+### 28:00 · 🔴 ŽINOVAI IR SLAPTI LYGIAI *(atskleidimas VISAI klasei)*
 
-*(Šitą sakai TIK tiems 2–4 vaikams, kuriuos pasižymėjai iš anksto arba dabar renkiesi
-pagal pakeltas rankas. Kiti tuo metu atsidaro žaidimą ir laukia komandos.)*
+*(Šitą sakai visiems, ne tik greitiesiems — tai šios pamokos pažadas.)*
 
-> **„Jūs praeitą kartą Klavišų Šokį baigėte tikrai greitai. Tai reiškia — jūs jau
-> ŽINOT. Ne kaip Mistė, kuri norėjo, bet nežinojo. Jūs TIKRAI žinot."**
+> **„Šiandien kai kurie iš jūsų irgi bus mokytojai."**
 
-> **„Šiandien būsit Žinovai. Rankos už galvos — štai taip."** ▲ Vaikai pakartoja judesį.
+> **„Kas pirmas pereis visus lygius — eina padėti kitiems. Bet NE spausti už juos!
+> Tik sakyti, kurį klavišą spausti. Kaip Lekta, ne kaip Mistė."**
 
-> **„Sakot, kurį klavišą spausti. Padrąsinat. Bet niekada — niekada — nespaudžiat
-> klavišo už jį patys. Kitaip būtumėt kaip Mistė, ne kaip Lekta."**
+> **„Žinovo ženklas — rankos už galvos. Štai taip."** ▲ Vaikai pakartoja judesį.
+
+🗝️ **IR PRIZAS:**
+
+> **„Ir jei VISI pabaigsit — aš jums parodysiu, kaip patekti į slaptus lygius."**
+
+⚠️ **Kodo nesakyk, kol visi nepabaigė.** Slaptas įėjimas: žaidimo pradžios ekrane
+surinkti **`w w w`** (trys iš eilės). Antras slaptas kambarys atsiveria už pirmojo.
 
 ❓ **„Ar Lekta paspaudė klavišus už Klaidą, ar tik parodė kelią?"** ▲ *(Tik parodė.)*
 
 > 💬 **„Tiksliai. Žinovas parodo kelią. Nepadaro už kitą."**
+
+📄 **MOKYTOJAI:** pasižymėk, kas pirmas baigė ir kam padėjo.
 
 ### 29:00 · Kitiems vaikams — kas jų laukia
 
