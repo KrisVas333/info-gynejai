@@ -119,14 +119,32 @@ veidu. Antrame plane Mistė jį pastebi ir nustemba.)*
 
 ### 🆕 5:15 · 🖼️ MISTĖ PRISISTATO *(komikso skaidrė)*
 
-*(Kadre: Mistė žvaliai tiesia ranką, virš jos tuščias kalbos burbulas; Klaidas nustebęs —
-jis jos nepažįsta.)*
+*(Kadre: Mistė žvaliai tiesia ranką, Klaidas nustebęs — jis jos nepažįsta.)*
+
+🆕 **Replika jau parašyta kalbos burbule** — vaikai ją mato. Tu ją vis tiek **pasakai balsu**:
+pirmokai dar neskaito greitai, o Mistės balsas yra pusė šios scenos.
 
 > **„Sveikas! Aš tau padėsiu!"** *(sakyk žvaliai, Mistės balsu)*
 
 > **„Klaidas jos net nepažįsta. O ji jau tiesia ranką."**
 
 ⚠️ Vardo dar NESAKOM — ji prisistato Bloke 1.
+
+
+### 🆕 🎯 5:25 · ŠIANDIENOS TIKSLAS *(skaidrė „Šiandienos tikslas")*
+
+🔴 **Pasakyk garsiai ir sustok.** Kiekviena pamoka turi savo tikslą, ir vaikai jį girdi
+(`design-standards` § 4.9).
+
+> **„Po šiandienos tu galėsi perduoti kitam, kaip veikia penki pagrindiniai klavišai:
+> ENTER, ESC, TARPAS, BACKSPACE ir raidės klavišas."**
+
+▶ Rodyk į kiekvieną kortelę, kai vardini: **ENTER įeina · ESC grįžta · TARPAS atskiria žodžius ·
+BACKSPACE trina · RAIDĖ rašo.**
+
+> 💬 **„Perduoti kitam — reiškia paaiškinti taip, kad ANAS suprastų. Tam reikia pačiam žinoti."**
+
+⚠️ Pamokos gale prie šito grįžtam ir klausiam, ar pasiekėm — tam skirtos **3 minutės**.
 
 ---
 
@@ -459,7 +477,20 @@ padėjėjų mechanikai pasireikšti. Po 5 minučių įsijunk, jei kas nors vis t
 
 ▲ **Visa klasė, du kartus.**
 
-### 40:10 · 🔴 Klysti yra normalu — ir dabar mes žengiam giliau
+
+### 🆕 🎯 39:40 · AR PASIEKĖM TIKSLĄ? *(3 minutės, suplanuotos)*
+
+❓ **„Pamokos pradžioje pasakiau: po šiandienos galėsi perduoti kitam, kaip veikia penki
+klavišai. Ar pasiekėm?"**
+
+▲ **Atsako VAIKAI.** Rodyk į kortelę — kas nors pasako, ką tas klavišas daro. Eik per visus penkis.
+
+🔴 **NETAISYK ir nepagražink.** „Ne visai" yra teisingas atsakymas. Jei kurio klavišo niekas
+nepaaiškina — **pasižymėk**: tai duomenys kitai pamokai, ne nesėkmė.
+
+> 💬 **„Vadinasi, šiandien jūs tapot žinovais. O žinovas ką daro? Parodo kelią, nepadaro už kitą."**
+
+### 42:40 · 🔴 Klysti yra normalu — ir dabar mes žengiam giliau
 
 *(Šitą sako mentorius, ne choras. Ir sako šiltai — tai pergalė, ne pamoka.)*
 
