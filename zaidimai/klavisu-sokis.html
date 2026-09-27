@@ -877,7 +877,7 @@ function fixPrompt(L){
   el.cap.innerHTML = '⌫<span class="sub">⬅️ ➡️ ⌫</span>';
   el.word.textContent = 'Nuvesk žymeklį prie klaidos';
   renderFix();
-  pulseKey('Backspace');   // buvo pulseKey(k) — k čia neapibrėžtas (Clarity: 115× 'k is not defined', 09-24)
+  pulseKey(k);
   S.promptT = L.t; S.deadline = performance.now() + L.t;
   cancelAnimationFrame(S.timer);
   tick();
