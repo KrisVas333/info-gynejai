@@ -86,7 +86,7 @@
     <div class="tablewrap"><table id="classes"><thead><tr><th>Klasė</th><th>Bėgimų</th><th>Dienų</th><th>Taškai vid.</th><th>Teisingai</th><th>Su garsu</th><th>Silpniausias klausimas</th></tr></thead><tbody></tbody></table></div>
 
     <h2>Gebėjimai</h2>
-    <p class="lead">Kiek procentų atsakymų teisingi. Klavišai — ką daro ENTER, ESC, BACKSPACE, rodyklės, raidės. Istorija — kas nutiko Klaidui ir Dingailei P1–P2.</p>
+    <p class="lead">Kiek procentų atsakymų teisingi. Klavišai — ką daro ENTER, ESC, BACKSPACE, rodyklės, raidės. Istorija — kas nutiko Klaidui ir Dingailei P1–P2. Mistė ir žinovas — P3: ko Mistė nori, kas yra žinovas, ką daryti, kai niekas nežino.</p>
     <div class="meters" id="meters"></div>
 
     <h2>Klavišai po vieną</h2>
@@ -142,6 +142,21 @@
     { id: 'q18', q: 'Ar tau patinka šitas žaidimas?', a: ['Taip', 'Ne'], ok: 0, g: 'juokas' },
     { id: 'q19', q: 'Ar Mistė pavargo bėgti?', a: ['Ne!', 'Truputį', 'Labai'], ok: 0, g: 'juokas' },
     { id: 'q20', q: 'Kas greitesnis: tu ar Mistė?', a: ['Aš', 'Mistė', 'Lygiosios'], ok: 0, g: 'juokas' },
+/* ═ MISTE-EXTRA ═ */
+    {"id":"q21","q":"Ko Mistė labai nori?","a":["Saldainių","Tikrų draugų","Miegoti"],"ok":2,"g":"p3"},
+    {"id":"q22","q":"Kokia buvo Mistės klaida?","a":["Padėjo nežinodama","Užmigo","Pabėgo"],"ok":1,"g":"p3"},
+    {"id":"q23","q":"Kas yra ŽINOVAS?","a":["Tas, kuris spėja","Tas, kuris skuba","Tas, kuris tikrai žino"],"ok":3,"g":"p3"},
+    {"id":"q24","q":"Kas yra mūsų žinovė?","a":["Mokytoja Lekta","Dingailė","Baitas"],"ok":1,"g":"p3"},
+    {"id":"q25","q":"Nė vienas nežino. Ką darom?","a":["Spėjam","Spaudom viską","Randam žinovą"],"ok":3,"g":"p3"},
+    {"id":"q26","q":"Ką daro TARPAS?","a":["Trina","Atskiria žodžius","Įeina"],"ok":2,"g":"p3"},
+    {"id":"q27","q":"Ką daro žinovas?","a":["Parodo kelią","Padaro už tave","Nieko"],"ok":1,"g":"p3"},
+    {"id":"q28","q":"Ar užtenka TIK norėti padėti?","a":["Taip","Ne, reikia ir žinoti"],"ok":2,"g":"p3"},
+    {"id":"q29","q":"Kas yra meilė?","a":["Gyvenimo grožis","Nieko gero","Šokoladas"],"ok":0,"g":"juokas"},
+    {"id":"q30","q":"Kas yra laimė?","a":["Draugai","Ledai","Bėgti su Miste"],"ok":0,"g":"juokas"},
+    {"id":"q31","q":"Kur baigiasi dangus?","a":["Niekur","Už debesų","Paklausiu žinovo"],"ok":0,"g":"juokas"},
+    {"id":"q32","q":"Kas buvo pirmiau: višta ar kiaušinis?","a":["Višta","Kiaušinis","Mistė"],"ok":0,"g":"juokas"},
+    {"id":"q33","q":"Ką sapnuoja kompiuteris?","a":["Nulius ir vienetus","Avis","Nieko"],"ok":0,"g":"juokas"},
+/* ═ /MISTE-EXTRA ═ */
   ];
   const byId = Object.fromEntries(Q.map(q => [q.id, q]));
   const KEY_ORDER = ['ENTER', 'ESC', 'BACKSPACE', 'Rodyklės', 'Raidės', 'Žymeklis pirma', 'Įeinam / išjungiam'];
@@ -171,7 +186,7 @@
   }
 
   function demoData() { // ?demo=1 — sample numbers to see the layout before the first lesson
-    const qs = Q.filter(q => q.ok).map((q, i) => { const n = 18 + (i * 7) % 15, ok = Math.round(n * (0.45 + ((i * 37) % 50) / 100)); const wrong = [1, 2, 3].filter(k => k !== q.ok); return { id: q.id, kartu: n, teisingai: ok, klaidu: n - ok, teisingai_proc: Math.round(100 * ok / n), sek_mediana: (1.5 + (i % 5) * 0.6).toFixed(1), greitos_klaidos: (i * 3) % 5, dazniausia_klaida: wrong[i % 2], dazniausia_klaida_n: Math.max(1, Math.round((n - ok) * 0.7)) }; });
+    const qs = Q.filter(q => q.ok).map((q, i) => { const n = 18 + (i * 7) % 15, ok = Math.round(n * (0.45 + ((i * 37) % 50) / 100)); const wrong = q.a.map((_, k) => k + 1).filter(k => k !== q.ok); return { id: q.id, kartu: n, teisingai: ok, klaidu: n - ok, teisingai_proc: Math.round(100 * ok / n), sek_mediana: (1.5 + (i % 5) * 0.6).toFixed(1), greitos_klaidos: (i * 3) % 5, dazniausia_klaida: wrong[i % 2], dazniausia_klaida_n: Math.max(1, Math.round((n - ok) * 0.7)) }; });
     return {
       t: [{ klase: 1, sav_diena: 4, nuo: '13:30', iki: '14:20' }, { klase: 2, sav_diena: 4, nuo: '14:20', iki: '15:15' }, { klase: 3, sav_diena: 5, nuo: '12:55', iki: '13:40' }, { klase: 4, sav_diena: 5, nuo: '13:50', iki: '14:35' }, { klase: 5, sav_diena: 5, nuo: '14:45', iki: '16:00' }],
       s: { begimu: 63, nutraukta: 4, dienu: 3, pirma_diena: '2026-09-18', paskutine_diena: '2026-09-26', klausimu: 350, teisingai: 241, klaidu: 109, tasku_vid: 412, tasku_max: 1350, sek_vid: 74, su_garsu: 27, auto_garsas: 9 },
@@ -210,8 +225,8 @@
 
     const qmap = Object.fromEntries(q.map(r => [r.id, r]));
     const group = g => { const rows = q.filter(r => byId[r.id] && byId[r.id].g === g); const ok = rows.reduce((a, r) => a + r.teisingai, 0), n = rows.reduce((a, r) => a + r.teisingai + r.klaidu, 0); return { ok, n, p: pct(ok, n) }; };
-    const kl = group('klavisai'), ist = group('istorija');
-    $('meters').innerHTML = [['Klavišai', kl], ['Istorija (P1–P2)', ist]].map(([name, g]) =>
+    const kl = group('klavisai'), ist = group('istorija'), p3 = group('p3');
+    $('meters').innerHTML = [['Klavišai', kl], ['Istorija (P1–P2)', ist], ['Mistė ir žinovas (P3)', p3]].map(([name, g]) =>
       `<div class="meter"><div class="top"><span class="name">${name}</span><span class="pct">${fmtPct(g.p)}</span></div><div class="track"><div class="fill" style="width:${g.p || 0}%"></div></div><div class="n">${g.ok} teisingų iš ${g.n} atsakymų</div></div>`).join('');
 
     $('keys').innerHTML = KEY_ORDER.map(k => {
