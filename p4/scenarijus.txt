@@ -2,7 +2,7 @@
 
 **PAMOKA 4 · LYGIS 0 ▸ SLAPTAŽODIS · SHIFT IR SKAIČIUS**
 **45 min · kompiuterių klasė · V2 · 2026-09-30 (Klaido istorija)**
-**Šaltinis: `deck.src.html` (34 skaidrės). Kiekviena skaidrė S1–S34 turi savo skyrių.**
+**Šaltinis: `deck.src.html` (32 skaidrės). Kiekviena skaidrė S1–S32 turi savo skyrių.**
 **Mentorius be patirties turi pravesti vien iš šito failo.**
 
 > **Žymėjimas:** **„taip“** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
@@ -18,7 +18,6 @@
 
 - [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs (nusukti arba uždengti). Vaikai pamokos pradžioje sėdi ten, ne prie kompiuterių. Prie kompiuterių einam tik 20:00.
 - [ ] 🖨️ **Atspausdintos A5 RAKTO KORTELĖS** (`rakto-kortele.html`) — po vieną kiekvienam vaikui **+ atsarginės** (2–3 papildomos). Pieštukai / flomasteriai paruošti.
-- [ ] 🏅 **Atspausdinti RAKTO MEISTRO ženklai** — po vieną kiekvienam vaikui + 1–2 atsarginiai.
 - [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), taimeris veikia, ▶ „PRADĖTI PAMOKĄ“ paruoštas. Projektorius perjungtas ir patikrintas.
 - [ ] 📱 **QR išbandytas telefonu** (`testas-qr.png` → „Klaido misija“). Jei nepavyksta — turi nuorodą INFOGYNEJAI.LT.
 - [ ] 🔒 **⊞+L — tik gestas.** Patikrinta, kad niekas (nei tu, nei vaikai) nespaus ⊞+L: užsirakins projektoriaus deck’as, o mokyklos kompiuterių slaptažodžių nežinom.
@@ -53,7 +52,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 2. **Klaidas 2/3** (S26) — be klausimo „Ką jūs darytumėt?“. Sutaupai ~30 s.
 3. Jei Shift per sunkus — **S19** vietoj S18 tęsimo (viena didžioji + vienas skaičius). Tai ne šalinimas, o atsarginis kelias.
 
-🔴 **NIEKADA NEKIRPK:** **pakartotinio testo** (S24), **išvados su šiandienos klausimu** (S28) ir **ženklo** (S33–S34).
+🔴 **NIEKADA NEKIRPK:** **pakartotinio testo** (S24) ir **išvados su šiandienos klausimu** (S28).
 
 
 ---
@@ -281,6 +280,8 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S19 
 
 ### S16 · 13:30 · ⇧ 2 būdas · Didžioji raidė = SHIFT + raidė kartu
 
+*(Pirma parodyk klaviatūrą dešinėje: rožinis SHIFT šokinėja — jis yra DU kartus, kairėje prie Z ir dešinėje. Geltonas A — kairėje, vidurinėje eilėje. Raidės išdėstytos kaip jūsų kompiuteryje: Q W E R T Y.)*
+
 > **„Didžioji raidė — tai SHIFT ir raidė KARTU. Vienas pirštas LAIKO Shift, kitas spaudžia raidę.“**
 
 ▲ Visi ore, dviem rankom: „Laikom… spaudžiam… paleidžiam!“ ×3 (kairė laiko, dešinė spaudžia).
@@ -480,7 +481,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 ---
 
-## 39–45 min · BLOKAS 6 · Ar pasiekėm · namai · spalis · ženklas
+## 39–45 min · BLOKAS 6 · Ar pasiekėm · namai · spalis
 
 ### S29 · 39:00 · 🎯 Ar pasiekėm tikslą? (2 min)
 
@@ -523,41 +524,11 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 > **„Gynėjai, iki kito karto.“**
 
-*(Tada — ženklas (dvi paskutinės skaidrės).)*
-
 ▲ Saliutuoja, tyliai sėdi.
 
-👁️ **Stebėk:** Ar saliutas vėl tikras. Rankos ant burnos — rami pabaiga prieš ženklą.
-
-### S33 · 43:30 · 🏅 Rakto Meistras · ženklas
-
-
-*(Rugsėjo ženklas — įteikiamas tik P4 (9 ženklai per metus). Dalini atspausdintus Rakto Meistro ženklus kiekvienam.)*
-
-> **„Rugsėjo ženklas — RAKTO MEISTRAS. Jūs jį užsidirbot per keturias pamokas.“**
-
-❓ Klausimas ekrane: „Kodėl RAKTO meistras? Prie ko tas raktas?“
-
-▲ Paspėlioja 2–3 atsakymus. Atsakymas — kitoje skaidrėje.
-
-👁️ **Stebėk:** Ką vaikai spėja (durys? namai? kortelė?) — visi atsakymai geri, atsakymas ateina kitoje skaidrėje.
-
-### S34 · 44:15 · 🏅 KEY = RAKTAS · „Kodėl RAKTO meistras?“
-
-
-> **„Klavišas angliškai — KEY. O key — tai ir raktas! Visą rugsėjį mokėmės klavišų — ir šiandien sukūrėm savo raktą. Todėl jūs — Rakto Meistrai.“**
-
-*(Rodyk ženklą: vieno rakto galva — klavišas. Klavišas angliškai = key = raktas.)*
-
-▲ Gauna ženklus, šypsosi. Kas nori — pasako „key“ garsiai.
-
-👁️ **Stebėk:** Ar kas nors „aha!“ — pamatė, kad klavišas ir raktas tas pats žodis. Tai pamokos pabaiga, leisk pasimėgauti tyla.
+👁️ **Stebėk:** Ar saliutas vėl tikras. Rankos ant burnos — rami pamokos pabaiga.
 
 ---
-
-## 🎓 Kodėl RAKTO meistras?
-
-(S33–S34) Klavišas angliškai — **KEY**. O key — tai ir **raktas**. Visą rugsėjį mokėmės klavišų — ir šiandien sukūrėm savo raktą. Todėl jūs — **Rakto Meistrai**.
 
 ## 📄 Klasės mokytojos lapas *(spausdinamas, 1 psl.)*
 
@@ -572,4 +543,4 @@ E. **E** — ko niekas nepaaiškino per „Ar pasiekėm tikslą?“ (S29) — tr
 F. **F** — ar rodei S19 (viena didžioji + vienas skaičius): taip / ne: `____`
 
 ---
-P4 · V2 · 2026-09-30 · 1:1 su `deck.src.html` (S1–S34) · ← [[../03-baitas-piesinys-failas/scenarijus|P3 scenarijus]]
+P4 · V2 · 2026-09-30 · 1:1 su `deck.src.html` (S1–S32) · ← [[../03-baitas-piesinys-failas/scenarijus|P3 scenarijus]]
