@@ -17,7 +17,7 @@
 ## 🔴 PRIEŠ PAMOKĄ
 
 - [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs (nusukti arba uždengti). Vaikai pamokos pradžioje sėdi ten, ne prie kompiuterių. Prie kompiuterių einam tik 20:00.
-- [ ] 🖨️ **Atspausdintos A5 RAKTO KORTELĖS** (`rakto-kortele.html`) — po vieną kiekvienam vaikui **+ atsarginės** (2–3 papildomos). Pieštukai / flomasteriai paruošti.
+- [ ] 🖍️ **Popierius ir pieštukai / flomasteriai** — bet koks lapas kiekvienam vaikui (arba sąsiuvinis). Pavyzdį pieši ant lentos.
 - [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), taimeris veikia, ▶ „PRADĖTI PAMOKĄ“ paruoštas. Projektorius perjungtas ir patikrintas.
 - [ ] 📱 **QR išbandytas telefonu** (`testas-qr.png` → „Klaido misija“). Jei nepavyksta — turi nuorodą INFOGYNEJAI.LT.
 - [ ] 🔒 **⊞+L — tik gestas.** Patikrinta, kad niekas (nei tu, nei vaikai) nespaus ⊞+L: užsirakins projektoriaus deck’as, o mokyklos kompiuterių slaptažodžių nežinom.
@@ -38,7 +38,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 | Kur | Skaidrė | Inkaras | Modalybė / formuluotė |
 |---|---|---|---|
 | S14 · 8:00 | Termino kortelė | I1 | žodžiu — „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“ |
-| S15 · 9:30 | Rakto kortelė | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
+| S15 · 9:30 | Trys paveikslėliai | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
 | S18 · 16:30 | Rašom slaptažodį | I1 | akimis — Taškeliai: „Slaptažodis — tik tau ir tėvams.“ |
 | S23 · ~25:00 | Mistė Runner | I1 | tylus gestas — 🤫 „Kas žino tavo slaptažodį?“ — „aš ir tėvai“ |
 | S28 · 36:00 | Išvada | I2 | gimsta iš Klaido istorijos, choru ×2 — „Vienas raktas — vienerios durys.“ |
@@ -259,12 +259,12 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S19 
 
 👁️ **Stebėk:** Ar kas nors sako „draugui galima“ — nesigink, tiesiog pakartok: „Tik tu ir tėvai.“
 
-### S15 · 9:30 · 🖍️ 1 būdas · Rakto kortelė — trys paveikslėliai (~4 min piešimui)
+### S15 · 9:30 · 🖍️ 1 būdas · Trys paveikslėliai (~4 min piešimui)
 
 
-*(Dalini A5 RAKTO KORTELES (`rakto-kortele.html`, atspausdinta iš anksto).)*
+*(Kiekvienas gauna bet kokį lapą (arba piešia sąsiuvinyje). Pavyzdį pieši ant lentos.)*
 
-> **„Stiprus slaptažodis — ILGAS IR JUOKINGAS. Sugalvok tris dalykus, kurie tau patinka, ir nupiešk juos trijuose langeliuose. Iš jų gims tavo slaptažodis.“**
+> **„Stiprus slaptažodis — ILGAS IR JUOKINGAS. Sugalvok tris dalykus, kurie tau patinka, ir nupiešk juos ant lapo. Iš jų gims tavo slaptažodis.“**
 
 *(Ekrane — TIK PAVYZDYS: zuikis + pica + medis → Zuikispicamedis7. 🔥 SPAUSK ➡️ — pavyzdys perbraukiamas:)*
 
@@ -272,11 +272,11 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S19 
 
 ⚠️ Žodžius rinkis be ą č ę ė į š ų ū ž (arba rašyk be ženkliuko: š → s).
 
-🔑 INKARAS 1 (piešiniu): kortelės apačioje — „Mano slaptažodį žino: aš ir ___“. Vaikai įrašo „mama“, „tėtis“… ❓ „O draugas?“ — „Ne!“
+🔑 INKARAS 1 (piešiniu): lapo apačioje — „Mano slaptažodį žino: aš ir ___“. Vaikai įrašo „mama“, „tėtis“… ❓ „O draugas?“ — „Ne!“
 
-▲ Piešia tris paveikslėlius. Kortelę VERČIA paveikslėliais žemyn — tai paslaptis.
+▲ Piešia tris paveikslėlius. Lapą VERČIA piešiniais žemyn — tai paslaptis.
 
-👁️ **Stebėk:** Kas piešia vieną didelį daiktą ir palieka kitus langelius tuščius; kas rodo kortelę kaimynui — primink: „Žinai tu ir tėvai.“
+👁️ **Stebėk:** Kas piešia vieną didelį daiktą ir nupiešia tik vieną; kas rodo piešinį kaimynui — primink: „Žinai tu ir tėvai.“
 
 ### S16 · 13:30 · ⇧ 2 būdas · Didžioji raidė = SHIFT + raidė kartu
 
@@ -489,7 +489,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 ❓ „Pamokos pradžioje pažadėjau: šiandien kiekvienas pasigamins savo raktą — saugų slaptažodį. Ar pasiekėm?“
 
-▲ Atsako VAIKAI. Rodyk į kortelę — kas nors paaiškina, kodėl ji svarbi (trys paveikslėliai · didžioji raidė · skaičius).
+▲ Atsako VAIKAI. Rodyk į ekraną — kas nors paaiškina, kodėl ji svarbi (trys paveikslėliai · didžioji raidė · skaičius).
 
 🔴 NETAISYK ir nepagražink: „ne visai“ yra teisingas atsakymas.
 
@@ -497,13 +497,13 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 ### S30 · 41:00 · 🏠 Namų darbas · IŠMOKYK SAVO TĖVUS
 
-> **„Namų darbas — IŠMOKYK SAVO TĖVUS. Parodyk jiems savo rakto kortelę ir papasakok, kas nutiko Klaidui. Tada paklausk: ar jūs visur naudojat tą patį slaptažodį? Ir paprašyk, kad pasirašytų ant kortelės.“**
+> **„Namų darbas — IŠMOKYK SAVO TĖVUS. Parodyk jiems savo tris paveikslėlius ir papasakok, kas nutiko Klaidui. Tada paklausk: ar jūs visur naudojat tą patį slaptažodį?“**
 
 🔑 INKARAS 1 (namuose, per tėvus): „Slaptažodį žinai tu ir tėvai.“
 
-▲ Sudeda kortelę į kuprinę. Kortelė keliauja namo — ne ant suolo, ne pas draugą.
+▲ Sudeda piešinį į kuprinę. Piešinys keliauja namo — ne ant suolo, ne pas draugą.
 
-👁️ **Stebėk:** Ar kiekvienas vaikas pasiima savo kortelę. Kortelės be vardo — pasirašyk pats, kad nesusimaišytų.
+👁️ **Stebėk:** Ar kiekvienas vaikas pasiima savo piešinį.
 
 ### S31 · 42:30 · 🌴 Su savo raktais — spalį GILIAU į džiungles
 
