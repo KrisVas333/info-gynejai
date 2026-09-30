@@ -1,8 +1,8 @@
-# P4 · Mentoriaus scenarijus — „Neuronas ir slaptas žodis“
+# P4 · Mentoriaus scenarijus — „Slaptas žodis“
 
 **PAMOKA 4 · LYGIS 0 ▸ SLAPTAŽODIS · SHIFT IR SKAIČIUS**
-**45 min · kompiuterių klasė · V1 · 2026-09-30**
-**Šaltinis: `deck.src.html` (38 skaidrės). Kiekviena skaidrė S1–S38 turi savo skyrių.**
+**45 min · kompiuterių klasė · V2 · 2026-09-30 (Klaido istorija)**
+**Šaltinis: `deck.src.html` (34 skaidrės). Kiekviena skaidrė S1–S34 turi savo skyrių.**
 **Mentorius be patirties turi pravesti vien iš šito failo.**
 
 > **Žymėjimas:** **„taip“** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
@@ -10,21 +10,20 @@
 > sakinys po atsakymo · 👁️ = **stebėk** · 🔑 = inkaras · *(kursyvas)* = mentoriui, negarsiai
 
 > ⚠️ **V1 — nematyta klasėje.** Tonas: **klysti yra normalu.** Jokių vagių ir baimės:
-> Neurono klaida — netvarka ir gėda, ne nusikaltimas. Apie 6–8 m. vaikus nesakom „mokslininkai įrodė“.
+> Klaido klaida — skuba ir netvarka, ne nusikaltimas. Apie 6–8 m. vaikus nesakom „mokslininkai įrodė“.
 
 ---
 
 ## 🔴 PRIEŠ PAMOKĄ
 
-- [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs (nusukti arba uždengti). Vaikai pamokos pradžioje sėdi ten, ne prie kompiuterių. Prie kompiuterių einam tik 27:00.
+- [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs (nusukti arba uždengti). Vaikai pamokos pradžioje sėdi ten, ne prie kompiuterių. Prie kompiuterių einam tik 20:00.
 - [ ] 🖨️ **Atspausdintos A5 RAKTO KORTELĖS** (`rakto-kortele.html`) — po vieną kiekvienam vaikui **+ atsarginės** (2–3 papildomos). Pieštukai / flomasteriai paruošti.
 - [ ] 🏅 **Atspausdinti RAKTO MEISTRO ženklai** — po vieną kiekvienam vaikui + 1–2 atsarginiai.
-- [ ] 🚪 **Trys kampai fiziniam žaidimui „Vienas raktas — visos durys“:** 🏫 mokykla · 🎮 žaidimas · 📬 paštas. Kampai laisvi, suolai nepastatyti; kiekvienam kampui 2–3 durų sargai.
 - [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), taimeris veikia, ▶ „PRADĖTI PAMOKĄ“ paruoštas. Projektorius perjungtas ir patikrintas.
 - [ ] 📱 **QR išbandytas telefonu** (`testas-qr.png` → „Klaido misija“). Jei nepavyksta — turi nuorodą INFOGYNEJAI.LT.
 - [ ] 🔒 **⊞+L — tik gestas.** Patikrinta, kad niekas (nei tu, nei vaikai) nespaus ⊞+L: užsirakins projektoriaus deck’as, o mokyklos kompiuterių slaptažodžių nežinom.
-- [ ] 🎮 **Klavišų Šokis** (INFOGYNEJAI.LT) atsidaro kiekviename kompiuteryje; pats išbandei; žinai slaptą kodą **w w w** (rodai tik kai VISI baigė).
-- [ ] 🧠 Žinai **du inkarus** ir kur jie grįžta (žr. lentelę žemiau) bei **uždarymo taisyklę** žodis žodin.
+- [ ] 🏃 **Mistė Runner** (INFOGYNEJAI.LT) atsidaro kiekviename kompiuteryje ir deck’o S23 skaidrėje (gyvas puslapis; jei tuščias — „↗ atidaryti naujame lange“). Pats praėjai slaptažodžio vartus ir **žinai slaptažodį** — vaikams sakai tik S22.
+- [ ] 🧠 Žinai **du inkarus** ir kur jie grįžta (žr. lentelę žemiau) bei **šiandienos klausimą** (S13) ir **išvadą** (S28) žodis žodin.
 - [ ] 🖊️ Atsispausdinai **mokytojos lapą** (apačioje) ir turi pieštuką — 📄 žymėsi ant jo.
 - [ ] 📞 Mokyklos IT žmogus pasiekiamas.
 
@@ -39,46 +38,46 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 | Kur | Skaidrė | Inkaras | Modalybė / formuluotė |
 |---|---|---|---|
-| S19 · 15:00 | Termino kortelė | I1 | žodžiu — „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“ |
-| S20 · 16:00 | Taisyklė gimsta | I2 choru + I1 ekrane |  — „Vienas raktas — vienerios durys.“ ×2 · „Slaptažodis — tik tau ir tėvams.“ |
-| S21 · 17:00 | Fizinis žaidimas | I2 | kūnu — Raktas atrakina TIK savo duris |
-| S22 · 20:00 | Rakto kortelė | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
-| S23 · 22:30 | Rašom slaptažodį | I1 | akimis — Taškeliai: „Slaptažodis — tik tau ir tėvams.“ |
-| S25 · 25:00 | Paštas (demo) | I2 | nauja vieta — „Pašto raktas turi būti tik pašto. Vienas raktas — vienerios durys.“ |
-| S29 · ~31:00 | Klavišų Šokis | I1 | tylus gestas — 🤫 „Kas žino tavo slaptažodį?“ — „aš ir tėvai“ |
-| S29 · ~32:00 | Klavišų Šokis | I2 | gestas visai klasei — Vienas pirštas → vienas delnas: „vienas raktas“ — „vienerios durys“ |
-| S32 · 40:00 | Išvada | I2 | choru, paskutinį kartą — „Vienas raktas — vienerios durys.“ |
-| S34 · 42:00 | Namų darbas | I1 | namuose per tėvus — „Slaptažodį žinai tu ir tėvai.“ |
+| S14 · 8:00 | Termino kortelė | I1 | žodžiu — „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“ |
+| S15 · 9:30 | Rakto kortelė | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
+| S18 · 16:30 | Rašom slaptažodį | I1 | akimis — Taškeliai: „Slaptažodis — tik tau ir tėvams.“ |
+| S23 · ~25:00 | Mistė Runner | I1 | tylus gestas — 🤫 „Kas žino tavo slaptažodį?“ — „aš ir tėvai“ |
+| S28 · 36:00 | Išvada | I2 | gimsta iš Klaido istorijos, choru ×2 — „Vienas raktas — vienerios durys.“ |
+| S30 · 41:00 | Namų darbas | I1 | namuose per tėvus — „Slaptažodį žinai tu ir tėvai.“ |
+
+⚠️ Inkaras 2 šiandien sąmoningai skamba tik pabaigoje (S28) — jis yra atsakymas į šiandienos klausimą (S13). Anksčiau jo nesakyk.
 
 ## ⏱️ JEI TRŪKSTA LAIKO — ką kirpti, eilės tvarka
 
+1. **Mistė Runner** (S23) — sustabdyk 29:00 vietoj 31:00. Sutaupai ~2 min.
+2. **Klaidas 2/3** (S26) — be klausimo „Ką jūs darytumėt?“. Sutaupai ~30 s.
+3. Jei Shift per sunkus — **S19** vietoj S18 tęsimo (viena didžioji + vienas skaičius). Tai ne šalinimas, o atsarginis kelias.
 
-1. **Motyvacijos pokalbis** (S15, 7:00) — tik vienas vaiko atsakymas vietoj 2–3. Sutaupai ~1 min.
-2. **El. pašto demonstracija** (S25, 25:00) → **vienas sakinys:** „Paštas irgi prašo vartotojo ir slaptažodžio — ir jo raktas turi būti tik pašto. Vienas raktas — vienerios durys.“ Sutaupai ~1,5 min. Inkaras 2 lieka.
-3. Jei Shift per sunkus — **S24** vietoj S23 tęsimo (mažosiomis). Tai ne šalinimas, o atsarginis kelias.
-
-🔴 **NIEKADA NEKIRPK:** **pakartotinio testo** (S30), **taisyklės** „Į džiungles vieni neinam…“ (S33) ir **ženklo** (S37–S38).
+🔴 **NIEKADA NEKIRPK:** **pakartotinio testo** (S24), **išvados su šiandienos klausimu** (S28) ir **ženklo** (S33–S34).
 
 
 ---
 
-## 0–6 min · BLOKAS 0 · Atidarymas + kartojimas
 
-🔴 **Viskas prie lentos, kėdės puslankiu, monitoriai tamsūs.** Kompiuterių niekas neliečia iki 27:00.
+## 0–5 min · BLOKAS 0 · Atidarymas + kartojimas
+
+🔴 **Viskas prie lentos, kėdės puslankiu, monitoriai tamsūs.** Kompiuterių niekas neliečia iki 20:00.
 
 ### S1 · 0:00 · Pasitikimas · titulinė skaidrė
+
 
 *(Prie DURŲ, ne prie stalo. Kiekvienam vaikui atskirai, šiltai.)*
 
 > **„Labas! Sėskis prie lentos — ne prie kompiuterio. Rankytes dar pailsinam.“**
 
-*(▶ SPAUSK „PRADĖTI PAMOKĄ“ (taimeris), kai pirmas vaikas peržengia slenkstį. Ekrane: „Neuronas ir slaptas žodis“ — nieko nekomentuok.)*
+*(▶ SPAUSK „PRADĖTI PAMOKĄ“ (taimeris), kai pirmas vaikas peržengia slenkstį. Ekrane: „Slaptas žodis“ — nieko nekomentuok.)*
 
 ▲ Sėdasi puslankiu prie lentos. Rankos ant kelių.
 
 👁️ **Stebėk:** Ar kas nors jau sėdi prie kompiuterio ar ten žiūri. Jei taip — šiltai pakviesk prie lentos, be aiškinimo.
 
 ### S2 · 0:20–1:50 · Pabudimas „5-4-3-2-1“ (90 s)
+
 
 *(Nauji judesiai — ne A/B/C. INTENSYVIAI. Darai KARTU su vaikais ir skaičiuoji BALSU žemyn — vaikas žino, kada baigsis. Pirmą ratą rodai lėtai (judesiai nauji), antrą — kuo greičiau. Klausk „ar gali?“, niekada „kas geriau?“. Kas negali — daro sėdėdamas.)*
 
@@ -100,6 +99,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 ### S3 · 1:50 · Keturios taisyklės · saliutas
 
+
 > **„Primenu keturias. ✋ — keliam ranką. 💬 — kalbam po vieną. 💛 — padedam vienas kitam. 🤫 — tylim, kai rodau.“**
 
 ▲ Klasė parodo kiekvieną ranka. Ketvirtai — TIKRAS SALIUTAS: gilus įkvėpimas, abu delnai ant burnos (kairė alkūnė prigludusi, dešinė pakelta virš pečių).
@@ -109,6 +109,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 👁️ **Stebėk:** Ar saliutas tikras (abu delnai ant burnos), ar pavirto į juoką. Jei į juoką — pakartok lėčiau, vieną kartą.
 
 ### S4 · 2:20 · 3 magiški klausimai (~45 s)
+
 
 *(Tu sakai — klasė kartoja choru, visus tris, du kartus. Formuluotė tiksli, nekeičiam. Tai ritualas, ne pamoka.)*
 
@@ -120,6 +121,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 ### S5 · 3:00 · Kaip atsakinėjam
 
+
 > **„Atsakot kūnu. A — pritupiam. B — apsisukam. C — rankos į viršų. Aš skaičiuoju TRYS – DU – VIENAS, ir visi kartu.“**
 
 *(Parodyk kiekvieną vieną kartą — kūnas prisimena iš praeitų pamokų.)*
@@ -128,7 +130,8 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Kas nežino, kuris judesys kuri raidė — kitame klausime žiūrėk į jį pirmiausia.
 
-### S6 · 3:20 · 1/5 · Kokia Klaido motyvacija?
+### S6 · 3:20 · 1/4 · Kokia Klaido motyvacija?
+
 
 ❓ „Kokia Klaido motyvacija?“ A nori visko iškart — neišlaukia PRADŽIOS → pritupk · B nori turėti tikrų draugų → apsisuk · C nori būti pats stipriausias → rankos į viršų.
 
@@ -140,7 +143,8 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Kas renkasi B — tas painioja Klaidą su Miste. Netaisyk garsiai, tik pasižymėk.
 
-### S7 · 3:45 · 2/5 · Didžioji Mistės klaida (kartojimas iš P3)
+### S7 · 3:50 · 2/4 · Didžioji Mistės klaida (kartojimas iš P3)
+
 
 ❓ „Kokia buvo didžioji Mistės klaida?“ A užmigo → pritupk · B norėjo padėti, bet pati nežinojo → apsisuk · C pabėgo → rankos į viršų.
 
@@ -152,7 +156,8 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Kiek vaikų dar pamena P3 išvadą. Jei daug klaidingų — tai ne nesėkmė, tik pasižymėk. Klysti yra normalu.
 
-### S8 · 4:10 · 3/5 · Kas yra ŽINOVAS?
+### S8 · 4:20 · 3/4 · Kas yra ŽINOVAS?
+
 
 ❓ „Kas yra ŽINOVAS?“ A tas, kuris greičiausiai spaudžia → pritupk · B tas, kuris garsiausiai šaukia → apsisuk · C tas, kuris TIKRAI žino → rankos į viršų. Teisinga — C.
 
@@ -162,7 +167,8 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Ar vaikai dar naudoja žodį ŽINOVAS patys — jis jau jų, nemokom iš naujo.
 
-### S9 · 4:35 · 4/5 · Kai nė vienas nežino
+### S9 · 4:50 · 4/4 · Kai nė vienas nežino
+
 
 ❓ „Kai nė vienas nežino — ką darom?“ A spėjam kartu → pritupk · B randam tą, kuris žino → apsisuk · C nieko nedarom → rankos į viršų. Teisinga — B.
 
@@ -170,23 +176,15 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 ▲ Atsako kūnu.
 
-👁️ **Stebėk:** Tai P3 taisyklė. Jei dauguma renkasi B — tiltas į šiandienos taisyklę („į džiungles vieni neinam“) bus lengvas.
+👁️ **Stebėk:** Tai P3 taisyklė. Jei dauguma renkasi B — tai tiltas į šiandienos klausimą (S13).
 
-### S10 · 5:00 · 5/5 🔴 Kabliukas · kas tas, kuris pažįsta jus geriau?
 
-🔴 P3 kabliukas, žodis žodin.
+---
 
-> **„Praeitą kartą pažadėjau: džiunglėse sutiksim dar vieną. Jis pažins jus geriau, nei jūs patys save pažįstat. Kas jis?“**
+## 5–8 min · BLOKAS 1 · Pagaliau džiunglėse · pažadas · šiandienos klausimas
 
-▲ PIRMA 3–4 spėjimai balsu (netaisyk!). TIK TADA A/B/C kūnu: A Mokytoja Lekta → pritupk · B Klaidas → apsisuk · C kažkas visai naujas → rankos į viršų. Teisinga — C.
+### S10 · 5:20 · 🌴 PAGALIAU — DŽIUNGLĖSE (istorija prasideda)
 
-> 💬 „Tai kažkas visai naujas. Jis mokosi iš visko, ką darot — todėl pažįsta jus taip gerai. Susipažinkim!“
-
-*(Jis pasirodys po akimirkos — pirma įžengiam į džiungles.)*
-
-👁️ **Stebėk:** Ką vaikai spėja savo žodžiais — tai juokingiausi momentai. Leisk pasijuokti, bet nevėluok.
-
-### S11 · 5:25 · 🌴 PAGALIAU — DŽIUNGLĖSE (istorija prasideda)
 
 *(IŠKILMINGAI, lėtai. Ekrane — Klaidas ir Mistė įžengia pro vartus.)*
 
@@ -198,7 +196,8 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Ar vaikai prisimena „pradėti iš naujo“ (P2) ir Mistės klaidą (P3) — jei kas pasako pats, pagirk.
 
-### S12 · 5:50 · 🚪 BUMPT! Stiklinės durys
+### S11 · 5:45 · 🚪 BUMPT! Stiklinės durys
+
 
 *(Staiga, su garsu: „BUMPT!“ — ploji delnais. Palauk 2 s — tegul pasijuokia.)*
 
@@ -210,157 +209,59 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Juokas čia geras — Mistė nesusižeidė, tik nustebo. Nesustok ilgiau nei 20 s.
 
-### S13 · 6:10 · 🎯 Šiandienos tikslas · PAŽADAS — savo raktas
+### S12 · 6:05 · 🎯 Šiandienos tikslas · PAŽADAS — savo raktas
 
 🔴 PASAKYK GARSIAI IR SUSTOK.
 
-> **„Šiandien kiekvienas pasigamins savo raktą — saugų slaptažodį. Po šiandienos tu galėsi pats / pati susikurti slaptažodį ir paaiškinti tėvams, kodėl jis stiprus.“**
+> **„Šiandien kiekvienas pasigamins savo raktą — saugų slaptažodį.“**
 
 *(Rodyk tris korteles: trys paveikslėliai · viena didžioji raidė · vienas skaičius.)*
 
-▲ Klasė pakartoja antrą sakinį choru.
+▲ Klasė pakartoja choru.
 
-👁️ **Stebėk:** Ar pakartojo visi. Pamokos gale (S31) grįžtam prie šito — tam skirtos 3 minutės.
+👁️ **Stebėk:** Ar pakartojo visi. Pamokos gale (S29) grįžtam prie šito — tam skirtos 2 minutės.
 
-### S14 · 6:40 · 🆕 NEURONAS — pirmas kartas
+### S13 · 6:30 · ❓ Šiandienos klausimas (grįžta pamokos gale žodis žodin)
 
-*(Rodyk Neuroną pirmą kartą ir palauk 3 s tylos. Neurono balsu — jis priplaukia prie stiklinių durų:)*
+*(P3 C1 modelis: vienas klausimas visai pamokai. Parodyk vieną raktą ore.)*
 
-> **„Aš jums padėsiu… aš irgi turiu raktą!“**
+> **„Ar gerai turėti vieną raktą visoms durims?“**
 
-> **„Štai jis — tas, kuris pažįsta jus geriau, nei jūs patys. Susipažinkit — NEURONAS. Jis — AI treneris. Jis mokosi iš visko, ką darom, ir todėl pažįsta mus taip gerai. Jis dalina ženklus — o šiandien, rugsėjo pabaigoje, ženklas bus ir jums.“**
+▲ 3–4 atsakymai balsu (taip / ne / kodėl).
 
-🔴 Baitas šiandien NEPASIRODO — vienas naujas veikėjas per pamoką.
+🔴 NETAISYK ir atsakymo NESAKYK.
 
-▲ Žiūri į ekraną, spėlioja, kas jis, šnabžda.
+> 💬 „Įdomu… Pamokos gale pažiūrėsim, kas nutiko Klaidui.“
 
-👁️ **Stebėk:** Pirma vaikų reakcija į Neuroną (šypsenos? „ooo“?). Jei kas klausia apie Baitą — „Dar ne.“
-
-
----
-
-## 6–9 min · BLOKAS 1 · Veikėjas ir jo motyvacija
-
-### S15 · 7:00 · 🔴 Motyvacija · NEURONAS NORI AUGTI
-
-🔴 SAKYK LĖTAI — tai paaiškins visą jo klaidą.
-
-> **„Ir dabar vienas dalykas apie Neuroną, kurį reikia atsiminti visiems metams. Neuronas nori AUGTI. Jis nori būti didesnis, protingesnis, stipresnis. Ir kiekviena nauja vieta jam žada: užsiregistruok — ir gausi naują lygį!“**
-
-❓ „Ar pažįstat ką nors, kuris labai nori augti?“
-
-▲ Priimk 2–3 atsakymus. NETAISYK.
-
-> 💬 „Augti — gražu. Pažiūrėkim, ką Neuronas dėl to padarė.“
-
-👁️ **Stebėk:** Augti vaikams — gerai, ir turi taip likti. Nesmerkiam Neurono: jo noras geras, klaida kita.
+👁️ **Stebėk:** 📄 Kiek vaikų sako „taip, gerai“ — pamokos gale (S28) palyginsi.
 
 
 ---
 
-## 9–14 min · BLOKAS 2 · Istorija
+## 8–19 min · BLOKAS 2 · Slaptažodis ir trys būdai
 
-Tonas šiltas ir juokingas: klaida čia komiška ir taisoma. Jokių vagių ir baimės — tai netvarka ir gėda, ne nusikaltimas.
+Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S19 paruošta.
 
-### S16 · 9:00 · 🖼️ Komiksas 1 · VISUR
+### S14 · 8:00 · Termino kortelė · SLAPTAŽODIS
 
-*(Rodydamas duris po vieną (mokykla, žaidimas, paštas):)*
-
-> **„Mokykla žada lygį — Neuronas registruojasi. Žaidimas žada lygį — registruojasi. Paštas žada — irgi! Ir kiekvienos durys paklausia: koks tavo slaptas žodis?“**
-
-> **„(Neurono balsu, linksmai) Kad nepamirščiau — visur tas pats: NEURONAS!“**
-
-❓ „Kaip manot, ar tai geras sumanymas?“
-
-▲ Kelios rankos. NETAISYK — nuomonė dar nesakoma.
-
-👁️ **Stebėk:** Kiek vaikų sako „taip, geras“ — tai natūralu. Pasižymėk bendrą nuotaiką; S17 pamatysi skirtumą.
-
-### S17 · 10:30 · ❓ Spėjam prieš atskleidimą (balsavimas)
-
-🔴 BALSUOJAM PRIEŠ ATSKLEIDIMĄ (eksperimentas). Atsakymo NESAKAI.
-
-❓ „Kas nutiks, jei kas nors suras tą vieną žodį?“ A atsidarys tik vienos durys → pritupk · B atsidarys VISOS durys iškart → apsisuk · C žodis pasikeis pats → rankos į viršų. 3 – 2 – 1!
-
-*(Suskaičiuok akimis, kiek B, ir sakyk:)*
-
-> **„Pažiūrėkim, kas nutiko.“**
-
-▲ Atsako kūnu, po „3 – 2 – 1“.
-
-👁️ **Stebėk:** 📄 PASIŽYMĖK: kiek vaikų spėjo B (mokytojos lapas, B eilutė).
-
-### S18 · 11:30 · 🖼️ 🔴 Komiksas 2 · VISOS DURYS
-
-*(SU ŠYPSENA, ne baisiai.)*
-
-> **„Kažkas atspėjo tą vieną žodį — NEURONAS. Ir… DZINNN! Atsidarė visos durys iškart. Mokyklos, žaidimo, pašto. O visi Neurono ženklai — ant grindų!“**
-
-> **„(Neurono balsu) Oi! Visos durys iš karto?!“**
-
-▲ Leisk nusijuokti.
-
-> 💬 „Kas spėjo B — jūs teisūs. Vienas raktas visoms durims — ir atsidaro visos.“
-
-👁️ **Stebėk:** Ar juokiasi, ar išsigando. Jei kas nors nuliūsta — „Neuronas nebuvo piktas, jis tiesiog nežinojo. Dabar sužinosim.“
-
-
----
-
-## 14–20 min · BLOKAS 3 · Atradimas 🔴
-
-Ekranai vis dar nejungiami. Čia gimsta ir terminas, ir taisyklė, ir abu inkarai.
-
-### S19 · 14:00 → 15:00 · Termino kortelė · SLAPTAŽODIS
-
-❓ 14:00 PIRMA KLAUSK: „Ką Neuronas turėjo daryti kitaip?“
-
-▲ Leisk pasiūlyti 3–4 variantus (kryptis: ne tą patį žodį visur · ne savo vardą · niekam nesakyti). Ką pasako vaikai — tas ir gera, netaisyk.
-
-🔴 15:00 — užrakintas maketas. SAKYK BALSU IR SUSTOK:
+🔴 Užrakintas maketas. SAKYK BALSU IR SUSTOK:
 
 > **„SLAPTAŽODIS — slaptas žodis, kuris atrakina tik tavo duris. Žinai tu ir tėvai. Daugiau niekas.“**
 
 🔑 INKARAS 1 (žodžiu): „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“
 
-👁️ **Stebėk:** Ar vaikai pasiūlė „nesakyti niekam“ patys. Jei ne — nesiūlyk, S20 klausimas nuves.
+*(~9:15 — tiltas į būdus:)*
 
-### S20 · 16:00 · 🔴 Taisyklė gimsta (sako vaikai, ne tu)
+> **„Gerai, bet ar mokat sugalvoti gerą slaptažodį?“**
 
-❓ „Tai kiek durų turi atrakinti vienas raktas?“
+▲ 1–2 atsakymai.
 
-▲ Atsako „vienas!“. Tada visa klasė DU KARTUS choru: „Vienas raktas — vienerios durys.“
+> 💬 „Parodysiu tris būdus.“
 
-🔑 INKARAS 2 (choru): „Vienas raktas — vienerios durys.“
+👁️ **Stebėk:** Ar kas nors sako „draugui galima“ — nesigink, tiesiog pakartok: „Tik tu ir tėvai.“
 
-🔑 INKARAS 1 (antraštėje ekrane): „Slaptažodis — tik tau ir tėvams.“ Abu čia pirmą kartą kartu.
+### S15 · 9:30 · 🖍️ 1 būdas · Rakto kortelė — trys paveikslėliai (~4 min piešimui)
 
-👁️ **Stebėk:** Ar vaikai taisyklę sako patys, ne kartoja tavęs. Jei tyli — leisk dar vienai rankai pasiūlyti, tada choru.
-
-### S21 · 17:00 · 🏃 Fizinis žaidimas · „Vienas raktas — visos durys“ (~3 min)
-
-*(Be įrangos. Trys klasės kampai = trejos durys: 🏫 MOKYKLA · 🎮 ŽAIDIMAS · 📬 PAŠTAS. Prie kiekvieno kampo 2–3 vaikai — durų sargai.)*
-
-> **„1 RAUNDAS. Vienas vaikas — RAKTAS, jo raktas vadinasi „NEURONAS“. Jis prieina prie kiekvienų durų ir pasako žodį — sargai atsidaro (plačiai išskečia rankas). Visos trys atsidaro!“**
-
-❓ „Kas ką tik nutiko?“
-
-> **„2 RAUNDAS. Trys skirtingi vaikai — trys skirtingi raktai. Kiekvienas atrakina TIK savo duris; prie kitų durų sargai lieka užsidarę (rankos sukryžiuotos).“**
-
-🔑 INKARAS 2 (kūnu): „Vienas raktas — vienerios durys.“
-
-▲ Sargai atsidaro / užsidaro, „raktai“ vaikšto. Po žaidimo — sugrįžtam į kėdes.
-
-👁️ **Stebėk:** Ar sargai tikrai užsidaro 2 raundo metu (ne visi „geri“ ir atsidaro). Jei atsidaro — sustabdyk ir paklausk, ar jų žodis tas pats.
-
-
----
-
-## 20–27 min · BLOKAS 4 · Rakto kortelė ir rašymas
-
-Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S24 paruošta.
-
-### S22 · 20:00 · 🖍️ Rakto kortelė (~4 min piešimui)
 
 *(Dalini A5 RAKTO KORTELES (`rakto-kortele.html`, atspausdinta iš anksto).)*
 
@@ -378,7 +279,34 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S24 
 
 👁️ **Stebėk:** Kas piešia vieną didelį daiktą ir palieka kitus langelius tuščius; kas rodo kortelę kaimynui — primink: „Žinai tu ir tėvai.“
 
-### S23 · 22:30 · 🔴 Rašom slaptažodį · gyva demonstracija prie TAVO klaviatūros
+### S16 · 13:30 · ⇧ 2 būdas · Didžioji raidė = SHIFT + raidė kartu
+
+> **„Didžioji raidė — tai SHIFT ir raidė KARTU. Vienas pirštas LAIKO Shift, kitas spaudžia raidę.“**
+
+▲ Visi ore, dviem rankom: „Laikom… spaudžiam… paleidžiam!“ ×3 (kairė laiko, dešinė spaudžia).
+
+❓ „Ką laikom?“ — „SHIFT!“ „Ką spaudžiam?“ — „Raidę!“
+
+*(Ekrane — dvi rankos: viena ant ⇧, kita ant A. Tikras klavišas — per demonstraciją S18.)*
+
+👁️ **Stebėk:** Dažniausia klaida — paspaudžia Shift ir PALEIDŽIA prieš raidę. Parodyk ore dar kartą lėtai.
+
+### S17 · 15:00 · 🧠 3 būdas · Istorijos triukas
+
+> **„Tris paveikslėlius sujungiam į vieną juokingą istoriją — tokią, kurią matai galvoje. Robotas… valgo tortą… ant debesies! Užsimerkit — matot?“**
+
+▲ Visi užsimerkia 3 s.
+
+> **„Ir pridedam mėgstamą skaičių — mano 5.“**
+
+▲ Kiekvienas iš SAVO trijų piešinių sugalvoja savo istoriją ir pasako ją TIK SAU, galvoje (ne garsiai!).
+
+> 💬 „Istoriją prisimeni — ir slaptažodis grįžta pats.“
+
+👁️ **Stebėk:** Kas pasakoja istoriją garsiai kaimynui — šypsokis ir primink: „Galvoje! Tai tavo raktas.“
+
+### S18 · 16:30 · 🔴 Rašom slaptažodį · gyva demonstracija prie TAVO klaviatūros
+
 
 *(Raidės, skaičiai, ⇧ Shift ir BACKSPACE priklauso laukeliui; skaidrę verčia TARPAS (arba ➡️ apačioje). ⭾ TAB = 👁.)*
 
@@ -400,37 +328,20 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S24 
 
 🔴 Niekas nerašo tikro slaptažodžio — nei vaikas, nei tu.
 
-👁️ **Stebėk:** Ar Shift laiko nuspaustą, ar paspaudžia ir paleidžia. Jei daugiau nei pusė nesuranda — pereik į S24, netęsk.
+👁️ **Stebėk:** Ar Shift laiko nuspaustą, ar paspaudžia ir paleidžia. Jei daugiau nei pusė nesuranda — pereik į S19, netęsk.
 
-### S24 · ≈24:00 (jei reikia) · ⚠️ Atsarginė skaidrė · tik mažosiomis
+### S19 · ≈18:30 (jei reikia) · ⚠️ Atsarginė skaidrė · viena didžioji + vienas skaičius
 
 *(Jei SHIFT klasei per sunkus arba laikas bėga — pereik čia. Jei SHIFT sekėsi — tiesiog praleisk (➡️).)*
 
-> **„Šiandien rašom tik mažosiomis raidėmis. Didžioji raidė — kitą kartą, skaičius — jau šiandien. Ilgas ir juokingas slaptažodis vis tiek stiprus.“**
+> **„Nereikia visko iškart. Užtenka VIENOS didžiosios raidės — pirmos — ir vieno skaičiaus. Visa kita — mažosiomis.“**
 
-▲ Žiūri į pavyzdį zuikispicamedis7.
+▲ Žiūri į pavyzdį Zuikispicamedis7.
 
-👁️ **Stebėk:** Jei šią skaidrę rodei — užsirašyk, kiek vaikų sunkiai rašė Shift (duomenys S31).
+👁️ **Stebėk:** Jei šią skaidrę rodei — užsirašyk, kiek vaikų sunkiai rašė Shift (duomenys S29).
 
-### S25 · 25:00 · 📬 Paštas · TIK PARODAU, nesijungiam
+### S20 · 19:00 · 🔒 Užrakink ekraną
 
-🔴 Tik demonstracija — nesijungiam, vaikai paskyrų nekuria. Paskyros šiame amžiuje — tėvų darbas.
-
-> **„Štai el. paštas. Čia tave randa žinutės. Kad įeitum, reikia dviejų dalykų: VARTOTOJO — tai tavo vardas pašte — ir SLAPTAŽODŽIO.“**
-
-❓ Rodyk Neurono laukelius: „Kaip manot, koks čia slaptažodis?“
-
-▲ Sušunka „NEURONAS!“
-
-> 💬 „Va. Pašto raktas turi būti tik pašto. Vienas raktas — vienerios durys.“
-
-🔑 INKARAS 2 (nauja vieta — paštas): „Vienas raktas — vienerios durys.“
-
-*(Paštą su tėvais — namuose, ne pamokoje.)*
-
-👁️ **Stebėk:** Ar vaikai pastebi, kad slaptažodis „neuronas“ yra jo paties vardas. Jei vėluoji — šią demonstraciją suspausk iki vieno sakinio (žr. „Jei trūksta laiko“).
-
-### S26 · 26:00 · 🔒 Užrakink ekraną
 
 🔴 ⊞+L PAMOKOJE NIEKAS NESPAUDŽIA — nei tu, nei vaikai (mokyklos kompiuterių slaptažodžių nežinom, o projektoriaus deck’as užsirakintų). Tai žinia ir judesys.
 
@@ -445,56 +356,55 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S24 
 
 ---
 
-## 27–34 min · BLOKAS 5 · Prie kompiuterių
+## 19–31 min · BLOKAS 3 · Prie kompiuterių · Mistė Runner
 
 Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
-### S27 · 27:00 · 🔴 Portalas · ĮEINAM 1·2·3
+### S21 · 20:00 · 🔴 Portalas · ĮEINAM 1·2·3
 
 *(Tik dabar kėdės grąžinamos prie stalų. Palauk, kol VISI sėdi ir rankos ant kelių.)*
 
-> **„Štai jis vėl — Klavišų Šokis. INFOGYNEJAI.LT.“**
+> **„Einam į INFOGYNEJAI.LT — ten mūsų laukia Mistė Runner!“**
 
 *(Rodyk adresą. Skaičiuojam: ĮEINAM 1·2·3. Kas atsistoja nuo kompiuterio — „pasukam raktą“ (judesys, klavišų nespaudžiam).)*
 
-▲ Sėdasi, rankos ant kelių, kartu „1·2·3“, atsidaro žaidimą.
+▲ Sėdasi, rankos ant kelių, kartu „1·2·3“, atsidaro INFOGYNEJAI.LT.
 
 👁️ **Stebėk:** 📄 Mokytojos lapas: A (kiek vaikų reikėjo gelbėti pereinant) ir C (kelintą minutę užsidegė paskutinis ekranas).
 
-### S28 · 28:00 · 🔴 Žinovai ir slapti lygiai (visai klasei)
+### S22 · 21:00 · 🔒 Mistė Runner užrakintas — reikia slaptažodžio
 
-> **„Kas pirmas pereis visus lygius — taps ŽINOVU ir eina padėti kitiems. Ne spausti už juos! Tik sakyti, kurį klavišą spausti.“**
+> **„Mistė Runner užrakintas — kaip durys džiunglėse! Kad įeitum, reikia SLAPTAŽODŽIO. Slaptažodį žinau aš — ir pasakysiu tik jums.“**
 
-> **„Žinovo ženklas — rankos už galvos. Štai taip.“**
+*(Kitoje skaidrėje parodyk tikrus vartus su slaptažodžio laukeliu. Slaptažodį pasakai balsu arba užrašai ant lentos TIK dabar, ne anksčiau.)*
 
-> **„Jei VISI pabaigsit — atrakinsim slaptus lygius.“**
+> 💬 „Matot? Be rakto — neįeini.“
 
-⚠️ 🗝️ Kodas — w w w pradžios ekrane. NESAKYK, kol visi nepabaigė.
+> **„Kas pirmas įeis ir pradės žaisti — tampa ŽINOVU ir padeda kitiems ŽODŽIU, nespaudžia už juos. Žinovo ženklas — rankos už galvos.“**
 
 ▲ Žinovų judesys: rankos už galvos. Vaikai pakartoja.
 
-👁️ **Stebėk:** 📄 Pasižymėk, kas pirmas baigė ir kam padėjo. Žinovas nespaudžia už kitą — jei spaudžia, tyliai primink: „Kaip Lekta, ne kaip Mistė.“
+👁️ **Stebėk:** 📄 Pasižymėk, kas pirmas įėjo ir kam padėjo. Žinovas nespaudžia už kitą — jei spaudžia, tyliai primink: „Kaip Lekta, ne kaip Mistė.“
 
-### S29 · 29:00–34:00 · 🎮 Klavišų Šokis (raidės su ⇧ SHIFT ir skaičiai)
+### S23 · 22:00–31:00 · 🏃 Mistė Runner (gyvas INFOGYNEJAI.LT)
 
-*(Skaidrėje nėra teksto. Šiandien ypač — raidės su ⇧ SHIFT ir skaičiai.)*
+*(Skaidrėje — gyvas puslapis INFOGYNEJAI.LT. Parodyk kortelę „Mistė Runner“ ir slaptažodžio vartus, įvesk slaptažodį prie savo klaviatūros. Jei ekranas tuščias — spausk „↗ atidaryti naujame lange“.)*
 
-🔑 ~31:00 INKARAS 1 (tylus gestas, apeinant klasę): pirštas prie lūpų 🤫 ir pašnibždomis: „Kas žino tavo slaptažodį?“ — „aš ir tėvai“.
+🔑 ~25:00 INKARAS 1 (tylus gestas, apeinant klasę): pirštas prie lūpų 🤫 ir pašnibždomis: „Kas žino tavo slaptažodį?“ — „aš ir tėvai“.
 
-🔑 ~32:00 INKARAS 2 (gestas visai klasei): „Stop!“ — tu iškeli VIENĄ pirštą ir sakai „vienas raktas“, klasė atveria VIENĄ delną ir atsako „vienerios durys“. Ir žaidžiam toliau.
+*(Kas atsistoja — „pasukam raktą“ (klavišų nespaudžiam). Žinovai padeda žodžiu. 31:00 — sustabdai žaidimą, kitoje skaidrėje testas.)*
 
-*(Kas atsistoja — „pasukam raktą“ (klavišų nespaudžiam). Žinovai padeda žodžiu. Jei VISI baigė — w w w, slapti lygiai. 34:00 — sustabdai žaidimą, kitoje skaidrėje testas.)*
+▲ Įveda slaptažodį, žaidžia. Žinovai vaikšto su rankomis už galvos ir sako, ką spausti.
 
-▲ Žaidžia. Žinovai vaikšto su rankomis už galvos ir sako, ką spausti.
-
-👁️ **Stebėk:** Kas užstrigo prie Shift; kur žinovas paspaudė už kitą; ar kas nors spaudžia ⊞+L (turi būti tik gestas).
+👁️ **Stebėk:** Kas užstrigo prie slaptažodžio (ypač prie Shift); kur žinovas paspaudė už kitą; ar kas nors spaudžia ⊞+L (turi būti tik gestas).
 
 
 ---
 
-## 34–37 min · BLOKAS 6 · Pakartotinis testas 🔴
+## 31–34 min · BLOKAS 4 · Pakartotinis testas 🔴
 
-### S30 · 34:00–37:00 · 🛡️ Klaido misija — dar kartą (pakartotinis diagnostinis testas)
+### S24 · 31:00–34:00 · 🛡️ Klaido misija — dar kartą (pakartotinis diagnostinis testas)
+
 
 🔴 NIEKADA NEPRALEIDŽIAMA. Tas pats testas kaip P1 — skirtumas tarp dviejų testų yra pamokos rezultatas.
 
@@ -504,18 +414,79 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 ▲ Daro testą patys. Kas nespėjo per 3 min — baigia namie su tėvais (QR).
 
-👁️ **Stebėk:** Pasižymėk, kas nespėjo. 37:00 — IŠEINAM 3·2·1, atgal prie lentos. Niekam nesakyk atsakymų.
+👁️ **Stebėk:** Pasižymėk, kas nespėjo. 34:00 — IŠEINAM 3·2·1, atgal prie lentos. Niekam nesakyk atsakymų.
 
 
 ---
 
-## 37–40 min · BLOKAS 7 · Ar pasiekėm tikslą? (3 min)
+## 34–39 min · BLOKAS 5 · Klaido istorija ir išvada
 
-### S31 · 37:00 · 🎯 Ar pasiekėm tikslą?
+IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija — **„nori visko iškart“** — štai kas veda į jo klaidą.
 
-🔴 TRYS MINUTĖS, SUPLANUOTOS. IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu.
+### S25 · 34:00 · 🖼️ Klaidas 1/3 · Vienas raktas viskam
 
-❓ „Pamokos pradžioje pasakiau: po šiandienos galėsi pats / pati susikurti slaptažodį ir paaiškinti tėvams, kodėl jis stiprus. Ar pasiekėm?“
+> **„O dabar — kas nutiko Klaidui. Klaidas pasidarė labai gerą raktą. Ir pagalvojo: kam man daug raktų? Aš noriu visko IŠKART! Vienu raktu — greičiau!“**
+
+*(Ir atrakino juo VISAS duris.)*
+
+▲ Žiūri į kadrą.
+
+👁️ **Stebėk:** Ar kas nors jau dabar sako „oi-oi“ — nesakyk, kad teisus, tik šypsokis.
+
+### S26 · 34:40 · 🖼️ Klaidas 2/3 · Pametė
+
+> **„Bet Klaidas skubėjo… Raktas iškrito — ir jis net nepastebėjo. Nubėgo toliau.“**
+
+❓ „Ką jūs darytumėt?“
+
+▲ 1–2 atsakymai, netaisyk.
+
+👁️ **Stebėk:** Kas sako „grįžčiau ieškoti“ — tai gera mintis, ją naudosi išvadoje.
+
+### S27 · 35:20 · 🖼️ Klaidas 3/3 · Kažkas rado
+
+> **„O tada… kažkas jį rado.“**
+
+*(Palauk 3 s tylos. Nesakyk, kas tas šešėlis ir ką jis darys — tai klausimas kitai skaidrei. Tonas: smalsumas, ne baimė.)*
+
+▲ Žiūri, šnabžda.
+
+👁️ **Stebėk:** Jei kam baisu — „Tai tik šešėlis. Pažiūrėkim, ką galim padaryti.“
+
+### S28 · 36:00–39:00 · 🔴 Išvada · šiandienos klausimas grįžta
+
+❓ „Kaip manot, kas nutiko toliau?“
+
+▲ 3–4 spėjimai.
+
+*(Tada grįžta ŠIANDIENOS KLAUSIMAS, žodis žodin:)*
+
+> **„Ar gerai turėti vieną raktą visoms durims?“**
+
+*(Ištrauk iš vaikų — ne tu sakai: tas pats raktas VISUR + kažkas jį randa = atrakina VISKĄ.)*
+
+*(SPAUSK ➡️ — ekrane atsiranda išvada.)*
+
+🔴 ŽODIS ŽODIN — iš šios eilutės generuojamas P5 kartojimo klausimas.
+
+> **„Didžioji Klaido klaida buvo — jis naudojo tą patį raktą viskam.“**
+
+▲ VISA KLASĖ, DU KARTUS.
+
+🔑 INKARAS 2 (choru): „Vienas raktas — vienerios durys.“ ×2
+
+👁️ **Stebėk:** 📄 Palygink su S13: kiek dabar sakytų „taip, gerai“? Ar eilutė sakoma žodis žodin — jei klasė sutrumpina, pakartok lėtai.
+
+
+---
+
+## 39–45 min · BLOKAS 6 · Ar pasiekėm · namai · spalis · ženklas
+
+### S29 · 39:00 · 🎯 Ar pasiekėm tikslą? (2 min)
+
+🔴 DVI MINUTĖS, SUPLANUOTOS.
+
+❓ „Pamokos pradžioje pažadėjau: šiandien kiekvienas pasigamins savo raktą — saugų slaptažodį. Ar pasiekėm?“
 
 ▲ Atsako VAIKAI. Rodyk į kortelę — kas nors paaiškina, kodėl ji svarbi (trys paveikslėliai · didžioji raidė · skaičius).
 
@@ -523,47 +494,9 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 👁️ **Stebėk:** Pasižymėk, ko niekas nepaaiškino — tai duomenys kitai pamokai, ne nesėkmė. Klysti yra normalu.
 
+### S30 · 41:00 · 🏠 Namų darbas · IŠMOKYK SAVO TĖVUS
 
----
-
-## 40–42 min · BLOKAS 8 · Išvada ir taisyklė
-
-### S32 · 40:00 · 🔴 Išvada · choru, du kartus
-
-🔴 ŽODIS ŽODIN — iš šios eilutės generuojamas P5 kartojimo klausimas.
-
-> **„Didžioji Neurono klaida buvo — jis norėjo augti visur, todėl visur naudojo tą patį lengvą žodį — ir vienas žodis atrakino visas duris.“**
-
-▲ VISA KLASĖ, DU KARTUS.
-
-*(Rodyk į kadrą, bet istorijos iš naujo NEPASAKOK.)*
-
-🔑 INKARAS 2 (choru, paskutinį kartą): „Vienas raktas — vienerios durys.“
-
-👁️ **Stebėk:** Ar eilutė sakoma žodis žodin. Jei klasė sutrumpina — pakartok lėtai ir vėl visi.
-
-### S33 · 41:00 · 🔴 Į džiungles vieni neinam · P3→P4 lanko uždarymas
-
-🔴 Taisyklė, kurią pamoka privalo uždaryti. SAKYK LĖTAI.
-
-> **„P3 išmokom: kai nežinai — surask žinovą. O šiandien — dar vienas žingsnis.“**
-
-> **„Į džiungles vieni neinam. Jeigu randi ką nors keisto — parodyk suaugusiam arba tėvams.“**
-
-▲ Klasė pakartoja pirmą sakinį choru.
-
-❓ „Kas yra tas suaugęs?“ (mama, tėtis, mokytoja…)
-
-👁️ **Stebėk:** Ar vaikai pasako „tėtis, mama, mokytoja“, o ne „draugas“. Jei „draugas“ — tyliai: „Suaugęs — tas, kuris žino ir rūpinasi.“
-
-
----
-
-## 42–45 min · BLOKAS 9 · Namų darbas, spalis, ženklas
-
-### S34 · 42:00 · 🏠 Namų darbas · IŠMOKYK SAVO TĖVUS
-
-> **„Namų darbas — IŠMOKYK SAVO TĖVUS. Parodyk jiems savo rakto kortelę ir papasakok apie Neuroną. Tada paklausk: ar jūs visur naudojat tą patį slaptažodį? Ir paprašyk, kad pasirašytų ant kortelės.“**
+> **„Namų darbas — IŠMOKYK SAVO TĖVUS. Parodyk jiems savo rakto kortelę ir papasakok, kas nutiko Klaidui. Tada paklausk: ar jūs visur naudojat tą patį slaptažodį? Ir paprašyk, kad pasirašytų ant kortelės.“**
 
 🔑 INKARAS 1 (namuose, per tėvus): „Slaptažodį žinai tu ir tėvai.“
 
@@ -571,11 +504,11 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 👁️ **Stebėk:** Ar kiekvienas vaikas pasiima savo kortelę. Kortelės be vardo — pasirašyk pats, kad nesusimaišytų.
 
-### S35 · 43:00 · 🌴 Su savo raktais — spalį GILIAU į džiungles
+### S31 · 42:30 · 🌴 Su savo raktais — spalį GILIAU į džiungles
 
-*(SU ŠYPSENA. Ekrane — visi trys, su Neuronu, prie atvirų vartų.)*
+*(SU ŠYPSENA. Ekrane — Klaidas ir Mistė džiunglėse.)*
 
-> **„Šiandien įžengėm pro vartus — o dabar kiekvienas turi SAVO raktą. Klaidas išmoko palaukti. Mistė surado žinovą. Neuronas — savo raktą. Todėl kitą kartą, spalį, einam GILIAU į džiungles. Visi kartu.“**
+> **„Šiandien įžengėm pro vartus — o dabar kiekvienas turi SAVO raktą. Klaidas išmoko: vienas raktas — vienerios durys. Mistė surado žinovą. Todėl kitą kartą, spalį, einam GILIAU į džiungles. Visi kartu.“**
 
 *(Nesakyk, kas ten laukia. ❓ Jei kas paklaus apie Dingailę — „Spalį.“)*
 
@@ -583,7 +516,8 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 👁️ **Stebėk:** Ar klasei tikrai smagu „giliau“. Ši akimirka turi jaustis kaip pergalė.
 
-### S36 · 43:30 · 🛡️ Atsisveikinimas · saliutas
+### S32 · 43:00 · 🛡️ Atsisveikinimas · saliutas
+
 
 🔴 SALIUTAS: gilus įkvėpimas, abu delnai ant burnos. Jokio šūksnio.
 
@@ -595,7 +529,8 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 👁️ **Stebėk:** Ar saliutas vėl tikras. Rankos ant burnos — rami pabaiga prieš ženklą.
 
-### S37 · 44:00 · 🏅 Rakto Meistras · ženklas
+### S33 · 43:30 · 🏅 Rakto Meistras · ženklas
+
 
 *(Rugsėjo ženklas — įteikiamas tik P4 (9 ženklai per metus). Dalini atspausdintus Rakto Meistro ženklus kiekvienam.)*
 
@@ -607,7 +542,8 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 👁️ **Stebėk:** Ką vaikai spėja (durys? namai? kortelė?) — visi atsakymai geri, atsakymas ateina kitoje skaidrėje.
 
-### S38 · 44:30 · 🏅 KEY = RAKTAS · „Kodėl RAKTO meistras?“
+### S34 · 44:15 · 🏅 KEY = RAKTAS · „Kodėl RAKTO meistras?“
+
 
 > **„Klavišas angliškai — KEY. O key — tai ir raktas! Visą rugsėjį mokėmės klavišų — ir šiandien sukūrėm savo raktą. Todėl jūs — Rakto Meistrai.“**
 
@@ -617,24 +553,23 @@ Nuo šios minutės — ir ne anksčiau — vaikai turi ekraną.
 
 👁️ **Stebėk:** Ar kas nors „aha!“ — pamatė, kad klavišas ir raktas tas pats žodis. Tai pamokos pabaiga, leisk pasimėgauti tyla.
 
-
 ---
 
 ## 🎓 Kodėl RAKTO meistras?
 
-(S37–S38) Klavišas angliškai — **KEY**. O key — tai ir **raktas**. Visą rugsėjį mokėmės klavišų — ir šiandien sukūrėm savo raktą. Todėl jūs — **Rakto Meistrai**.
+(S33–S34) Klavišas angliškai — **KEY**. O key — tai ir **raktas**. Visą rugsėjį mokėmės klavišų — ir šiandien sukūrėm savo raktą. Todėl jūs — **Rakto Meistrai**.
 
 ## 📄 Klasės mokytojos lapas *(spausdinamas, 1 psl.)*
 
 **Šeši skaičiai per pamoką.** *(⚠️ šis lapas — V1 pasiūlymas, nepatvirtintas Kris’o.)*
 
 
-A. **A** — kiek vaikų prireikė gelbėti pereinant prie kompiuterių (27:00): `____`
-B. **B** — kiek vaikų spėjo **B** prie „Kas nutiks, jei kas nors suras tą vieną žodį?“ (S17, 10:30): `____`
-C. **C** — kelintą minutę užsidegė paskutinis ekranas (S27): `____`
-D. **D** — kiek vaikų nespėjo testo per 3 min (S30) — jie baigia namie su QR: `____`
-E. **E** — ko niekas nepaaiškino per „Ar pasiekėm tikslą?“ (S31) — trys paveikslėliai / didžioji raidė / skaičius: `____`
-F. **F** — ar rodei S24 (tik mažosiomis): taip / ne: `____`
+A. **A** — kiek vaikų prireikė gelbėti pereinant prie kompiuterių (20:00): `____`
+B. **B** — kiek vaikų sakė „taip, gerai“ prie šiandienos klausimo (S13, 6:30) → ir kiek pabaigoje (S28): `____`
+C. **C** — kelintą minutę užsidegė paskutinis ekranas (S21): `____`
+D. **D** — kiek vaikų nespėjo testo per 3 min (S24) — jie baigia namie su QR: `____`
+E. **E** — ko niekas nepaaiškino per „Ar pasiekėm tikslą?“ (S29) — trys paveikslėliai / didžioji raidė / skaičius: `____`
+F. **F** — ar rodei S19 (viena didžioji + vienas skaičius): taip / ne: `____`
 
 ---
-P4 · V1 · 2026-09-30 · 1:1 su `deck.src.html` (S1–S38) · ← [[../03-baitas-piesinys-failas/scenarijus|P3 scenarijus]]
+P4 · V2 · 2026-09-30 · 1:1 su `deck.src.html` (S1–S34) · ← [[../03-baitas-piesinys-failas/scenarijus|P3 scenarijus]]
