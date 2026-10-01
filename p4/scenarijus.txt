@@ -41,10 +41,9 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 | S14 · 9:30 | Trys paveikslėliai | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
 | S17 · 16:30 | Rašom slaptažodį | I1 | akimis — Taškeliai: „Slaptažodis — tik tau ir tėvams.“ |
 | S22 · ~25:00 | Mistė Runner | I1 | tylus gestas — 🤫 „Kas žino tavo slaptažodį?“ — „aš ir tėvai“ |
-| S27 · 36:00 | Išvada | I2 | gimsta iš Klaido istorijos, choru ×2 — „Vienas raktas — vienerios durys.“ |
 | S29 · 41:00 | Namų darbas | I1 | namuose per tėvus — „Slaptažodį žinai tu ir tėvai.“ |
 
-⚠️ Inkaras 2 šiandien sąmoningai skamba tik pabaigoje (S27) — jis yra atsakymas į šiandienos klausimą (S12). Anksčiau jo nesakyk.
+⚠️ Inkaras 2 šiandien ekrane NErodomas (Kris, 2026-10-01): išvada — tik Klaido klaidos sakinys (S27). Žodžiu jis nuskamba tik spalio skaidrėje (S30).
 
 ## ⏱️ JEI TRŪKSTA LAIKO — ką kirpti, eilės tvarka
 
@@ -463,7 +462,6 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 ▲ VISA KLASĖ, DU KARTUS.
 
-🔑 INKARAS 2 (choru): „Vienas raktas — vienerios durys.“ ×2
 
 👁️ **Stebėk:** 📄 Palygink su S12: kiek dabar sakytų „taip, gerai“? Ar eilutė sakoma žodis žodin — jei klasė sutrumpina, pakartok lėtai.
 
