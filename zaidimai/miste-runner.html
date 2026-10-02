@@ -118,6 +118,7 @@
   <p class="goHint">arba TARPAS</p>
 <!-- ═ MISTE-EXTRA ═ -->
   <button type="button" class="introPick" id="pickIntro">🖱 INTRO</button>
+  <button type="button" class="tutPick" id="pickTut">🎮 KAIP ŽAISTI</button>
 <!-- ═ /MISTE-EXTRA ═ -->
 </div>
 
@@ -134,6 +135,10 @@
     </span>
     <span class="sep"></span>
     <span class="group"><button id="introBtn" type="button" title="Pelės treniruotė iš naujo">🖱 INTRO</button></span>
+<!-- ═ MISTE-EXTRA ═ -->
+    <span class="sep"></span>
+    <span class="group"><button id="tutBtn" type="button" title="Kaip žaisti: mygtukai 1–5">🎮 KAIP ŽAISTI</button></span>
+<!-- ═ /MISTE-EXTRA ═ -->
   </p>
 </div>
 
@@ -974,6 +979,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
     }
   }
   function onKey(e) {                     // kviečiama iš žaidimo globalaus keydown
+    if (tutActive()) { window.__misteTut.key(e); return; }   // KAIP ŽAISTI
     if (!S.active) return;
     if (e.key === 'Escape') { e.preventDefault(); skipStage(); return; }
     if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || /^Arrow/.test(e.key || '')) e.preventDefault();
@@ -1385,7 +1391,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
 
   // ================= ciklas =================
   // headless savitestyje (?selftest=1) rAF virtualiame laike beveik nesisuka -> tas pats ciklas per setTimeout
-  var TIMER_LOOP = /[?&](selftest|demo)=/.test(location.search), rafPaint = 0;
+  var TIMER_LOOP = /[?&](selftest|demo|tutselftest|tutshot)=/.test(location.search), rafPaint = 0;
   function schedule() { S.raf = TIMER_LOOP ? setTimeout(function () { loop(performance.now()); }, 16) : requestAnimationFrame(loop); }
   function unschedule() { if (S.raf) { if (TIMER_LOOP) clearTimeout(S.raf); else cancelAnimationFrame(S.raf); } S.raf = 0; }
   function loop(ts) {
@@ -1456,9 +1462,13 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
     ev('intro_baigta', { laikas_s: bucketTime(S.t - S.t0), pro_sali: bucketMiss(S.misses) });
     markDone();
     close();
+    // KAIP ŽAISTI (2026-10-02): po pelės įvado — 5 mygtukų pamoka, tada žaidimas
+    try { if (window.__misteTut) window.__misteTut.afterIntro(); } catch (e) { console.error('tut', e); }
   }
+  function tutActive() { try { return !!(window.__misteTut && window.__misteTut.active()); } catch (e) { return false; } }
   function abort() { markDone(); close(); }
   function freeze() {
+    try { if (window.__misteTut) window.__misteTut.freeze(); } catch (e) {}
     if (!S.active) return;
     S.frozen = true; S.walls = null;
     unschedule();
@@ -1469,6 +1479,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
   // ================= tiltas į žaidimą =================
   function attach(g) {
     G = g;
+    try { if (window.__misteTut) window.__misteTut.attach(g); } catch (e) { console.error('tut', e); }
     if (!root || !ctx) return;
     root.addEventListener('pointermove', onMove);
     root.addEventListener('pointerdown', onDown);
@@ -1483,12 +1494,12 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
     if (btn) {
       btn.addEventListener('click', function () {
         var m = G.state && G.state.mode;
-        if (!S.active && (m === 'title' || m === 'dead')) start(1);   // ne 'locked' (pamokos pabaiga)
+        if (!S.active && !tutActive() && (m === 'title' || m === 'dead')) start(1);   // ne 'locked' (pamokos pabaiga)
         try { btn.blur(); } catch (e) {}
       });
       setInterval(function () {
         var m = G.state && G.state.mode, pk = document.getElementById('pick');
-        btn.disabled = S.active || !(m === 'title' || m === 'dead');
+        btn.disabled = S.active || tutActive() || !(m === 'title' || m === 'dead');
         // kol matomas #pick (jame savas 🖱 INTRO) — šis paslėptas; visibility, kad eilutė nešokinėtų
         btn.style.visibility = pk && !pk.hidden ? 'hidden' : '';
       }, 400);
@@ -1496,7 +1507,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
     // „🖱 INTRO" mygtukas pradžios meniu (#pick) — po ▶ PRADĖTI
     var pbtn = document.getElementById('pickIntro');
     if (pbtn) {
-      pbtn.addEventListener('click', function (e) { e.stopPropagation(); if (!S.active && G.state && G.state.mode !== 'locked') start(1); });
+      pbtn.addEventListener('click', function (e) { e.stopPropagation(); if (!S.active && !tutActive() && G.state && G.state.mode !== 'locked') start(1); });
       // TARPAS / ENTER ant šio mygtuko: tik intro, ne bėgimas (sustabdom globalų keydown; mygtukas pats paspaudžiamas)
       pbtn.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') e.stopPropagation(); });
     }
@@ -1513,6 +1524,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
       stage = demoRun || done ? 0 : 1;
     }
     if (stage) start(stage);
+    else if (p && p.get('tut') === '1' && window.__misteTut) window.__misteTut.start('nuoroda');   // ?intro=0&tut=1 — tik pamoka
     if (p && p.get('selftest') === '1') selftest();
     if (p && p.get('demo')) demo(p.get('demo'));
   }
@@ -1604,8 +1616,11 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
         for (var k = 0; k < N_STAGES; k++) skipStage();
         var iv2 = setInterval(function () {
           if (S.active) return; clearInterval(iv2);
-          r.push('po intro pick=' + (pick.hidden ? 'paslėptas' : 'matomas') + ' mode=' + G.state.mode);
-          var ok = r[0] === 'pick=matomas' && r[1] === '.keys INTRO=hidden' && r[2] === 'po TARPO ant INTRO=title' && r[3] === 'po paspaudimo intro=rodomas pick=paslėptas' && r[4] === 'po intro pick=matomas mode=title';
+          // po įvado atsidaro KAIP ŽAISTI (2026-10-02); Esc ją praleidžia -> atgal į #pick
+          r.push('po intro pamoka=' + (tutActive() ? 'rodoma' : 'NE'));
+          if (tutActive()) window.__misteTut.skip();
+          r.push('po pamokos pick=' + (pick.hidden ? 'paslėptas' : 'matomas') + ' mode=' + G.state.mode);
+          var ok = r[0] === 'pick=matomas' && r[1] === '.keys INTRO=hidden' && r[2] === 'po TARPO ant INTRO=title' && r[3] === 'po paspaudimo intro=rodomas pick=paslėptas' && r[4] === 'po intro pamoka=rodoma' && r[5] === 'po pamokos pick=matomas mode=title';
           document.documentElement.setAttribute('data-pick-test', (ok ? 'OK · ' : 'FAIL · ') + r.join(' · '));
         }, 50);
       });
@@ -1640,6 +1655,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
   function testItems(item) {
     item('🖱 Pelės įvadas — visas', function () { start(1); });
     STAGES.forEach(function (st, i) { item('🖱 Pelės įvadas · ' + (i + 1) + ' · ' + st.name, function () { start(i + 1); }); });
+    if (window.__misteTut) window.__misteTut.testItems(item);
   }
 
   // ================= savitestis: ?intro=1&selftest=1&nosend=1 =================
@@ -1907,8 +1923,636 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
   }
 
   window.__misteIntro = {
-    attach: attach, start: start, active: function () { return S.active; }, key: onKey,
+    attach: attach, start: start, active: function () { return S.active || tutActive(); }, key: onKey,
     freeze: freeze, testItems: testItems, skip: skipStage
+  };
+})();
+</script>
+<!-- ─── KAIP ŽAISTI (Kris 2026-10-02): 5 dideli mygtukai, pirštas spaudžia 3, tada vaikas spaudžia 1–5. Šaltinis tools/mr-intro/tutorial.block.html ─── -->
+<style>
+#tut{position:fixed;inset:0;z-index:21;background:#f7f7f7;opacity:1;transition:opacity .6s;touch-action:none;outline:none;-webkit-user-select:none;user-select:none;overflow:hidden}
+#tut[hidden]{display:none}
+#tut.fade{opacity:0}
+#tut canvas{display:block;width:100%;height:100%;background:#f7f7f7;image-rendering:pixelated}
+#pick .tutPick{min-width:150px;min-height:0;padding:9px 14px;font-size:14px;letter-spacing:.04em;margin-top:2px;background:#2f2f2f;border-color:rgba(255,255,255,.75)}
+</style>
+<div id="tut" hidden tabindex="-1" role="application" aria-label="Kaip žaisti: mygtukai 1–5"><canvas id="tutCv"></canvas></div>
+<script>
+(function () {
+  'use strict';
+  // ================= KONSTANTOS — viskas vienoje vietoje =================
+  var CFG = {
+    BG: '#f7f7f7', INK: '#535353', MUTED: '#8f8f8f', GUIDE: '#c9c9c9', CLOUD: '#dcdcdc',
+    GREEN: '#3e9b4f', GREEN_DARK: '#2a6e37', GREEN_LINE: '#5cb86c',
+    FONT: '"Press Start 2P", "Courier New", monospace',
+    EMOJI_FONT: '"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif',
+    LAY: {                                 // aukščio dalys
+      titleY: 0.062, titleSize: 0.046,
+      capY: 0.122, capSize: 0.027,          // paaiškinimas po antrašte (apačioje — pirštas)
+      sceneTop: 0.16, sceneBot: 0.625,      // scena (liniuotė + Mistė) — žaidimo koordinatėmis, ištempta
+      btnY: 0.67, btnH: 0.2, btnMaxW: 0.15, btnGap: 0.028,   // 5 mygtukai: kvadratai
+      handU: 18,                            // piršto langelis = mygtuko plotis / handU
+      wordSize: 0.07
+    },
+    SCENE: { top: -16, bottom: 12, left: -60, right: 300 },   // kiek žaidimo pikselių aplink liniuotę / Mistę rodom
+    DEMO: { key: 3, reps: 2, enter: 0.8, press: 0.22, hold: 0.25, after: 0.9, leave: 0.6, firstWait: 0.6 },
+    TRY: { order: [1, 2, 3, 4, 5], idleHint: 5, hintFor: 1.8, shiver: 0.5 },
+    DONE: { hold: 2.8 },
+    FADE: 0.6,
+    TXT: {
+      demo: 'ŠTAI KAIP: SPAUDŽIAM 3', demoCap: '3 = ŠUOLIS IKI 3 LINIJOS',
+      try: 'DABAR TU! SPAUSK ', tryCap: 'PELE ARBA KLAVIŠU 1–5',
+      done: 'TU MOKI! PIRMYN!', doneCap: 'DABAR – TIKRAS ŽAIDIMAS',
+      words: ['YEAH!', 'SUPER!', 'YEAH!', 'SUPER!', 'PASAKA!'],
+      voices: ['yeah', 'super', 'yeah', 'super', 'pasaka'],
+      say: { yeah: 'Yeah!', super: 'Super!', pasaka: 'Pasaka!', jega: 'Info gynyba – jėga!' },
+      emoji: ['🎉', '⭐', '👍', '🔥', '🏆']
+    }
+  };
+  var T = CFG.TXT, L = CFG.LAY;
+  // pirštas (vaizdas iš priekio, rodo į viršų): '#' kontūras, 'o' oda, 's' rankovė, 'n' nagas
+  var HAND = [
+    '.....##........', '....#nn#.......', '....#oo#.......', '....#oo#.......', '....#oo#.......',
+    '....#oo####....', '....#oo#oo###..', '.##.#oo#oo#oo#.', '#oo##oo#oo#oo##', '#ooo#oooooooo#.',
+    '.#ooooooooooo#.', '.#ooooooooooo#.', '..#ooooooooo#..', '..#ooooooooo#..', '...#########...',
+    '...#sssssss#...', '...#sssssss#...', '...#########...'
+  ];
+  var TIP = { c: 5.5, r: 0 };               // piršto galiukas (langeliais)
+
+  // ================= būsena =================
+  var G = null, GEO = null;
+  var root = document.getElementById('tut');
+  var cv = document.getElementById('tutCv');
+  var ctx = cv ? cv.getContext('2d') : null;
+  var W = 900, H = 500, DPR = 1;
+  var S = {
+    active: false, frozen: false, raf: 0, last: 0, t: 0, t0: 0, from: '',
+    phase: 'demo', phaseT: 0, rep: 0, demoStep: 'wait', demoAt: 0,
+    next: 0, done: [], pending: 0, misses: 0, shiver: {}, hintUntil: -9, lastAct: 0, pressT: {},
+    m: { y: 0, onGround: true, jumpT: 0, v0: 0, level: 0, animT: 0, apexDone: true, apexLog: [] },
+    flash: { k: 0, t: -9 }, words: [], parts: [], pebbles: [], clouds: [], fadeAt: 0, doneAt: 0,
+    pickWasHidden: true
+  };
+  window.__misteTutState = S;
+
+  function now() { return S.t; }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ev(name, data) { try { if (G && G.IG) G.IG.ev(name, data || {}); } catch (e) {} }
+
+  // ================= garsas =================
+  var AC = null;
+  function audio() {
+    try {
+      if (!AC) { var A = window.AudioContext || window.webkitAudioContext; if (A) AC = new A(); }
+      if (AC && AC.state === 'suspended') AC.resume();
+    } catch (e) { AC = null; }
+    return AC;
+  }
+  function beep(freq, dur, type, gain, slideTo) {
+    try {
+      var a = AC; if (!a || S.frozen) return;
+      var o = a.createOscillator(), g = a.createGain(), t = a.currentTime;
+      o.type = type || 'square'; o.frequency.setValueAtTime(freq, t);
+      if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+      g.gain.setValueAtTime(gain || 0.05, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+    } catch (e) {}
+  }
+  var SFX = {
+    jump: function () { beep(520, 0.12, 'square', 0.035, 900); },
+    good: function () { beep(660, 0.08, 'square', 0.04); setTimeout(function () { beep(990, 0.1, 'square', 0.04); }, 70); },
+    wrong: function () { beep(160, 0.25, 'sawtooth', 0.05, 90); },
+    win: function () { [523, 659, 784, 1047].forEach(function (f, i) { setTimeout(function () { beep(f, 0.14, 'square', 0.04); }, i * 110); }); }
+  };
+  var voiceEl = null;
+  function playVoice(key) {
+    if (/[?&](tutselftest|tutshot)=/.test(location.search)) return;   // headless: be garso
+    var V = (typeof MISTE_INTRO_VOICE !== 'undefined') ? MISTE_INTRO_VOICE : {};
+    var speech = function () {
+      try { if (window.speechSynthesis && typeof SpeechSynthesisUtterance === 'function') {
+        speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(T.say[key] || ''); u.lang = 'lt-LT'; speechSynthesis.speak(u); } } catch (e) {}
+    };
+    try {
+      if (V[key] && typeof Audio === 'function') {
+        voiceEl = voiceEl || new Audio(); voiceEl.pause(); voiceEl.src = V[key]; voiceEl.currentTime = 0;
+        var p = voiceEl.play(); if (p && p.catch) p.catch(speech);
+      } else speech();
+    } catch (e) { speech(); }
+  }
+  function stopVoice() { try { if (voiceEl) voiceEl.pause(); } catch (e) {} try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} }
+
+  // ================= geometrija: žaidimo koordinatės -> ekranas =================
+  // Mistės šuolis — TIE PATYS žaidimo dydžiai (STEP, GRAVITY, GROUND_Y, jumpV0, lineY), tik ištempti į didesnį vaizdą
+  function scene() {
+    var g = GEO, Sc = CFG.SCENE;
+    var y0 = g.lineY(5) + Sc.top, y1 = g.GROUND_Y + Sc.bottom;
+    var x0 = g.RULER_X + Sc.left, x1 = g.MISTE_X + Sc.right;
+    var hpx = (L.sceneBot - L.sceneTop) * H, wpx = W * 0.94;
+    var k = Math.min(hpx / (y1 - y0), wpx / (x1 - x0));
+    var ox = Math.round(W / 2 - (x0 + x1) / 2 * k), oy = Math.round(L.sceneTop * H + (hpx - (y1 - y0) * k) / 2 - y0 * k);
+    return { k: k, X: function (x) { return Math.round(ox + x * k); }, Y: function (y) { return Math.round(oy + y * k); }, x0: x0, x1: x1 };
+  }
+  function buttons() {
+    var bh = Math.round(L.btnH * H), bw = Math.min(bh, Math.round(L.btnMaxW * W)), gap = Math.round(L.btnGap * W);
+    var total = 5 * bw + 4 * gap, x = Math.round(W / 2 - total / 2), y = Math.round(L.btnY * H);
+    var out = [];
+    for (var i = 0; i < 5; i++) out.push({ k: i + 1, x: x + i * (bw + gap), y: y, w: bw, h: bw });
+    return out;
+  }
+  function btnAt(p) { var b = buttons(); for (var i = 0; i < b.length; i++) { var q = b[i]; if (p.x >= q.x && p.x <= q.x + q.w && p.y >= q.y - q.h * 0.05 && p.y <= q.y + q.h * 1.1) return q.k; } return 0; }
+
+  // ================= Mistės šuolis (kaip žaidime) =================
+  function jump(k) {
+    var m = S.m; if (!m.onGround) return false;
+    m.onGround = false; m.jumpT = 0; m.v0 = GEO.jumpV0(k); m.level = k; m.apexDone = false; m.peak = GEO.GROUND_Y;
+    SFX.jump();
+    return true;
+  }
+  function onApex(k) {
+    S.flash = { k: k, t: now() };
+    S.m.apexLog.push({ k: k, head: S.m.peak - GEO.MISTE_H, want: GEO.lineY(k) });
+    if (S.phase === 'try') {
+      var i = S.done.length - 1;
+      var sc = scene();
+      // žodis — dešinėje, PO pasiekta linija (linija lieka matoma, 5-as neišlenda iš scenos)
+      floatWord(T.emoji[i % T.emoji.length] + ' ' + T.words[i % T.words.length], sc.X(GEO.MISTE_X + 170), sc.Y(GEO.lineY(k)) + Math.round(L.wordSize * H * 0.85));
+      playVoice(T.voices[i % T.voices.length]);
+      SFX.good();
+      burst(sc.X(GEO.MISTE_X + GEO.MISTE_W / 2), sc.Y(GEO.lineY(k)), 14, 0.12 * H, CFG.GREEN);
+    }
+  }
+  function floatWord(s, x, y) { S.words = [{ s: s, x: x, y: y, t0: now() }]; }
+  function burst(x, y, n, spread, col) {
+    for (var i = 0; i < n; i++) {
+      var a = rnd(0, Math.PI * 2), v = rnd(0.3, 1) * spread;
+      S.parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - spread * 0.4, age: 0, life: rnd(0.5, 0.9), s: Math.max(3, Math.round(H / 140)), col: col });
+    }
+  }
+
+  // ================= fazės =================
+  function enter(phase) {
+    S.phase = phase; S.phaseT = 0;
+    if (phase === 'demo') { S.rep = 0; S.demoStep = 'wait'; S.demoAt = now() + CFG.DEMO.firstWait; }
+    if (phase === 'try') { S.next = CFG.TRY.order[0]; S.lastAct = now(); }
+    if (phase === 'done') {
+      S.doneAt = now(); S.words = []; SFX.win(); playVoice('jega');
+      for (var i = 0; i < 4; i++) burst(rnd(0.15, 0.85) * W, rnd(0.25, 0.5) * H, 22, 0.25 * H, [CFG.GREEN, CFG.INK, CFG.MUTED, CFG.GREEN_LINE][i]);
+      ev('kaip_zaisti_baigta', { pro_sali: String(Math.min(S.misses, 10)) + (S.misses > 10 ? '+' : '') });
+    }
+  }
+  // demonstracija: pirštas atslenka -> paspaudžia 3 -> Mistė šoka -> pirštas atsitraukia; CFG.DEMO.reps kartų
+  function updateDemo() {
+    var D = CFG.DEMO;
+    if (now() < S.demoAt) return;
+    if (S.demoStep === 'wait') { S.demoStep = 'enter'; S.demoAt = now() + D.enter; }
+    else if (S.demoStep === 'enter') { S.demoStep = 'press'; S.demoAt = now() + D.press; S.pressT[D.key] = now(); jump(D.key); }
+    else if (S.demoStep === 'press') { S.demoStep = 'hold'; S.demoAt = now() + D.hold; }
+    else if (S.demoStep === 'hold') { S.demoStep = 'air'; S.demoAt = now(); }
+    else if (S.demoStep === 'air') { if (S.m.onGround) { S.demoStep = 'after'; S.demoAt = now() + D.after; } }
+    else if (S.demoStep === 'after') {
+      S.rep++;
+      if (S.rep < D.reps) { S.demoStep = 'enter'; S.demoAt = now() + D.enter; }
+      else { S.demoStep = 'leave'; S.demoAt = now() + D.leave; }
+    } else if (S.demoStep === 'leave') enter('try');
+  }
+  // rankos padėtis demonstracijoje: 0 = už ekrano apačioje, 1 = ant mygtuko; press 0..1
+  function demoHand() {
+    var D = CFG.DEMO, t = now(), st = S.demoStep;
+    if (S.phase !== 'demo') return null;
+    var a = 0, press = 0;
+    if (st === 'wait') a = 0;
+    else if (st === 'enter') a = S.rep === 0 ? easeOut(1 - (S.demoAt - t) / D.enter) : 1;
+    else if (st === 'press') { a = 1; press = Math.sin(Math.PI * clamp(1 - (S.demoAt - t) / D.press, 0, 1)); }
+    else if (st === 'hold' || st === 'air' || st === 'after') a = 1;
+    else if (st === 'leave') a = 1 - easeOut(1 - (S.demoAt - t) / D.leave);
+    return { k: D.key, a: a, press: press };
+  }
+  function easeOut(x) { x = clamp(x, 0, 1); return 1 - Math.pow(1 - x, 3); }
+
+  function press(k, via) {
+    if (!S.active || S.frozen) return;
+    audio();
+    if (S.phase !== 'try') return;           // demonstracijos metu — tik žiūrim
+    S.lastAct = now();
+    S.pressT[k] = now();
+    if (k !== S.next) {                       // ne tas: mygtukas sudreba, pirštas rodo teisingą
+      S.shiver[k] = now(); S.hintUntil = now() + CFG.TRY.hintFor; S.misses++;
+      SFX.wrong();
+      return;
+    }
+    if (!S.m.onGround) { S.pending = k; return; }   // dar ore — šoks nusileidus
+    accept(k, via);
+  }
+  function accept(k) {
+    S.done.push(k); S.hintUntil = -9;
+    var i = CFG.TRY.order.indexOf(k);
+    S.next = CFG.TRY.order[i + 1] || 0;
+    jump(k);
+  }
+
+  // ================= įvestis =================
+  function toPoint(e) { return { x: e.clientX, y: e.clientY }; }
+  function onDown(e) {
+    if (!S.active || S.frozen) return;
+    e.preventDefault();
+    try { root.focus({ preventScroll: true }); } catch (x) {}
+    if (e.button !== 0) return;
+    var k = btnAt(toPoint(e)); if (k) press(k, 'pele');
+    else audio();
+  }
+  function onMove(e) {
+    if (!S.active) return;
+    root.style.cursor = btnAt(toPoint(e)) && S.phase === 'try' ? 'pointer' : 'default';
+  }
+  function levelFromEvent(e) {
+    var c = /^(?:Digit|Numpad)([1-5])$/.exec(e.code || '');
+    if (c) return +c[1];
+    if (/^[1-5]$/.test(e.key || '')) return +e.key;
+    return 0;
+  }
+  function onKey(e) {                        // iš žaidimo globalaus keydown (per __misteIntro.key)
+    if (!S.active) return;
+    if (e.key === 'Escape') { e.preventDefault(); skip(); return; }
+    if (e.repeat) { e.preventDefault(); return; }
+    var k = levelFromEvent(e);
+    if (k) { e.preventDefault(); press(k, 'klavisas'); return; }
+    if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || /^Arrow/.test(e.key || '')) e.preventDefault();
+  }
+
+  // ================= atnaujinimas =================
+  function update(dt) {
+    S.t += dt; S.phaseT += dt;
+    var g = GEO, m = S.m;
+    m.animT += dt;
+    if (!m.onGround) {
+      m.jumpT += dt;
+      var t = m.jumpT;
+      var hgt = m.v0 * t - 0.5 * g.GRAVITY * t * t;
+      if (!m.apexDone && t >= m.v0 / g.GRAVITY) { m.apexDone = true; m.peak = g.GROUND_Y - (m.v0 * m.v0) / (2 * g.GRAVITY); onApex(m.level); }
+      if (hgt <= 0) { m.y = g.GROUND_Y; m.onGround = true; m.level = 0; }
+      else m.y = g.GROUND_Y - hgt;
+    }
+    if (m.onGround && S.pending) { var p = S.pending; S.pending = 0; if (p === S.next) accept(p); }
+    if (S.phase === 'demo') updateDemo();
+    else if (S.phase === 'try') {
+      if (!S.next && m.onGround && S.done.length >= CFG.TRY.order.length) enter('done');
+      else if (S.next && now() - S.lastAct > CFG.TRY.idleHint && now() > S.hintUntil) { S.hintUntil = now() + CFG.TRY.hintFor; S.lastAct = now(); }
+    } else if (S.phase === 'done') {
+      if (!S.fadeAt && now() - S.doneAt > CFG.DONE.hold) { S.fadeAt = now() + CFG.FADE; root.classList.add('fade'); }
+      if (S.fadeAt && now() >= S.fadeAt) { close(); return; }
+    }
+    // fonas juda — Mistė bėga
+    var sp = 160 * dt;
+    S.pebbles.forEach(function (p) { p.x -= sp; if (p.x < -20) p.x += 440; });
+    S.clouds.forEach(function (c) { c.x -= 14 * dt; if (c.x < 0) c.x += 330; });
+    S.parts.forEach(function (p) { p.age += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 0.9 * H * dt; });
+    S.parts = S.parts.filter(function (p) { return p.age < p.life; });
+    S.words = S.words.filter(function (w) { return now() - w.t0 < 1.4; });
+  }
+
+  // ================= piešimas =================
+  function text(str, x, y, size, align, color, alpha) {
+    ctx.save(); if (alpha != null) ctx.globalAlpha = alpha;
+    ctx.font = Math.round(size) + 'px ' + CFG.FONT; ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = color || CFG.INK; ctx.fillText(str, Math.round(x), Math.round(y)); ctx.restore();
+  }
+  function textW(str, size) { ctx.font = Math.round(size) + 'px ' + CFG.FONT; return ctx.measureText(str).width; }
+  function fit(str, size, maxW) { size = Math.round(size); while (size > 8 && textW(str, size) > maxW) size--; return size; }
+  function emoji(ch, x, y, size) {
+    ctx.save(); ctx.font = Math.round(size) + 'px ' + CFG.EMOJI_FONT; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = CFG.INK; ctx.fillText(ch, Math.round(x), Math.round(y)); ctx.restore();
+  }
+  // žemėlapis žaidimo koordinatėmis (žaidimo sprite mastelis 2)
+  function drawSprite(map, gx, gy, sc, color) {
+    ctx.fillStyle = color;
+    for (var r = 0; r < map.length; r++) for (var c = 0; c < map[r].length; c++) {
+      if (map[r][c] !== '#') continue;
+      var x = sc.X(gx + c * 2), y = sc.Y(gy + r * 2);
+      ctx.fillRect(x, y, sc.X(gx + c * 2 + 2) - x, sc.Y(gy + r * 2 + 2) - y);
+    }
+  }
+  var CHECK = ['.......#', '......##', '#....##.', '##..##..', '.####...', '..##....'];
+  function drawCheck(x, y, u) {             // pikselinė varnelė (emoji ✔ spalvota ir svetima stiliui)
+    ctx.fillStyle = '#ffffff';
+    for (var r = 0; r < CHECK.length; r++) for (var c = 0; c < CHECK[r].length; c++) if (CHECK[r][c] === '#') ctx.fillRect(x + c * u, y + r * u, u, u);
+  }
+  function drawHand(tipX, tipY, u, alpha) {
+    ctx.save(); ctx.globalAlpha = alpha == null ? 1 : alpha;
+    var x0 = Math.round(tipX - TIP.c * u), y0 = Math.round(tipY - TIP.r * u);
+    var col = { '#': CFG.INK, o: CFG.CLOUD, s: CFG.MUTED, n: CFG.BG };
+    for (var r = 0; r < HAND.length; r++) for (var c = 0; c < HAND[r].length; c++) {
+      var f = col[HAND[r][c]]; if (!f) continue;
+      ctx.fillStyle = f; ctx.fillRect(x0 + c * u, y0 + r * u, u, u);
+    }
+    ctx.restore();
+  }
+
+  function render() {
+    var C = CFG, t = now(), g = GEO, sc = scene();
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = C.BG; ctx.fillRect(0, 0, W, H);
+    var lw = Math.max(2, Math.round(sc.k * 2));
+
+    // debesys
+    S.clouds.forEach(function (c) { drawSprite(g.CLOUD_MAP, sc.x0 + c.x, c.y, sc, C.CLOUD); });
+
+    // pagalbinės linijos 1–5 (kaip žaidime), pasiekta linija užsidega
+    var flashOn = t - S.flash.t < 1.1;
+    for (var k = 1; k <= 5; k++) {
+      var y = sc.Y(g.lineY(k) + 1);
+      var lit = flashOn && S.flash.k === k;
+      var nextLine = S.phase === 'try' && S.next === k && S.m.onGround;
+      if (lit) { ctx.fillStyle = S.phase === 'demo' ? C.INK : C.GREEN; ctx.fillRect(sc.X(g.RULER_X + 2), y - lw, sc.X(sc.x1) - sc.X(g.RULER_X + 2), lw * 2); }
+      else {
+        ctx.fillStyle = nextLine && Math.floor(t * 3) % 2 ? C.MUTED : C.GUIDE;
+        var dash = Math.max(2, Math.round(sc.k * 2)), gap = dash * 2;
+        for (var x = sc.X(g.RULER_X + 2); x < sc.X(sc.x1); x += dash + gap) ctx.fillRect(x, y - lw / 2, dash, lw);
+      }
+    }
+    // liniuotė su dideliais skaičiais
+    ctx.fillStyle = C.MUTED;
+    ctx.fillRect(sc.X(g.RULER_X), sc.Y(g.lineY(5) - 6), lw, sc.Y(g.GROUND_Y) - sc.Y(g.lineY(5) - 6));
+    var ns = Math.round(Math.min(28 * sc.k / 2, (sc.Y(g.lineY(1)) - sc.Y(g.lineY(2))) * 0.8));
+    for (var j = 1; j <= 5; j++) {
+      var yy = sc.Y(g.lineY(j));
+      ctx.fillStyle = C.MUTED; ctx.fillRect(sc.X(g.RULER_X - 6), yy, sc.X(g.RULER_X + 2) - sc.X(g.RULER_X - 6), lw);
+      var on = flashOn && S.flash.k === j;
+      var pulse = on ? 1 + 0.35 * Math.max(0, 1 - (t - S.flash.t) / 0.5) : 1;
+      text(String(j), sc.X(g.RULER_X - 12), yy + lw / 2, ns * pulse, 'right', on ? (S.phase === 'demo' ? C.INK : C.GREEN) : C.INK);
+    }
+    // žemė
+    ctx.fillStyle = C.INK; ctx.fillRect(sc.X(sc.x0), sc.Y(g.GROUND_Y), sc.X(sc.x1) - sc.X(sc.x0), lw);
+    ctx.fillStyle = C.MUTED;
+    S.pebbles.forEach(function (p) { if (p.x >= 0 && sc.x0 + p.x < sc.x1) ctx.fillRect(sc.X(sc.x0 + p.x), sc.Y(g.GROUND_Y + p.dy), Math.round(p.w * sc.k), lw); });
+    // Mistė (žaidimo sprite'ai)
+    var m = S.m, frame = Math.floor(m.animT * 8) % 2;
+    var spr = !m.onGround ? g.MISTE_JUMP : (frame ? g.MISTE_RUN2 : g.MISTE_RUN1);
+    drawSprite(spr, g.MISTE_X, m.y - g.MISTE_H, sc, C.INK);
+
+    // mygtukai 1–5
+    var bs = buttons(), hand = demoHand();
+    bs.forEach(function (b) {
+      var k = b.k, isDone = S.done.indexOf(k) >= 0, isNext = S.phase === 'try' && S.next === k;
+      var pressedAgo = t - (S.pressT[k] || -9);
+      var down = (hand && hand.k === k && hand.press > 0.35) || pressedAgo < 0.15;
+      var sx = S.shiver[k] != null && t - S.shiver[k] < CFG.TRY.shiver ? Math.round(Math.sin((t - S.shiver[k]) * 60) * b.w * 0.06) : 0;
+      var pulse = isNext && !down ? 1 + 0.06 * (0.5 + 0.5 * Math.sin(t * 7)) : 1;
+      var w = Math.round(b.w * pulse), h = Math.round(b.h * pulse);
+      var x = b.x + Math.round((b.w - w) / 2) + sx, y = b.y + Math.round((b.h - h) / 2);
+      var bd = Math.max(3, Math.round(b.w * 0.045)), depth = Math.max(4, Math.round(b.w * 0.07));
+      var dy = down ? depth - bd : 0;
+      var fill = isDone ? C.GREEN : (S.phase === 'demo' && k === CFG.DEMO.key) || isNext ? '#ffffff' : C.BG;
+      var edge = isDone ? C.GREEN_DARK : (isNext || (S.phase === 'demo' && k === CFG.DEMO.key)) ? C.INK : C.MUTED;
+      if (S.phase === 'done') { fill = C.GREEN; edge = C.GREEN_DARK; }
+      // šešėlis / „storas apatinis kraštas" kaip .keys kbd
+      ctx.fillStyle = edge; ctx.fillRect(x, y + dy, w, h - dy);
+      ctx.fillStyle = fill; ctx.fillRect(x + bd, y + dy + bd, w - 2 * bd, h - dy - bd - (down ? bd : depth));
+      if (isNext && Math.floor(t * 3) % 2 === 0) { ctx.strokeStyle = C.INK; ctx.lineWidth = bd; ctx.strokeRect(x - bd * 2, y - bd * 2, w + bd * 4, h + bd * 4); }
+      var fs = Math.round(b.w * 0.5);
+      text(String(k), x + w / 2, y + dy + (h - depth) / 2 + bd / 2, fs, 'center', isDone || S.phase === 'done' ? '#ffffff' : C.INK);
+      if (isDone) drawCheck(x + w - bd * 2 - Math.round(b.w * 0.2), y + dy + bd * 2, Math.max(2, Math.round(b.w / 40)));
+    });
+
+    // pirštas: demonstracijoje spaudžia 3; po klaidos / ilgai nieko nedarant — rodo teisingą mygtuką
+    var u = Math.max(2, Math.round(bs[0].w / L.handU));
+    if (hand && hand.a > 0) {
+      var b3 = bs[hand.k - 1];
+      var tipX = b3.x + b3.w * 0.5, rest = b3.y + b3.h * 0.55;
+      var off = (1 - hand.a) * (H - rest + u * 2);
+      drawHand(tipX, rest + off - hand.press * b3.h * 0.12, u);
+    } else if (S.phase === 'try' && S.next && t < S.hintUntil) {
+      var bn = bs[S.next - 1], bob = Math.abs(Math.sin(t * 6)) * bn.h * 0.12;
+      drawHand(bn.x + bn.w * 0.5, bn.y + bn.h * 0.62 + bob, u);
+    }
+
+    // dalelės
+    S.parts.forEach(function (p) { ctx.fillStyle = p.col; ctx.globalAlpha = clamp(1 - p.age / p.life, 0, 1); ctx.fillRect(Math.round(p.x), Math.round(p.y), p.s, p.s); });
+    ctx.globalAlpha = 1;
+    // apdovanojimo žodis
+    S.words.forEach(function (wd) {
+      var a = (now() - wd.t0) / 1.4, size = fit(wd.s, L.wordSize * H, W * 0.42);
+      var x = clamp(wd.x, textW(wd.s, size) / 2 + 8, W - textW(wd.s, size) / 2 - 8);
+      ctx.save(); ctx.globalAlpha = 1 - a * a; ctx.font = Math.round(size) + 'px ' + C.FONT + ',' + C.EMOJI_FONT; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = C.GREEN_DARK; ctx.fillText(wd.s, Math.round(x), Math.round(wd.y - a * 0.03 * H)); ctx.restore();
+    });
+
+    // antraštė ir apatinė eilutė (≤ 8 žodžiai)
+    var title = '', cap = '';
+    if (S.phase === 'demo') { title = T.demo; cap = T.demoCap; }
+    else if (S.phase === 'try') { title = S.next ? T.try + S.next : T.done; cap = T.tryCap; }
+    else { title = T.done; cap = T.doneCap; }
+    if (title) text(title, W / 2, L.titleY * H, fit(title, L.titleSize * H, W * 0.92), 'center', S.phase === 'done' ? C.GREEN_DARK : C.INK);
+    if (S.phase === 'done') emoji('🏆', W / 2, (L.sceneTop + 0.12) * H, 0.13 * H * (1 + 0.08 * Math.sin(t * 6)));
+    if (cap) text(cap, W / 2, L.capY * H, fit(cap, L.capSize * H, W * 0.85), 'center', C.MUTED);
+    // pažanga: 5 langeliai po antrašte nereikalingi — patys mygtukai žaliuoja
+  }
+
+  // ================= ciklas =================
+  var TIMER_LOOP = /[?&](tutselftest|tutshot|selftest|demo)=/.test(location.search), rafPaint = 0;
+  function schedule() { S.raf = TIMER_LOOP ? setTimeout(function () { loop(performance.now()); }, 16) : requestAnimationFrame(loop); }
+  function unschedule() { if (S.raf) { if (TIMER_LOOP) clearTimeout(S.raf); else cancelAnimationFrame(S.raf); } S.raf = 0; }
+  function loop(ts) {
+    S.raf = 0;
+    if (!S.active || S.frozen) return;
+    var dt = (ts - S.last) / 1000; S.last = ts;
+    if (!(dt > 0)) dt = 0; if (dt > 0.05) dt = 0.05;
+    try {
+      if (G && G.state && G.state.mode === 'running') { abort(); return; }   // pvz. „test" meniu paleido bėgimą
+      update(dt);
+      if (S.active && !TIMER_LOOP) render();
+      else if (S.active && !rafPaint) rafPaint = requestAnimationFrame(function () { rafPaint = 0; if (S.active) render(); });
+    } catch (e) { console.error('tut', e); }
+    if (S.active && !S.frozen) schedule();
+  }
+  function resize() {
+    W = window.innerWidth || 900; H = window.innerHeight || 500; DPR = window.devicePixelRatio || 1;
+    if (cv) { cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
+  }
+
+  // ================= paleidimas / pabaiga =================
+  function start(from) {
+    if (!G || !GEO || !root || !ctx) return false;
+    if (G.state && G.state.mode === 'locked') return false;
+    try { if (G.stopSpeech) G.stopSpeech(); } catch (e) {}
+    var pick = document.getElementById('pick');
+    if (!S.active) S.pickWasHidden = !pick || pick.hidden;
+    if (pick) pick.hidden = true;
+    root.hidden = false; root.classList.remove('fade');
+    S.active = true; S.frozen = false; S.from = from || 'meniu';
+    S.t0 = S.t; S.done = []; S.pending = 0; S.misses = 0; S.shiver = {}; S.pressT = {}; S.hintUntil = -9; S.words = []; S.parts = []; S.fadeAt = 0;
+    S.m = { y: GEO.GROUND_Y, onGround: true, jumpT: 0, v0: 0, level: 0, animT: 0, apexDone: true, apexLog: [], peak: GEO.GROUND_Y };
+    S.flash = { k: 0, t: -9 };
+    S.pebbles = []; for (var i = 0; i < 26; i++) S.pebbles.push({ x: rnd(0, 440), w: 2 + Math.floor(rnd(0, 5)), dy: 6 + Math.floor(rnd(0, 9)) });
+    S.clouds = [0, 1].map(function (i) { return { x: 80 + i * 220 + rnd(0, 60), y: GEO.lineY(5) - 6 + rnd(0, 30) }; });
+    resize();
+    enter('demo');
+    ev('kaip_zaisti_pradeta', { is: S.from });
+    try { root.focus({ preventScroll: true }); } catch (e) {}
+    S.last = performance.now();
+    if (!S.raf) schedule();
+    return true;
+  }
+  function close() {
+    stopVoice();
+    S.active = false; unschedule();
+    root.hidden = true; root.classList.remove('fade');
+    var pick = document.getElementById('pick');
+    if (pick && !S.pickWasHidden) pick.hidden = false;
+    if (G && G.state && G.state.mode === 'dead') G.state.mode = 'title';
+    try { if (G && G.canvas && (!pick || pick.hidden)) G.canvas.focus(); } catch (e) {}
+  }
+  function skip() {                          // Esc — mentoriui
+    if (!S.active || S.frozen) return;
+    ev('kaip_zaisti_praleista', { faze: S.phase, paspausta: String(S.done.length) });
+    close();
+  }
+  function abort() { close(); }
+  function freeze() {
+    if (!S.active) return;
+    S.frozen = true; unschedule(); stopVoice();
+    try { if (AC) AC.suspend(); } catch (e) {}
+  }
+
+  // ================= tiltas =================
+  function attach(g) {
+    G = g; GEO = window.__misteGeo || null;
+    if (!root || !ctx || !GEO) return;
+    root.addEventListener('pointerdown', onDown);
+    root.addEventListener('pointermove', onMove);
+    root.addEventListener('contextmenu', function (e) { if (S.active) e.preventDefault(); });
+    window.addEventListener('resize', function () { if (S.active) resize(); });
+    document.addEventListener('visibilitychange', function () { S.last = performance.now(); });
+    var busy = function () { return S.active || (window.__misteIntro && window.__misteIntro.active()); };
+    // „🎮 KAIP ŽAISTI" po žaidimu (.keys) — tik titulinis arba pabaigos ekranas
+    var btn = document.getElementById('tutBtn');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var m = G.state && G.state.mode;
+        if (!busy() && (m === 'title' || m === 'dead')) start('mygtukas');
+        try { btn.blur(); } catch (e) {}
+      });
+      setInterval(function () {
+        var m = G.state && G.state.mode, pk = document.getElementById('pick');
+        btn.disabled = busy() || !(m === 'title' || m === 'dead');
+        btn.style.visibility = pk && !pk.hidden ? 'hidden' : '';
+      }, 400);
+    }
+    // „🎮 KAIP ŽAISTI" pradžios meniu (#pick) — po 🖱 INTRO
+    var pbtn = document.getElementById('pickTut');
+    if (pbtn) {
+      pbtn.addEventListener('click', function (e) { e.stopPropagation(); if (!busy() && G.state && G.state.mode !== 'locked') start('meniu'); });
+      pbtn.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') e.stopPropagation(); });
+    }
+    var p; try { p = new URLSearchParams(location.search); } catch (e) { p = null; }
+    if (p && p.get('tutselftest') === '1') selftest(p.get('flow') === '1');
+    else if (p && p.get('tutshot')) shot(p.get('tutshot'));
+  }
+  // ar paleisti automatiškai (kviečia įvadas, kai baigiasi): ?tut=0 — ne
+  function afterIntro() {
+    var q = null; try { q = new URLSearchParams(location.search).get('tut'); } catch (e) {}
+    if (q === '0') return false;
+    return start('po_intro');
+  }
+  function testItems(item) { item('🎮 Kaip žaisti (5 mygtukai)', function () { start('test'); }); }
+
+  // ================= ekrano nuotraukos: ?tut=1&tutshot=demo|apex|try|wrong|done&nosend=1 =================
+  function ff(sec) { for (var i = 0; i < sec * 60; i++) { update(1 / 60); if (!S.active) return; } }
+  function shot(kind) {
+    setTimeout(function () { if (start('test')) shotAt(kind); }, 300);   // kaip įvado ?demo= — po pirmų kadrų
+  }
+  function shotAt(kind) {
+    if (kind === 'demo') { ff(CFG.DEMO.firstWait + CFG.DEMO.enter + 0.1); }              // pirštas spaudžia 3
+    else if (kind === 'apex') { ff(CFG.DEMO.firstWait + CFG.DEMO.enter + 0.04); ff(GEO.jumpV0(3) / GEO.GRAVITY + 0.02); }
+    else {
+      while (S.phase === 'demo') ff(0.1);
+      if (kind === 'try' || kind === 'wrong' || kind === 'done') { press(1); ff(1.2); press(2); ff(1.3); press(3); ff(GEO.jumpV0(3) / GEO.GRAVITY + 0.03); }
+      if (kind === 'wrong') { ff(1.2); press(5); ff(0.2); }
+      if (kind === 'done') { ff(1.2); press(4); ff(1.4); press(5); ff(1.6); ff(0.3); }
+    }
+    S.frozen = true; unschedule();           // nuotraukai — sustingdom būtent šią akimirką ir vis perpiešiam
+    var rp = function () { render(); requestAnimationFrame(rp); }; rp();
+  }
+
+  // ================= savitestis: ?tut=1&tutselftest=1&nosend=1  (flow=1: įvado pabaiga -> pamoka) =================
+  function selftest(flow) {
+    var html = document.documentElement;
+    html.setAttribute('data-tut-test', 'RUNNING');
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    function Fail(msg) { this.msg = msg; }
+    var check = function (c, msg) { if (!c) throw new Fail(msg); };
+    var waitFor = async function (cond, ms, label) { var t0 = performance.now(); while (!cond()) { if (performance.now() - t0 > ms) throw new Fail('laukta per ilgai: ' + label); await wait(20); } };
+    var key = function (k, code) { window.dispatchEvent(new KeyboardEvent('keydown', { key: k, code: code || ('Digit' + k), bubbles: true, cancelable: true })); };
+    var click = function (k) { var b = buttons()[k - 1]; root.dispatchEvent(new PointerEvent('pointerdown', { clientX: b.x + b.w / 2, clientY: b.y + b.h / 2, button: 0, bubbles: true, cancelable: true, pointerType: 'mouse' })); };
+    (async function () {
+      var notes = [];
+      try {
+        if (flow) {
+          // įvadas paleistas ?intro=s8: Esc praleidžia paskutinį etapą -> įvadas baigiasi -> pamoka atsidaro pati
+          await waitFor(function () { return window.__misteIntroState && window.__misteIntroState.active; }, 5000, 'įvadas neprasidėjo');
+          await wait(300);
+          window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', bubbles: true, cancelable: true }));
+          await waitFor(function () { return S.active; }, 6000, 'po įvado pamoka neatsidarė');
+          check(!window.__misteIntroState.active, 'įvadas vis dar aktyvus');
+          check(S.from === 'po_intro', 'pamoka atsidarė ne po įvado: ' + S.from);
+          notes.push('įvadas -> pamoka ✔');
+        } else {
+          start('test');
+        }
+        // 1) demonstracija: pirštas spaudžia 3, Mistė pasiekia 3 liniją; vaiko paspaudimai nieko nedaro
+        check(S.phase === 'demo', 'pradžia ne demo: ' + S.phase);
+        key('1'); check(S.done.length === 0, 'demo metu paspaudimas užskaitytas');
+        await waitFor(function () { return S.phase === 'try'; }, 15000, 'demo nesibaigė');
+        var demoApex = S.m.apexLog.slice();
+        check(demoApex.length === CFG.DEMO.reps, 'demo šuolių ' + demoApex.length);
+        demoApex.forEach(function (a) { check(a.k === 3 && Math.abs(a.head - a.want) < 0.01, 'demo galva ' + a.head + ' ≠ linija 3 ' + a.want); });
+        notes.push('demo: 3 ×' + demoApex.length + ' galva=' + demoApex[0].head + ' linija3=' + demoApex[0].want);
+        // 2) neteisingas klavišas: sudreba, pirštas rodo 1, progreso nėra
+        key('4');
+        check(S.done.length === 0 && S.shiver[4] != null && S.hintUntil > now() && S.misses === 1, 'klaida neparodyta');
+        click(5);
+        check(S.done.length === 0 && S.shiver[5] != null && S.misses === 2, 'klaida pele neparodyta');
+        notes.push('klaida: sudrebėjo + pirštas ✔');
+        // 3) 1..5: klavišai ir pelė pakaitomis; kiekvienas šuolis — tiksliai į tą liniją, mygtukas žalias
+        var apex0 = S.m.apexLog.length;
+        for (var k = 1; k <= 5; k++) {
+          await waitFor(function () { return S.m.onGround; }, 3000, 'Mistė nenusileido prieš ' + k);
+          if (k % 2) key(String(k), k === 3 ? 'Numpad3' : 'Digit' + k); else click(k);
+          check(S.done.indexOf(k) >= 0, k + ' neužsidegė');
+          await waitFor(function () { return S.m.apexLog.length === apex0 + k; }, 3000, k + ' viršūnė');
+          var a = S.m.apexLog[apex0 + k - 1];
+          check(a.k === k && Math.abs(a.head - GEO.lineY(k)) < 0.01, 'šuolis ' + k + ': galva ' + a.head + ' ≠ ' + GEO.lineY(k));
+          check(S.words.length && S.words[0].s.indexOf(T.words[k - 1]) >= 0, 'nėra apdovanojimo ' + k);
+        }
+        notes.push('1–5: viršūnės = linijos ' + S.m.apexLog.slice(apex0).map(function (x) { return x.head; }).join('/'));
+        await waitFor(function () { return S.phase === 'done'; }, 4000, 'šventė neprasidėjo');
+        await waitFor(function () { return !S.active; }, 8000, 'pamoka neužsidarė');
+        check(root.hidden, '#tut matomas');
+        check(G.state.mode === 'title', 'mode=' + G.state.mode);
+        notes.push('pabaiga -> titulinis ✔');
+        // 4) Esc praleidžia
+        start('test'); await wait(200);
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', bubbles: true, cancelable: true }));
+        check(!S.active && root.hidden, 'Esc nepraleido');
+        notes.push('Esc ✔');
+        // 5) mygtukai meniu
+        var pk = document.getElementById('pickTut'), kb = document.getElementById('tutBtn');
+        check(!!pk && !!kb, 'nėra KAIP ŽAISTI mygtukų');
+        if (document.getElementById('pick').hidden) { kb.disabled = false; kb.click(); } else pk.click();
+        check(S.active, 'meniu mygtukas neatidarė');
+        skip();
+        notes.push('meniu mygtukas ✔');
+        html.setAttribute('data-tut-test', 'OK · ' + notes.join(' · ') + ' · ' + W + 'x' + H);
+      } catch (e) {
+        html.setAttribute('data-tut-test', 'FAIL: ' + (e && e.msg ? e.msg : (e && e.message) || e));
+      }
+    })();
+  }
+
+  window.__misteTut = {
+    attach: attach, start: start, afterIntro: afterIntro, active: function () { return S.active; }, key: onKey,
+    freeze: freeze, testItems: testItems, skip: skip
   };
 })();
 </script>
@@ -1946,7 +2590,7 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
 
   // anonymous run statistics -> Supabase (same table pattern as the P1 test: public key can only INSERT,
   // the server stamps the time, and lesson-window filtering happens in the bcjr_miste_v view)
-  const VERSION = 'miste-2026-09-30b';
+  const VERSION = 'miste-2026-10-02';
 
   // ---------- analitika (track.js): tik įvykiai, jokio vaiko turinio ----------
   const IG = window.ig || { ev(){}, tag(){}, upgrade(){}, sesija:null };
@@ -2240,6 +2884,9 @@ var MISTE_INTRO_VOICE = {"jega":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAO
     return a;
   }
 
+/* ═ MISTE-EXTRA ═ */
+  window.__misteGeo = { GROUND_Y, STEP, GRAVITY, MISTE_X, MISTE_W, MISTE_H, RULER_X, lineY, jumpV0, MISTE_RUN1, MISTE_RUN2, MISTE_JUMP, CLOUD_MAP }; /* KAIP ŽAISTI */
+/* ═ /MISTE-EXTRA ═ */
   const state = {
     mode: 'title',            // title | running | dead
     time: 0,
