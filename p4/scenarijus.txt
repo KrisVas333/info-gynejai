@@ -22,7 +22,7 @@
 - [ ] 📱 **QR išbandytas telefonu** (`testas-qr.png` → „Klaido misija“). Jei nepavyksta — turi nuorodą INFOGYNEJAI.LT.
 - [ ] 🔒 **⊞+L — tik gestas.** Patikrinta, kad niekas (nei tu, nei vaikai) nespaus ⊞+L: užsirakins projektoriaus deck’as, o mokyklos kompiuterių slaptažodžių nežinom.
 - [ ] 🏃 **Mistė Runner** (INFOGYNEJAI.LT) atsidaro kiekviename kompiuteryje ir deck’o S22 skaidrėje (gyvas puslapis; jei tuščias — „↗ atidaryti naujame lange“). Pats praėjai slaptažodžio vartus ir **žinai slaptažodį** — vaikams sakai tik S21.
-- [ ] 🧠 Žinai **du inkarus** ir kur jie grįžta (žr. lentelę žemiau) bei **šiandienos klausimą** (S12) ir **išvadą** (S27) žodis žodin.
+- [ ] 🧠 Žinai **du inkarus** ir kur jie grįžta (žr. lentelę žemiau) bei **šiandienos klausimą** (S13) ir **išvadą** (S27) žodis žodin.
 - [ ] 🖊️ Atsispausdinai **mokytojos lapą** (apačioje) ir turi pieštuką — 📄 žymėsi ant jo.
 - [ ] 📞 Mokyklos IT žmogus pasiekiamas.
 
@@ -37,7 +37,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 | Kur | Skaidrė | Inkaras | Modalybė / formuluotė |
 |---|---|---|---|
-| S13 · 8:00 | Termino kortelė | I1 | žodžiu — „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“ |
+| S12 · 6:30 | Termino kortelė | I1 | žodžiu — „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“ |
 | S14 · 9:30 | Trys paveikslėliai | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
 | S17 · 16:30 | Rašom slaptažodį | I1 | akimis — Taškeliai: „Slaptažodis — tik tau ir tėvams.“ |
 | S22 · ~25:00 | Mistė Runner | I1 | tylus gestas — 🤫 „Kas žino tavo slaptažodį?“ — „aš ir tėvai“ |
@@ -163,7 +163,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 ▲ Atsako kūnu.
 
-👁️ **Stebėk:** Tai P3 taisyklė. Jei dauguma renkasi B — tai tiltas į šiandienos klausimą (S12).
+👁️ **Stebėk:** Tai P3 taisyklė. Jei dauguma renkasi B — tai tiltas į šiandienos klausimą (S13).
 
 
 ---
@@ -208,7 +208,24 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 👁️ **Stebėk:** Ar pakartojo visi. Pamokos gale (S28) grįžtam prie šito — tam skirtos 2 minutės.
 
-### S12 · 6:30 · ❓ Šiandienos klausimas (grįžta pamokos gale žodis žodin)
+### S12 · 6:30 · Termino kortelė · SLAPTAŽODIS
+
+🔴 Užrakintas maketas. SAKYK BALSU IR SUSTOK:
+
+> **„SLAPTAŽODIS — slaptas žodis, kuris atrakina tik tavo duris. Žinai tu ir tėvai. Daugiau niekas.“**
+
+🔑 INKARAS 1 (žodžiu): „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“
+
+👁️ **Stebėk:** Ar kas nors sako „draugui galima“ — nesigink, tiesiog pakartok: „Tik tu ir tėvai.“
+
+
+---
+
+## 8–19 min · BLOKAS 2 · Slaptažodis ir trys būdai
+
+Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S18 paruošta.
+
+### S13 · 8:00 · ❓ Šiandienos klausimas (grįžta pamokos gale žodis žodin)
 
 *(P3 C1 modelis: vienas klausimas visai pamokai. Parodyk vieną raktą ore.)*
 
@@ -220,24 +237,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 > 💬 „Įdomu… Pamokos gale pažiūrėsim, kas nutiko Klaidui.“
 
-👁️ **Stebėk:** 📄 Kiek vaikų sako „taip, gerai“ — pamokos gale (S27) palyginsi.
-
-
----
-
-## 8–19 min · BLOKAS 2 · Slaptažodis ir trys būdai
-
-Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S18 paruošta.
-
-### S13 · 8:00 · Termino kortelė · SLAPTAŽODIS
-
-🔴 Užrakintas maketas. SAKYK BALSU IR SUSTOK:
-
-> **„SLAPTAŽODIS — slaptas žodis, kuris atrakina tik tavo duris. Žinai tu ir tėvai. Daugiau niekas.“**
-
-🔑 INKARAS 1 (žodžiu): „O geriausias draugas?“ — „Ne. Tik tu ir tėvai.“
-
-*(~9:15 — tiltas į būdus:)*
+*(~9:15 — po atsakymų tiltas į būdus:)*
 
 > **„Gerai, bet ar mokat sugalvoti gerą slaptažodį?“**
 
@@ -245,7 +245,7 @@ Vis dar prie lentos. Shift pirmokui — naujas judesys; atsarginė skaidrė S18 
 
 > 💬 „Parodysiu tris būdus.“
 
-👁️ **Stebėk:** Ar kas nors sako „draugui galima“ — nesigink, tiesiog pakartok: „Tik tu ir tėvai.“
+👁️ **Stebėk:** 📄 Kiek vaikų sako „taip, gerai“ — pamokos gale (S27) palyginsi.
 
 ### S14 · 9:30 · 🖍️ 1 būdas · Trys paveikslėliai (~4 min piešimui)
 
@@ -463,7 +463,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 ▲ VISA KLASĖ, DU KARTUS.
 
 
-👁️ **Stebėk:** 📄 Palygink su S12: kiek dabar sakytų „taip, gerai“? Ar eilutė sakoma žodis žodin — jei klasė sutrumpina, pakartok lėtai.
+👁️ **Stebėk:** 📄 Palygink su S13: kiek dabar sakytų „taip, gerai“? Ar eilutė sakoma žodis žodin — jei klasė sutrumpina, pakartok lėtai.
 
 
 ---
@@ -523,7 +523,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 
 A. **A** — kiek vaikų prireikė gelbėti pereinant prie kompiuterių (20:00): `____`
-B. **B** — kiek vaikų sakė „taip, gerai“ prie šiandienos klausimo (S12, 6:30) → ir kiek pabaigoje (S27): `____`
+B. **B** — kiek vaikų sakė „taip, gerai“ prie šiandienos klausimo (S13, 8:00) → ir kiek pabaigoje (S27): `____`
 C. **C** — kelintą minutę užsidegė paskutinis ekranas (S20): `____`
 D. **D** — kiek vaikų nespėjo testo per 3 min (S23) — jie baigia namie su QR: `____`
 E. **E** — ko niekas nepaaiškino per „Ar pasiekėm tikslą?“ (S28) — trys paveikslėliai / didžioji raidė / skaičius: `____`
