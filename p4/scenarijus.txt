@@ -2,7 +2,7 @@
 
 **PAMOKA 4 · LYGIS 0 ▸ SLAPTAŽODIS · SHIFT IR SKAIČIUS**
 **45 min · kompiuterių klasė · V2 · 2026-09-30 (Klaido istorija)**
-**Šaltinis: `deck.src.html` (32 skaidrės). Kiekviena skaidrė S1–S32 turi savo skyrių.**
+**Šaltinis: `deck.src.html` (34 skaidrės). Kiekviena skaidrė S1–S34 turi savo skyrių.**
 **Mentorius be patirties turi pravesti vien iš šito failo.**
 
 > **Žymėjimas:** **„taip“** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
@@ -41,7 +41,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 | S15 · 9:30 | Trys paveikslėliai | I1 | piešiniu — „Mano slaptažodį žino: aš ir ___“ |
 | S18 · 16:30 | Rašom slaptažodį | I1 | akimis — Taškeliai: „Slaptažodis — tik tau ir tėvams.“ |
 | S23 · ~25:00 | Mistė Runner | I1 | tylus gestas — 🤫 „Kas žino tavo slaptažodį?“ — „aš ir tėvai“ |
-| S30 · 41:00 | Namų darbas | I1 | namuose per tėvus — „Slaptažodį žinai tu ir tėvai.“ |
+| S30 · 40:30 | Namų darbas | I1 | namuose per tėvus — „Slaptažodį žinai tu ir tėvai.“ |
 
 ⚠️ Inkaras 2 šiandien ekrane NErodomas (Kris, 2026-10-01): išvada — tik Klaido klaidos sakinys (S28). Žodžiu jis nuskamba tik spalio skaidrėje (S31).
 
@@ -216,7 +216,7 @@ Kas 10–12 min — nauja modalybė (žodžiu, choru, kūnu, piešiniu, akimis, 
 
 ▲ Klasė pakartoja choru.
 
-👁️ **Stebėk:** Ar pakartojo visi. Pamokos gale (S29) grįžtam prie šito — tam skirtos 2 minutės.
+👁️ **Stebėk:** Ar pakartojo visi. Pamokos gale (S29) grįžtam prie šito — tam skirta 1,5 min.
 
 ### S13 · 6:30 · Termino kortelė · SLAPTAŽODIS
 
@@ -478,11 +478,11 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 ---
 
-## 39–45 min · BLOKAS 6 · Ar pasiekėm · namai · spalis
+## 39–45 min · BLOKAS 6 · Ar pasiekėm · namai · spalis · refleksija
 
-### S29 · 39:00 · 🎯 Ar pasiekėm tikslą? (2 min)
+### S29 · 39:00 · 🎯 Ar pasiekėm tikslą? (1,5 min)
 
-🔴 DVI MINUTĖS, SUPLANUOTOS.
+🔴 PUSANTROS MINUTĖS, SUPLANUOTOS.
 
 ❓ „Pamokos pradžioje pažadėjau: šiandien kiekvienas pasigamins savo raktą — saugų slaptažodį. Ar pasiekėm?“
 
@@ -492,7 +492,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 👁️ **Stebėk:** Pasižymėk, ko niekas nepaaiškino — tai duomenys kitai pamokai, ne nesėkmė. Klysti yra normalu.
 
-### S30 · 41:00 · 🏠 Namų darbas · IŠMOKYK SAVO TĖVUS
+### S30 · 40:30 · 🏠 Namų darbas · IŠMOKYK SAVO TĖVUS
 
 > **„Namų darbas — IŠMOKYK SAVO TĖVUS. Parodyk jiems savo tris paveikslėlius ir papasakok, kas nutiko Klaidui. Tada paklausk: ar jūs visur naudojat tą patį slaptažodį?“**
 
@@ -502,7 +502,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 👁️ **Stebėk:** Ar kiekvienas vaikas pasiima savo piešinį.
 
-### S31 · 42:30 · 🌴 Su savo raktais — spalį GILIAU į džiungles
+### S31 · 41:30 · 🌴 Su savo raktais — spalį GILIAU į džiungles
 
 *(SU ŠYPSENA. Ekrane — Klaidas ir Mistė džiunglėse.)*
 
@@ -514,7 +514,7 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 
 👁️ **Stebėk:** Ar klasei tikrai smagu „giliau“. Ši akimirka turi jaustis kaip pergalė.
 
-### S32 · 43:00 · 🛡️ Atsisveikinimas · saliutas
+### S32 · 42:00 · 🛡️ Atsisveikinimas · saliutas
 
 
 🔴 SALIUTAS: gilus įkvėpimas, abu delnai ant burnos. Jokio šūksnio.
@@ -524,6 +524,30 @@ IŠEINAM 3·2·1 — atgal prie lentos, kėdės puslankiu. Klaido motyvacija —
 ▲ Saliutuoja, tyliai sėdi.
 
 👁️ **Stebėk:** Ar saliutas vėl tikras. Rankos ant burnos — rami pamokos pabaiga.
+
+### S33 · 42:30 · 🤔 Ką Klaidas galėjo padaryti geriau? (refleksija ~1 min)
+
+*(Tikslas — tvarka ir drausmė klasėje: vaikai GARSIAI pagalvoja, kas nepavyko ir ką galima daryti kitaip. Pirma — per Klaidą: apie veikėją kalbėti lengviau nei apie save.)*
+
+❓ „Ką Klaidas galėjo padaryti geriau?“
+
+▲ 2–3 vaikų atsakymai (pvz. „neskubėti“, „turėti kelis raktus“, „nepamesti“).
+
+🔴 Tu klausi — vaikai atsako. NEMORALIZUOK, nepridėk savo išvados, tik „Ačiū.“
+
+👁️ **Stebėk:** Ar atsakymai jungiasi su Klaido motyvacija „nori visko iškart“ — jei taip, tiesiog linktelk.
+
+### S34 · 43:30 · 🪑🤝 Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip? (~1 min)
+
+*(Klasės refleksija — tvarka ir drausmė.)*
+
+❓ „Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip?“
+
+▲ Vaikai patys įvardija, kas šiandien nepavyko (pvz. ginčas dėl kėdės, šaukimas, kas nors spaudė už kitą) ir ką darysim kitaip (pvz. „kėdes pasidalinam“, „laukiam eilės“).
+
+🔴 Tu klausi — vaikai atsako. Be vardų, be kaltinimų, NEMORALIZUOK. Vieną jų sugalvotą taisyklę pakartok garsiai: „Kitą kartą darom taip.“
+
+👁️ **Stebėk:** 📄 Užsirašyk tą taisyklę — kitą pamoką pradėsi nuo jos.
 
 ---
 
@@ -540,4 +564,4 @@ E. **E** — ko niekas nepaaiškino per „Ar pasiekėm tikslą?“ (S29) — tr
 F. **F** — ar rodei S19 (viena didžioji + vienas skaičius): taip / ne: `____`
 
 ---
-P4 · V2 · 2026-09-30 · 1:1 su `deck.src.html` (S1–S32) · ← [[../03-baitas-piesinys-failas/scenarijus|P3 scenarijus]]
+P4 · V2 · 2026-09-30 · 1:1 su `deck.src.html` (S1–S34) · ← [[../03-baitas-piesinys-failas/scenarijus|P3 scenarijus]]
