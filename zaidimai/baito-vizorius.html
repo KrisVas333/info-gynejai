@@ -102,6 +102,20 @@ h1.title{font-size:clamp(40px,8vh,84px);font-weight:900;margin:0;letter-spacing:
 .zone.g.glow{--gc:var(--g)}.zone.r.glow{--gc:var(--r)}
 @keyframes glow{50%{box-shadow:0 0 0 14px color-mix(in srgb,var(--gc,#1FB47A) 45%,transparent),0 0 60px 20px var(--gc,#1FB47A)}}
 .zone .ic{font-size:clamp(56px,12vh,120px);line-height:1}
+.mid{order:2}
+.zone .zw.long{font-size:clamp(30px,5.2vh,50px)}
+.tray{position:absolute;left:0;right:0;top:1vh;display:flex;flex-wrap:wrap;align-content:flex-start;justify-content:center;gap:1.6vh 1.2vw;z-index:4;padding:1vh;border-radius:30px;border:5px dashed #b9c7d3;min-height:20vh}
+.tray.hover{background:#ffffff88}
+.card.l2c{width:clamp(76px,13vh,124px);height:clamp(76px,13vh,124px)}
+#doneBtn{position:absolute;left:0;right:0;margin:0 auto;width:max-content;max-width:100%;bottom:3vh;z-index:6;white-space:nowrap;font-size:clamp(32px,5.6vh,58px);padding:2vh 2.4vw;animation:pop .4s ease-out}
+#gameScr.l2 .mid .bimg{display:none}
+.side.paused{opacity:.3;filter:grayscale(1)}
+.res{position:absolute;left:10px;right:10px;top:10px;z-index:6;background:#fff;border-radius:24px;padding:1.6vh 1vw;box-shadow:0 10px 30px #0003;display:flex;flex-direction:column;align-items:center;gap:1.2vh;animation:pop .35s ease-out;pointer-events:none}
+.res .rn{font:900 clamp(44px,8.5vh,84px)/1 var(--font);color:var(--navy)}
+.res .rd{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.res .rd i{width:clamp(34px,5.6vh,54px);height:clamp(34px,5.6vh,54px);border-radius:50%;font:900 clamp(20px,3.4vh,32px)/1 var(--font);font-style:normal;display:flex;align-items:center;justify-content:center}
+.res .rd i.y{background:var(--g);color:#fff}
+.res .rd i.n{background:#fff;border:5px solid var(--r);color:var(--r)}
 .zone .icimg{height:clamp(56px,13vh,130px);width:auto;display:block;-webkit-user-drag:none}
 .zone .zw{font:900 clamp(40px,7vh,70px)/1 var(--font);letter-spacing:.02em}
 .zone.g .zw{color:var(--g-dark)}.zone.r .zw{color:var(--r-dark)}
@@ -216,24 +230,28 @@ h1.title{font-size:clamp(40px,8vh,84px);font-weight:900;margin:0;letter-spacing:
     </div>
     <div class="play" id="play">
       <div class="zone g" id="zoneG" data-k="g">
-        <button class="spk" type="button" data-say="viesa" aria-label="🔊 vieša">🔊</button>
+        <button class="spk" type="button" data-say="viesa" aria-label="🔊">🔊</button>
         <div class="ic">🧺</div><div class="zw">VIEŠA</div><div class="zd">galima rodyti</div>
         <div class="got" id="gotG"></div>
+        <div class="res" hidden></div>
       </div>
       <div class="mid">
         <div id="itemWrap" hidden><div class="item" id="item"><img id="itemImg" alt=""><button class="spk" id="itemSpk" type="button" aria-label="🔊 kas čia?">🔊</button></div></div>
+        <div id="tray" class="tray" hidden></div>
+        <button class="big" id="doneBtn" type="button" hidden>✔ BAIGIAU</button>
         <div class="bimg" id="gameBaitas"><div class="in"><img id="gameBaitasImg" alt="Baitas"><i class="visor" id="visor"></i></div></div>
       </div>
       <div class="zone r" id="zoneR" data-k="r">
-        <button class="spk" type="button" data-say="slapta" aria-label="🔊 slapta">🔊</button>
+        <button class="spk" type="button" data-say="slapta" aria-label="🔊">🔊</button>
         <div class="ic"><img id="chestImg" class="icimg" alt="užrakinta skrynia"></div><div class="zw">SLAPTA</div><div class="zd">tik man ir tėvams</div>
         <div class="got" id="gotR"></div>
+        <div class="res" hidden></div>
       </div>
       <div class="arrow" id="arrow" hidden>⬅️</div>
     </div>
     <div id="banner" hidden><div class="lvl" id="bLvl">1</div><div class="ico" id="bIco">🟢🔴</div><div class="lvn" id="bName">AIŠKU</div><button class="big" id="bGo" type="button">▶</button></div>
   </div>
-  <aside class="side" aria-label="Serija">
+  <aside class="side" id="side" aria-label="Serija">
     <div class="stars" id="starsBox"><span class="s">⭐</span><b id="starsN">0</b></div>
     <div class="tube" id="tube"><div class="fill" id="fill"></div>
       <span class="tick" data-n="3" style="bottom:30%">🔥</span><span class="tick" data-n="5" style="bottom:50%">⚡</span><span class="tick" data-n="10" style="bottom:100%">👑</span>
@@ -2197,7 +2215,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     { key: 'namie-viena', k: 'r', name: 'Kada ji namie viena', l1: true },   // Kris gali keisti į { key: 'slaptazodis', k: 'r', name: 'Slaptažodis', l1: true }
     { key: 'uniforma', k: 'r', name: 'Nuotrauka su mokyklos uniforma', gudru: true },
     { key: 'namo-nuotrauka', k: 'r', name: 'Namo nuotrauka', gudru: true },
-    { key: 'augintinis', k: 'g', name: 'Katino nuotrauka', gudru: true }
+    { key: 'augintinis', k: 'g', name: 'Katinuko nuotrauka', gudru: true }
   ];
   var ITEMS = {}; ITEM_LIST.forEach(function (it) { ITEMS[it.key] = it; });
   var ALL = ITEM_LIST.map(function (it) { return it.key; });
@@ -2206,15 +2224,41 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
   // lygiai — duomenys, ne kodas
   var LEVELS = [
     { id: 'l1', name: 'AIŠKU', ico: '🟢🔴', kind: 'sort', items: function () { return ITEM_LIST.filter(function (it) { return it.l1; }).map(function (it) { return it.key; }); }, fin: 0.9, next: 900, sayKind: true },
-    // GUDRU: visi keblūs + 5 paprasti (2–3 kiekvienos rūšies), atsitiktinai
-    { id: 'l2', name: 'GUDRU', ico: '🟢🔴⚡', kind: 'sort', items: function () {
-        var ng = Math.random() < 0.5 ? 2 : 3;
-        return ALL.filter(function (key) { return ITEMS[key].gudru; }).concat(shuffle(ofKind(BASIC, 'g')).slice(0, ng), shuffle(ofKind(BASIC, 'r')).slice(0, 5 - ng)); },
-      fin: 0.6, next: 500, sayKind: false },
+    // GUDRU (Kris 2026-10-07): visi daiktai išdėlioti, vaikas sudeda BE atsako ir BE serijos, spaudžia ✔ BAIGIAU / Enter,
+    // mato tik „kiek teisingai kiekvienoje dėžėje", taiso be užuominų, kol viskas teisinga. Daiktai — l2Items() (prisitaikantys).
+    { id: 'l2', name: 'GUDRU', ico: '🧩✔', kind: 'sortall', items: function () { return l2Items(); } },
     { id: 'l3', name: 'BAITO KLAIDOS', ico: '🔍🔍', kind: 'fix', g: 3, r: 3 }
   ];
+  // ═══ DĖŽIŲ RĖMAI — tie patys paveikslai, kita kategorijos formuluotė; kiekvienam lygiui kitas rėmas IR atsitiktinė pusė ═══
+  var FRAMES = [
+    { id: 'viesa', g: { ic: '🧺', w: 'VIEŠA', d: 'galima rodyti', say: 'viesa' }, r: { img: 'skrynia', w: 'SLAPTA', d: 'tik man ir tėvams', say: 'slapta' } },
+    { id: 'bezdzione', g: { ic: '🐒', w: 'BEŽDŽIONEI', d: 'galima papasakoti', say: 'bezdzionei' }, r: { ic: '🔒', w: 'TIK MAN', d: 'ir tėvams', say: 'tikman' } },
+    { id: 'seima', g: { ic: '🌍', w: 'VISI', d: 'gali matyti visi', say: 'visi' }, r: { ic: '👨‍👩‍👧', w: 'ŠEIMA', d: 'tik šeima', say: 'seima' } }
+  ];
+  // ═══ PRISITAIKYMAS (vienoje vietoje) ═══
+  // 1 lygis: jei pirmi L1_SHORT daiktai visi teisingi iš pirmo karto — lygis baigiasi anksčiau (likę praleidžiami).
+  // Kiekvienas daiktas, kurį vaikas kada nors padėjo ne ten (1 lygyje arba pirmu 2 lygio tikrinimu), patenka į S.missed:
+  // 2 lygyje jie grįžta pirmi (iki 5 paprastų), 3 lygyje Baito klaidos renkamos pirmiausia iš jų.
+  var ADAPT = { L1_SHORT: 4, L2_BASIC: 5 };
+  function l2Items() {
+    var tricky = ALL.filter(function (key) { return ITEMS[key].gudru; });
+    var miss = shuffle(BASIC.filter(function (key) { return S.missed[key]; })).slice(0, ADAPT.L2_BASIC);
+    var rest = shuffle(BASIC.filter(function (key) { return miss.indexOf(key) < 0; }));
+    var basic = miss.slice();
+    while (basic.length < ADAPT.L2_BASIC && rest.length) {          // pildom, kad abi rūšys būtų bent po 2
+      var ng = ofKind(basic, 'g').length, nr = ofKind(basic, 'r').length, want = ng <= nr ? 'g' : 'r';
+      var i = rest.findIndex(function (key) { return ITEMS[key].k === want; }); if (i < 0) i = 0;
+      basic.push(rest.splice(i, 1)[0]);
+    }
+    return tricky.concat(basic);
+  }
   var SAY = {
-    viesa: 'Vieša! Galima rodyti.', slapta: 'Slapta! Tik man ir tėvams.', bandom: 'Bandom dar!', komanda: 'Tu — Informacijos Gynėjų komandoje!', nunesk: 'Nunešk į kitą dėžę!', darkarta: 'Dar kartą!',
+    viesa: 'Vieša! Galima rodyti.', slapta: 'Slapta! Tik man ir tėvams.', bandom: 'Bandom dar!',
+    bezdzionei: 'Galima papasakoti beždžionei.', tikman: 'Tik man ir tėvams.', visi: 'Gali matyti visi.', seima: 'Tik šeima.',
+    sudeliok: 'Sudėliok visus paveikslėlius. Tada spausk baigiau.', kaireje: 'Kairėje', desineje: 'Dešinėje', nieko: 'nieko',
+    viskas: 'Viskas teisingai!', pataisyk: 'Pataisyk ir spausk baigiau.',
+    n0: 'nulis', n1: 'vienas', n2: 'du', n3: 'trys', n4: 'keturi', n5: 'penki', n6: 'šeši', n7: 'septyni', n8: 'aštuoni',
+    is1: 'iš vieno', is2: 'iš dviejų', is3: 'iš trijų', is4: 'iš keturių', is5: 'iš penkių', is6: 'iš šešių', is7: 'iš septynių', is8: 'iš aštuonių', komanda: 'Tu — Informacijos Gynėjų komandoje!', nunesk: 'Nunešk į kitą dėžę!', darkarta: 'Dar kartą!',
     vilk: 'Paspausk, laikyk, nešk, paleisk!', klaidos: 'Baitas suklydo du kartus. Surask!',
     yeah: 'Yeah!', super: 'Super!', pasaka: 'Pasaka!', jega: 'Info gynyba – jėga!'
   };
@@ -2224,6 +2268,9 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
   var S = {
     phase: 'start', level: -1, stars: 0, streak: 0, best: 0, locked: false,
     queue: [], cur: null, wrongOn: 0, busy: false, timers: [],
+    missed: {},              // daiktai, kuriuos vaikas kada nors padėjo ne ten (prisitaikymas)
+    frame: null, gLeft: true, frameOrder: [1, 2],
+    l2: null,                // 2 lygio būsena
     mileLog: [],             // parodytos serijos šventės (patikrai)
     lv: null,                // dabartinio lygio statistika
     fix: null,               // 3 lygio būsena
@@ -2288,6 +2335,18 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
       }
     } catch (e) {}
   }
+  // seka: jei visi klipai yra — groja vienas po kito, kitaip naršyklės balsas pasako visą sakinį
+  function sayParts(keys, text) {
+    var V = window.BV_VOICE || {};
+    if (keys.every(function (k) { return V[k]; })) {
+      var i = 0; voiceEl = voiceEl || new Audio();
+      var next = function () { if (i >= keys.length || S.locked) { voiceEl.onended = null; return; } voiceEl.src = V[keys[i++]]; var pp = voiceEl.play(); if (pp && pp.catch) pp.catch(function () {}); };
+      voiceEl.pause(); voiceEl.onended = next; next(); return;
+    }
+    try { if (window.speechSynthesis) { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = 'lt-LT'; u.rate = 0.9;
+      var lt = (speechSynthesis.getVoices() || []).filter(function (v) { return /^lt/i.test(v.lang); })[0]; if (lt) u.voice = lt; speechSynthesis.speak(u); } } catch (e) {}
+    S.lastSaid = text;
+  }
   function stopVoice() { try { if (voiceEl) voiceEl.pause(); if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} }
 
   // ================= anoniminė statistika -> Supabase (bcjr-duomenys § 3b; etalonas Klavišų Šokis) =================
@@ -2313,6 +2372,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
       zvaigzdes: Math.max(0, S.stars - R.stars0),
       klaidu: R.levels.reduce(function (a, l) { return a + (l.klaidu || 0); }, 0),
       serija: S.best,
+      l2_bandymu: S.l2Checks || null,                     // kiek kartų 2 lygyje spausta ✔ BAIGIAU iki visko teisingai
       trukme_s: Math.round((performance.now() - R.t0) / 1000),
       nebaigta: !!unfinished, atsakymai: R.levels,
       clarity_sesija: (window.ig && window.ig.sesija) || null
@@ -2528,11 +2588,28 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
   function levelRow(unfinished) {
     var L = S.lv; if (!L) return null;
     var o = { id: L.id, teisingai: L.ok, klaidu: L.bad, zvaigzdes: L.ok, serija: L.best, ms: Math.round(performance.now() - levelT0), daiktai: L.items };
+    if (L.extra) for (var x in L.extra) o[x] = L.extra[x];
     if (unfinished) o.nebaigta = true;
     return o;
   }
   function setDots() { Array.prototype.forEach.call(document.querySelectorAll('.dot'), function (d) { var l = +d.dataset.l; d.classList.toggle('on', l === S.level); d.classList.toggle('done', l < S.level); }); }
+  var tray = $('tray'), doneBtn = $('doneBtn');
+  function applyFrame(f, gLeft) {
+    S.frame = f; S.gLeft = gLeft;
+    ['g', 'r'].forEach(function (k) {
+      var z = Z[k], c = f[k];
+      z.querySelector('.ic').innerHTML = c.img ? '<img id="chestImg" class="icimg" alt="užrakinta skrynia">' : c.ic;
+      if (c.img) z.querySelector('.icimg').src = IMG[c.img] || '';
+      var w = z.querySelector('.zw'); w.textContent = c.w; w.classList.toggle('long', c.w.length > 7);
+      z.querySelector('.zd').textContent = c.d;
+      z.querySelector('.spk').dataset.say = c.say;
+    });
+    Z.g.style.order = gLeft ? 1 : 3; Z.r.style.order = gLeft ? 3 : 1;     // pusė atsitiktinė: „kairė = klaida" neveikia
+  }
+  function hideResults() { Array.prototype.forEach.call(document.querySelectorAll('.res'), function (r) { r.hidden = true; }); }
   function clearBoard() {
+    tray.innerHTML = ''; tray.hidden = true; doneBtn.hidden = true; hideResults(); S.l2 = null;
+    $('gameScr').classList.remove('l2'); $('side').classList.remove('paused');
     GOT.g.innerHTML = ''; GOT.r.innerHTML = ''; Z.g.classList.remove('glow'); Z.r.classList.remove('glow');
     itemWrap.hidden = true; arrow.hidden = true; $('find').hidden = true; S.fix = null; S.cur = null;
   }
@@ -2541,7 +2618,9 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     if (!R) startRun();
     S.phase = 'banner'; S.level = i; var L = LEVELS[i];
     show('game'); clearBoard(); setDots(); updateStars(false); updateStreak();
-    S.lv = { id: L.id, ok: 0, bad: 0, best: 0, items: [] };
+    var f = i === 0 ? FRAMES[0] : FRAMES[S.frameOrder[i - 1] || 0], gl = Math.random() < 0.5;
+    applyFrame(f, gl);
+    S.lv = { id: L.id, ok: 0, bad: 0, best: 0, items: [], extra: { remas: f.id, kaire: gl ? 'g' : 'r' } };
     $('bLvl').textContent = (i + 1); $('bIco').textContent = L.ico; $('bName').textContent = L.name; $('banner').hidden = false;
     try { $('bGo').focus({ preventScroll: true }); } catch (e) {}
     beep(660, 0.1, 'triangle', 0.05); beep(880, 0.16, 'triangle', 0.05, 0, 0.1);
@@ -2553,6 +2632,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     clearTimers(); $('banner').hidden = true; S.phase = 'play'; levelT0 = performance.now();
     var L = LEVELS[S.level];
     if (L.kind === 'sort') { S.queue = shuffle(L.items()); later(nextItem, 300); }
+    else if (L.kind === 'sortall') setupSortAll();
     else setupFix();
   }
   $('bGo').addEventListener('click', function (e) { e.stopPropagation(); ac(); beginLevel(); });
@@ -2572,6 +2652,9 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
   function nextItem() {
     if (S.phase !== 'play') return;
     var L = LEVELS[S.level];
+    if (S.level === 0 && S.queue.length && S.lv.items.length >= ADAPT.L1_SHORT && S.lv.items.every(function (r) { return r.bandymu === 1; })) {
+      S.lv.extra.sutrumpinta = S.queue.length; S.queue = [];          // tobulai — likusių 1 lygio daiktų nereikia
+    }
     if (!S.queue.length) { levelDone(); return; }
     var key = S.queue.shift();
     S.cur = { key: key, k: ITEMS[key].k, wrong: 0 }; S.wrongOn = 0; S.busy = false;
@@ -2611,7 +2694,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     var k = S.cur.k, key = S.cur.key, at = center(itemEl);
     rec.ok = rec.bandymu === 1;
     var big = rewardOk(k, at);
-    if (!big && LEVELS[S.level].sayKind) later(function () { say(k === 'g' ? 'viesa' : 'slapta'); }, 250);
+    if (!big && LEVELS[S.level].sayKind) later(function () { say(S.frame[k].say); }, 250);
     // daiktas nuskrenda į dėžę ir tampa miniatiūra
     var th = document.createElement('div'); th.className = 'thumb'; th.innerHTML = '<img alt="">'; th.firstChild.src = IMG[key] || ''; th.style.visibility = 'hidden';
     GOT[k].appendChild(th);
@@ -2626,14 +2709,15 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     softNo(); baitas('tilt'); shake(wrap || el);
     // rodyklė į teisingą dėžę (be klaidos teksto)
     var pr = $('play').getBoundingClientRect(), zr = Z[correctK].getBoundingClientRect();
-    arrow.textContent = correctK === 'g' ? '⬅️' : '➡️'; arrow.className = 'arrow ' + (correctK === 'g' ? 'L' : 'R');
+    var isLeft = (zr.left + zr.right) / 2 < (pr.left + pr.right) / 2;
+    arrow.textContent = isLeft ? '⬅️' : '➡️'; arrow.className = 'arrow ' + (isLeft ? 'L' : 'R');
     arrow.style.left = ''; arrow.style.right = '';
-    if (correctK === 'g') arrow.style.left = (zr.right - pr.left + 10) + 'px'; else arrow.style.right = (pr.right - zr.left + 10) + 'px';
+    if (isLeft) arrow.style.left = (zr.right - pr.left + 10) + 'px'; else arrow.style.right = (pr.right - zr.left + 10) + 'px';
     arrow.hidden = false;
     later(function () { say('bandom'); }, 450);
   }
   function sortBad(z) {
-    S.cur.wrong++; S.wrongOn++;
+    S.cur.wrong++; S.wrongOn++; S.missed[S.cur.key] = true;
     snapBack(itemEl);
     wrongFeedback(S.cur.k, itemEl, itemWrap);
     if (S.wrongOn >= CFG.HELP_AFTER) Z[S.cur.k].classList.add('glow');   // po 3 klaidų tam pačiam daiktui — teisinga dėžė švyti
@@ -2641,10 +2725,81 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     armIdle();
   }
 
+  // ---------- 2 lygis: GUDRU — sudėk viską, tada ✔ BAIGIAU (be atsako, be serijos) ----------
+  function setupSortAll() {
+    var keys = shuffle(LEVELS[S.level].items());
+    S.l2 = { keys: keys, checks: 0, wrongTotal: 0, first: null };
+    $('gameScr').classList.add('l2'); $('side').classList.add('paused');   // serija sustabdyta
+    tray.hidden = false; doneBtn.hidden = true;
+    keys.forEach(function (key, i) { later(function () { var c = makeL2Card(key); tray.appendChild(c); beep(440 + i * 40, 0.06, 'sine', 0.04); }, 150 + i * 120); });
+    later(function () { say('sudeliok'); }, 300 + keys.length * 120);
+  }
+  function makeL2Card(key) {
+    var c = document.createElement('div'); c.className = 'card l2c'; c.dataset.key = key; c.dataset.at = '';
+    c.setAttribute('aria-label', ITEMS[key].name);
+    c.innerHTML = '<img alt=""><button class="spk" type="button" aria-label="🔊">🔊</button>';
+    c.firstChild.src = IMG[key] || '';
+    c.lastChild.addEventListener('click', function (e) { e.stopPropagation(); say(key, e.currentTarget); });
+    draggable(c, {
+      can: function () { return S.phase === 'play' && !!S.l2 && !S.l2.done; },
+      zones: function () { return [Z.g, Z.r, tray]; },
+      start: function () { hideResults(); },
+      end: function (d, z) {
+        if (!d.moved || !z) { snapBack(c); return; }
+        var box = z === tray ? tray : GOT[z.dataset.k];
+        if (c.parentNode === box) { snapBack(c); return; }
+        c.style.transition = 'none'; c.style.transform = '';
+        box.appendChild(c); c.dataset.at = z === tray ? '' : z.dataset.k;
+        beep(520, 0.07, 'triangle', 0.05);            // neutralus „padėjau" — ne atsakas
+        doneBtn.hidden = tray.children.length > 0;
+      }
+    });
+    return c;
+  }
+  function numKeys(ok, tot) { return tot ? ['n' + ok, 'is' + tot] : ['nieko']; }
+  function numText(ok, tot) { return tot ? SAY['n' + ok] + ' ' + SAY['is' + tot] : SAY.nieko; }
+  function checkAll() {
+    var L2 = S.l2; if (!L2 || L2.done || tray.children.length) return;
+    L2.checks++; S.l2Checks = L2.checks;
+    var res = {}, wrong = 0;
+    ['g', 'r'].forEach(function (k) {
+      var cards = Array.prototype.slice.call(GOT[k].children), ok = cards.filter(function (c) { return ITEMS[c.dataset.key].k === k; }).length;
+      res[k] = { ok: ok, tot: cards.length }; wrong += cards.length - ok;
+      if (L2.checks === 1) cards.forEach(function (c) { if (ITEMS[c.dataset.key].k !== k) S.missed[c.dataset.key] = true; });
+      // rezultatas dėžėje: TIK skaičius ir taškai — kurie daiktai klaidingi, nerodoma
+      var box = Z[k].querySelector('.res'), dots = '';
+      for (var i = 0; i < cards.length; i++) dots += i < ok ? '<i class="y">✔</i>' : '<i class="n">✖</i>';
+      box.innerHTML = '<div class="rn">' + ok + ' / ' + cards.length + '</div><div class="rd">' + dots + '</div>';
+      box.hidden = false;
+    });
+    if (L2.checks === 1) { L2.first = wrong; S.lv.items = L2.keys.map(function (key) { var c = document.querySelector('.card.l2c[data-key="' + key + '"]'); return { d: key, pirmas_ok: !!c && ITEMS[key].k === c.dataset.at }; }); }
+    L2.wrongTotal += wrong;
+    var lk = S.gLeft ? 'g' : 'r', rk = S.gLeft ? 'r' : 'g';
+    var keys = ['kaireje'].concat(numKeys(res[lk].ok, res[lk].tot), ['desineje'], numKeys(res[rk].ok, res[rk].tot));
+    var text = SAY.kaireje + ' — ' + numText(res[lk].ok, res[lk].tot) + '. ' + SAY.desineje + ' — ' + numText(res[rk].ok, res[rk].tot) + '.';
+    S.lv.bad = L2.wrongTotal; S.lv.extra.bandymu = L2.checks; S.lv.extra.pirmas_klaidu = L2.first;
+    IG.ev('l2_tikrinta', { kartas: String(L2.checks), klaidu: String(wrong) });
+    if (!wrong) {
+      L2.done = true; S.busy = true; doneBtn.hidden = true;
+      S.lv.ok = L2.keys.length; S.stars += L2.keys.length; updateStars(true);
+      visorFlash('g'); bark(); confetti(220, 2000); fanfare();
+      popWord(innerWidth / 2, innerHeight * 0.45, '🎉 VISKAS TEISINGAI!');
+      sayParts(keys.concat(['viskas']), text + ' ' + SAY.viskas);
+      later(levelDone, 3600);
+      return;
+    }
+    beep(392, 0.12, 'triangle', 0.05); beep(392, 0.12, 'triangle', 0.05, 0, 0.16);   // „pažiūrėk" — ne klaidos garsas
+    sayParts(keys.concat(['pataisyk']), text + ' ' + SAY.pataisyk);
+  }
+  doneBtn.addEventListener('click', function (e) { e.stopPropagation(); ac(); checkAll(); });
+
   // ---------- 3 lygis: Baito klaidos ----------
   function setupFix() {
-    var g = shuffle(ofKind(BASIC, 'g')).slice(0, 3);
-    var r = shuffle(ofKind(BASIC, 'r')).slice(0, 3);
+    // prisitaikymas: Baito klaida (g[2] skrynioje, r[0] krepšyje) — pirmiausia daiktas, kurį vaikas pats buvo supainiojęs
+    var missFirst = function (k) { var all = shuffle(ofKind(BASIC, k)), m = all.filter(function (key) { return S.missed[key]; }); return m.length ? [m[0]].concat(all.filter(function (key) { return key !== m[0]; })) : all; };
+    var gm = missFirst('g'), rm = missFirst('r');
+    var g = [gm[1], gm[2], gm[0]];   // g[2] — klaida
+    var r = [rm[0], rm[1], rm[2]];   // r[0] — klaida
     // Baitas užtikrintai suklysta du kartus: vieną viešą įdeda į skrynią, vieną slaptą — į krepšį
     var place = { g: shuffle([g[0], g[1], r[0]]), r: shuffle([r[1], r[2], g[2]]) };
     S.fix = { cards: [], fixed: 0, errs: 0, wrongKeys: [r[0], g[2]] };
@@ -2691,7 +2846,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
       S.fix.fixed++; S.lv.items.push({ d: key, bandymu: 1, ok: true });
       var slot = $('find').children[S.fix.fixed - 1]; if (slot) { slot.classList.add('got'); slot.textContent = '⭐'; }
       var big = rewardOk(k, cc);
-      if (!big) later(function () { say(k === 'g' ? 'viesa' : 'slapta'); }, 250);
+      if (!big) later(function () { say(S.frame[k].say); }, 250);
       arrow.hidden = true; Z.g.classList.remove('glow'); Z.r.classList.remove('glow');
       if (S.fix.fixed >= 2) { S.busy = true; later(levelDone, big ? 1900 : 1200); }
       else armFixIdle();
@@ -2747,7 +2902,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     confetti(260, 3200); fanfare(); later(function () { say('komanda', $('endSpk')); }, 800);
     IG.ev('zaidimas_baigtas', { zvaigzdes: String(S.stars), serija: String(S.best) });
   }
-  function resetRun() { S.stars = 0; S.streak = 0; S.best = 0; R = null; updateStars(false); updateStreak(); }
+  function resetRun() { S.stars = 0; S.streak = 0; S.best = 0; R = null; S.missed = {}; S.l2Checks = 0; S.frameOrder = shuffle([1, 2]); updateStars(false); updateStreak(); }
   $('againBtn').addEventListener('click', function (e) { e.stopPropagation(); ac(); resetRun(); startLevel(0); });
 
   // ================= 1 · PELĖS ĮVADAS (tas pats blokas kaip Mistė Runner) =================
@@ -2812,6 +2967,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     if (e.key && e.key.length === 1) { typed = (typed + e.key.toLowerCase()).slice(-4); if (typed === 'test') { typed = ''; openMenu(); return; } }
     if (!menu.hidden) { if (e.key === 'Escape') menu.hidden = true; return; }
     if (INTRO && INTRO.active()) { INTRO.key(e); return; }   // Esc — praleisti įvado etapą (kaip Mistė Runner)
+    if (e.key === 'Enter' && S.phase === 'play' && S.l2 && !doneBtn.hidden) { e.preventDefault(); checkAll(); return; }   // ✔ BAIGIAU klaviatūra
     if (S.phase === 'teach' && e.key === 'Escape') { e.preventDefault(); startLevel(0); return; }   // mentorius praleidžia vilkimo pamoką
     if (e.target && e.target.tagName === 'BUTTON') return;
     if (e.key === 'Enter' || e.key === ' ') {
@@ -2838,7 +2994,7 @@ window.BV_VOICE = {"ledai":"data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADT
     else if (lg === 'pabaiga') { S.stars = 18; S.best = 7; showEnd(); }
   } else show('start');
 
-  window.__bv = { ITEM_LIST: ITEM_LIST, carry: function () { return carryAnim.length; }, S: S, begin: begin, startTeach: startTeach, startLevel: startLevel, beginLevel: beginLevel, showEnd: showEnd, openMenu: openMenu, ITEMS: ITEMS, LEVELS: LEVELS, run: function () { return R; }, nosend: NOSEND };
+  window.__bv = { ITEM_LIST: ITEM_LIST, FRAMES: FRAMES, checkAll: checkAll, l2Items: l2Items, carry: function () { return carryAnim.length; }, S: S, begin: begin, startTeach: startTeach, startLevel: startLevel, beginLevel: beginLevel, showEnd: showEnd, openMenu: openMenu, ITEMS: ITEMS, LEVELS: LEVELS, run: function () { return R; }, nosend: NOSEND };
   try { document.documentElement.setAttribute('data-patikra', '__PATIKRA_OK__'); } catch (e) {}
 })();
 </script>
