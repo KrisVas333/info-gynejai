@@ -469,6 +469,13 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   font-size:clamp(1rem,2.15vw,2.6rem)}                                         /* 41 px */
 .slide .bub.after{transition:opacity .4s}
 
+/* 🔍 KAIP ATSKIRTI? — vienas klausimas vietoj atmintinės (Kris, 2026-10-07) */
+.ask{font-size:clamp(1.6rem,4.6vw,4.4rem)}                                     /* 84 px */
+.ansrow .termcard{padding:clamp(14px,2.6vh,30px) clamp(20px,3vw,50px)}
+.ansrow .yn{font-size:clamp(1.4rem,3.4vw,3.4rem);font-weight:900;opacity:.92}      /* 65 px */
+.ansrow .w{font-size:clamp(2rem,5vw,4.6rem);margin-top:6px;white-space:nowrap}
+.slide.howto .rule.o{font-size:clamp(1.2rem,2.6vw,2.6rem)}                           /* 50 px */
+
 /* 🟢🔴 Dvi termino kortelės greta */
 .termrow{display:flex;gap:clamp(16px,3vw,56px);justify-content:center;align-items:stretch;flex-wrap:wrap}
 .termrow .termcard{flex:1 1 0;min-width:min(40vw,520px)}
@@ -754,8 +761,27 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   </div>
 </section>
 
+<section class="slide howto" data-type="terminas" data-blk="14–17 · 🔍 KAIP ATSKIRTI?" data-emo="🔍📍"
+ data-lt-note="⏱ 15:00–16:00 · 🧠 ĮRANKIS: taisyklė vietoj atmintinės — vaikai ne zubrina sąrašą, o turi vieną klausimą. SAKYK: „Kaip žinoti, ar slapta? Paklausk savęs: ar nepažįstamas, tai sužinojęs, galėtų mane SURASTI?” ▲ Visi pasidaro „žiūronus” iš rankų 🔍 ir kartu: „Ar padės mane surasti?” · Išbandyk 3 pavyzdžiais (kiekvienas: klausimas → vaikai atsako TAIP/NE → kortelė): „Mėgstami ledai?” — NE → VIEŠA. „Kur gyveni?” — TAIP, ateitų prie durų → SLAPTA. „Kada būni namie viena?” — TAIP, žinotų KADA ateiti → SLAPTA. · Nuotrauka ir mokykla: „Ar pagal veidą / mokyklą galėtų rasti?” — TAIP → SLAPTA. · 🔑 Apatinė eilutė: „O slaptažodis — mūsų raktas iš P4. Jis tave ne suranda, o ATRAKINA. Todėl irgi visada SLAPTA.” · Nežinai? → „Paklausk tėvų. Kol nežinai — laikyk slapta.”"
+>
+  <div class="kicker big2"><span data-lt="🔍 Kaip atskirti?">🔍 Kaip atskirti?</span></div>
+  <h1 class="ask"><span data-lt="Ar tai padės mane SURASTI? 📍">Ar tai padės mane SURASTI? 📍</span></h1>
+  <div class="termrow ansrow">
+    <div class="termcard g">
+      <div class="yn"><span data-lt="NE 👎">NE 👎</span></div>
+      <div class="w"><span data-lt="🧺 VIEŠA">🧺 VIEŠA</span></div>
+    </div>
+    <div class="termcard r">
+      <div class="yn"><span data-lt="TAIP 👍">TAIP 👍</span></div>
+      <div class="w"><span data-lt="🔐 SLAPTA">🔐 SLAPTA</span></div>
+    </div>
+  </div>
+  <div class="rule o"><span data-lt="🔑 Slaptažodis — visada SLAPTA!">🔑 Slaptažodis — visada SLAPTA!</span></div>
+</section>
+
+
 <section class="slide" data-type="taisykle" data-blk="14–17 · 📜 TAISYKLĖ" data-emo="🔴🤐"
- data-lt-note="⏱ 15:30 · 🔑 INKARAS 2 — TAISYKLĖ. SAKYK lėtai, kiekvieną žodį: „Slapta lieka slapta — net jei nori padėti.” · ▲ Visa klasė, DU KARTUS, su judesiu: rankos SUKRYŽIUOTOS ant krūtinės (tai bus mūsų „slapta” ženklas vilkimo veikloje). · 💬 „Baitas norėjo padėti. Noras buvo geras. Bet slapta — lieka slapta.”"
+ data-lt-note="⏱ 16:00 · 🔑 INKARAS 2 — TAISYKLĖ. SAKYK lėtai, kiekvieną žodį: „Slapta lieka slapta — net jei nori padėti.” · ▲ Visa klasė, DU KARTUS, su judesiu: rankos SUKRYŽIUOTOS ant krūtinės (tai bus mūsų „slapta” ženklas vilkimo veikloje). · 💬 „Baitas norėjo padėti. Noras buvo geras. Bet slapta — lieka slapta.”"
 >
   <div class="kicker"><span data-lt="📜 Taisyklė">📜 Taisyklė</span></div>
   <div class="huge">🔴🤐</div>
@@ -764,7 +790,7 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
 
 <!-- ══════════ 17–22 min · BLOKAS 4 · VILKIMAS DECK'E · 🧠 Patikrink → atsakas → pataisyk ══════════ -->
 <section class="slide dndslide" data-type="veiksmas" data-blk="17–22 · ✋ VIEŠA AR SLAPTA? NEŠAM PELE" data-emo="⭐🟢🔴" data-dnd="1"
- data-lt-note="⏱ 17:00–22:00 · 🧠 ĮRANKIS: Patikrink → atsakas → pataisyk. ✋ VILKIMAS DECK'E. Ekrane — tai, ką Baitas išpasakojo apie Dingailę. VAIKAI NEŠA 6 KORTELES, paskutines 4 greitai neši TU. Kūnu (3-2-1) balsuojam tik prie PIRMŲ 3 kortelių. VIENA KORTELĖ VIENU METU: 1) Parodyk kortelę (arba spausk jos 🔊 — kompiuteris pasako žodį). 2) ▲ VISA KLASĖ PIRMA KŪNU, 3-2-1: 🙌 rankos AUKŠTYN = VIEŠA · 🙅 rankos SUKRYŽIUOTOS = SLAPTA. 3) Vienas vaikas ateina prie tavo kompiuterio ir PELE nuneša kortelę: paspausk — laikyk — nešk — paleisk. Teisingai — kortelė įšoka, Baito vizorius užsidega ta spalva. Klaida — kortelė sudreba ir grįžta, rodyklė rodo teisingą dėžę (po 3 klaidų dėžė švyti). · 🔑 INKARAI (kūnu): prie kiekvienos 🔴 kortelės visi kartu: „Slapta — tik man ir tėvams!”; prie paskutinės: „Slapta lieka slapta — net jei nori padėti.” · 💡 Kortelės: 🟢 ledai, kompasas, drugelis, piešinys, kamuolys · 🔴 namai, telefonas, mokykla, nuotrauka, „žaidžia žaidimus 15 valandą” (laikrodis + namas; įrašo dar nėra — 🔊 kalba naršyklės balsu arba žodį sakai tu). Mokyklos ir nuotraukos vaikai gali ginčytis — paklausk „kodėl?”, tada: „Kas žino tavo mokyklą — gali tave rasti.” · ⟲ iš naujo — kortelės sumaišomos. · 6 vaikų kortelės ×~35 s + 4 tavo ×~10 s ≈ 4–5 min."
+ data-lt-note="⏱ 17:00–22:00 · 🧠 ĮRANKIS: Patikrink → atsakas → pataisyk. ✋ VILKIMAS DECK'E. Ekrane — tai, ką Baitas išpasakojo apie Dingailę. VAIKAI NEŠA 6 KORTELES, paskutines 4 greitai neši TU. Kūnu (3-2-1) balsuojam tik prie PIRMŲ 3 kortelių. VIENA KORTELĖ VIENU METU: 1) Parodyk kortelę (arba spausk jos 🔊 — kompiuteris pasako žodį). 2) ▲ VISA KLASĖ PIRMA KŪNU, 3-2-1: 🙌 rankos AUKŠTYN = VIEŠA · 🙅 rankos SUKRYŽIUOTOS = SLAPTA. 3) Vienas vaikas ateina prie tavo kompiuterio ir PELE nuneša kortelę: paspausk — laikyk — nešk — paleisk. Teisingai — kortelė įšoka, Baito vizorius užsidega ta spalva. Klaida — kortelė sudreba ir grįžta, rodyklė rodo teisingą dėžę (po 3 klaidų dėžė švyti). · 🔑 INKARAI (kūnu): prie kiekvienos 🔴 kortelės visi kartu: „Slapta — tik man ir tėvams!”; prie paskutinės: „Slapta lieka slapta — net jei nori padėti.” · 💡 Kortelės: 🟢 ledai, kompasas, drugelis, piešinys, kamuolys · 🔴 namai, telefonas, mokykla, nuotrauka, „žaidžia žaidimus 15 valandą” (laikrodis + namas; įrašo dar nėra — 🔊 kalba naršyklės balsu arba žodį sakai tu). Mokyklos ir nuotraukos vaikai gali ginčytis — paklausk 🔍 „Ar tai padės ją SURASTI?” (Taip — prie mokyklos, pagal veidą → SLAPTA.) · ⟲ iš naujo — kortelės sumaišomos. · 6 vaikų kortelės ×~35 s + 4 tavo ×~10 s ≈ 4–5 min."
 >
   <div class="dnd" id="dnd">
     <div class="dnd-top">

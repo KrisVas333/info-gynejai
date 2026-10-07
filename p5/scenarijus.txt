@@ -2,7 +2,7 @@
 
 **PAMOKA 5 · LYGIS 0 ▸ VIEŠA AR SLAPTA · NEŠAM PELE**
 **45 min · kompiuterių klasė · V1 · 2026-10-07**
-**Šaltinis: `deck.src.html` (33 skaidrės). Kiekviena skaidrė S1–S32 turi savo skyrių.**
+**Šaltinis: `deck.src.html` (33 skaidrės). Kiekviena skaidrė S1–S33 turi savo skyrių.**
 **Mentorius be patirties turi pravesti vien iš šito failo.**
 
 > **Žymėjimas:** **„taip“** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
@@ -19,10 +19,10 @@
 
 - [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs. Prie kompiuterių einam tik 22:45.
 - [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), ▶ „PRADĖTI PAMOKĄ“ paruoštas. Po juo — **antras taimeris ⏰** (pagal tvarkaraštį): prieš pamoką rodo „pamoka prasidės 13:30“ (kt.) / „12:55“ (pn.). Jei po juo parašyta „atsarginė lentelė“ — internetas neveikia, laikas vis tiek teisingas.
-- [ ] 🖱️ **Pelė prie tavo kompiuterio** pasiekiama vaikui (S19 vaikai po vieną ateis nešti kortelių). Išbandyk: nunešk vieną kortelę, paspausk „⟲ iš naujo“.
+- [ ] 🖱️ **Pelė prie tavo kompiuterio** pasiekiama vaikui (S20 vaikai po vieną ateis nešti kortelių). Išbandyk: nunešk vieną kortelę, paspausk „⟲ iš naujo“.
 - [ ] 🔊 **Garsas įjungtas** (vilkimo skaidrėje — mažas „ding“). 🔊 ant kortelių paleidžia įrašytą lietuvišką balsą.
-- [ ] 🐶 **„Baito vizorius“** atsidaro kiekviename kompiuteryje (INFOGYNEJAI.LT → „Baito vizorius“) ir deck’o S22. Jei S22 rodo „Žaidimas ruošiamas…“ — žaidimo dar nėra; tada S22 laiką skiri vilkimui deck’e (žr. „Jei trūksta laiko“).
-- [ ] 🧠 Žinai **du inkarus** (lentelė žemiau), **šiandienos klausimą** (S10) ir **išvadą** (S27) žodis žodin.
+- [ ] 🐶 **„Baito vizorius“** atsidaro kiekviename kompiuteryje (INFOGYNEJAI.LT → „Baito vizorius“) ir deck’o S23. Jei S23 rodo „Žaidimas ruošiamas…“ — žaidimo dar nėra; tada S23 laiką skiri vilkimui deck’e (žr. „Jei trūksta laiko“).
+- [ ] 🧠 Žinai **du inkarus** (lentelė žemiau), **šiandienos klausimą** (S10) ir **išvadą** (S28) žodis žodin.
 - [ ] 📄 Jei P4 refleksijoje klasė sugalvojo taisyklę — turi ją užsirašiusi (pasakysi S1).
 - [ ] 🖊️ Atsispausdinai **mokytojos lapą** (apačioje) ir turi pieštuką.
 - [ ] 📞 Mokyklos IT žmogus pasiekiamas.
@@ -41,11 +41,12 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 | S5 · 2:05 | Kam galima žinoti tavo slaptažodį? | I1 | kūnu — „Tik man ir tėvams“ (apsisukam) |
 | S16 · 12:10 | Baitas plepa visiems | I1 | istorijoje, Mistės balsu — „Tai tik jai ir tėvams!“ |
 | S17 · 14:00 | Termino kortelė | I1 | choru, du kartus — „Slapta — tik man ir tėvams!“ |
-| S18 · 15:30 | Taisyklė | I2 | choru + gestas (rankos sukryžiuotos) |
-| S19 · 17–22 | Vilkimas deck’e | I1 + I2 | kūnu + pele — prie kiekvienos 🔴 kortelės |
-| S22 · ~29:00 | Baito vizorius | I1 | tylus gestas 🤫 — „Kam galima žinoti, kur gyveni?“ — „Tik man ir tėvams“ |
-| S27 · 39:00 | Išvada | I2 | choru + rankos sukryžiuotos |
-| S29 · 41:30 | Namų darbas | I1 | namuose per tėvus |
+| S18 · 15:00 | 🔍 Kaip atskirti? | — | žiūronai iš rankų — „Ar tai padės mane surasti?“ |
+| S19 · 16:00 | Taisyklė | I2 | choru + gestas (rankos sukryžiuotos) |
+| S20 · 17–22 | Vilkimas deck’e | I1 + I2 | kūnu + pele — prie kiekvienos 🔴 kortelės |
+| S23 · ~29:00 | Baito vizorius | I1 | tylus gestas 🤫 — „Kam galima žinoti, kur gyveni?“ — „Tik man ir tėvams“ |
+| S28 · 39:00 | Išvada | I2 | choru + rankos sukryžiuotos |
+| S30 · 41:30 | Namų darbas | I1 | namuose per tėvus |
 
 ## 🧠 MOKYMOSI MOKSLO ĮRANKIAI — pagal blokus
 
@@ -54,7 +55,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 | 0–5 | Pabudimas · 4 kartojimo klausimai | Kūnas pirma · Aktyvus prisiminimas · Kartojimas su pertraukomis |
 | 5–8 | Tikslas · šiandienos klausimas | Pasakyk tikslą |
 | 8–14 | Baitas ir Dingailė · „Ar jis padarė gerai?“ | Priežastinė istorija · Prognozė, tada atskleidimas · Rodyk, nerašyk |
-| 14–17 | VIEŠA / SLAPTA · taisyklė | Du inkarai |
+| 14–17 | VIEŠA / SLAPTA · kaip atskirti · taisyklė | Du inkarai · Taisyklė vietoj atmintinės |
 | 17–22 | Vilkimas deck’e | Patikrink → atsakas → pataisyk |
 | 26–34 | „Baito vizorius“ | Žaidybinė praktika · Maišymas |
 | 36–39 | Šešėlis girdėjo · šešėlių taryba · nuotrauka | Kabliukas |
@@ -64,12 +65,12 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 ## ⏱️ JEI TRŪKSTA LAIKO — ką kirpti, eilės tvarka
 
 0. *(Jau nukirpta pagal planą:)* žaidimo **3 lygis „Baito klaidos“** šiandien nežaidžiamas — keliauja į P8.
-1. **Vilkimas** (S19) — jau suplanuota: vaikai neša 6, tu — 4. Jei dar trūksta — tu neši 6, vaikai 4. Sutaupai ~1 min.
+1. **Vilkimas** (S20) — jau suplanuota: vaikai neša 6, tu — 4. Jei dar trūksta — tu neši 6, vaikai 4. Sutaupai ~1 min.
 2. **Klausimas „Ar jis padarė gerai?“** (S16) — tik 2 atsakymai. Sutaupai ~1 min.
-3. **Baito vizorius** (S22) — sustabdyk 33:00 vietoj 34:00. Sutaupai ~1 min.
-4. Jei žaidimas **neatsidaro** (S22 „Žaidimas ruošiamas…“) — grįžk į S19, paspausk „⟲ iš naujo“ ir kortelės neša tie vaikai, kurie dar nenešė (iki 32:00). Tada IŠEINAM.
+3. **Baito vizorius** (S23) — sustabdyk 33:00 vietoj 34:00. Sutaupai ~1 min.
+4. Jei žaidimas **neatsidaro** (S23 „Žaidimas ruošiamas…“) — grįžk į S20, paspausk „⟲ iš naujo“ ir kortelės neša tie vaikai, kurie dar nenešė (iki 32:00). Tada IŠEINAM.
 
-🔴 **NIEKADA NEKIRPK:** **vilkimo deck’e** (S19 — pamokos interaktyvi dalis), **išvados su šiandienos klausimu** (S27) ir **dviejų refleksijų** (S31–S32, 43:00–45:00).
+🔴 **NIEKADA NEKIRPK:** **vilkimo deck’e** (S20 — pamokos interaktyvi dalis), **išvados su šiandienos klausimu** (S28) ir **dviejų refleksijų** (S32–S33, 43:00–45:00).
 
 ⏰ **Antras taimeris** (po pagrindiniu): pradeda skaičiuoti pats, pamokos pradžios minutę pagal tvarkaraštį. Jei jis **oranžinis ir pulsuoja** — tu dar senoje dalyje, o laikas jau kitai („+1:30“ = vėluoji pusantros minutės). **Raudonas** — vėluoji 2 min ir daugiau: kirpk pagal sąrašą aukščiau.
 
@@ -194,7 +195,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 ▲ Klasė pakartoja choru.
 
-*(Rodyk 🟢 ir 🔴 korteles. Ką jos reiškia — dar nesakyk, sužinosim iš istorijos. Gale grįšim — S28.)*
+*(Rodyk 🟢 ir 🔴 korteles. Ką jos reiškia — dar nesakyk, sužinosim iš istorijos. Gale grįšim — S29.)*
 
 👁️ **Stebėk:** Ar visi kartojo. Jei tylūs — pakartok dar kartą, linksmiau.
 
@@ -208,7 +209,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 *(~7:30 TILTAS:)* **„O dabar — atgal į džiungles. Klaidas ir Mistė eina toliau…“**
 
-👁️ **Stebėk:** 📄 Pasižymėk, kiek sakė „taip, galima“ — palyginsi S27.
+👁️ **Stebėk:** 📄 Pasižymėk, kiek sakė „taip, galima“ — palyginsi S28.
 
 
 ## 8–14 min · BLOKAS 2 · Baitas ir Dingailė (istorija)
@@ -312,7 +313,28 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** Kas abejoja dėl „mokyklos“ ar „nuotraukos“ — gerai, tai bus vilkimo veikloje.
 
-### S18 · 15:30 · 📜 Taisyklė
+### S18 · 15:00 · 🔍 Kaip atskirti?
+
+*(Kad vaikai ne zubrintų sąrašą, o turėtų VIENĄ klausimą, kurį gali užduoti apie bet ką.)*
+
+> **„Kaip žinoti, ar slapta? Paklausk savęs: ar nepažįstamas, tai sužinojęs, galėtų mane SURASTI?“**
+
+▲ Visi pasidaro „žiūronus“ iš rankų 🔍 ir kartu: **„Ar tai padės mane surasti?“**
+
+Išbandyk 3 pavyzdžiais (klausimas → vaikai TAIP/NE → kortelė):
+- „Mėgstami ledai?“ — NE → 🧺 VIEŠA.
+- „Kur gyveni?“ — TAIP, ateitų prie durų → 🔐 SLAPTA.
+- „Kada būni namie viena?“ — TAIP, žinotų, KADA ateiti → 🔐 SLAPTA.
+
+Nuotrauka ir mokykla: „Ar pagal veidą / mokyklą galėtų rasti?“ — TAIP → SLAPTA.
+
+🔑 Apatinė eilutė: „O slaptažodis — mūsų raktas iš P4. Jis tave ne suranda, o ATRAKINA. Todėl irgi visada SLAPTA.“
+
+Nežinai? → „Paklausk tėvų. Kol nežinai — laikyk slapta.“
+
+👁️ **Stebėk:** Kas atsako TAIP/NE greitai — tie jau turi taisyklę, ne atmintinę.
+
+### S19 · 16:00 · 📜 Taisyklė
 
 🔑 INKARAS 2, lėtai, kiekvieną žodį:
 
@@ -329,7 +351,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 🧠 **Įrankis:** Patikrink → atsakas → pataisyk.
 
-### S19 · 17:00–22:00 · ✋ VIEŠA ar SLAPTA? Nešam pele
+### S20 · 17:00–22:00 · ✋ VIEŠA ar SLAPTA? Nešam pele
 
 *(Ekrane — 10 kortelių: tai, ką Baitas išpasakojo apie Dingailę. Kairėje — 🧺 VIEŠA, dešinėje — 🔐 SLAPTA, viduryje — Baitas. Kortelės kaskart sumaišomos.)*
 
@@ -353,7 +375,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 ## 22–26 min · BLOKAS 5 · Prie kompiuterių
 
-### S20 · 22:00 · 🔊 Priminimas (dar prie lentos)
+### S21 · 22:00 · 🔊 Priminimas (dar prie lentos)
 
 > **„Žaidime — tas pats mygtukas. Nežinai, kas paveikslėlyje? Spausk 🔊 — kompiuteris pasakys.“**
 
@@ -365,7 +387,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** Ar visi parodė judesį — kas ne, tam žaidime padėk pirmiausia.
 
-### S21 · 22:45–26:00 · Portalas · ĮEINAM 1·2·3
+### S22 · 22:45–26:00 · Portalas · ĮEINAM 1·2·3
 
 🔴 DABAR — prie kompiuterių.
 
@@ -382,7 +404,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 🧠 **Įrankiai:** Žaidybinė praktika · Maišymas.
 
-### S22 · 26:00–34:00 · 🐶 Baito vizorius
+### S23 · 26:00–34:00 · 🐶 Baito vizorius
 
 *(Pelės įvadas (kaip Mistė Runner) → vilkimo mokymas → 1 lygis (aiškūs daiktai) → 2 lygis (keblesni). ✂️ 3 lygis „Baito klaidos“ šiandien nežaidžiamas — keliauja į P8.)*
 
@@ -397,7 +419,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 ## 34–36 min · BLOKAS 7 · Atgal prie lentos
 
-### S23 · 34:00–36:00 · 🪑 IŠEINAM 3·2·1
+### S24 · 34:00–36:00 · 🪑 IŠEINAM 3·2·1
 
 > **„Rankos nuo pelės! 3 – 2 – 1… Atsistojam — pasukam raktą — ir į savo kėdę prie lentos.“**
 
@@ -412,7 +434,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 🧠 **Įrankis:** Kabliukas (į P6). Trys kadrai be užrašų — žiūrim. Pamoka baigiasi klausimu, atsakymo nėra.
 
-### S24 · 36:00 · 👤 Šešėlis girdėjo
+### S25 · 36:00 · 👤 Šešėlis girdėjo
 
 🤫 TYLIAI, paslaptingai:
 
@@ -424,7 +446,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** Ar visi rado šešėlį — jei ne, parodyk ranka į medį.
 
-### S25 · 37:00 · 👥 Šešėlių taryba · Klaido raktas
+### S26 · 37:00 · 👥 Šešėlių taryba · Klaido raktas
 
 > **„Šešėlis kažką pasakoja kitiems šešėliams… ir kelia Klaido raktą!“** *(3 s tylos)*
 
@@ -436,7 +458,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** Kas atpažįsta raktą iš P4 — linktelk, pirštas prie lūpų.
 
-### S26 · 38:00 · 📸 Dingailės nuotrauka
+### S27 · 38:00 · 📸 Dingailės nuotrauka
 
 > **„O kas čia rankoje? … Dingailės nuotrauka — ta slapta žinia, kurią jis nugirdo iš Baito.“** *(pauzė)* **„Kas bus toliau? Sužinosim kitą kartą.“**
 
@@ -449,7 +471,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 🧠 **Įrankis:** Patikrink tikslą.
 
-### S27 · 39:00 · 🔴 Išvada · šiandienos klausimas
+### S28 · 39:00 · 🔴 Išvada · šiandienos klausimas
 
 *(Grįžta ŠIANDIENOS KLAUSIMAS, žodis žodin:)*
 
@@ -471,7 +493,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** 📄 Palygink su S10 ir S16: kiek dabar sakytų „taip, galima“?
 
-### S28 · 41:00 · 🎯 Ar pasiekėm tikslą? (30 s)
+### S29 · 41:00 · 🎯 Ar pasiekėm tikslą? (30 s)
 
 🔴 30 SEKUNDŽIŲ, SUPLANUOTA.
 
@@ -483,7 +505,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** 📄 Kas painiojosi — duomenys P6.
 
-### S29 · 41:30 · 🏠 Namų darbas · išmokyk savo tėvus
+### S30 · 41:30 · 🏠 Namų darbas · išmokyk savo tėvus
 
 > **„Namų darbas — IŠMOKYK SAVO TĖVUS. Papasakok jiems apie Baitą. Tada kartu namie surask du dalykus, kurie VIEŠI, ir du, kurie SLAPTI.“**
 
@@ -493,7 +515,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** Ar vaikai pakartoja užduotį savais žodžiais — paklausk vieno.
 
-### S30 · 42:30 · 🛡️ Atsisveikinimas · saliutas
+### S31 · 42:30 · 🛡️ Atsisveikinimas · saliutas
 
 🔴 SALIUTAS: gilus įkvėpimas, abu delnai ant burnos. Jokio šūksnio.
 
@@ -508,7 +530,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 🔴 **43:00–45:00 — tik refleksijai.** Jei vėluoji — kirpk anksčiau, ne čia.
 
-### S31 · 43:00 · 🤔 Ką Baitas galėjo padaryti geriau? (~40 s)
+### S32 · 43:00 · 🤔 Ką Baitas galėjo padaryti geriau? (~40 s)
 
 *(Tikslas — tvarka ir drausmė klasėje. Pirma — per Baitą: apie veikėją kalbėti lengviau nei apie save.)*
 
@@ -520,7 +542,7 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 👁️ **Stebėk:** Ar atsakymai jungiasi su taisykle „Slapta lieka slapta“ — jei taip, tiesiog linktelk.
 
-### S32 · 43:40 · 🪑🤝 Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip? (~1:20 — ilgiausia)
+### S33 · 43:40 · 🪑🤝 Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip? (~1:20 — ilgiausia)
 
 *(Klasės valdymo pokalbis — pagrindinė pabaigos dalis.)*
 
@@ -538,12 +560,12 @@ Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyli
 
 **Šeši skaičiai per pamoką.** *(⚠️ V1 pasiūlymas, nepatvirtintas Kris’o.)*
 
-A. **A** — kiek sakė „taip, galima“ prie šiandienos klausimo (S10, 5:45) → ir kiek pabaigoje (S27): `____`
+A. **A** — kiek sakė „taip, galima“ prie šiandienos klausimo (S10, 5:45) → ir kiek pabaigoje (S28): `____`
 B. **B** — kiek sakė „gerai“ prie klausimo „Ar jis padarė gerai?“ (S16): `____`
-C. **C** — kurias korteles klasė rodė kūnu NETEISINGAI (S19): `____`
-D. **D** — kiek vaikų nešė pele (S19) ir kam nepavyko paleisti: `____`
-E. **E** — kiek vaikų pasiekė žaidimo 2 lygį (S22): `____`
-F. **F** — antro taimerio vėlavimas S27 pradžioje (pvz. „+2:10“): `____`
+C. **C** — kurias korteles klasė rodė kūnu NETEISINGAI (S20): `____`
+D. **D** — kiek vaikų nešė pele (S20) ir kam nepavyko paleisti: `____`
+E. **E** — kiek vaikų pasiekė žaidimo 2 lygį (S23): `____`
+F. **F** — antro taimerio vėlavimas S28 pradžioje (pvz. „+2:10“): `____`
 
 ---
-P5 · V1 · 2026-10-07 · 1:1 su `deck.src.html` (S1–S32) · ← [[../04-neuronas-slaptazodis/scenarijus|P4 scenarijus]]
+P5 · V1 · 2026-10-07 · 1:1 su `deck.src.html` (S1–S33) · ← [[../04-neuronas-slaptazodis/scenarijus|P4 scenarijus]]
