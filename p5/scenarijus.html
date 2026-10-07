@@ -1,0 +1,327 @@
+<!doctype html><html lang="lt"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pamoka 5 — mentoriaus scenarijus (V1)</title>
+<!-- GENERUOJAMAS iš scenarijus.md (P4 scenarijaus stilius). Taisyk .md, tada perkonvertuok. -->
+<style>
+:root{--bg:#0C1030;--card:#1B1550;--ink:#fff;--soft:#C3B9F0;--miste:#8A6BFF;--teal:#24C9EC;
+ --gold:#FFC53D;--green:#1FB47A;--red:#E8503F;
+ --f:'SF Pro Rounded',ui-rounded,'Nunito','Segoe UI',system-ui,sans-serif;--m:ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 20px 80px}
+header{border-bottom:3px solid var(--miste);padding-bottom:16px;margin-bottom:8px}
+.eyebrow{font-family:var(--m);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--miste);font-weight:800}
+h1{font-size:clamp(1.8rem,5vw,3rem);margin:.2em 0 .1em;line-height:1.1}
+h2{font-size:clamp(1.2rem,3vw,1.7rem);margin:2em 0 .5em;border-left:5px solid var(--miste);padding-left:12px}
+h3{font-size:1.05rem;margin:1.4em 0 .4em;color:var(--gold)}
+nav{position:sticky;top:0;background:#0C1030ee;backdrop-filter:blur(8px);padding:10px 0;z-index:9;
+ border-bottom:1px solid #ffffff1a;margin-bottom:10px}
+nav a{color:var(--soft);text-decoration:none;font-size:.8rem;margin-right:12px;font-weight:700;white-space:nowrap}
+nav a:hover{color:var(--gold)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pill{background:var(--card);border:2px solid #ffffff22;border-radius:99px;padding:4px 13px;font-size:.82rem;font-weight:700}
+.pill.tech{background:#3a2a10;border-color:var(--gold);color:var(--gold)}
+.pill.draft{background:#3a1010;border-color:var(--red);color:#ffb3ac}
+.blk{background:var(--card);border:2px solid #ffffff1f;border-radius:16px;padding:18px 20px;margin:18px 0}
+.blk.hi{border-color:var(--teal);background:#12234a}
+.blk.warn{border-color:var(--gold);background:#2a2410}
+.blk.stop{border-color:var(--red);background:#2a1216}
+.blk.new{border-color:var(--miste);background:#221a4a}
+.time{display:inline-block;font-family:var(--m);font-size:.78rem;background:#5A3FD6;
+ border-radius:99px;padding:3px 12px;font-weight:800;margin-right:8px}
+.say{background:#fff;color:#131735;border-radius:14px;padding:12px 16px;margin:10px 0;font-weight:700;border-left:6px solid var(--miste)}
+.ask{border-left:5px solid var(--teal);padding:2px 0 2px 14px;margin:10px 0}
+.why{border-left:5px solid var(--gold);padding:8px 14px;margin:10px 0;background:#2a2410;border-radius:0 10px 10px 0;font-weight:700}
+.act{border-left:5px solid var(--soft);padding-left:14px;margin:10px 0;font-style:italic;color:var(--soft)}
+.crit{border-left:5px solid var(--red);background:#2a1216;padding:8px 14px;margin:10px 0;font-weight:800;border-radius:0 10px 10px 0}
+.fun{border-left:5px solid var(--green);background:#0f2e22;padding:8px 14px;margin:10px 0;border-radius:0 10px 10px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem}
+th,td{border:1px solid #ffffff26;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#ffffff12;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.g{color:var(--green);font-weight:800}.r{color:var(--red);font-weight:800}
+ol,ul{padding-left:22px}li{margin:5px 0}
+.sheet{background:#fff;color:#131735;border-radius:16px;padding:22px 24px;margin:18px 0}
+.sheet table th{background:#eee;color:#131735}
+.sheet table td,.sheet table th{border-color:#bbb}
+footer{margin-top:50px;padding-top:16px;border-top:1px solid #ffffff1a;font-size:.82rem;color:var(--soft)}
+code{background:#00000040;padding:1px 6px;border-radius:6px;font-family:var(--m);font-size:.85em}
+@media print{body{background:#fff;color:#000}nav{display:none}.blk{border-color:#999;background:#f6f6f6;color:#000}
+ .say{border-color:#666}h2{border-color:#666}.sheet{border:2px solid #000}.noprint{display:none}
+ .why{background:#eee;color:#000}.crit{background:#eee;color:#000}.fun{background:#eee;color:#000}}
+</style></head><body><div class="wrap">
+<header>
+  <div class="eyebrow">🛡️ Informacijos Gynėjai · Pamoka 5 iš 36 · mentoriaus scenarijus</div>
+  <h1>Baitas ir Dingailė</h1>
+  <div class="meta">
+    <span class="pill">45 min</span>
+    <span class="pill tech">TECHNIKA: kompiuterių klasė</span>
+    <span class="pill">1–2 kl.</span>
+    <span class="pill">33 skaidrės</span>
+    <span class="pill draft">⚠️ V1 · 2026-10-07</span>
+  </div>
+</header>
+<nav class="noprint"><a href="#prep">Prieš pamoką</a><a href="#anch">Inkarai</a><a href="#tools">Įrankiai</a><a href="#tight">Jei trūksta laiko</a><a href="#b0">0–5</a><a href="#b1">5–8</a><a href="#b2">8–15</a><a href="#b3">15–18</a><a href="#b4">18–23</a><a href="#b5">23–27</a><a href="#b6">27–34</a><a href="#b7">34–36</a><a href="#b8">36–39</a><a href="#b9">39–43</a><a href="#b10">43–45</a><a href="#lapas">Mokytojos lapas</a></nav>
+<div class="blk "><p><b>Žymėjimas:</b> <b>„taip“</b> = sakoma balsu pažodžiui · ❓ = vedantis klausimas · ▲ = vaiko veiksmas · 🔴 = <b>čia pamokos miršta, nepraleisti</b> · 💬 = mentoriaus sakinys po atsakymo · 👁️ = <b>stebėk</b> · 🔑 = inkaras · 🧠 = mokymosi mokslo įrankis · <span class="act">(kursyvas)</span> = mentoriui, negarsiai</p></div>
+<div class="blk stop"><p>⚠️ <b>V1 — nematyta klasėje.</b> Tonas: <b>klysti yra normalu.</b> Baitas — ne blogietis: jis LABAI nori padėti. Klaida — ne noras, o tai, KĄ jis papasakojo. Šešėlis — paslaptis ir smalsumas, ne baimė. Veikėjai dar nežino, kad Klaido raktas pamestas. Vaikai žino (matė P4 pabaigoje). Mes to neaiškinam.</p></div>
+<h2 id="prep">🔴 PRIEŠ PAMOKĄ</h2>
+<div class="blk stop">
+<ul><li>🔴 <b>KĖDĖS PUSLANKIU PRIE LENTOS</b>, tiek, kiek vaikų. Monitoriai tamsūs. Prie kompiuterių einam tik 23:45.</li><li>🖥️ <b>Deck’as atidarytas pilname ekrane</b> (<code>deck.html</code>), ▶ „PRADĖTI PAMOKĄ“ paruoštas. Po juo — <b>antras taimeris ⏰</b> (pagal tvarkaraštį): prieš pamoką rodo „pamoka prasidės 13:30“ (kt.) / „12:55“ (pn.). Jei po juo parašyta „atsarginė lentelė“ — internetas neveikia, laikas vis tiek teisingas.</li><li>🖱️ <b>Pelė prie tavo kompiuterio</b> pasiekiama vaikui (S20 vaikai po vieną ateis nešti kortelių). Išbandyk: nunešk vieną kortelę, paspausk „⟲ iš naujo“.</li><li>🔊 <b>Garsas įjungtas</b> (vilkimo skaidrėje — mažas „ding“). 🔊 ant kortelių paleidžia įrašytą lietuvišką balsą.</li><li>🐶 <b>„Baito vizorius“</b> atsidaro kiekviename kompiuteryje (INFOGYNEJAI.LT → „Baito vizorius“) ir deck’o S23. Jei S23 rodo „Žaidimas ruošiamas…“ — žaidimo dar nėra; tada S23 laiką skiri vilkimui deck’e (žr. „Jei trūksta laiko“).</li><li>🧠 Žinai <b>du inkarus</b> (lentelė žemiau), <b>šiandienos klausimą</b> (S10) ir <b>išvadą</b> (S25) žodis žodin.</li><li>📄 Jei P4 refleksijoje klasė sugalvojo taisyklę — turi ją užsirašiusi (pasakysi S1).</li><li>🖊️ Atsispausdinai <b>mokytojos lapą</b> (apačioje) ir turi pieštuką.</li><li>📞 Mokyklos IT žmogus pasiekiamas.</li></ul>
+</div>
+<div class="blk stop"><p>⚠️ <b>SALIUTAS — visada tas pats gestas.</b> Gilus įkvėpimas → abu delnai ant burnos (kairė alkūnė prigludusi, dešinė pakelta virš pečių). Jokio kito gesto ir jokio šūksnio.</p></div>
+<h2 id="anch">🔑 DU INKARAI — kur jie grįžta</h2>
+<div class="blk new">
+<ul><li><b>Inkaras 1:</b> „<b>Slapta — tik man ir tėvams.</b>“</li><li><b>Inkaras 2:</b> „<b>Slapta lieka slapta — net jei nori padėti.</b>“</li></ul>
+<p>Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyliai, namuose):</p>
+<table><tr><th>Kur</th><th>Skaidrė</th><th>Inkaras</th><th>Modalybė / formuluotė</th></tr><tr><td>S5 · 2:05</td><td>Kam galima žinoti tavo slaptažodį?</td><td>I1</td><td>kūnu — „Tik man ir tėvams“ (apsisukam)</td></tr><tr><td>S16 · 12:10</td><td>Baitas plepa visiems</td><td>I1</td><td>istorijoje, Mistės balsu — „Tai tik jai ir tėvams!“</td></tr><tr><td>S18 · 15:00</td><td>Termino kortelė</td><td>I1</td><td>choru, du kartus — „Slapta — tik man ir tėvams!“</td></tr><tr><td>S19 · 16:30</td><td>Taisyklė</td><td>I2</td><td>choru + gestas (rankos sukryžiuotos)</td></tr><tr><td>S20 · 18–23</td><td>Vilkimas deck’e</td><td>I1 + I2</td><td>kūnu + pele — prie kiekvienos 🔴 kortelės</td></tr><tr><td>S23 · ~30:00</td><td>Baito vizorius</td><td>I1</td><td>tylus gestas 🤫 — „Kam galima žinoti, kur gyveni?“ — „Tik man ir tėvams“</td></tr><tr><td>S25 · 36:00</td><td>Išvada</td><td>I2</td><td>choru + rankos sukryžiuotos</td></tr><tr><td>S27 · 38:30</td><td>Namų darbas</td><td>I1</td><td>namuose per tėvus</td></tr></table>
+</div>
+<h2 id="tools">🧠 MOKYMOSI MOKSLO ĮRANKIAI — pagal blokus</h2>
+<div class="blk new">
+<table><tr><th>Min</th><th>Blokas</th><th>Įrankis</th></tr><tr><td>0–5</td><td>Pabudimas · 4 kartojimo klausimai</td><td>Kūnas pirma · Aktyvus prisiminimas · Kartojimas su pertraukomis</td></tr><tr><td>5–8</td><td>Tikslas · šiandienos klausimas</td><td>Pasakyk tikslą</td></tr><tr><td>8–15</td><td>Baitas ir Dingailė · spėjam</td><td>Priežastinė istorija · Prognozė, tada atskleidimas · Rodyk, nerašyk</td></tr><tr><td>15–18</td><td>VIEŠA / SLAPTA · taisyklė</td><td>Du inkarai</td></tr><tr><td>18–23</td><td>Vilkimas deck’e</td><td>Patikrink → atsakas → pataisyk</td></tr><tr><td>27–34</td><td>„Baito vizorius“</td><td>Žaidybinė praktika · Maišymas</td></tr><tr><td>36–39</td><td>Išvada · ar pasiekėm</td><td>Patikrink tikslą</td></tr><tr><td>39–43</td><td>Šešėlis girdėjo · šešėlių taryba · nuotrauka</td><td>Kabliukas</td></tr><tr><td>43–45</td><td>Dvi refleksijos</td><td>Klasės valdymas (refleksija)</td></tr></table>
+</div>
+<h2 id="tight">⏱️ JEI TRŪKSTA LAIKO — ką kirpti, eilės tvarka</h2>
+<div class="blk warn">
+<ol><li><span class="act">(Jau nukirpta pagal planą:)</span> žaidimo <b>3 lygis „Baito klaidos“</b> šiandien nežaidžiamas — keliauja į P8.</li><li><b>Vilkimas</b> (S20) — jau suplanuota: vaikai neša 6, tu — 4. Jei dar trūksta — tu neši 6, vaikai 4. Sutaupai ~1 min.</li><li><b>Spėjimas</b> (S17) — tik A/B/C, be balso diskusijos „Kas nutiks?“. Sutaupai ~1,5 min.</li><li><b>Baito vizorius</b> (S23) — sustabdyk 33:00 vietoj 34:00. Sutaupai ~1 min.</li><li>Jei žaidimas <b>neatsidaro</b> (S23 „Žaidimas ruošiamas…“) — grįžk į S20, paspausk „⟲ iš naujo“ ir kortelės neša tie vaikai, kurie dar nenešė (iki 32:00). Tada IŠEINAM.</li></ol>
+<p class="crit">🔴 <b>NIEKADA NEKIRPK:</b> <b>vilkimo deck’e</b> (S20 — pamokos interaktyvi dalis), <b>išvados su šiandienos klausimu</b> (S25) ir <b>dviejų refleksijų</b> (S32–S33, 43:00–45:00).</p>
+<p>⏰ <b>Antras taimeris</b> (po pagrindiniu): pradeda skaičiuoti pats, pamokos pradžios minutę pagal tvarkaraštį. Jei jis <b>oranžinis ir pulsuoja</b> — tu dar senoje dalyje, o laikas jau kitai („+1:30“ = vėluoji pusantros minutės). <b>Raudonas</b> — vėluoji 2 min ir daugiau: kirpk pagal sąrašą aukščiau.</p>
+</div>
+<h2 id="b0"><span class="time">0–5 min</span>BLOKAS 0 · Atidarymas + kartojimas</h2>
+<p class="crit">🔴 <b>Viskas prie lentos, kėdės puslankiu, monitoriai tamsūs.</b></p>
+<h3 id="s1"><span class="time">0:00</span>S1 · Pasitikimas · titulinė skaidrė</h3>
+<p class="act">(Prie DURŲ, ne prie stalo. Kiekvienam vaikui atskirai, šiltai.)</p>
+<div class="say">„Labas! Sėskis prie lentos — ne prie kompiuterio. Rankytes dar pailsinam.“</div>
+<p class="act">(Jei P4 refleksijoje klasė sugalvojo taisyklę — pasakyk ją: „Praeitą kartą sutarėm: …“. ▶ SPAUSK „PRADĖTI PAMOKĄ“, kai pirmas vaikas peržengia slenkstį.)</p>
+<p>▲ Sėdasi puslankiu prie lentos.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas jau sėdi prie kompiuterio — šiltai pakviesk prie lentos, be aiškinimo.</div>
+<h3 id="s2"><span class="time">0:15–1:30</span>S2 · Pabudimas „Perkūnija“ + „Plojam–stop“ (75 s)</h3>
+<p>🧠 <b>Įrankis:</b> Kūnas pirma (PABUDIMAS). Nauji judesiai — ne A/B/C ir ne P4 „5-4-3-2-1“.</p>
+<p class="act">(Darai KARTU su vaikais — vis garsiau, paskui vis tyliau. Kas negali stovėti — daro sėdėdamas.)</p>
+<div class="say">„🌬️ Vėjas!“ <span class="act">(trinam delnus)</span> „💧 Lašai!“ <span class="act">(spragsim pirštais)</span> „🌧️ Lietus!“ <span class="act">(plojam per šlaunis)</span> „⛈️ PERKŪNAS!“ <span class="act">(trepsim kojomis)</span></div>
+<div class="say">„Lietus… lašai… vėjas…“ <span class="act">(atgal iki tylos)</span></div>
+<div class="say">„✋ Plojam! … STOP!“ <span class="act">(×3, vis trumpiau; paskutinis STOP = tyla)</span></div>
+<p>▲ Trina, spragsi, ploja, trepsi, sustingsta.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Klausk „ar gali?“, niekada „kas geriau?“. Baigiasi tyla → iškart saliutas.</div>
+<h3 id="s3"><span class="time">1:30</span>S3 · Keturios taisyklės · saliutas</h3>
+<div class="say">„Primenu keturias. ✋ — keliam ranką. 💬 — kalbam po vieną. 💛 — padedam vienas kitam. 🤫 — tylim, kai rodau.“</div>
+<p>▲ Klasė parodo kiekvieną ranka. Ketvirtai — TIKRAS SALIUTAS.</p>
+<p class="crit">🔴 Jokio kito gesto ir jokio šūksnio.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar saliutas tikras, ar pavirto į juoką. Jei į juoką — pakartok lėčiau.</div>
+<h3 id="s4"><span class="time">1:50</span>S4 · Kaip atsakinėjam</h3>
+<p>🧠 <b>Įrankis:</b> Aktyvus prisiminimas — keturi klausimai iš P1–P4.</p>
+<div class="say">„Atsakot kūnu. A — pritupiam. B — apsisukam. C — rankos į viršų. Aš skaičiuoju TRYS – DU – VIENAS, ir visi kartu.“</div>
+<p>▲ Vieną kartą pabando judesius.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas painioja judesius — žiūrėk į jį pirmiausia.</div>
+<h3 id="s5"><span class="time">2:05</span>S5 · 1/4 · Kam galima žinoti tavo slaptažodį? (P4 raktas)</h3>
+<p class="ask">❓ „Kam galima žinoti tavo slaptažodį?“ A visai klasei → pritupk · B tik man ir tėvams → apsisuk · C geriausiam draugui → rankos į viršų.</p>
+<p class="act">(3 – 2 – 1! Teisinga — B. SPAUSK DAR KARTĄ, kad užsidegtų teisingas atsakymas.)</p>
+<p class="why">💬 „Slaptažodis — tik man ir tėvams. Daugiau niekam.“</p>
+<p>🔑 INKARAS 1 (kūnu, pirmą kartą šiandien).</p>
+<p>▲ Atsako kūnu.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas renkasi C (draugas) — pasižymėk, šiandien tai dar kartą grįš.</div>
+<h3 id="s6"><span class="time">2:50</span>S6 · 2/4 · Kaip parašyti DIDŽIĄJĄ raidę? (Shift)</h3>
+<p class="ask">❓ „Kaip parašyti DIDŽIĄJĄ raidę?“ A tarpas → pritupk · B trynimas ⌫ → apsisuk · C ⇧ SHIFT + raidė → rankos į viršų.</p>
+<p class="act">(Teisinga — C. SPAUSK DAR KARTĄ.)</p>
+<p class="why">💬 „Laikai ⇧ SHIFT ir spaudi raidę — ji didžioji!“</p>
+<p>▲ Visi ore „laiko“ SHIFT kaire ranka ir „spaudžia“ raidę dešine.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas spaudžia viena ranka — dar nesuprato „laikyk ir spausk“.</div>
+<h3 id="s7"><span class="time">3:35</span>S7 · 3/4 · Ką daro šis mygtukas? 🔊</h3>
+<p class="ask">❓ „Ką daro šis mygtukas?“ A perskaito tekstą → pritupk · B išjungia kompiuterį → apsisuk · C įjungia muziką → rankos į viršų.</p>
+<p class="act">(Teisinga — A. SPAUSK DAR KARTĄ.)</p>
+<p class="why">💬 „🔊 Paspaudi — ir kompiuteris tau perskaito!“</p>
+<p class="act">(Šiandien jo prireiks kortelėse ir žaidime — kas neskaito, spaudžia 🔊.)</p>
+<p>▲ Atsako kūnu.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas renkasi C — gali nežinoti mygtuko; žaidime prieik pirmiausia.</div>
+<h3 id="s8"><span class="time">4:20</span>S8 · 4/4 · Kokia buvo didžioji Klaido klaida?</h3>
+<p class="ask">❓ „Kokia buvo didžioji Klaido klaida?“ A užmigo prie durų → pritupk · B naudojo tą patį raktą viskam → apsisuk · C pabėgo nuo Mistės → rankos į viršų.</p>
+<p class="act">(Teisinga — B. SPAUSK DAR KARTĄ.)</p>
+<p class="why">💬 „Didžioji Klaido klaida buvo — jis naudojo tą patį raktą viskam.“ (žodis žodin iš P4 išvados)</p>
+<p class="act">(Jei kas prisimena, kad raktą PAMETĖ ir kažkas jį RADO — linktelk ir pašnibždėk: „Ššš… Klaidas dar nežino.“ Daugiau nieko.)</p>
+<p>▲ Atsako kūnu.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kiek vaikų pamena P4 išvadą — pasižymėk, netaisyk.</div>
+<h2 id="b1"><span class="time">5–8 min</span>BLOKAS 1 · Tikslas · šiandienos klausimas</h2>
+<h3 id="s9"><span class="time">5:00</span>S9 · 🎯 Šiandienos tikslas</h3>
+<p>🧠 <b>Įrankis:</b> Pasakyk tikslą.</p>
+<p class="crit">🔴 PAŽADAS — PASAKYK GARSIAI IR SUSTOK.</p>
+<div class="say">„Šiandien išmoksim atskirti, kas VIEŠA, o kas SLAPTA.“</div>
+<p>▲ Klasė pakartoja choru.</p>
+<p class="act">(Rodyk 🟢 ir 🔴 korteles. Ką jos reiškia — dar nesakyk, sužinosim iš istorijos. Gale grįšim — S26.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar visi kartojo. Jei tylūs — pakartok dar kartą, linksmiau.</div>
+<h3 id="s10"><span class="time">5:45</span>S10 · ❓ Šiandienos klausimas</h3>
+<div class="say">„Ar viską galima pasakyti, jei nori padėti?“</div>
+<p>▲ 3–4 atsakymai balsu (taip / ne / kodėl).</p>
+<p class="crit">🔴 NETAISYK ir atsakymo NESAKYK: <b>„Įdomu… Pamokos gale pažiūrėsim, kas nutiko Baitui.“</b></p>
+<p><span class="act">(~7:30 TILTAS:)</span> <b>„O dabar — atgal į džiungles. Klaidas ir Mistė eina toliau…“</b></p>
+<div class="fun">👁️ <b>Stebėk:</b> 📄 Pasižymėk, kiek sakė „taip, galima“ — palyginsi S25.</div>
+<h2 id="b2"><span class="time">8–15 min</span>BLOKAS 2 · Baitas ir Dingailė (istorija)</h2>
+<p>🧠 <b>Įrankiai:</b> Priežastinė istorija · Prognozė, tada atskleidimas · Rodyk, nerašyk. Kadruose burbulai — žodžius skaitai TU.</p>
+<h3 id="s11"><span class="time">8:00</span>S11 · 🖼️ 1 · Kas ten bėga?</h3>
+<div class="say">„Klaidas ir Mistė įžengė į džiungles. Ieško Dingailės — Klaido sesės. Ir staiga… iš toli kažkas juos pamatė — ir BĖGA tiesiai link jų!“</div>
+<p class="ask">❓ „Kas ten bėga?“</p>
+<p>▲ Spėja (šuo! robotas!). Vardo dar nesakyk.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas pirmas pamato akinius-vizorių — pagirk akylumą.</div>
+<h3 id="s12"><span class="time">8:45</span>S12 · 🖼️ 2 · Pro atviras duris</h3>
+<div class="say">„Jis taip skubėjo pas Klaidą ir Mistę, kad prabėgo pro… pažiūrėkit!“</div>
+<p class="act">(Palauk 3 s — tegul vaikai patys pamato: tos pačios durys ir skrynia iš P4 — dabar PLAČIAI ATVIROS.)</p>
+<p>🤫 PAŠNIBŽDOM, pirštas prie lūpų: <b>„Ar kas nors pastebėjot? … Ššš. Klaidas dar nežino.“</b></p>
+<p class="crit">🔴 Nieko neaiškink ir nesakyk, kas atrakino. Veikėjai nežino — žinom tik mes.</p>
+<p>▲ Vaikai rodo pirštais, šnabždasi.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas sako „šešėlis!“ / „raktas!“ — linktelk ir pirštas prie lūpų. Paslaptis lieka paslaptimi.</div>
+<h3 id="s13"><span class="time">9:30</span>S13 · 🖼️ 3 · „Aš galiu padėti!“</h3>
+<p>🧠 <b>Įrankis:</b> Prognozė, tada atskleidimas. Burbulas TUŠČIAS.</p>
+<p class="ask">❓ „Ką jis sako, kaip manot?“ ▲ 2 spėjimai.</p>
+<p class="act">(SPAUSK ➡️ — burbule atsiranda žodžiai. Skaityk linksmai, uždusęs nuo bėgimo:)</p>
+<div class="say">„Aš galiu padėti! Aš pažįstu Dingailę!“</div>
+<p class="ask">❓ „Ar Klaidas apsidžiaugė?“ (Taip! Jis ieško sesės.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar vaikai džiaugiasi Baitu — gerai, jis ir turi patikti.</div>
+<h3 id="s14"><span class="time">10:20</span>S14 · 🐶 Naujas veikėjas · BAITAS</h3>
+<div class="say">„Susipažinkit — BAITAS. Jis DI šuo-skeneris. Matot akinius? Tai jo VIZORIUS. Užsidega 🟢 žaliai — kai daiktą galima rodyti visiems. Užsidega 🔴 raudonai — kai tai paslaptis.“</div>
+<p>💛 MOTYVACIJA, lėtai: <b>„Baitas labai, LABAI nori būti naudingas.“</b></p>
+<p>▲ Visi kartu: „Nori būti naudingas!“</p>
+<p class="ask">❓ „Ar gerai norėti padėti?“ (Taip! — netaisyk, tai tiesa.)</p>
+<p class="act">(Klaida bus ne noras, o KĄ jis darys.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar vaikai prisimena Mistę (P3) — „ji irgi norėjo padėti“. Jei kas pasako — linktelk: „Pažiūrėsim.“</div>
+<h3 id="s15"><span class="time">11:20</span>S15 · 🖼️ 4 · Baitas plepa beždžionei</h3>
+<div class="say">„Jie keliauja toliau. Ant šakos — beždžionė. Ir Baitas, norėdamas padėti, iškart jai papasakoja: kaip Dingailė atrodo — ir kur ji gyvena!“</div>
+<p><span class="act">(Skaityk burbulą Baito balsu, labai draugiškai:)</span> <b>„Dingailė gyvena va ten! 🏠“</b></p>
+<p class="ask">❓ Rodyk į Klaidą ir Mistę: „O kaip jie atrodo? Ar jiems patinka?“ (Jie susirūpinę.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas pastebi veidus — tai emocijų skaitymas, pagirk.</div>
+<h3 id="s16"><span class="time">12:10</span>S16 · 🖼️ 5 · Baitas plepa visiems</h3>
+<div class="say">„Prie upės — papūga ir varlė. Baitas ir joms papasakoja VISKĄ: Dingailės veidą, jos namus… ir kada ji būna namie VIENA.“</div>
+<p><span class="act">(Burbulas:)</span> <b>„Ji būna namie viena!“</b></p>
+<p class="act">(Pabrėžk: Baitas tikrai mano, kad taip PADĖS — kuo daugiau žinos, tuo greičiau suras.)</p>
+<p>🔑 INKARAS 1 (istorijoje, Mistės balsu): <b>„Baitai! Kur Dingailė gyvena ir kada ji viena — tai tik jai ir tėvams!“</b></p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas jau sako „negalima!“ — neatsakinėk, kitoje skaidrėje spėsim visi.</div>
+<h3 id="s17"><span class="time">13:00–15:00</span>S17 · 🔮 Spėjam</h3>
+<p>🧠 <b>Įrankis:</b> Prognozė prieš atskleidimą.</p>
+<p class="ask">❓ „Ar Baitas gerai padarė?“ A gerai — jis padėjo → pritupk · B negerai → apsisuk · C nežinau → rankos į viršų.</p>
+<p class="crit">🔴 TEISINGO ATSAKYMO ČIA NĖRA IR NIEKO NEUŽDEGAM — tai SPĖJIMAS. Atsakymas — kitoje skaidrėje.</p>
+<p class="ask">❓ Tada balsu: „Kas nutiks, kai visi džiunglėse tai žinos?“ ▲ 3–4 atsakymai. Netaisyk: „Pažiūrėkim…“</p>
+<div class="fun">👁️ <b>Stebėk:</b> 📄 Kiek pritūpė (A „gerai“) — palyginsi S25.</div>
+<h2 id="b3"><span class="time">15–18 min</span>BLOKAS 3 · VIEŠA / SLAPTA · taisyklė</h2>
+<p>🧠 <b>Įrankis:</b> Du inkarai.</p>
+<h3 id="s18"><span class="time">15:00</span>S18 · Termino kortelė · VIEŠA / SLAPTA</h3>
+<p class="act">(SAKYK BALSU IR SUSTOK po kiekvienos.)</p>
+<div class="say">„VIEŠA — tai, ką galima rodyti visiems. Mėgstami ledai, piešinys, kamuolys.“</div>
+<div class="say">„SLAPTA — tik man ir tėvams. Kur gyveni, telefonas, kada būni namie viena.“</div>
+<p>🔑 INKARAS 1 (choru, du kartus): <b>„Slapta — tik man ir tėvams!“</b></p>
+<p class="ask">❓ „O geriausias draugas?“ — „Ne. Tik man ir tėvams.“</p>
+<p class="ask">❓ Grįžk prie spėjimo: „Tai ar Baitas gerai padarė?“ (Ne — jis išpasakojo, kas SLAPTA.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas abejoja dėl „mokyklos“ ar „nuotraukos“ — gerai, tai bus vilkimo veikloje.</div>
+<h3 id="s19"><span class="time">16:30</span>S19 · 📜 Taisyklė</h3>
+<p>🔑 INKARAS 2, lėtai, kiekvieną žodį:</p>
+<div class="say">„Slapta lieka slapta — net jei nori padėti.“</div>
+<p>▲ Visa klasė, DU KARTUS, rankos SUKRYŽIUOTOS ant krūtinės (tai „slapta“ ženklas vilkimui).</p>
+<p class="why">💬 „Baitas norėjo padėti. Noras buvo geras. Bet slapta — lieka slapta.“</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar visi sukryžiavo rankas — šito judesio reikės po minutės.</div>
+<h2 id="b4"><span class="time">18–23 min</span>BLOKAS 4 · Vilkimas deck’e (interaktyvi dalis)</h2>
+<p>🧠 <b>Įrankis:</b> Patikrink → atsakas → pataisyk.</p>
+<h3 id="s20"><span class="time">18:00–23:00</span>S20 · ✋ VIEŠA ar SLAPTA? Nešam pele</h3>
+<p class="act">(Ekrane — 10 kortelių: tai, ką Baitas išpasakojo apie Dingailę. Kairėje — 🧺 VIEŠA, dešinėje — 🔐 SLAPTA, viduryje — Baitas. Kortelės kaskart sumaišomos.)</p>
+<p><b>VAIKAI NEŠA 6 KORTELES, paskutines 4 greitai neši TU. Kūnu (3-2-1) balsuojam tik prie PIRMŲ 3 kortelių.</b> Viena kortelė vienu metu:</p>
+<ol><li>Parodyk kortelę (arba spausk jos 🔊 — kompiuteris pasako žodį).</li><li>▲ <span class="act">(tik pirmos 3 kortelės)</span> <b>VISA KLASĖ PIRMA KŪNU</b>, 3-2-1: 🙌 rankos AUKŠTYN = VIEŠA · 🙅 rankos SUKRYŽIUOTOS = SLAPTA.</li><li>Vienas vaikas ateina prie tavo kompiuterio ir <b>pele</b> nuneša kortelę: <b>paspausk — laikyk — nešk — paleisk.</b></li></ol>
+<p class="act">(🔊 — įrašytas lietuviškas balsas. Teisingai — kortelė įšoka, Baito vizorius užsidega ta spalva, „ding“. Klaida — kortelė sudreba ir grįžta, Baitas pakreipia galvą, rodyklė 👇 rodo teisingą dėžę. Po 3 klaidų dėžė švyti. Visos 10 — „⭐ Baitas išmoko! ⭐“.)</p>
+<p>🔑 INKARAI (kūnu): prie kiekvienos 🔴 kortelės visi kartu <b>„Slapta — tik man ir tėvams!“</b>; prie paskutinės — <b>„Slapta lieka slapta — net jei nori padėti.“</b></p>
+<p class="act">(Kortelės: 🟢 ledai, kompasas, drugelis, piešinys, kamuolys · 🔴 namai, telefonas, mokykla, nuotrauka, „kada namie viena“.)</p>
+<p class="why">💬 Jei ginčijasi dėl mokyklos ar nuotraukos: ❓ „Kodėl?“ … „Kas žino tavo mokyklą ar mato tavo nuotrauką — gali tave rasti.“</p>
+<p class="act">(6 vaikų kortelės ×~35 s + 4 tavo ×~10 s ≈ 4–5 min. „⟲ iš naujo“ — viršuje dešinėje.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas pelę laiko, bet nepaleidžia — sakyk „paleisk“ tik žodžiu, ranka nepadėk. Kas nešė — atsisėda, eilė kitam (niekas neneša dviejų).</div>
+<h2 id="b5"><span class="time">23–27 min</span>BLOKAS 5 · Prie kompiuterių</h2>
+<h3 id="s21"><span class="time">23:00</span>S21 · 🔊 Priminimas (dar prie lentos)</h3>
+<div class="say">„Žaidime — tas pats mygtukas. Nežinai, kas paveikslėlyje? Spausk 🔊 — kompiuteris pasakys.“</div>
+<p>▲ Visi ore „paspaudžia“ 🔊.</p>
+<div class="say">„Žaidime NEŠAM PELE — kaip ką tik prie lentos: paspausk, laikyk, nešk, paleisk.“</div>
+<p>▲ Visi ore: suspaudžia kumštį — neša — atleidžia.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar visi parodė judesį — kas ne, tam žaidime padėk pirmiausia.</div>
+<h3 id="s22"><span class="time">23:45–27:00</span>S22 · Portalas · ĮEINAM 1·2·3</h3>
+<p class="crit">🔴 DABAR — prie kompiuterių.</p>
+<div class="say">„Einam į INFOGYNEJAI.LT — ten mūsų laukia Baitas ir jo vizorius!“</div>
+<p class="act">(Rodyk adresą ir kortelę „Baito vizorius“. Realiai persėsti ir atsidaryti — 3–4 min.)</p>
+<p>▲ Pirmi atsidarę tampa ŽINOVAIS ir padeda kitiems ŽODŽIU (rankos už galvos). Kas atsistoja — „pasukam raktą“.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas neranda kortelės — žinovas parodo pirštu ekrane, ne pele.</div>
+<h2 id="b6"><span class="time">27–34 min</span>BLOKAS 6 · Žaidimas „Baito vizorius“</h2>
+<p>🧠 <b>Įrankiai:</b> Žaidybinė praktika · Maišymas.</p>
+<h3 id="s23"><span class="time">27:00–34:00</span>S23 · 🐶 Baito vizorius</h3>
+<p class="act">(Pelės įvadas (kaip Mistė Runner) → vilkimo mokymas → 1 lygis (aiškūs daiktai) → 2 lygis (keblesni). ✂️ 3 lygis „Baito klaidos“ šiandien nežaidžiamas — keliauja į P8.)</p>
+<p class="act">(Ekrane — tikras žaidimas. Jei „Žaidimas ruošiamas…“ arba tuščia — spausk „↗ atidaryti naujame lange“; jei ir ten nėra — žr. „Jei trūksta laiko“ 4 punktą.)</p>
+<p>🔑 ~30:00 INKARAS 1 (tylus gestas, apeinant klasę): pirštas prie lūpų 🤫, pašnibždomis <b>„Kam galima žinoti, kur gyveni?“</b> — „Tik man ir tėvams“.</p>
+<p>▲ Žaidžia; žinovai padeda žodžiu.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas užstrigo vilkimo mokyme (nepaleidžia pelės mygtuko) — atsistok šalia ir sakyk tik „paleisk“. 📄 Pasižymėk, kas pasiekė 2 lygį.</div>
+<h2 id="b7"><span class="time">34–36 min</span>BLOKAS 7 · Atgal prie lentos</h2>
+<h3 id="s24"><span class="time">34:00–36:00</span>S24 · 🪑 IŠEINAM 3·2·1</h3>
+<div class="say">„Rankos nuo pelės! 3 – 2 – 1… Atsistojam — pasukam raktą — ir į savo kėdę prie lentos.“</div>
+<p class="act">(Monitorius išjungti arba nusukti. Kas dar žaidžia — ramiai: „Baitas palauks. Kitą kartą.“)</p>
+<p>▲ Grįžta į puslankį.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Realiai — 2 min. Nepradėk išvados, kol visi nesėdi.</div>
+<h2 id="b8"><span class="time">36–39 min</span>BLOKAS 8 · Išvada · ar pasiekėm · namai</h2>
+<p>🧠 <b>Įrankis:</b> Patikrink tikslą.</p>
+<h3 id="s25"><span class="time">36:00</span>S25 · 🔴 Išvada · šiandienos klausimas</h3>
+<p class="act">(Grįžta ŠIANDIENOS KLAUSIMAS, žodis žodin:)</p>
+<div class="say">„Ar viską galima pasakyti, jei nori padėti?“</div>
+<p>▲ 3–4 atsakymai.</p>
+<p class="act">(Ištrauk iš vaikų — ne tu sakai: Baitas išpasakojo VISKĄ, ir tai, kas SLAPTA = dabar visi džiunglėse žino, kur Dingailė gyvena ir kada ji viena.)</p>
+<p class="act">(SPAUSK ➡️ — ekrane atsiranda išvada.)</p>
+<p class="crit">🔴 ŽODIS ŽODIN — iš šios eilutės generuojamas P6 kartojimo klausimas.</p>
+<div class="say">„Didžioji Baito klaida buvo — jis visiems papasakojo VISKĄ.“</div>
+<p>▲ VISA KLASĖ, DU KARTUS.</p>
+<p>🔑 INKARAS 2 (choru + rankos sukryžiuotos): <b>„Slapta lieka slapta — net jei nori padėti.“</b></p>
+<div class="fun">👁️ <b>Stebėk:</b> 📄 Palygink su S10 ir S17: kiek dabar sakytų „taip, galima“?</div>
+<h3 id="s26"><span class="time">38:00</span>S26 · 🎯 Ar pasiekėm tikslą? (30 s)</h3>
+<p class="crit">🔴 30 SEKUNDŽIŲ, SUPLANUOTA.</p>
+<p class="ask">❓ „Pamokos pradžioje pažadėjau: šiandien išmoksim atskirti, kas VIEŠA, kas SLAPTA. Ar pasiekėm?“</p>
+<p>▲ Atsako VAIKAI: kiekvienai kortelei — po vieną pavyzdį.</p>
+<p class="crit">🔴 NETAISYK ir nepagražink: „ne visai“ yra teisingas atsakymas.</p>
+<div class="fun">👁️ <b>Stebėk:</b> 📄 Kas painiojosi — duomenys P6.</div>
+<h3 id="s27"><span class="time">38:30</span>S27 · 🏠 Namų darbas · išmokyk savo tėvus</h3>
+<div class="say">„Namų darbas — IŠMOKYK SAVO TĖVUS. Papasakok jiems apie Baitą. Tada kartu namie surask du dalykus, kurie VIEŠI, ir du, kurie SLAPTI.“</div>
+<p>🔑 INKARAS 1 (namuose, per tėvus): „Slapta — tik man ir tėvams.“</p>
+<p class="act">(Tėvams nuoroda į žaidimą — hub’e INFOGYNEJAI.LT.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar vaikai pakartoja užduotį savais žodžiais — paklausk vieno.</div>
+<h2 id="b9"><span class="time">39–43 min</span>BLOKAS 9 · Kabliukas (šešėliai) · saliutas</h2>
+<p>🧠 <b>Įrankis:</b> Kabliukas (į P6). Trys kadrai be užrašų — žiūrim. Pamoka baigiasi klausimu, atsakymo nėra.</p>
+<h3 id="s28"><span class="time">39:00</span>S28 · 👤 Šešėlis girdėjo</h3>
+<p>🤫 TYLIAI, paslaptingai:</p>
+<div class="say">„Pažiūrėkit — kas ten, už medžio?“ <span class="act">(3 s tylos)</span> „Šešėlis. Jis girdėjo VISKĄ, ką Baitas papasakojo.“</div>
+<p class="act">(Veikėjai jo nemato — mes matom. Nesakyk, kas tas šešėlis. Tonas: smalsumas, ne baimė.)</p>
+<p>▲ Rodo pirštais, šnabždasi.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar visi rado šešėlį — jei ne, parodyk ranka į medį.</div>
+<h3 id="s29"><span class="time">40:00</span>S29 · 👥 Šešėlių taryba · Klaido raktas</h3>
+<div class="say">„Šešėlis kažką pasakoja kitiems šešėliams… ir kelia Klaido raktą!“ <span class="act">(3 s tylos)</span></div>
+<p class="ask">❓ „Ką jis sako?“ (Nesuprantam — burbule keisti ženklai, tai šešėlių kalba.)</p>
+<p>▲ 1–2 spėjimai. NETAISYK.</p>
+<p class="act">(Nesakyk, kas tie šešėliai ir ko jie nori. Ant kadro nieko nerašom.)</p>
+<div class="fun">👁️ <b>Stebėk:</b> Kas atpažįsta raktą iš P4 — linktelk, pirštas prie lūpų.</div>
+<h3 id="s30"><span class="time">41:15</span>S30 · 📸 Dingailės nuotrauka</h3>
+<div class="say">„O kas čia rankoje? … Dingailės nuotrauka — ta slapta žinia, kurią jis nugirdo iš Baito.“ <span class="act">(pauzė)</span> „Kas bus toliau? Sužinosim kitą kartą.“</div>
+<p class="crit">🔴 Čia pamoka baigiasi klausimu — NIEKO neatsakyk ir neaiškink. Jei klausia „ką jis darys?“ — „Kitą kartą.“</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar kas išsigando — jei taip: „Šešėlis — tik paslaptis. Mes Gynėjai, mes išsiaiškinsim.“</div>
+<h3 id="s31"><span class="time">42:30</span>S31 · 🛡️ Atsisveikinimas · saliutas</h3>
+<p class="crit">🔴 SALIUTAS: gilus įkvėpimas, abu delnai ant burnos. Jokio šūksnio.</p>
+<div class="say">„Gynėjai, iki kito karto.“</div>
+<p>▲ Saliutuoja, tyliai sėdi.</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar saliutas tikras — rami pamokos pabaiga.</div>
+<h2 id="b10"><span class="time">43–45 min</span>BLOKAS 10 · Refleksija (2 min, klasės valdymas)</h2>
+<p class="crit">🔴 <b>43:00–45:00 — tik refleksijai.</b> Jei vėluoji — kirpk anksčiau, ne čia.</p>
+<h3 id="s32"><span class="time">43:00</span>S32 · 🤔 Ką Baitas galėjo padaryti geriau? (~40 s)</h3>
+<p class="act">(Tikslas — tvarka ir drausmė klasėje. Pirma — per Baitą: apie veikėją kalbėti lengviau nei apie save.)</p>
+<p class="ask">❓ „Ką Baitas galėjo padaryti geriau?“</p>
+<p>▲ 2 vaikų atsakymai (pvz. „nepasakoti, kur ji gyvena“, „paklausti Klaido“, „sakyti tik tai, kas vieša“).</p>
+<p class="crit">🔴 Tu klausi — vaikai atsako. NEMORALIZUOK, nepridėk savo išvados, tik „Ačiū.“</p>
+<div class="fun">👁️ <b>Stebėk:</b> Ar atsakymai jungiasi su taisykle „Slapta lieka slapta“ — jei taip, tiesiog linktelk.</div>
+<h3 id="s33"><span class="time">43:40</span>S33 · 🪑🤝 Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip? (~1:20 — ilgiausia)</h3>
+<p class="act">(Klasės valdymo pokalbis — pagrindinė pabaigos dalis.)</p>
+<p class="ask">❓ „Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip?“</p>
+<p>▲ Vaikai patys įvardija, kas nepavyko (pvz. ginčas, kas neš kortelę, stumdymasis prie kompiuterio) ir ką darysim kitaip („laukiam eilės“, „nešam po vieną“).</p>
+<p class="crit">🔴 Tu klausi — vaikai atsako. Be vardų, be kaltinimų, NEMORALIZUOK. Vieną jų taisyklę pakartok garsiai: „Kitą kartą darom taip.“</p>
+<div class="fun">👁️ <b>Stebėk:</b> 📄 Užsirašyk tą taisyklę — P6 pradėsi nuo jos.</div>
+<h2 id="lapas">📄 Klasės mokytojos lapas <span class="act">(spausdinamas, 1 psl.)</span></h2>
+<div class="sheet">
+<p><b>Šeši skaičiai per pamoką.</b> <span class="act">(⚠️ V1 pasiūlymas, nepatvirtintas Kris’o.)</span></p>
+<p>A. <b>A</b> — kiek sakė „taip, galima“ prie šiandienos klausimo (S10, 5:45) → ir kiek pabaigoje (S25): <code>____</code></p>
+<p>B. <b>B</b> — kiek pritūpė (A „gerai padarė“) spėjime (S17): <code>____</code></p>
+<p>C. <b>C</b> — kurias korteles klasė rodė kūnu NETEISINGAI (S20): <code>____</code></p>
+<p>D. <b>D</b> — kiek vaikų nešė pele (S20) ir kam nepavyko paleisti: <code>____</code></p>
+<p>E. <b>E</b> — kiek vaikų pasiekė žaidimo 2 lygį (S23): <code>____</code></p>
+<p>F. <b>F</b> — antro taimerio vėlavimas S25 pradžioje (pvz. „+2:10“): <code>____</code></p>
+</div>
+<footer>P5 · V1 · 2026-10-07 · 1:1 su <code>deck.src.html</code> (S1–S33) · ← <a href="../04-neuronas-slaptazodis/scenarijus.html">P4 scenarijus</a></footer>
+</div></body></html>

@@ -1,0 +1,549 @@
+# P5 · Mentoriaus scenarijus — „Baitas ir Dingailė“
+
+**PAMOKA 5 · LYGIS 0 ▸ VIEŠA AR SLAPTA · NEŠAM PELE**
+**45 min · kompiuterių klasė · V1 · 2026-10-07**
+**Šaltinis: `deck.src.html` (33 skaidrės). Kiekviena skaidrė S1–S33 turi savo skyrių.**
+**Mentorius be patirties turi pravesti vien iš šito failo.**
+
+> **Žymėjimas:** **„taip“** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
+> ▲ = vaiko veiksmas · 🔴 = **čia pamokos miršta, nepraleisti** · 💬 = mentoriaus
+> sakinys po atsakymo · 👁️ = **stebėk** · 🔑 = inkaras · 🧠 = mokymosi mokslo įrankis · *(kursyvas)* = mentoriui, negarsiai
+
+> ⚠️ **V1 — nematyta klasėje.** Tonas: **klysti yra normalu.** Baitas — ne blogietis: jis LABAI nori padėti.
+> Klaida — ne noras, o tai, KĄ jis papasakojo. Šešėlis — paslaptis ir smalsumas, ne baimė.
+> Veikėjai dar nežino, kad Klaido raktas pamestas. Vaikai žino (matė P4 pabaigoje). Mes to neaiškinam.
+
+---
+
+## 🔴 PRIEŠ PAMOKĄ
+
+- [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs. Prie kompiuterių einam tik 23:45.
+- [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), ▶ „PRADĖTI PAMOKĄ“ paruoštas. Po juo — **antras taimeris ⏰** (pagal tvarkaraštį): prieš pamoką rodo „pamoka prasidės 13:30“ (kt.) / „12:55“ (pn.). Jei po juo parašyta „atsarginė lentelė“ — internetas neveikia, laikas vis tiek teisingas.
+- [ ] 🖱️ **Pelė prie tavo kompiuterio** pasiekiama vaikui (S20 vaikai po vieną ateis nešti kortelių). Išbandyk: nunešk vieną kortelę, paspausk „⟲ iš naujo“.
+- [ ] 🔊 **Garsas įjungtas** (vilkimo skaidrėje — mažas „ding“). 🔊 ant kortelių paleidžia įrašytą lietuvišką balsą.
+- [ ] 🐶 **„Baito vizorius“** atsidaro kiekviename kompiuteryje (INFOGYNEJAI.LT → „Baito vizorius“) ir deck’o S23. Jei S23 rodo „Žaidimas ruošiamas…“ — žaidimo dar nėra; tada S23 laiką skiri vilkimui deck’e (žr. „Jei trūksta laiko“).
+- [ ] 🧠 Žinai **du inkarus** (lentelė žemiau), **šiandienos klausimą** (S10) ir **išvadą** (S25) žodis žodin.
+- [ ] 📄 Jei P4 refleksijoje klasė sugalvojo taisyklę — turi ją užsirašiusi (pasakysi S1).
+- [ ] 🖊️ Atsispausdinai **mokytojos lapą** (apačioje) ir turi pieštuką.
+- [ ] 📞 Mokyklos IT žmogus pasiekiamas.
+
+> ⚠️ **SALIUTAS — visada tas pats gestas.** Gilus įkvėpimas → abu delnai ant burnos (kairė alkūnė prigludusi, dešinė pakelta virš pečių). Jokio kito gesto ir jokio šūksnio.
+
+## 🔑 DU INKARAI — kur jie grįžta
+
+- **Inkaras 1:** „**Slapta — tik man ir tėvams.**“
+- **Inkaras 2:** „**Slapta lieka slapta — net jei nori padėti.**“
+
+Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, gestu, pele, tyliai, namuose):
+
+| Kur | Skaidrė | Inkaras | Modalybė / formuluotė |
+|---|---|---|---|
+| S5 · 2:05 | Kam galima žinoti tavo slaptažodį? | I1 | kūnu — „Tik man ir tėvams“ (apsisukam) |
+| S16 · 12:10 | Baitas plepa visiems | I1 | istorijoje, Mistės balsu — „Tai tik jai ir tėvams!“ |
+| S18 · 15:00 | Termino kortelė | I1 | choru, du kartus — „Slapta — tik man ir tėvams!“ |
+| S19 · 16:30 | Taisyklė | I2 | choru + gestas (rankos sukryžiuotos) |
+| S20 · 18–23 | Vilkimas deck’e | I1 + I2 | kūnu + pele — prie kiekvienos 🔴 kortelės |
+| S23 · ~30:00 | Baito vizorius | I1 | tylus gestas 🤫 — „Kam galima žinoti, kur gyveni?“ — „Tik man ir tėvams“ |
+| S25 · 36:00 | Išvada | I2 | choru + rankos sukryžiuotos |
+| S27 · 38:30 | Namų darbas | I1 | namuose per tėvus |
+
+## 🧠 MOKYMOSI MOKSLO ĮRANKIAI — pagal blokus
+
+| Min | Blokas | Įrankis |
+|---|---|---|
+| 0–5 | Pabudimas · 4 kartojimo klausimai | Kūnas pirma · Aktyvus prisiminimas · Kartojimas su pertraukomis |
+| 5–8 | Tikslas · šiandienos klausimas | Pasakyk tikslą |
+| 8–15 | Baitas ir Dingailė · spėjam | Priežastinė istorija · Prognozė, tada atskleidimas · Rodyk, nerašyk |
+| 15–18 | VIEŠA / SLAPTA · taisyklė | Du inkarai |
+| 18–23 | Vilkimas deck’e | Patikrink → atsakas → pataisyk |
+| 27–34 | „Baito vizorius“ | Žaidybinė praktika · Maišymas |
+| 36–39 | Išvada · ar pasiekėm | Patikrink tikslą |
+| 39–43 | Šešėlis girdėjo · šešėlių taryba · nuotrauka | Kabliukas |
+| 43–45 | Dvi refleksijos | Klasės valdymas (refleksija) |
+
+## ⏱️ JEI TRŪKSTA LAIKO — ką kirpti, eilės tvarka
+
+0. *(Jau nukirpta pagal planą:)* žaidimo **3 lygis „Baito klaidos“** šiandien nežaidžiamas — keliauja į P8.
+1. **Vilkimas** (S20) — jau suplanuota: vaikai neša 6, tu — 4. Jei dar trūksta — tu neši 6, vaikai 4. Sutaupai ~1 min.
+2. **Spėjimas** (S17) — tik A/B/C, be balso diskusijos „Kas nutiks?“. Sutaupai ~1,5 min.
+3. **Baito vizorius** (S23) — sustabdyk 33:00 vietoj 34:00. Sutaupai ~1 min.
+4. Jei žaidimas **neatsidaro** (S23 „Žaidimas ruošiamas…“) — grįžk į S20, paspausk „⟲ iš naujo“ ir kortelės neša tie vaikai, kurie dar nenešė (iki 32:00). Tada IŠEINAM.
+
+🔴 **NIEKADA NEKIRPK:** **vilkimo deck’e** (S20 — pamokos interaktyvi dalis), **išvados su šiandienos klausimu** (S25) ir **dviejų refleksijų** (S32–S33, 43:00–45:00).
+
+⏰ **Antras taimeris** (po pagrindiniu): pradeda skaičiuoti pats, pamokos pradžios minutę pagal tvarkaraštį. Jei jis **oranžinis ir pulsuoja** — tu dar senoje dalyje, o laikas jau kitai („+1:30“ = vėluoji pusantros minutės). **Raudonas** — vėluoji 2 min ir daugiau: kirpk pagal sąrašą aukščiau.
+
+---
+
+## 0–5 min · BLOKAS 0 · Atidarymas + kartojimas
+
+🔴 **Viskas prie lentos, kėdės puslankiu, monitoriai tamsūs.**
+
+### S1 · 0:00 · Pasitikimas · titulinė skaidrė
+
+*(Prie DURŲ, ne prie stalo. Kiekvienam vaikui atskirai, šiltai.)*
+
+> **„Labas! Sėskis prie lentos — ne prie kompiuterio. Rankytes dar pailsinam.“**
+
+*(Jei P4 refleksijoje klasė sugalvojo taisyklę — pasakyk ją: „Praeitą kartą sutarėm: …“. ▶ SPAUSK „PRADĖTI PAMOKĄ“, kai pirmas vaikas peržengia slenkstį.)*
+
+▲ Sėdasi puslankiu prie lentos.
+
+👁️ **Stebėk:** Kas jau sėdi prie kompiuterio — šiltai pakviesk prie lentos, be aiškinimo.
+
+### S2 · 0:15–1:30 · Pabudimas „Perkūnija“ + „Plojam–stop“ (75 s)
+
+🧠 **Įrankis:** Kūnas pirma (PABUDIMAS). Nauji judesiai — ne A/B/C ir ne P4 „5-4-3-2-1“.
+
+*(Darai KARTU su vaikais — vis garsiau, paskui vis tyliau. Kas negali stovėti — daro sėdėdamas.)*
+
+> **„🌬️ Vėjas!“** *(trinam delnus)* **„💧 Lašai!“** *(spragsim pirštais)* **„🌧️ Lietus!“** *(plojam per šlaunis)* **„⛈️ PERKŪNAS!“** *(trepsim kojomis)*
+
+> **„Lietus… lašai… vėjas…“** *(atgal iki tylos)*
+
+> **„✋ Plojam! … STOP!“** *(×3, vis trumpiau; paskutinis STOP = tyla)*
+
+▲ Trina, spragsi, ploja, trepsi, sustingsta.
+
+👁️ **Stebėk:** Klausk „ar gali?“, niekada „kas geriau?“. Baigiasi tyla → iškart saliutas.
+
+### S3 · 1:30 · Keturios taisyklės · saliutas
+
+> **„Primenu keturias. ✋ — keliam ranką. 💬 — kalbam po vieną. 💛 — padedam vienas kitam. 🤫 — tylim, kai rodau.“**
+
+▲ Klasė parodo kiekvieną ranka. Ketvirtai — TIKRAS SALIUTAS.
+
+🔴 Jokio kito gesto ir jokio šūksnio.
+
+👁️ **Stebėk:** Ar saliutas tikras, ar pavirto į juoką. Jei į juoką — pakartok lėčiau.
+
+### S4 · 1:50 · Kaip atsakinėjam
+
+🧠 **Įrankis:** Aktyvus prisiminimas — keturi klausimai iš P1–P4.
+
+> **„Atsakot kūnu. A — pritupiam. B — apsisukam. C — rankos į viršų. Aš skaičiuoju TRYS – DU – VIENAS, ir visi kartu.“**
+
+▲ Vieną kartą pabando judesius.
+
+👁️ **Stebėk:** Kas painioja judesius — žiūrėk į jį pirmiausia.
+
+### S5 · 2:05 · 1/4 · Kam galima žinoti tavo slaptažodį? (P4 raktas)
+
+❓ „Kam galima žinoti tavo slaptažodį?“ A visai klasei → pritupk · B tik man ir tėvams → apsisuk · C geriausiam draugui → rankos į viršų.
+
+*(3 – 2 – 1! Teisinga — B. SPAUSK DAR KARTĄ, kad užsidegtų teisingas atsakymas.)*
+
+💬 „Slaptažodis — tik man ir tėvams. Daugiau niekam.“
+
+🔑 INKARAS 1 (kūnu, pirmą kartą šiandien).
+
+▲ Atsako kūnu.
+
+👁️ **Stebėk:** Kas renkasi C (draugas) — pasižymėk, šiandien tai dar kartą grįš.
+
+### S6 · 2:50 · 2/4 · Kaip parašyti DIDŽIĄJĄ raidę? (Shift)
+
+❓ „Kaip parašyti DIDŽIĄJĄ raidę?“ A tarpas → pritupk · B trynimas ⌫ → apsisuk · C ⇧ SHIFT + raidė → rankos į viršų.
+
+*(Teisinga — C. SPAUSK DAR KARTĄ.)*
+
+💬 „Laikai ⇧ SHIFT ir spaudi raidę — ji didžioji!“
+
+▲ Visi ore „laiko“ SHIFT kaire ranka ir „spaudžia“ raidę dešine.
+
+👁️ **Stebėk:** Kas spaudžia viena ranka — dar nesuprato „laikyk ir spausk“.
+
+### S7 · 3:35 · 3/4 · Ką daro šis mygtukas? 🔊
+
+❓ „Ką daro šis mygtukas?“ A perskaito tekstą → pritupk · B išjungia kompiuterį → apsisuk · C įjungia muziką → rankos į viršų.
+
+*(Teisinga — A. SPAUSK DAR KARTĄ.)*
+
+💬 „🔊 Paspaudi — ir kompiuteris tau perskaito!“
+
+*(Šiandien jo prireiks kortelėse ir žaidime — kas neskaito, spaudžia 🔊.)*
+
+▲ Atsako kūnu.
+
+👁️ **Stebėk:** Kas renkasi C — gali nežinoti mygtuko; žaidime prieik pirmiausia.
+
+### S8 · 4:20 · 4/4 · Kokia buvo didžioji Klaido klaida?
+
+❓ „Kokia buvo didžioji Klaido klaida?“ A užmigo prie durų → pritupk · B naudojo tą patį raktą viskam → apsisuk · C pabėgo nuo Mistės → rankos į viršų.
+
+*(Teisinga — B. SPAUSK DAR KARTĄ.)*
+
+💬 „Didžioji Klaido klaida buvo — jis naudojo tą patį raktą viskam.“ (žodis žodin iš P4 išvados)
+
+*(Jei kas prisimena, kad raktą PAMETĖ ir kažkas jį RADO — linktelk ir pašnibždėk: „Ššš… Klaidas dar nežino.“ Daugiau nieko.)*
+
+▲ Atsako kūnu.
+
+👁️ **Stebėk:** Kiek vaikų pamena P4 išvadą — pasižymėk, netaisyk.
+
+## 5–8 min · BLOKAS 1 · Tikslas · šiandienos klausimas
+
+### S9 · 5:00 · 🎯 Šiandienos tikslas
+
+🧠 **Įrankis:** Pasakyk tikslą.
+
+🔴 PAŽADAS — PASAKYK GARSIAI IR SUSTOK.
+
+> **„Šiandien išmoksim atskirti, kas VIEŠA, o kas SLAPTA.“**
+
+▲ Klasė pakartoja choru.
+
+*(Rodyk 🟢 ir 🔴 korteles. Ką jos reiškia — dar nesakyk, sužinosim iš istorijos. Gale grįšim — S26.)*
+
+👁️ **Stebėk:** Ar visi kartojo. Jei tylūs — pakartok dar kartą, linksmiau.
+
+### S10 · 5:45 · ❓ Šiandienos klausimas
+
+> **„Ar viską galima pasakyti, jei nori padėti?“**
+
+▲ 3–4 atsakymai balsu (taip / ne / kodėl).
+
+🔴 NETAISYK ir atsakymo NESAKYK: **„Įdomu… Pamokos gale pažiūrėsim, kas nutiko Baitui.“**
+
+*(~7:30 TILTAS:)* **„O dabar — atgal į džiungles. Klaidas ir Mistė eina toliau…“**
+
+👁️ **Stebėk:** 📄 Pasižymėk, kiek sakė „taip, galima“ — palyginsi S25.
+
+## 8–15 min · BLOKAS 2 · Baitas ir Dingailė (istorija)
+
+🧠 **Įrankiai:** Priežastinė istorija · Prognozė, tada atskleidimas · Rodyk, nerašyk. Kadruose burbulai — žodžius skaitai TU.
+
+### S11 · 8:00 · 🖼️ 1 · Kas ten bėga?
+
+> **„Klaidas ir Mistė įžengė į džiungles. Ieško Dingailės — Klaido sesės. Ir staiga… iš toli kažkas juos pamatė — ir BĖGA tiesiai link jų!“**
+
+❓ „Kas ten bėga?“
+
+▲ Spėja (šuo! robotas!). Vardo dar nesakyk.
+
+👁️ **Stebėk:** Kas pirmas pamato akinius-vizorių — pagirk akylumą.
+
+### S12 · 8:45 · 🖼️ 2 · Pro atviras duris
+
+> **„Jis taip skubėjo pas Klaidą ir Mistę, kad prabėgo pro… pažiūrėkit!“**
+
+*(Palauk 3 s — tegul vaikai patys pamato: tos pačios durys ir skrynia iš P4 — dabar PLAČIAI ATVIROS.)*
+
+🤫 PAŠNIBŽDOM, pirštas prie lūpų: **„Ar kas nors pastebėjot? … Ššš. Klaidas dar nežino.“**
+
+🔴 Nieko neaiškink ir nesakyk, kas atrakino. Veikėjai nežino — žinom tik mes.
+
+▲ Vaikai rodo pirštais, šnabždasi.
+
+👁️ **Stebėk:** Kas sako „šešėlis!“ / „raktas!“ — linktelk ir pirštas prie lūpų. Paslaptis lieka paslaptimi.
+
+### S13 · 9:30 · 🖼️ 3 · „Aš galiu padėti!“
+
+🧠 **Įrankis:** Prognozė, tada atskleidimas. Burbulas TUŠČIAS.
+
+❓ „Ką jis sako, kaip manot?“ ▲ 2 spėjimai.
+
+*(SPAUSK ➡️ — burbule atsiranda žodžiai. Skaityk linksmai, uždusęs nuo bėgimo:)*
+
+> **„Aš galiu padėti! Aš pažįstu Dingailę!“**
+
+❓ „Ar Klaidas apsidžiaugė?“ (Taip! Jis ieško sesės.)
+
+👁️ **Stebėk:** Ar vaikai džiaugiasi Baitu — gerai, jis ir turi patikti.
+
+### S14 · 10:20 · 🐶 Naujas veikėjas · BAITAS
+
+> **„Susipažinkit — BAITAS. Jis DI šuo-skeneris. Matot akinius? Tai jo VIZORIUS. Užsidega 🟢 žaliai — kai daiktą galima rodyti visiems. Užsidega 🔴 raudonai — kai tai paslaptis.“**
+
+💛 MOTYVACIJA, lėtai: **„Baitas labai, LABAI nori būti naudingas.“**
+
+▲ Visi kartu: „Nori būti naudingas!“
+
+❓ „Ar gerai norėti padėti?“ (Taip! — netaisyk, tai tiesa.)
+
+*(Klaida bus ne noras, o KĄ jis darys.)*
+
+👁️ **Stebėk:** Ar vaikai prisimena Mistę (P3) — „ji irgi norėjo padėti“. Jei kas pasako — linktelk: „Pažiūrėsim.“
+
+### S15 · 11:20 · 🖼️ 4 · Baitas plepa beždžionei
+
+> **„Jie keliauja toliau. Ant šakos — beždžionė. Ir Baitas, norėdamas padėti, iškart jai papasakoja: kaip Dingailė atrodo — ir kur ji gyvena!“**
+
+*(Skaityk burbulą Baito balsu, labai draugiškai:)* **„Dingailė gyvena va ten! 🏠“**
+
+❓ Rodyk į Klaidą ir Mistę: „O kaip jie atrodo? Ar jiems patinka?“ (Jie susirūpinę.)
+
+👁️ **Stebėk:** Kas pastebi veidus — tai emocijų skaitymas, pagirk.
+
+### S16 · 12:10 · 🖼️ 5 · Baitas plepa visiems
+
+> **„Prie upės — papūga ir varlė. Baitas ir joms papasakoja VISKĄ: Dingailės veidą, jos namus… ir kada ji būna namie VIENA.“**
+
+*(Burbulas:)* **„Ji būna namie viena!“**
+
+*(Pabrėžk: Baitas tikrai mano, kad taip PADĖS — kuo daugiau žinos, tuo greičiau suras.)*
+
+🔑 INKARAS 1 (istorijoje, Mistės balsu): **„Baitai! Kur Dingailė gyvena ir kada ji viena — tai tik jai ir tėvams!“**
+
+👁️ **Stebėk:** Kas jau sako „negalima!“ — neatsakinėk, kitoje skaidrėje spėsim visi.
+
+### S17 · 13:00–15:00 · 🔮 Spėjam
+
+🧠 **Įrankis:** Prognozė prieš atskleidimą.
+
+❓ „Ar Baitas gerai padarė?“ A gerai — jis padėjo → pritupk · B negerai → apsisuk · C nežinau → rankos į viršų.
+
+🔴 TEISINGO ATSAKYMO ČIA NĖRA IR NIEKO NEUŽDEGAM — tai SPĖJIMAS. Atsakymas — kitoje skaidrėje.
+
+❓ Tada balsu: „Kas nutiks, kai visi džiunglėse tai žinos?“ ▲ 3–4 atsakymai. Netaisyk: „Pažiūrėkim…“
+
+👁️ **Stebėk:** 📄 Kiek pritūpė (A „gerai“) — palyginsi S25.
+
+## 15–18 min · BLOKAS 3 · VIEŠA / SLAPTA · taisyklė
+
+🧠 **Įrankis:** Du inkarai.
+
+### S18 · 15:00 · Termino kortelė · VIEŠA / SLAPTA
+
+*(SAKYK BALSU IR SUSTOK po kiekvienos.)*
+
+> **„VIEŠA — tai, ką galima rodyti visiems. Mėgstami ledai, piešinys, kamuolys.“**
+
+> **„SLAPTA — tik man ir tėvams. Kur gyveni, telefonas, kada būni namie viena.“**
+
+🔑 INKARAS 1 (choru, du kartus): **„Slapta — tik man ir tėvams!“**
+
+❓ „O geriausias draugas?“ — „Ne. Tik man ir tėvams.“
+
+❓ Grįžk prie spėjimo: „Tai ar Baitas gerai padarė?“ (Ne — jis išpasakojo, kas SLAPTA.)
+
+👁️ **Stebėk:** Kas abejoja dėl „mokyklos“ ar „nuotraukos“ — gerai, tai bus vilkimo veikloje.
+
+### S19 · 16:30 · 📜 Taisyklė
+
+🔑 INKARAS 2, lėtai, kiekvieną žodį:
+
+> **„Slapta lieka slapta — net jei nori padėti.“**
+
+▲ Visa klasė, DU KARTUS, rankos SUKRYŽIUOTOS ant krūtinės (tai „slapta“ ženklas vilkimui).
+
+💬 „Baitas norėjo padėti. Noras buvo geras. Bet slapta — lieka slapta.“
+
+👁️ **Stebėk:** Ar visi sukryžiavo rankas — šito judesio reikės po minutės.
+
+## 18–23 min · BLOKAS 4 · Vilkimas deck’e (interaktyvi dalis)
+
+🧠 **Įrankis:** Patikrink → atsakas → pataisyk.
+
+### S20 · 18:00–23:00 · ✋ VIEŠA ar SLAPTA? Nešam pele
+
+*(Ekrane — 10 kortelių: tai, ką Baitas išpasakojo apie Dingailę. Kairėje — 🧺 VIEŠA, dešinėje — 🔐 SLAPTA, viduryje — Baitas. Kortelės kaskart sumaišomos.)*
+
+**VAIKAI NEŠA 6 KORTELES, paskutines 4 greitai neši TU. Kūnu (3-2-1) balsuojam tik prie PIRMŲ 3 kortelių.** Viena kortelė vienu metu:
+1. Parodyk kortelę (arba spausk jos 🔊 — kompiuteris pasako žodį).
+2. ▲ *(tik pirmos 3 kortelės)* **VISA KLASĖ PIRMA KŪNU**, 3-2-1: 🙌 rankos AUKŠTYN = VIEŠA · 🙅 rankos SUKRYŽIUOTOS = SLAPTA.
+3. Vienas vaikas ateina prie tavo kompiuterio ir **pele** nuneša kortelę: **paspausk — laikyk — nešk — paleisk.**
+
+*(🔊 — įrašytas lietuviškas balsas. Teisingai — kortelė įšoka, Baito vizorius užsidega ta spalva, „ding“. Klaida — kortelė sudreba ir grįžta, Baitas pakreipia galvą, rodyklė 👇 rodo teisingą dėžę. Po 3 klaidų dėžė švyti. Visos 10 — „⭐ Baitas išmoko! ⭐“.)*
+
+🔑 INKARAI (kūnu): prie kiekvienos 🔴 kortelės visi kartu **„Slapta — tik man ir tėvams!“**; prie paskutinės — **„Slapta lieka slapta — net jei nori padėti.“**
+
+*(Kortelės: 🟢 ledai, kompasas, drugelis, piešinys, kamuolys · 🔴 namai, telefonas, mokykla, nuotrauka, „kada namie viena“.)*
+
+💬 Jei ginčijasi dėl mokyklos ar nuotraukos: ❓ „Kodėl?“ … „Kas žino tavo mokyklą ar mato tavo nuotrauką — gali tave rasti.“
+
+*(6 vaikų kortelės ×~35 s + 4 tavo ×~10 s ≈ 4–5 min. „⟲ iš naujo“ — viršuje dešinėje.)*
+
+👁️ **Stebėk:** Kas pelę laiko, bet nepaleidžia — sakyk „paleisk“ tik žodžiu, ranka nepadėk. Kas nešė — atsisėda, eilė kitam (niekas neneša dviejų).
+
+## 23–27 min · BLOKAS 5 · Prie kompiuterių
+
+### S21 · 23:00 · 🔊 Priminimas (dar prie lentos)
+
+> **„Žaidime — tas pats mygtukas. Nežinai, kas paveikslėlyje? Spausk 🔊 — kompiuteris pasakys.“**
+
+▲ Visi ore „paspaudžia“ 🔊.
+
+> **„Žaidime NEŠAM PELE — kaip ką tik prie lentos: paspausk, laikyk, nešk, paleisk.“**
+
+▲ Visi ore: suspaudžia kumštį — neša — atleidžia.
+
+👁️ **Stebėk:** Ar visi parodė judesį — kas ne, tam žaidime padėk pirmiausia.
+
+### S22 · 23:45–27:00 · Portalas · ĮEINAM 1·2·3
+
+🔴 DABAR — prie kompiuterių.
+
+> **„Einam į INFOGYNEJAI.LT — ten mūsų laukia Baitas ir jo vizorius!“**
+
+*(Rodyk adresą ir kortelę „Baito vizorius“. Realiai persėsti ir atsidaryti — 3–4 min.)*
+
+▲ Pirmi atsidarę tampa ŽINOVAIS ir padeda kitiems ŽODŽIU (rankos už galvos). Kas atsistoja — „pasukam raktą“.
+
+👁️ **Stebėk:** Kas neranda kortelės — žinovas parodo pirštu ekrane, ne pele.
+
+## 27–34 min · BLOKAS 6 · Žaidimas „Baito vizorius“
+
+🧠 **Įrankiai:** Žaidybinė praktika · Maišymas.
+
+### S23 · 27:00–34:00 · 🐶 Baito vizorius
+
+*(Pelės įvadas (kaip Mistė Runner) → vilkimo mokymas → 1 lygis (aiškūs daiktai) → 2 lygis (keblesni). ✂️ 3 lygis „Baito klaidos“ šiandien nežaidžiamas — keliauja į P8.)*
+
+*(Ekrane — tikras žaidimas. Jei „Žaidimas ruošiamas…“ arba tuščia — spausk „↗ atidaryti naujame lange“; jei ir ten nėra — žr. „Jei trūksta laiko“ 4 punktą.)*
+
+🔑 ~30:00 INKARAS 1 (tylus gestas, apeinant klasę): pirštas prie lūpų 🤫, pašnibždomis **„Kam galima žinoti, kur gyveni?“** — „Tik man ir tėvams“.
+
+▲ Žaidžia; žinovai padeda žodžiu.
+
+👁️ **Stebėk:** Kas užstrigo vilkimo mokyme (nepaleidžia pelės mygtuko) — atsistok šalia ir sakyk tik „paleisk“. 📄 Pasižymėk, kas pasiekė 2 lygį.
+
+## 34–36 min · BLOKAS 7 · Atgal prie lentos
+
+### S24 · 34:00–36:00 · 🪑 IŠEINAM 3·2·1
+
+> **„Rankos nuo pelės! 3 – 2 – 1… Atsistojam — pasukam raktą — ir į savo kėdę prie lentos.“**
+
+*(Monitorius išjungti arba nusukti. Kas dar žaidžia — ramiai: „Baitas palauks. Kitą kartą.“)*
+
+▲ Grįžta į puslankį.
+
+👁️ **Stebėk:** Realiai — 2 min. Nepradėk išvados, kol visi nesėdi.
+
+## 36–39 min · BLOKAS 8 · Išvada · ar pasiekėm · namai
+
+🧠 **Įrankis:** Patikrink tikslą.
+
+### S25 · 36:00 · 🔴 Išvada · šiandienos klausimas
+
+*(Grįžta ŠIANDIENOS KLAUSIMAS, žodis žodin:)*
+
+> **„Ar viską galima pasakyti, jei nori padėti?“**
+
+▲ 3–4 atsakymai.
+
+*(Ištrauk iš vaikų — ne tu sakai: Baitas išpasakojo VISKĄ, ir tai, kas SLAPTA = dabar visi džiunglėse žino, kur Dingailė gyvena ir kada ji viena.)*
+
+*(SPAUSK ➡️ — ekrane atsiranda išvada.)*
+
+🔴 ŽODIS ŽODIN — iš šios eilutės generuojamas P6 kartojimo klausimas.
+
+> **„Didžioji Baito klaida buvo — jis visiems papasakojo VISKĄ.“**
+
+▲ VISA KLASĖ, DU KARTUS.
+
+🔑 INKARAS 2 (choru + rankos sukryžiuotos): **„Slapta lieka slapta — net jei nori padėti.“**
+
+👁️ **Stebėk:** 📄 Palygink su S10 ir S17: kiek dabar sakytų „taip, galima“?
+
+### S26 · 38:00 · 🎯 Ar pasiekėm tikslą? (30 s)
+
+🔴 30 SEKUNDŽIŲ, SUPLANUOTA.
+
+❓ „Pamokos pradžioje pažadėjau: šiandien išmoksim atskirti, kas VIEŠA, kas SLAPTA. Ar pasiekėm?“
+
+▲ Atsako VAIKAI: kiekvienai kortelei — po vieną pavyzdį.
+
+🔴 NETAISYK ir nepagražink: „ne visai“ yra teisingas atsakymas.
+
+👁️ **Stebėk:** 📄 Kas painiojosi — duomenys P6.
+
+### S27 · 38:30 · 🏠 Namų darbas · išmokyk savo tėvus
+
+> **„Namų darbas — IŠMOKYK SAVO TĖVUS. Papasakok jiems apie Baitą. Tada kartu namie surask du dalykus, kurie VIEŠI, ir du, kurie SLAPTI.“**
+
+🔑 INKARAS 1 (namuose, per tėvus): „Slapta — tik man ir tėvams.“
+
+*(Tėvams nuoroda į žaidimą — hub’e INFOGYNEJAI.LT.)*
+
+👁️ **Stebėk:** Ar vaikai pakartoja užduotį savais žodžiais — paklausk vieno.
+
+## 39–43 min · BLOKAS 9 · Kabliukas (šešėliai) · saliutas
+
+🧠 **Įrankis:** Kabliukas (į P6). Trys kadrai be užrašų — žiūrim. Pamoka baigiasi klausimu, atsakymo nėra.
+
+### S28 · 39:00 · 👤 Šešėlis girdėjo
+
+🤫 TYLIAI, paslaptingai:
+
+> **„Pažiūrėkit — kas ten, už medžio?“** *(3 s tylos)* **„Šešėlis. Jis girdėjo VISKĄ, ką Baitas papasakojo.“**
+
+*(Veikėjai jo nemato — mes matom. Nesakyk, kas tas šešėlis. Tonas: smalsumas, ne baimė.)*
+
+▲ Rodo pirštais, šnabždasi.
+
+👁️ **Stebėk:** Ar visi rado šešėlį — jei ne, parodyk ranka į medį.
+
+### S29 · 40:00 · 👥 Šešėlių taryba · Klaido raktas
+
+> **„Šešėlis kažką pasakoja kitiems šešėliams… ir kelia Klaido raktą!“** *(3 s tylos)*
+
+❓ „Ką jis sako?“ (Nesuprantam — burbule keisti ženklai, tai šešėlių kalba.)
+
+▲ 1–2 spėjimai. NETAISYK.
+
+*(Nesakyk, kas tie šešėliai ir ko jie nori. Ant kadro nieko nerašom.)*
+
+👁️ **Stebėk:** Kas atpažįsta raktą iš P4 — linktelk, pirštas prie lūpų.
+
+### S30 · 41:15 · 📸 Dingailės nuotrauka
+
+> **„O kas čia rankoje? … Dingailės nuotrauka — ta slapta žinia, kurią jis nugirdo iš Baito.“** *(pauzė)* **„Kas bus toliau? Sužinosim kitą kartą.“**
+
+🔴 Čia pamoka baigiasi klausimu — NIEKO neatsakyk ir neaiškink. Jei klausia „ką jis darys?“ — „Kitą kartą.“
+
+👁️ **Stebėk:** Ar kas išsigando — jei taip: „Šešėlis — tik paslaptis. Mes Gynėjai, mes išsiaiškinsim.“
+
+### S31 · 42:30 · 🛡️ Atsisveikinimas · saliutas
+
+🔴 SALIUTAS: gilus įkvėpimas, abu delnai ant burnos. Jokio šūksnio.
+
+> **„Gynėjai, iki kito karto.“**
+
+▲ Saliutuoja, tyliai sėdi.
+
+👁️ **Stebėk:** Ar saliutas tikras — rami pamokos pabaiga.
+
+## 43–45 min · BLOKAS 10 · Refleksija (2 min, klasės valdymas)
+
+🔴 **43:00–45:00 — tik refleksijai.** Jei vėluoji — kirpk anksčiau, ne čia.
+
+### S32 · 43:00 · 🤔 Ką Baitas galėjo padaryti geriau? (~40 s)
+
+*(Tikslas — tvarka ir drausmė klasėje. Pirma — per Baitą: apie veikėją kalbėti lengviau nei apie save.)*
+
+❓ „Ką Baitas galėjo padaryti geriau?“
+
+▲ 2 vaikų atsakymai (pvz. „nepasakoti, kur ji gyvena“, „paklausti Klaido“, „sakyti tik tai, kas vieša“).
+
+🔴 Tu klausi — vaikai atsako. NEMORALIZUOK, nepridėk savo išvados, tik „Ačiū.“
+
+👁️ **Stebėk:** Ar atsakymai jungiasi su taisykle „Slapta lieka slapta“ — jei taip, tiesiog linktelk.
+
+### S33 · 43:40 · 🪑🤝 Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip? (~1:20 — ilgiausia)
+
+*(Klasės valdymo pokalbis — pagrindinė pabaigos dalis.)*
+
+❓ „Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip?“
+
+▲ Vaikai patys įvardija, kas nepavyko (pvz. ginčas, kas neš kortelę, stumdymasis prie kompiuterio) ir ką darysim kitaip („laukiam eilės“, „nešam po vieną“).
+
+🔴 Tu klausi — vaikai atsako. Be vardų, be kaltinimų, NEMORALIZUOK. Vieną jų taisyklę pakartok garsiai: „Kitą kartą darom taip.“
+
+👁️ **Stebėk:** 📄 Užsirašyk tą taisyklę — P6 pradėsi nuo jos.
+
+---
+
+## 📄 Klasės mokytojos lapas *(spausdinamas, 1 psl.)*
+
+**Šeši skaičiai per pamoką.** *(⚠️ V1 pasiūlymas, nepatvirtintas Kris’o.)*
+
+A. **A** — kiek sakė „taip, galima“ prie šiandienos klausimo (S10, 5:45) → ir kiek pabaigoje (S25): `____`
+B. **B** — kiek pritūpė (A „gerai padarė“) spėjime (S17): `____`
+C. **C** — kurias korteles klasė rodė kūnu NETEISINGAI (S20): `____`
+D. **D** — kiek vaikų nešė pele (S20) ir kam nepavyko paleisti: `____`
+E. **E** — kiek vaikų pasiekė žaidimo 2 lygį (S23): `____`
+F. **F** — antro taimerio vėlavimas S25 pradžioje (pvz. „+2:10“): `____`
+
+---
+P5 · V1 · 2026-10-07 · 1:1 su `deck.src.html` (S1–S33) · ← [[../04-neuronas-slaptazodis/scenarijus|P4 scenarijus]]
