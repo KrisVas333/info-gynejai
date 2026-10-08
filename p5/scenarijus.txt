@@ -18,7 +18,7 @@
 ## 🔴 PRIEŠ PAMOKĄ
 
 - [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs. Prie kompiuterių einam tik 22:45.
-- [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), ▶ „PRADĖTI PAMOKĄ“ paruoštas. Po juo — **antras taimeris ⏰** (pagal tvarkaraštį): prieš pamoką rodo „pamoka prasidės 13:30“ (kt.) / „12:55“ (pn.). Jei po juo parašyta „atsarginė lentelė“ — internetas neveikia, laikas vis tiek teisingas.
+- [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`deck.html`), ▶ „PRADĖTI PAMOKĄ“ paruoštas. Po juo — **antras taimeris ⏰** (pagal tvarkaraštį): prieš pamoką rodo „pamoka prasidės 13:35“ (kt.) / „12:55“ (pn.). Jei po juo parašyta „atsarginė lentelė“ — internetas neveikia, laikas vis tiek teisingas.
 - [ ] 🖱️ **Pelė prie tavo kompiuterio** pasiekiama vaikui (S20 vaikai po vieną ateis nešti kortelių). Išbandyk: nunešk vieną kortelę, paspausk „⟲ iš naujo“.
 - [ ] 🔊 **Garsas įjungtas** (vilkimo skaidrėje — mažas „ding“). 🔊 ant kortelių paleidžia įrašytą lietuvišką balsą.
 - [ ] 🐶 **„Baito vizorius“** atsidaro kiekviename kompiuteryje (INFOGYNEJAI.LT → „Baito vizorius“) ir deck’o S23. Jei S23 rodo „Žaidimas ruošiamas…“ — žaidimo dar nėra; tada S23 laiką skiri vilkimui deck’e (žr. „Jei trūksta laiko“).
