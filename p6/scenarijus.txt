@@ -1,0 +1,780 @@
+# P6 · Mentoriaus scenarijus — „Kaukė“
+
+**PAMOKA 6 · LYGIS 0 ▸ VIEŠA AR SLAPTA · SLAPYVARDIS KAIP KAUKĖ**
+**~47 min · kompiuterių klasė · V2 · 2026-10-14 · pamoka 2026-10-15 13:35**
+**Šaltinis: `P6-deck.src.html` (38 skaidrės) + `P6-planas-v2.html`. Kiekviena skaidrė S1–S38 turi savo skyrių.**
+**Mentorius be patirties turi pravesti vien iš šito failo.**
+
+> ⚠️ **LT tekstą dar turi patikrinti gimtakalbis.** Visi „sakyk“ sakiniai paimti iš deck’o mentoriaus pastabų; jų kalbos nepatikrino žmogus.
+
+> **Žymėjimas:** **„taip“** = sakoma balsu pažodžiui · ❓ = vedantis klausimas ·
+> ▲ = vaiko veiksmas · 🔴 = **čia pamokos miršta, nepraleisti** · 💬 = mentoriaus
+> sakinys po atsakymo · 👁️ = **stebėk** · 🔑 = inkaras · 🧠 = mokymosi mokslo įrankis · *(kursyvas)* = mentoriui, negarsiai
+
+> ⚠️ **V2 — nematyta klasėje.** Tonas: **kaukė nėra gėda ir nėra baimė.** Mistė nėra kvaila: ji norėjo, kad Dingailė ją atpažintų.
+> Klaida — ne noras, o tai, KĄ ji padarė (kaukę iš savo veido). Šešėlis — paslaptis ir smalsumas, ne baimė.
+> Veikėjai dar nežino, kad Šešėlis turi Dingailės nuotrauką. Vaikai žino (matė P5 pabaigoje). Mes to neaiškinam.
+
+---
+
+## 🔴 PRIEŠ PAMOKĄ
+
+- [ ] 🔴 **KĖDĖS PUSLANKIU PRIE LENTOS**, tiek, kiek vaikų. Monitoriai tamsūs. Prie kompiuterių einam tik 26:30.
+- [ ] 🖥️ **Deck’as atidarytas pilname ekrane** (`P6-deck.html`), ▶ „PRADĖTI PAMOKĄ“ paruoštas. Antras taimeris ⏰ — kaip P5 (⚠️ P6 deck’e jį radau, bet to paties elgesio nepatikrinau).
+- [ ] 🎞️ **Istorijos priminimo video (59 s)** — paspausk ▶ vieną kartą prieš pamoką: ar groja ir ar yra garsas. Skaidrė pilno ekrano, be teksto — **klausimas yra tik šiame scenarijuje (S4)**. Jei video nesileidžia — žr. S4.
+- [ ] 🛠️ **Kaukių dirbtuvės** — atsidaryk S23 ir **patikrink, ar puslapis įsikrauna** (ne tuščias langas). Jei tuščias — veiklą vesi žodžiu, 3 žingsniai S23 skyriuje.
+- [ ] 🖱️ **Pelė prie tavo kompiuterio** pasiekiama vaikui (S23 vaikai po vieną ateis vilkti). Išbandyk: nutempk slapyvardžio kortelę prie durų, **dukart spustelėk** dramblio kaukę, paspausk „⟲“.
+- [ ] 🚪 **Kaukių vartai** atsidaro vaikų kompiuteriuose (INFOGYNEJAI.LT) ir S26 didžiuoju mygtuku. Žinok, kaip pasirinkti žaidimą (S24): vartuose spusteli kortelę arba adresas su `?zaidimas=klavisu-sokis` / `miste-runner` / `baito-vizorius`.
+- [ ] 🔊 **Garsas įjungtas** (video, dirbtuvės, vartai kalba lietuviškai).
+- [ ] 🧠 Žinai **du inkarus** (lentelė žemiau), **šiandienos klausimą** (S17) ir **išvadą** (S33) žodis žodin.
+- [ ] 📄 Jei P5 refleksijoje klasė sugalvojo taisyklę — turi ją užsirašiusi (pasakysi S1).
+- [ ] 🎭 **Atsispausdinai kaukės kortelių** (apačioje) — po vieną kiekvienam vaikui + keletą atsarginių, ir pieštukų/spalvotų flomasterių.
+- [ ] 🖊️ Atsispausdinai **mokytojos lapą** (apačioje) ir turi pieštuką.
+- [ ] 📞 Mokyklos IT žmogus pasiekiamas.
+
+> ⚠️ **SALIUTAS — visada tas pats gestas.** Gilus įkvėpimas → abu delnai ant burnos (kairė alkūnė prigludusi, dešinė pakelta virš pečių). Jokio kito gesto ir jokio šūksnio.
+
+> 🔴 **SLAPTAŽODIS NERAŠOMAS NIEKUR.** Nei ant kortelės, nei lentoje, nei tavo lape. Slapyvardį rašyti galima (jis 🟢 viešas). Slaptažodžio nesakyk balsu ir neprašyk vaiko jo pasakyti.
+
+## 🔑 DU INKARAI — kur jie grįžta
+
+- **Inkaras 1 (⚓1):** „**Slapyvardis — kaukė. Ją mato visi, bet ji neišduoda, kas aš.**“
+- **Inkaras 2 (⚓2):** „**Didžioji Mistės klaida buvo — ji norėjo, kad ją atpažintų, todėl kaukę padarė iš savo veido.**“
+
+Kas 10–12 min — nauja modalybė (kūnu, istorijoje, choru, poromis, pele, tyliai, namuose):
+
+| Kur | Skaidrė | Inkaras | Modalybė / formuluotė |
+|---|---|---|---|
+| S18 · 13:30 | Termino kortelė · SLAPYVARDIS | ⚓1 | choru, du kartus, pirmą kartą |
+| S19 · 15:00 | Kuri kaukė geresnė? | — | balsavimas kūnu (ranka į kairę / į dešinę) |
+| S21 · 17:40 | Kaip įsiminti | ⚓1 | poros (nauja) + vaidyba be garso; slaptažodis — tik sau 🤫 |
+| S22 · 18:40 | Kaukė kitokia nei raktas | — | choru, viena ranka kaukė, kita raktas |
+| S23 · 19:30–25:30 | Kaukių dirbtuvės | ⚓1 | pele — prie kiekvienos kortelės |
+| S26 · ~29:00 | Kaukių vartai | ⚓1 | tylus gestas 🤫 apeinant klasę |
+| S33 · 41:40 | Išvada · Mistės klaida | ⚓2 | choru ×2 |
+| S35 · 43:45 | Namų darbas | ⚓2 | namuose per tėvus |
+
+## 🧠 MOKYMOSI MOKSLO ĮRANKIAI — pagal blokus
+
+| Min | Blokas | Įrankis |
+|---|---|---|
+| 0–9:30 | Pabudimas · istorijos priminimas · 7 klausimai kūnu | Kūnas pirma · Aktyvus prisiminimas · Kartojimas su pertraukomis · Priežastinė istorija |
+| 9:30–13:30 | Ko kiekvienas nori · paieška · sandėliukas · tikslas · šiandienos klausimas | Rodyk, nerašyk · Pasakyk tikslą |
+| 13:30–19:30 | SLAPYVARDIS · kaukės receptas · kaip įsiminti · kaukė ≠ raktas | Du inkarai · Taisyklė vietoj atmintinės · Trys būdai įsiminti |
+| 19:30–25:30 | Kaukių dirbtuvės (didysis ekranas) | Patikrink → atsakas → pataisyk |
+| 25:30–36:00 | Žaidimo balsavimas · Kaukių vartai (Sargybinis + Prisimink) | Pasirinkimas kūnu · Žaidybinė praktika |
+| 37:00–40:40 | Dvi kaukės · salė · „Dingailė“ moja · miško gaudynės | Rodyk, nerašyk · Prognozė, tada atskleidimas · Kabliukas |
+| 40:40–43:00 | Šiandienos klausimas · išvada | Prognozė, tada atskleidimas |
+| 43:00–45:00 | Ar pasiekėm · namai · saliutas | Patikrink tikslą |
+| 45:00–47:00 | Dvi refleksijos | Klasės valdymas |
+
+## ⏱ JEI TRŪKSTA LAIKO — ką kirpti, eilės tvarka
+
+⚠️ Pamoka su visomis skaidrėmis trunka ~47 min. Plane v2 kirpimo sąrašo nėra — šitas sudarytas iš deck’o pastabų ir laiko žymų, Kris’ui patvirtinti.
+
+1. **Sujunk „Kaip atsakinėjam“ (S5) su pirmu klausimu (S6)** — judesius parodyk jau ant pirmo klausimo, vienu prieinamu. Sutaupai ~30 s.
+2. **Iš 7 testo klausimų palik 5** — **išmesk „tarpą“ (S7) ir „Shift“ (S9)**. Sutaupai ~70 s.
+3. **Dirbtuvėse (S23) 6 kortelės vietoj 10** — imk 3 🟢 + 3 🔴 (pvz. GeltonasDramblys, KosminisZaliukas, Robotas3000 · Miste2005, Ona7metai, LinaPetraite); likusias praleisk. Sutaupai ~1–1,5 min.
+4. **Kaukių salės skaidrę (S29) praleisk** — iš S28 eik tiesiai į S30 „Dingailė moja“. Sutaupai ~40 s. *(Deck’o S27 taisyklė: jei sugrįžai vėliau nei 35:30 — ⚠️ ta riba deck’e nepakeista, nors IŠEINAM dabar 36:00–37:00; praktiškai: sugrįžai vėluodamas — praleisk.)*
+5. **„Kuri kaukė geresnė?“ (S19)** — tik 1 „kodėl?“ vietoj 2. Sutaupai ~20 s.
+6. **Kaip įsiminti (S21)** — vietoj trijų žingsnių tik „Pasakyk kaimynui“ (poros). Sutaupai ~30 s.
+
+🔴 **NIEKADA NEKIRPK:** **🟢/🔴 kūno raundo** dirbtuvėse (S23, 1 etapas — bent 6 kortelės), **3-io etapo „Klasės kaukė“** (S23 — pavyzdys prieš vartus), **Kaukių vartų** (S26), **išvados su šiandienos klausimu** (S32–S33) ir **dviejų refleksijų** (S37–S38, 45:00–47:00).
+
+⏰ **Antras taimeris** (po pagrindiniu): jei **oranžinis ir pulsuoja** — tu dar senoje dalyje, o laikas jau kitai. **Raudonas** — vėluoji 2 min ir daugiau: kirpk pagal sąrašą aukščiau.
+
+---
+
+## 0–9 min · BLOKAS 0 · Atidarymas · priminimas · kūno testas
+
+🔴 **Viskas prie lentos, kėdės puslankiu, monitoriai tamsūs.**
+
+### S1 · 0:00 · Pasitikimas · titulinė skaidrė
+
+*(Prie DURŲ, ne prie stalo. Kiekvienam vaikui atskirai, šiltai.)*
+
+> **„Labas! Sėskis prie lentos — ne prie kompiuterio. Rankytes dar pailsinam.“**
+
+*(Jei P5 refleksijoje klasė sugalvojo taisyklę — pasakyk ją: „Praeitą kartą sutarėm: …“. ▶ SPAUSK „PRADĖTI PAMOKĄ“, kai pirmas vaikas peržengia slenkstį.)*
+
+▲ Sėdasi puslankiu prie lentos.
+
+👁️ **Stebėk:** Kas ateina pavargęs ar susijaudinęs — pirma jam šypsena.
+
+### S2 · 0:20–1:50 · Pabudimas „Ar gali?“ (90 s)
+
+🧠 **Įrankis:** Kūnas pirma. Nauji judesiai — ne A/B/C, ne P4 „5-4-3-2-1“, ne P5 „Perkūnija“.
+
+*(Darai KARTU su klase tuo pačiu tempu. Klausk „ar gali?“, niekada „kas geriau?“. Be varžybų. Kas negali stovėti — daro sėdėdamas.)*
+
+> **„🕺 Alkūnė–kelis!“** *(30 s, GREITAI — čia pikas: kaire alkūne prie dešinio kelio, dešine prie kairio, žygiuojam vis greičiau)*
+
+> **„👂 Ausis–nosis!“** *(20 s: dešine ranka kairę ausį, kaire nosį; paskui sukeisti, vis greičiau)*
+
+> **„🤯 Galva–pilvas!“** *(15 s: viena ranka glostom galvą, kita sukam ratus ant pilvo; sukeisti)*
+
+> **„😉 Mirktelim.“** *(15 s, ramiai: spragtelim kaire ranka ir mirkteliam dešine akimi)*
+
+*(Pabaigai — du lėti gilūs įkvėpimai, rankos nuleidžiamos → iškart saliutas.)*
+
+▲ Daro kartu.
+
+👁️ **Stebėk:** Ar kas nors stovi nuošalyje — pakviesk šypsena, ne žodžiais.
+
+### S3 · 1:50 · Keturios taisyklės · saliutas
+
+> **„Primenu keturias. ✋ — keliam ranką. 💬 — kalbam po vieną. 💛 — padedam vienas kitam. 🤫 — tylim, kai rodau.“**
+
+▲ Klasė parodo kiekvieną ranka. Ketvirtai — TIKRAS SALIUTAS.
+
+🔴 Jokio kito gesto ir jokio šūksnio.
+
+👁️ **Stebėk:** Ar saliutas tikras, ar pavirto į juoką. Jei į juoką — pakartok lėčiau.
+
+### S4 · 2:20–4:30 · 🎞️ Istorijos priminimas (video 59 s)
+
+🧠 **Įrankis:** Aktyvus prisiminimas (istorijos priminimas atskirtas nuo teorijos).
+
+🔴 SPAUSK didelį ▶. Skaidrė — pilno ekrano video, **be jokio teksto**. Video baigiasi Šešėlio kadru su Dingailės nuotrauka — kadras lieka ekrane.
+
+*(Kai baigiasi — klausimas gyvena TIK čia, ekrane jo nėra:)*
+
+> **„Kas nutiko pabaigoje?“**
+
+▲ 2–3 vaikų atsakymai (šešėlis paėmė nuotrauką, Baitas papasakojo viską…).
+
+🔴 NETAISYK. „Didžiosios Baito klaidos“ klausimas — kūno teste po šitos skaidrės (didžiosios klaidos eina paskutinės iš 7 klausimų), todėl čia klausi TIK „Kas nutiko pabaigoje?“.
+
+*(Jei video nesileidžia — papasakok paskutines 3 eilutes: Baitas papasakojo VISKĄ, šešėlis klausėsi, paėmė Dingailės nuotrauką.)*
+
+👁️ **Stebėk:** Kas prisimena detales (raktas, durys) — pagirk tuos.
+
+### S5 · 4:30 · Kaip atsakinėjam (~30 s) · NAUJI judesiai
+
+🧠 **Įrankis:** Aktyvus prisiminimas — septyni klausimai (paskutiniai trys — didžiosios klaidos).
+
+> **„Atsakot kūnu. A — gandras (stovim ant vienos kojos). B — liečiam kojų pirštus. C — žvaigždė. Aš skaičiuoju TRYS – DU – VIENAS, ir visi kartu.“**
+
+🔴 NAUJI JUDESIAI (rinkinys 2, nuo P6) — parodyk kiekvieną LĖTAI ir išbandykit po vieną kartą: **gandras** = kojos kelis aukštyn, ranka laiko pusiausvyrą · **pirštai** = pasilenkiam, liečiam kojų pirštus · **žvaigždė** = rankos ir kojos į šalis.
+
+*(Atsakymų plytelėse nėra emoji — tik tekstas ir judesio GIF; rodyk į GIF, kad vaikas matytų, ką daryti.)*
+
+*(Kas negali — rodo ranka: A vienas pirštas, B du, C trys.)*
+
+▲ Vieną kartą pabando judesius.
+
+👁️ **Stebėk:** Kas painioja judesius — žiūrėk į jį pirmiausia.
+
+### S6 · 5:00 · 1/7 · Kuris klavišas ištrina raidę? (P2 klaviatūra)
+
+❓ „Kuris klavišas ištrina raidę?“ A tarpo klavišas → gandras · B Backspace ⌫ → liečiam pirštus · C Shift → žvaigždė.
+
+*(3 – 2 – 1! Teisinga — B. SPAUSK DAR KARTĄ, kad užsidegtų teisingas atsakymas.)*
+
+💬 „Backspace ⌫ ištrina raidę.“
+
+▲ Atsako kūnu. ~40 s.
+
+👁️ **Stebėk:** Kas renkasi A ar C — pasižymėk, netaisyk.
+
+### S7 · 5:40 · 2/7 · Kuriuo klavišu padarom tarpą tarp žodžių? (P2–P3 klaviatūra)
+
+❓ „Kuriuo klavišu padarom tarpą tarp žodžių?“ A Enter → gandras · B Shift → liečiam pirštus · C tarpo klavišas (ilgasis) → žvaigždė.
+
+*(Teisinga — C. SPAUSK DAR KARTĄ.)*
+
+💬 „Tarpą padaro ilgas tarpo klavišas.“
+
+▲ Atsako kūnu. ~40 s.
+
+👁️ **Stebėk:** Kas žiūri į kaimyną prieš atsakydamas — pasižymėk, netaisyk.
+
+### S8 · 6:20 · 3/7 · Kas žino tavo slaptažodį? (P4 slaptažodis)
+
+❓ „Kas žino tavo slaptažodį?“ A aš ir tėvai → gandras · B visa klasė → liečiam pirštus · C geriausias draugas → žvaigždė.
+
+*(Teisinga — A. SPAUSK DAR KARTĄ.)*
+
+💬 „Slaptažodį žinau tik aš ir mano tėvai.“
+
+🔴 Jei kas rodo C — NEBARK: „Net geriausias draugas — ne.“
+
+▲ Atsako kūnu. ~40 s.
+
+👁️ **Stebėk:** Kas renkasi C — gali būti, kad dalijasi slaptažodžiu; pasižymėk, netaisyk.
+
+### S9 · 7:00 · 4/7 · Kaip padaryti DIDŽIĄJĄ raidę? (Shift)
+
+❓ „Kaip padaryti DIDŽIĄJĄ raidę?“ A tarpas → gandras · B trynimo klavišas ⌫ → liečiam pirštus · C ⇧ SHIFT + raidė → žvaigždė.
+
+*(Teisinga — C. SPAUSK DAR KARTĄ.)*
+
+💬 „Laikai ⇧ SHIFT ir spaudi raidę — ji didžioji!“
+
+🔁 *(SHIFT iš P4; šiandien jo prireiks slapyvardžiui — GeltonasDramblys rašomas su DIDŽIOMIS raidėmis.)*
+
+▲ Visi ore „laiko“ SHIFT kaire ranka ir „spaudžia“ raidę dešine. ~30 s.
+
+👁️ **Stebėk:** Kas spaudžia viena ranka — dar nesuprato „laikyk ir spausk“.
+
+### S10 · 7:30 · 5/7 · Kokia buvo didžioji Baito klaida? (P5)
+
+❓ „Kokia buvo didžioji Baito klaida?“ A visiems papasakojo VISKĄ → gandras · B užmigo prie durų → liečiam pirštus · C nieko nepasakė → žvaigždė.
+
+*(Teisinga — A. SPAUSK DAR KARTĄ, kad užsidegtų teisingas atsakymas.)*
+
+💬 ŽODIS ŽODIN iš P5 išvados: „Didžioji Baito klaida buvo — jis visiems papasakojo VISKĄ.“
+
+*(Tai viena iš TRIJŲ didžiųjų klaidų — jos eina paskutinės. Tai ta pati klaida, kurią vaikai ką tik prisiminė po video — dabar ją pagauna kūnu.)*
+
+▲ Atsako kūnu. ~40 s.
+
+👁️ **Stebėk:** Kiek vaikų pamena P5 išvadą — pasižymėk, netaisyk.
+
+### S11 · 8:10 · 6/7 · Kokia buvo didžioji Klaido klaida? (P4)
+
+❓ „Kokia buvo didžioji Klaido klaida?“ A pamiršo savo vardą → gandras · B tas pats raktas viskam → liečiam pirštus · C pabėgo nuo Mistės → žvaigždė.
+
+*(Teisinga — B. SPAUSK DAR KARTĄ.)*
+
+💬 ŽODIS ŽODIN iš P4 išvados: „Didžioji Klaido klaida buvo — jis naudojo tą patį raktą viskam.“
+
+🔁 *(SPIRALĖ: šitas raktas šiandien grįš — „Kaukė kitokia nei raktas.“ Dar nesakyk, tik linktelk.)*
+
+▲ Atsako kūnu. ~40 s.
+
+👁️ **Stebėk:** Kas renkasi C — gali nepamenti P4; netaisyk.
+
+### S12 · 8:50 · 7/7 · Kokia buvo didžioji Mistės klaida? (P3)
+
+❓ „Kokia buvo didžioji Mistės klaida?“ A pametė klaviatūrą → gandras · B nenorėjo padėti → liečiam pirštus · C norėjo padėti, bet pati nežinojo → žvaigždė.
+
+*(Teisinga — C. SPAUSK DAR KARTĄ.)*
+
+💬 iš P3: „Mistė labai norėjo padėti, bet pati dar nežinojo pakankamai…“
+
+🔴 NESAKYK, kad Mistė „bloga“ — noras padėti geras. Klaida — kad mokė kitus to, ko pati dar nemokėjo. *(Šiandien Mistė padarys DAR VIENĄ klaidą — apie kaukę. Dar nesakyk.)*
+
+▲ Atsako kūnu. ~40 s.
+
+👁️ **Stebėk:** Kas pamena Mistę — linktelk.
+
+
+## 9–13 min · BLOKAS 1 · Ko kiekvienas nori · paieška · sandėliukas · tikslas · klausimas
+
+### S13 · 9:30–11:00 · 👥 Ko kiekvienas nori?
+
+🧠 **Įrankis:** Priežastinė istorija (kodėl veikėjai taip elgiasi — motyvacija).
+
+*(Rodyk po vieną: Klaidas… Mistė… Baitas…)*
+
+❓ „Ko kiekvienas jų nori?“
+
+▲ Vaikai atsako patys (3–4 balsai).
+
+*(SPAUSK ➡️ — po kiekvienu atsiranda ženklas. Ištark kartu, trumpai, po vieną:)* 🎁 Klaidas nori VISKO IŠKART · 🤝 Mistė nori TIKRŲ DRAUGŲ · 💛 Baitas nori BŪTI NAUDINGAS.
+
+*(Tada tyliai ir paslaptingai:)*
+
+> **„Taip… bet labiausiai jie visi nori surasti Dingailę.“**
+
+*(Palauk 2 s tylos.)*
+
+👁️ **Stebėk:** Ar vaikai išskiria „norą“ nuo „klaidos“ — noras geras, klaida — ką darai su juo.
+
+### S14 · 11:00 · 🖼️ 1 · Paieška džiunglėse (~1 min)
+
+🧠 **Įrankiai:** Priežastinė istorija · Rodyk, nerašyk.
+
+> **„Klaidas, Mistė ir Baitas ieško Dingailės. Klaidas užlipo į medį — iš viršaus geriau matyti. Mistė šaukia: Dingaile! O Baitas kelia akmenį ir žiūri po juo.“**
+
+❓ „Ką darytum tu?“
+
+▲ Vaikai PARODO KŪNU, be garso: lipa į medį · šaukia (be garso!) · kelia akmenį.
+
+🔴 Tyliai — kad paskui būtų ramu.
+
+👁️ **Stebėk:** Kas rodo ir kas tik žiūri — nė vienas nekritikuojamas.
+
+### S15 · 12:00 · 🖼️ 2 · Užrakintas sandėliukas (~50 s)
+
+> **„Staiga — medinis sandėliukas. Durys užrakintos. Ant durų du ženklai: 🔑 raktas ir 🎭 kaukė.“**
+
+*(Palauk 3 s — tegul vaikai patys pamato ženklus.)*
+
+🔴 PASAKYK ŽODIS ŽODIN:
+
+> **„Įeiti gali tik tas, kas turi slaptažodį IR užsidėjęs kaukę.“**
+
+▲ Vaikai parodo pirštu: kur raktas, kur kaukė.
+
+*(Ekrane — trumpai: „slaptažodis IR kaukė“. 🔁 Raktas — iš P4 (slaptažodis). Kaukė — NAUJA. Dar nepaaiškink, kas ta kaukė — sužinosim po minutės.)*
+
+👁️ **Stebėk:** Kas klausia „kas ta kaukė?“ — pirštas prie lūpų, šypsena: „Netrukus.“
+
+### S16 · 12:50 · 🎯 Šiandienos tikslas
+
+🧠 **Įrankis:** Pasakyk tikslą.
+
+🔴 PAŽADAS — PASAKYK GARSIAI IR SUSTOK.
+
+> **„Šiandien kiekvienas pasidarys savo kaukę.“**
+
+▲ Klasė pakartoja choru.
+
+*(Ką tai reiškia — dar nesakyk, sužinosim po akimirkos. Gale grįšim — S34.)*
+
+👁️ **Stebėk:** Ar visi kartojo. Jei tylūs — pakartok dar kartą, linksmiau.
+
+### S17 · 13:10 · ❓ Šiandienos klausimas
+
+> **„Kokią kaukę reikia užsidėti, kai įeini į žaidimą?“**
+
+*(SAKYK lėtai. Pamokos gale klausimas grįžta žodis žodin — S32.)*
+
+▲ 2–3 atsakymai balsu.
+
+🔴 NETAISYK ir atsakymo NESAKYK: **„Įdomu… Pamokos gale pažiūrėsim.“**
+
+*(TILTAS:)* **„O ką reiškia užsidėti kaukę? Pažiūrėkim — ir pirmą žodį išmoksim.“**
+
+👁️ **Stebėk:** 📄 Pasižymėk, ką sakė — palyginsi S32.
+
+
+## 13–19 min · BLOKAS 2 · Slapyvardis · kaukės receptas · kaip įsiminti · kaukė ≠ raktas
+
+### S18 · 13:30 · Termino kortelė · SLAPYVARDIS (~1:30)
+
+🧠 **Įrankis:** Du inkarai (atradimas po spėjimo).
+
+*(SAKYK BALSU IR SUSTOK po kiekvienos.)*
+
+> **„SLAPYVARDIS. Girdit — SLAP-? Kaip SLAPTA. Slapyvardis — tai kaukė.“**
+
+> **„Ją mato VISI. Bet ji neišduoda, kas aš.“**
+
+🔑 INKARAS 1 (choru, du kartus, lėtai, pirmą kartą): **„Slapyvardis — kaukė. Ją mato visi, bet ji neišduoda, kas aš.“**
+
+*(➡️ TILTAS:)* **„Dabar pažiūrėkim į dvi kaukes iš istorijos — pasinaudokit šia kortele.“**
+
+👁️ **Stebėk:** Kas pakartoja ne žodis žodin, bet savais žodžiais — tie suprato.
+
+### S19 · 15:00–16:30 · 🖼️ 3 · Kuri kaukė geresnė?
+
+> **„Klaidas užsidėjo kaukę — geltono dramblio galvą. O Mistė — kartoninę savo pačios veido kaukę!“**
+
+*(Rodyk į kairę, paskui į dešinę.)*
+
+❓ „Kuri kaukė geresnė? Kodėl?“
+
+▲ Vaikai BALSUOJA KŪNU: kairė kaukė — ranka į kairę, dešinė — ranka į dešinę. Pasiklausk 2 vaikų „kodėl?“.
+
+🔴 Vaikai gali pasinaudoti SLAPYVARDIS kortele: „Kuri kaukė neišduoda, kas po ja?“ NETAISYK — atsakymas ateina pamokos pabaigoje. Slapyvardžių virš galvų čia dar NĖRA — jie pasirodys S28.
+
+👁️ **Stebėk:** 📄 Kas renkasi „juokingesnę“, o kas „saugesnę“ — užsirašyk, kiek balsų kuriai (mokytojos lapas, B).
+
+### S20 · 16:30 · 🎭 Kaukės receptas (~1:10)
+
+🧠 **Įrankis:** Taisyklė vietoj atmintinės (trys žingsniai).
+
+*(SAKYK ir rodyk po vieną kortelę:)*
+
+> **„1 · KAS? Būtybė, kuria norėtum būti: dramblys, ateivis, drakonas, robotas.“**
+
+> **„2 · KOKS? Viena savybė, kurią mėgsti: Geltonas, Greitas, Kosminis, Juokingas.“** *(Pavyzdys: GELTONAS + DRAMBLYS = GeltonasDramblys.)*
+
+> **„3 · PATIKRA 🔍 Ar ši kaukė padės mane SURASTI?“** *(Tai klausimas iš P5!)*
+
+*(Joje neturi būti vardo, pavardės, amžiaus, mokyklos, miesto.)*
+
+▲ Vaikai pabando: ✋ „Ar ‘Ona7metė’ gera kaukė?“ (NE — joje amžius.) ✋ „Ar ‘KosminisRobotas’?“ (TAIP.)
+
+🔁 SPIRALĖ į P5: PATIKRA = tas pats klausimas „Ar padės mane SURASTI?“.
+
+👁️ **Stebėk:** Kas atsako greitai — jau turi taisyklę, ne atmintinę.
+
+### S21 · 17:40 · 👁️🗣️🙌 Kaip įsiminti (~1 min)
+
+🧠 **Įrankis:** Trys būdai įsiminti (rodyk · sakyk · daryk) — kiekvienas vis KITA modalybė.
+
+> **„Kaip nepamiršti savo kaukės? Trys žingsniai.“**
+
+**SLAPYVARDIS — viešas, galima rodyti:**
+
+1. 👁️ **PAMATYK** — „Užsimerk ir pamatyk savo kaukę galvoje.“ *(5 s tylos.)*
+2. 🗣️ **PASAKYK** — „Atsimerk ir pasakyk ją kaimynui.“ ▲ POROS, 20 s — NAUJA modalybė (P1–P5 poros nebuvo).
+3. 🙌 **PARODYK** — „Parodyk ją kūnu — pvz., dramblio straublį!“ ▲ Visi 10 s vaidina savo kaukę be garso. NAUJA modalybė (vaidyba).
+
+**SLAPTAŽODIS — ta pati technika, bet SLAPTAI:**
+
+1. 👁️ **PAMATYK** — „Užsimerk ir pamatyk savo slaptažodžio paveikslėlių ISTORIJĄ galvoje.“
+2. 🤫 **PASAKYK** — TIK SAU, tyliai, pirštas prie lūpų — niekam garsiai, nė kaimynui.
+3. 🙊 **PARODYK** — slaptažodžio NERODOM niekam (nei kūnu, nei ekrane).
+
+🔴 **Kaimynui sakom ir rodom TIK slapyvardį.**
+
+💡 *(Kortelė su kauke keliauja namo. Slapyvardį GALIMA užsirašyti — jis 🟢 viešas. Slaptažodžio — NIEKADA.)*
+
+👁️ **Stebėk:** Kas nežino, ką parodyti — padėk, pasiūlyk 2 variantus. Kas sako slaptažodį kaimynui — ramiai: „Tik slapyvardį.“
+
+### S22 · 18:40 · 🔁 Kaukė kitokia nei raktas (~50 s)
+
+🔑 SAKYK lėtai, kiekvieną žodį:
+
+> **„Kaukė kitokia nei raktas.“**
+
+*(Paaiškinimas — vienas sakinys:)* **„Jei slaptažodis būtų Dramblys1, o kaukė — GeltonasDramblys, Šešėlis atspėtų raktą iš kaukės.“**
+
+❓ „Ką Klaidas padarė P4?“ (Tas pats raktas viskam.) 💬 „Tai ta pati klaida — naujoje vietoje.“
+
+▲ Choru du kartus, rankos: viena ranka kaukė (veidas), kita — raktas, ir praskiriam į šalis.
+
+🔴 Slaptažodis — vis dar SLAPTA ir vis dar tik man ir tėvams. Jokių pavyzdžių iš vaikų slaptažodžių.
+
+👁️ **Stebėk:** Ar visi praskyrė rankas — tai atskiri dalykai.
+
+
+## 19–25 min · BLOKAS 3 · Kaukių dirbtuvės (didysis ekranas)
+
+🧠 **Įrankis:** Patikrink → atsakas → pataisyk.
+
+### S23 · 19:30–25:30 · 🛠️ Kaukių dirbtuvės · 3 etapai (~6 min)
+
+*(Pelė — TAVO kompiuteryje, vaikai ateina po vieną. Spaudos tvarka: laukiam eilės. Mygtukai ekrano viršuje: ➡ kitas etapas · ⬅ atgal · ⟲ etapą iš naujo.)*
+
+🔴 **Jei ekranas tuščias** — spausk šoninius mygtukus, o veiklą pravesk žodžiu pagal tuos pačius 3 žingsnius.
+
+**1 etapas · KOKS SLAPYVARDIS GERAS?** *(kūno raundas + vilkimas)* — apačioje 10 SLAPYVARDŽIŲ kortelių prie sandėliuko durų:
+
+- 🟢 **geri** (neišduoda, kas aš): **GeltonasDramblys, KosminisZaliukas, UgnisDrakonas, Robotas3000, SabonisTikraiTikrai, MelynasKrepsininkas**
+- 🔴 **išduoda:** **Miste2005** (metai) · **Ona7metai** (vardas + amžius) · **RokasRiese** (vardas + miestas) · **LinaPetraite** (vardas + pavardė)
+
+Prie KIEKVIENOS kortelės:
+1. ❓ „Ar šis vardas padės mane SURASTI?“ *(Sprendžia VARDAS, ne paveikslėlis.)*
+2. ▲ **VISA KLASĖ PIRMA KŪNU**, 3-2-1: 🙌 ranka AUKŠTYN = GERAS slapyvardis · ✋ ranka PRIE VEIDO = IŠDUODA.
+3. ▲ Tik tada vienas vaikas VILKDAMAS nuneša kortelę prie durų. Geras — skeneris dega žaliai ir spragteli. Išduodantis — durys sudreba, krūmuose sumirksi Šešėlio akys.
+
+💬 Jei Šešėlio akys išgąsdina: „Ššš. Čia tik paslaptis. Dabar mes žinom, kas neteisinga.“ *(10 vaikų, po vieną. Neturint laiko — 6 kortelės, žr. „Jei trūksta laiko“.)*
+
+**2 etapas · UŽSIDĖK KAUKĘ** *(NAUJAS pelės įgūdis: dukart spustelėti)* — vaikas **DUKART** spusteli dramblio kaukę ir ji nuskrenda ant Klaido veido. Vienas spustelėjimas — kaukė tik sukrusteli. Durys klausia: 🎭 ✅ · 🔑 ❔ — **slaptažodis vis tiek reikalingas.**
+
+> **„Kaukė jau yra. Bet durys vis tiek klausia rakto.“**
+
+**3 etapas · KLASĖS KAUKĖ** — ant tuščio veido vaikai nutempia būtybę ir savybę, kurias išrinko klasė (vienas tempia būtybę, kitas savybę), trečias dukart spusteli — kaukė uždedama. **TU rašai slapyvardį SU SHIFT** (lentoje arba ekrane). Tada 🔍 „Ar padės mane SURASTI?“ → ✓. Tai pavyzdys prieš darbą prie savo kompiuterių.
+
+🔑 INKARAS 1 (vilkimas): prie kiekvienos kortelės visa klasė kartu **„Slapyvardis — kaukė. Ją mato visi, bet ji neišduoda, kas aš.“**
+
+*(Laikas: 1 etapas ~3 min · 2 etapas ~1 min · 3 etapas ~2 min. ⚠️ Deck’e skirstymo nėra — tai mano paskirstymas; 10 kortelių per ~3 min — ankšta, todėl kirpimo sąraše tai 3-ias punktas.)*
+
+👁️ **Stebėk:** Kas pelę laiko, bet nepaleidžia — sakyk „paleisk“ tik žodžiu, ranka nepadėk. Kas vilko — atsisėda, eilė kitam (niekas neneša dviejų). Kas dukart spaudžia per lėtai — „greičiau, du kartus iš eilės“.
+
+
+## 25–36 min · BLOKAS 4 · Žaidimas · Kaukių vartai
+
+### S24 · 25:30 · 🗳️ Kurį žaidimą žaidžiam? (~50 s)
+
+🧠 **Įrankis:** Pasirinkimas kūnu (trys variantai = A/B/C).
+
+> **„Pasidarėm kaukes. Dabar — kur jas panaudosim? Trys žaidimai. Balsuojam KŪNU: A — gandras, B — liečiam pirštus, C — žvaigždė.“**
+
+*(Parodyk kiekvieną žaidimą vienu sakiniu:)*
+- **A · Klavišų šokis** (klaviatūra)
+- **B · Mistė Runner** (pelė)
+- **C · Baito vizorius** (vilkimas)
+
+*(3 – 2 – 1!)*
+
+▲ Suskaičiuok rankas / kūnus, išrink daugiausia balsų. Lygiosios — mesk monetą arba klausk šalia sėdinčių.
+
+🔴 Čia NĖRA teisingo atsakymo — žaidimas pasirenkamas. NEKOMENTUOK ir neįtikinėk.
+
+*(⚠️ Žaidimų trejetas dar laukia Kris’o patvirtinimo.)*
+
+👁️ **Stebėk:** 📄 Kuris laimėjo — įrašyk lape (D punktas: paskui išsirink tą kortelę vartuose).
+
+### S25 · 26:30 · Portalas · ĮEINAM 1·2·3
+
+🔴 DABAR — prie kompiuterių (pirmas kartas šiandien).
+
+> **„Einam į INFOGYNEJAI.LT — ten mūsų laukia kaukių kalvė!“**
+
+*(Rodyk adresą. Realiai persėsti ir atsidaryti puslapį — 3–4 min. Deck’e sakoma „kaukių kalvė“; puslapis ir mygtukas vadinasi „Kaukių vartai“ — tai ta pati vieta.)*
+
+▲ Pirmi atsidarę tampa ŽINOVAIS ir padeda kitiems ŽODŽIU (rankos už galvos), nespaudžia už juos. Kas atsistoja nuo kompiuterio — „pasukam raktą“ (P4 judesys).
+
+👁️ **Stebėk:** Kas užstrigo prie adreso — pirmas ateik tu.
+
+### S26 · 27:30–36:00 · 💻 Tavo kaukė · tavo slapyvardis (Kaukių vartai)
+
+🧠 **Įrankis:** Žaidybinė praktika (vadovaujama).
+
+*(Didelis mygtukas „Kaukių vartai“ deck’e atidaro tą patį puslapį naujame lange (`kaukiu-vartai.html`); tą patį puslapį atsidaro ir vaikai savo kompiuteriuose. Kompiuteris kalba lietuviškai — kas neskaito, klauso.)*
+
+> **„Spausk išrinkto žaidimo kortelę vartuose.“** *(arba adresas su `?zaidimas=…`)*
+
+**VARTAI — du žingsniai, ~4 min, paskui išrinktas žaidimas:**
+
+**1 · SARGYBINIS** *(~1 min)* — vaikas yra sargybinis: 6 žaidėjai su slapyvardžiais. Kaukę (neišduodančią) **praleidžia** 🟢, slapyvardį su tikru vardu / amžiumi / miestu **sustabdo** 🔴. Klaida grįžta vėliau.
+
+> **„Tu — sargybinis! Kaukę praleisk. Tikrą vardą — sustabdyk!“** *(taip sako pats puslapis)*
+
+**2 · PRISIMINK** *(~3 min)* — vaikas: pasirenka būtybę ir savybę → **pats parašo** savo slapyvardį iš atminties (pirmai raidei laiko ⇧ Shift) → paskui rakto žingsnis: du paveikslėliai → žodis, pirma raidė su Shift, skaičius. Puslapis primena: „Kaukė ir raktas — niekada ne iš to paties!“ → „Aš — [slapyvardis]!“ → išrinktas žaidimas.
+
+🔴 **KAI VAIKAS PAMIRŠTA SAVO SLAPYVARDĮ:**
+1. Prieik, **pritūpk prie jo akių lygio**, ramiai: „Pažiūrėkim į tavo kaukę.“
+2. **Parodyk JO paties kaukės kortelę** (tą, kurią jis darė / neša namo) arba jo kaukės paveikslėlį ekrane. Jei puslapis po 2 klaidų pats parodo kaukės užuominą — leisk jam pažiūrėti.
+3. Padėk prisiminti **žingsniais iš S21**: pamatyk → pasakyk (tyliai tau) → parašyk.
+4. 🔴 **NIEKADA nesakyk kito vaiko slapyvardžio, nerodyk kito vaiko ekrano ar kortelės** ir nesakyk „kaip Jonukas“. Jei vaikas prašo pasižiūrėti pas kaimyną — „Ne, kiekvieno kaukė — jo paties.“
+5. Jei vis tiek neprisimena — leisk **sukurti naują kaukę** (kitas slapyvardis). Tai ne klaida. Atnaujink puslapį (F5), jei reikia pradėti iš naujo. *(⚠️ Nepatikrinau, ar vartai išsaugo pradėtą būseną po F5.)*
+6. **Slaptažodis:** nesakyk jo balsu, neklausk, ar prisimeni „kokį žodį“. Jei užmiršo raktą — taip pat kuriama iš naujo.
+
+🔑 ~29:00 INKARAS 1 (tylus gestas, apeinant klasę): pirštas prie lūpų 🤫 ir pašnibždomis: **„Slapyvardis — kaukė. Kam galima žinoti slaptažodį?“** — „Tik man ir tėvams“.
+
+▲ Žaidžia; žinovai padeda žodžiu, nespaudžia už kitus.
+
+*(⏱ 34:00 — sustabdai veiklą (deck’o žymė: 36:00 — pradedam grįžti). Vartų pabaigos laikrodis pats pritemdo žaidimą ir parodo juostą „Gerai, Info Gynėjai, grįžkim!“ — tai ne klaida.)*
+
+👁️ **Stebėk:** 📄 Kam reikėjo kaukės užuominos (mokytojos lapas, E). Kas pasiekė „Aš — …!“ (F). Kas rašo slapyvardį be Shift — atsistok šalia ir sakyk tik „laikyk Shift“.
+
+
+## 36–37 min · BLOKAS 5 · Atgal prie lentos
+
+### S27 · 36:00–37:00 · 🪑 IŠEINAM 3·2·1
+
+> **„Rankos nuo pelės! 3 – 2 – 1… Atsistojam — pasukam raktą — ir į savo kėdę prie lentos.“**
+
+*(Monitorius išjungti arba nusukti. Kas dar žaidžia — priėjęs ramiai: „Kaukė palauks. Kitą kartą.“)*
+
+▲ Grįžta į puslankį.
+
+⏱ **Jei sugrįžo vėliau nei 35:30 (deck’o pastaba) — praleisk „Kaukių salę“ (S29) ir eik tiesiai į S30.** *(⚠️ Riba deck’e lieka 35:30, nors skaidrė dabar 36:00–37:00 — realiai: vėluoji, praleisk.)*
+
+👁️ **Stebėk:** Realiai — 1–2 min. Nepradėk išvados, kol visi nesėdi.
+
+
+## 37–40 min · BLOKAS 6 · Istorijos pabaiga (kaukių salė · Dingailė · miškas)
+
+🧠 **Įrankiai:** Rodyk, nerašyk · Prognozė, tada atskleidimas · Kabliukas. Tonas: **smalsumas, ne baimė.**
+
+### S28 · 37:00 · 🖼️ Dvi kaukės (~40 s)
+
+> **„Grįžtam į istoriją. Klaidas ir Mistė įėjo pro sandėliuko duris. Žiūrėkit — kokias kaukes užsidėjo!“**
+
+*(Rodyk virš galvų žalius slapyvardžius: Klaidas — GeltonasDramblys, Mistė — Miste2005.)*
+
+❓ „Pažiūrėkit į Mistės slapyvardį. Ką pastebit?“ *(Miste… 2005… jos vardas! ir gimimo metai!)*
+
+🔴 NEAIŠKINK — vaikai patys pamato.
+
+*(SPAUSK ➡️ — atsiranda Mistės žodžiai. SKAITYK linksmai, pasitikinčiai:)*
+
+> **„Dingailė pažįsta mano veidą — ji mane iškart atpažins!“**
+
+❓ „Ar gerai?“ ▲ 2 atsakymai, NETAISYK — atsakymas ateis po minutės.
+
+👁️ **Stebėk:** Kas pirmas pasako „tai jos vardas!“ — pagirk akylumą.
+
+### S29 · 37:40 · 🖼️ Kaukių salė (~40 s)
+
+> **„Klaidas, Mistė ir Baitas įėjo į sandėliuką. Viduje — minia su kaukėmis! Keli krepšininkai skirtingų spalvų, ateivis, aukštas krepšininkas žalia apranga…“**
+
+*(Rodyk žalius slapyvardžius virš galvų: TikrasLebronas, MelynasLebronas, KosminisZaliukas, SabonisTikraiTikrai; Klaidas — GeltonasDramblys, Mistė — Miste2005.)*
+
+❓ „Ar žinom, kas yra kas?“ ▲ Vaikai: NE!
+
+> **„Niekas nežino. Visi dairosi, ir visi su kaukėmis.“**
+
+*(Rodyk, nerašyk — kas neskaito, mato kaukes. Tonas: smalsumas, ne baimė.)*
+
+⏱ **Šią skaidrę praleisk, jei vėluoji (žr. S27 ir „Jei trūksta laiko“).**
+
+👁️ **Stebėk:** Ar vaikai pamato, kad slapyvardis tikrai neišduoda, kas po kauke — tai ir yra gera kaukė.
+
+### S30 · 38:20 · 🖼️ „Dingailė“ moja (~1 min)
+
+> **„Kitame salės gale kažkas su Dingailės kauke moja Mistei!“**
+
+*(SKAITYK linksmai, draugiškai (burbulas ekrane):)* **„Labas, mano tikra drauge Miste, sek paskui mane!“**
+
+*(Mistė džiaugiasi — kažkas ją pažįsta!)*
+
+⏸ PAUZĖ. SPAUSK ➡️ — atsiranda klausimai:
+
+❓ „Ar tai tikrai Dingailė? Kaip ji atpažino Mistę?“
+
+▲ Vaikai spėja balsu, 3–4 atsakymai.
+
+🔴 NETAISYK ir neatsakyk. Ką žinom MES (gali užuminti vienu sakiniu): **Šešėlis turi Dingailės nuotrauką (P5), o Mistė rodo savo tikrą veidą.**
+
+*(Nesakyk, kad tai Šešėlis. Tonas: smalsumas, ne baimė.)*
+
+👁️ **Stebėk:** Ar kas išsigando — ramiai: **„Mes Gynėjai, mes išsiaiškinsim.“**
+
+### S31 · 39:40 · 🪝 Kabliukas · gaudynės į mišką → P7
+
+🧠 **Įrankis:** Kabliukas.
+
+🤫 TYLIAI, paslaptingai:
+
+> **„Dingailė išbėga iš sandėliuko į tamsų mišką… o Klaidas, Mistė ir Baitas bėga iš paskos.“**
+
+*(Palauk 3 s tylos. SPAUSK ➡️ — atsiranda užrašas.)*
+
+> **„Kas bus toliau? Sužinosim kitą kartą.“**
+
+🔴 NIEKO neaiškink ir neatsakinėk vaikams — tonas: smalsumas, ne baimė. Jei klausia „kas ta Dingailė su kauke?“ — „Kitą kartą.“
+
+👁️ **Stebėk:** Ar kas išsigando — jei taip: **„Mes Gynėjai, mes išsiaiškinsim.“**
+
+*(Namų darbui ekstra, kai prieisi prie namų darbo (S35): „Papasakok, kur palikom Klaidą, Mistę ir Baitą — ir kaip manai, kas bus?“)*
+
+*(🔧 Orkestratoriui: kabliuko eilutę „Kas bus toliau? Sužinosim kitą kartą.“ reikia įrašyti į `canon.md` § KABLIUKAS registrą (P6 eilutė) — senoji „nuotraukos“ eilutė atšaukta.)*
+
+
+## 40–43 min · BLOKAS 7 · Šiandienos klausimas · išvada
+
+### S32 · 40:40 · ❓ Šiandienos klausimas (~1 min)
+
+*(Grįžta ŠIANDIENOS KLAUSIMAS, žodis žodin:)*
+
+> **„Kokią kaukę reikia užsidėti, kai įeini į žaidimą?“**
+
+▲ 3–4 atsakymai.
+
+*(Ištrauk iš vaikų — ne tu sakai: kaukę, kuri neišduoda, kas aš (ne savo veidą, ne vardą) · ir DAR slaptažodį — kaukė ir raktas ne iš to paties.)*
+
+❓ Ir ištrauk iš vaikų:
+
+> **„Kaukę gali užsidėti bet kas. Jie žino, kas yra Mistė, o Mistė nežino, kas po kauke.“**
+
+*(Jei vaikai nesako — pasakyk pats, trumpai.)*
+
+👁️ **Stebėk:** 📄 Palygink su S17 (13:10): ar pasikeitė atsakymai?
+
+### S33 · 41:40 · 🔴 Išvada · Mistės klaida (~1:20)
+
+*(Rodyk į kadrą sakydamas eilutę, bet NEPASAKOK istorijos iš naujo — ji jau buvo. Kadre — kuo baigėsi Mistės kaukė. Antraštė jau ekrane: „Didžioji Mistės klaida buvo —“. SPAUSK ➡️ — atsiranda likusi dalis.)*
+
+🔴 ŽODIS ŽODIN — iš šios eilutės generuojamas P7 kartojimo klausimas.
+
+> **„Didžioji Mistės klaida buvo — ji norėjo, kad ją atpažintų, todėl kaukę padarė iš savo veido.“**
+
+▲ VISA KLASĖ, DU KARTUS.
+
+🔑 INKARAS 2 (choru): ta pati eilutė, tas pats tonas.
+
+💬 „Mistė nenorėjo nieko blogo. Bet kaukė, kuri rodo, kas esi — nebe kaukė.“
+
+👁️ **Stebėk:** Ar vaikai pasako „Mistė irgi norėjo gero“ — taip ir turi būti, linktelk.
+
+
+## 43–45 min · BLOKAS 8 · Ar pasiekėm · namai · saliutas
+
+🧠 **Įrankis:** Patikrink tikslą.
+
+### S34 · 43:00 · 🎯 Ar pasiekėm tikslą? (30–45 s)
+
+🔴 30–45 SEKUNDŽIŲ, SUPLANUOTA.
+
+❓ „Pamokos pradžioje pažadėjau: šiandien kiekvienas pasidarys savo kaukę. Ar pasidarėm?“
+
+▲ Atsako VAIKAI: kaukės pavyzdys (KAS? + KOKS?) ir kuo kaukė skiriasi nuo rakto.
+
+🔴 NETAISYK ir nepagražink: „ne visai“ yra teisingas atsakymas.
+
+👁️ **Stebėk:** 📄 Kas painiojosi — duomenys P7.
+
+### S35 · 43:45 · 🏠 Namų darbas · išmokyk savo tėvus
+
+> **„Namų darbas — IŠMOKYK SAVO TĖVUS. Parodyk jiems savo kaukę ir paklausk: kokią kaukę jūs naudojat žaidimuose?“**
+
+🔑 INKARAS 2 (namuose, per tėvus): kaukė neišduoda, kas aš.
+
+*(Slapyvardį galima parodyti — jis 🟢 viešas. **Slaptažodžio NERODOM.** Kortelė su kauke keliauja namo — išdalink dabar. Tėvams nuoroda — hub’e INFOGYNEJAI.LT.)*
+
+👁️ **Stebėk:** Ar vaikai pakartoja užduotį savais žodžiais — paklausk vieno.
+
+### S36 · 44:30 · 🛡️ Atsisveikinimas · saliutas
+
+🔴 SALIUTAS: gilus įkvėpimas, abu delnai ant burnos. Jokio šūksnio.
+
+> **„Gynėjai, iki kito karto.“**
+
+▲ Saliutuoja, tyliai sėdi.
+
+👁️ **Stebėk:** Ar saliutas tikras — rami pamokos pabaiga.
+
+
+## 45–47 min · BLOKAS 9 · Refleksija (2 min, klasės valdymas)
+
+🔴 **45:00–47:00 — tik refleksijai.** Jei vėluoji — kirpk anksčiau, ne čia.
+
+### S37 · 45:00 · 🤔 Ką Mistė galėjo padaryti geriau? (~40 s)
+
+*(Tikslas — tvarka ir drausmė klasėje. Pirma — per Mistę: apie veikėją kalbėti lengviau nei apie save.)*
+
+❓ „Ką Mistė galėjo padaryti geriau?“
+
+▲ 2–3 vaikų atsakymai (pvz. „nedaryti kaukės iš savo veido“, „pasirinkti slapyvardį be savo vardo“, „paklausti Klaido“).
+
+🔴 Tu klausi — vaikai atsako. NEMORALIZUOK, nepridėk savo išvados, tik „Ačiū.“
+
+👁️ **Stebėk:** Ar atsakymai jungiasi su ⚓1 — jei taip, tiesiog linktelk.
+
+### S38 · 45:40 · 🪑🤝 Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip? (~1:20 — ilgiausia)
+
+*(Klasės valdymo pokalbis — pagrindinė pabaigos dalis.)*
+
+❓ „Kas šiandien galėjo būti geriau? Ką kitą kartą darysim kitaip?“
+
+▲ Vaikai patys įvardija, kas nepavyko (pvz. ginčas, kas vilks kaukę, stumdymasis prie kompiuterio, šaukimas) ir ką darysim kitaip („laukiam eilės“, „vilkstam po vieną“).
+
+🔴 Tu klausi — vaikai atsako. Be vardų, be kaltinimų, NEMORALIZUOK. Vieną jų sugalvotą taisyklę pakartok garsiai: „Kitą kartą darom taip.“
+
+👁️ **Stebėk:** 📄 Užsirašyk tą taisyklę — P7 pradėsi nuo jos.
+
+---
+
+## 📄 Klasės mokytojos lapas *(spausdinamas, 1 psl.)*
+
+**Šeši skaičiai per pamoką.** *(⚠️ V1 pasiūlymas, nepatvirtintas Kris’o.)*
+
+A. **A** — kiek sakė, kad reikia užsidėti kaukę / slapyvardį prie šiandienos klausimo (S17, 13:10) → ir kiek pabaigoje (S32): `____`
+B. **B** — balsai „Kuri kaukė geresnė?“ (S19): dramblys `____` · Mistės veidas `____`
+C. **C** — kurias slapyvardžių korteles klasė rodė kūnu NETEISINGAI (S23, „Koks slapyvardis geras?“): `____`
+D. **D** — žaidimo balsavimas (S24): A Klavišų šokis `__` · B Mistė Runner `__` · C Baito vizorius `__` → laimėjo: `____`
+E. **E** — kiek vaikų pamiršo slapyvardį ir kam reikėjo kaukės užuominos (S26): `____`
+F. **F** — kiek vaikų pasiekė „Aš — …!“ vartuose (S26) `____` · antro taimerio vėlavimas S32 pradžioje (pvz. „+2:10“): `____`
+
+**Mano pastabos** *(be vaikų vardų, jei lapas lieka klasėje):*
+`______________________________________________________________`
+`______________________________________________________________`
+
+🔴 **Šiame lape — jokių slaptažodžių ir jokių tikrų vardų prie slapyvardžių.**
+
+---
+
+## 🏠 Namų darbas tėvams *(išdalinti S35)*
+
+**Mieli tėveliai,**
+
+šiandien Informacijos Gynėjai mokėsi: **slapyvardis yra kaukė** — ją mato visi, bet ji neišduoda, kas tu esi. Vaikas pats sugalvojo kaukę (būtybė + savybė, pvz. „GeltonasDramblys“).
+
+**Prašom padaryti kartu (5 min):**
+
+1. Paprašykite vaiko **parodyti savo kaukę** (kortelė) ir pasakyti slapyvardį.
+2. Paklauskite: **„Kokią kaukę jūs naudojat žaidimuose?“** — o tada kartu pažiūrėkit: ar joje nėra tikro vardo, amžiaus, mokyklos ar miesto?
+3. Pasikalbėkit: **kaukė ir slaptažodis — niekada ne iš to paties žodžio.**
+
+🔴 **Slaptažodžio nerašome ant kortelės ir nesakome balsu.** Slapyvardį rodyti galima.
+
+*Informacijos Gynėjai · INFOGYNEJAI.LT*
+
+---
+
+## 🎭 Kaukės kortelė *(spausdinama, po vieną vaikui)*
+
+@@MASKCARD@@
+
+---
+P6 · V2 · 2026-10-14 · 1:1 su `P6-deck.src.html` (S1–S38) · ← [[../05-baitas-skrynia/scenarijus|P5 scenarijus]]
