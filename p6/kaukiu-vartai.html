@@ -13,7 +13,7 @@
   · 2N neprivalomas skaičius → ENTER → slapyvardis „RobotasValdo7" · 2D SLAPTAŽODŽIAI (Kris 2026-10-14): 8 paruoštos
   kortelės ●●●● → 👁 parodo → tempk į „Geras" (žalia, kairė) / „Blogas" (raudona, dešinė); klaida grįžta vėliau
   → „Aš — X!" → išrinktas žaidimas.
-  Pradžia: mentorius spusteli išrinktą žaidimą (arba ?zaidimas=klavisu-sokis|miste-runner|baito-vizorius).
+  Pradžia: mentorius spusteli išrinktą žaidimą (arba ?zaidimas=klavisu-sokis|miste-runner|baito-vizorius|klaido-misija).
   Kaukės: vartai-assets/kaukes/<id>.png → ../../assets/brainclub-jr-v2/p06-kaukes/<id>.png → emoji (niekada nelūžta).
   Balsas: vartai-assets/balsas/*.mp3 (ElevenLabs eleven_v4, ytARIPxr985DUzw1udo1); atsarginis — speechSynthesis lt-LT.
   Paslėpta suaugusiam: „test" — šuolių sąrašas · „timer" — pamokos pabaigos sekos bandymas. Duomenų bazės nėra (sąmoningai).
@@ -59,10 +59,10 @@ button{font-family:inherit}
 
 /* ── 0 · pasirinkimas (mentorius) ── */
 #s0 h1{position:absolute;top:150px;left:0;right:0;text-align:center;font-size:70px;margin:0}
-#games{position:absolute;left:120px;right:120px;top:300px;height:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:50px}
-.gcard{background:var(--card);border:8px solid #ffffff22;border-radius:44px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;color:#fff;font-size:60px;font-weight:900;transition:transform .15s,border-color .15s}
+#games{position:absolute;left:120px;right:120px;top:300px;height:600px;display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+.gcard{background:var(--card);border:8px solid #ffffff22;border-radius:44px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;color:#fff;font-size:46px;font-weight:900;transition:transform .15s,border-color .15s}
 .gcard:hover{transform:scale(1.04);border-color:var(--gold)}
-.gcard .ic{font-size:200px;line-height:1;height:240px;display:flex;align-items:center}
+.gcard .ic{font-size:170px;line-height:1;height:240px;display:flex;align-items:center}
 .gcard img{height:240px}
 #startBtn{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:520px;height:520px;border-radius:50%;border:12px solid var(--gold);background:var(--green);color:#fff;font-size:250px;cursor:pointer;box-shadow:0 20px 0 #0b6b47;animation:pulseC 1.4s ease-in-out infinite;display:none}
 @keyframes pulseC{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.07)}}
@@ -299,7 +299,8 @@ const CFG = {
 const GAMES = [
   {id:'klavisu-sokis',  w:'Klavišų šokis', ic:'⌨️', file:'klavisu-sokis.html'},
   {id:'miste-runner',   w:'Mistė Runner',  ic:'🏃', img:'vartai-assets/miste.png', file:'miste-runner.html'},
-  {id:'baito-vizorius', w:'Baito vizorius',ic:'🥽', file:'baito-vizorius.html'}
+  {id:'baito-vizorius', w:'Baito vizorius',ic:'🥽', file:'baito-vizorius.html'},
+  {id:'klaido-misija',  w:'Klaido misija', ic:'🛡️', url:'https://krisvas333.github.io/info-gynejai/p1/testas.html'}
 ];
 /* ---------- kaukės ---------- */
 const MASKS = {
@@ -862,7 +863,7 @@ function go3(){
   $('cardNick').textContent = nick; fitText($('cardNick'), 900, 120);
   const g = S.game || GAMES[1];
   const a = $('goGame'); a.innerHTML = gameIcon(g) + '<span>' + g.w + ' ➜</span>';
-  a.href = BASE + g.file + '?vardas=' + encodeURIComponent(nick);
+  a.href = (g.url || BASE + g.file) + '?vardas=' + encodeURIComponent(nick);
   try{ localStorage.setItem(LS_VARDAS, nick); }catch(e){}
   const c = $('card'); c.classList.remove('in'); void c.offsetWidth; c.classList.add('in');
   confetti(110); sndFan(); a.classList.add('glow');
