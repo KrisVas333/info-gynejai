@@ -5,23 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kaukių dirbtuvės</title>
 <!--
-  ══ BCJR P6 · KAUKIŲ DIRBTUVĖS · variantas A „Pro sandėlio duris“ (~6 min) ══
+  ══ BCJR P6 · KAUKŲ DIRBTUVĖS · variantas A „Pro sandėlio duris“ (TIK 1 dalis, ~6 min) ══
   Didysis ekranas, MENTORIAUS kompiuteris. Vaikai ateina po vieną ir naudoja mentoriaus pelę.
-  Mentoriaus mygtukai: ➡ (kitas etapas, viršuj dešinėj) · ⬅ atgal · ⟲ etapą iš naujo.
-  Paslėptas sąrašas: surink t-e-s-t → šuoliai į bet kurį etapą/būseną. Esc uždaro.
+  Mygtukai: ⟲ iš naujo · 🔇/🔊 balsas (numatyta: išjungtas; klavišas M).
+  Paslėptas sąrašas: surink t-e-s-t → šuoliai (pradžia / visos surūšiuotos). Esc uždaro.
 
-  1 · KAUKĖ AR VARDAS? — fonas: sandėliuko durys iš deck'o (comics/p06-kauke/02-uzrakintas-sandeliukas.png).
-      10 kortelių (2 eilės po 5), virš kiekvienos — žalias slapyvardis (kaip vartų Sargybinio). Verdiktas pagal SLAPYVARDĮ.
-      Paėmus kortelę slapyvardis perskaitomas. Klasė balsuoja KŪNU: 🙌 = gera kaukė · 🙅 = išduoda.
-      Gera (6) → ant skenerio ant durų, spyna +1 (6 langeliai). Išduodanti (Miste2005, Ona7metai, RokasRiese, LinaPetraite)
-      → durys sudreba, Šešėlio akys, balsas pasako KODĖL (metai / amžius / miestas / vardas+pavardė), kortelė į 🙅 krūvą.
-      LinaPetraite su saulės kauke: graži kaukė, bet tikras vardas — skaičiuojasi VARDAS.
-  2 · UŽSIDĖK KAUKĘ — NAUJAS įgūdis: DU KARTUS spustelėti dramblio kaukę → ji nuskrenda ant Klaido veido.
-      Vienas spustelėjimas → kaukė sukrusteli, rodoma „du kartus!“. Durys: 🎭 ✅ · 🔑 ❔ — slaptažodis vis tiek reikalingas.
-  3 · KLASĖS KAUKĖ — klasė išrenka būtybę ir savybę. Vienas vaikas tempia būtybę ant tuščios kaukės,
-      kitas — savybę. Trečias du kartus spusteli → kaukė uždedama, slapyvardis parašomas ir perskaitomas.
-      Tada 🔍 „Ar padės mane SURASTI?“ → ✓. Mentorius gali rašyti slapyvardį lentoje su Shift (pavyzdys prieš Kalvę).
-  Kaukių PNG: dirbtuves-assets/img/p06-kaukes/*.png (sumažintos kopijos iš assets/brainclub-jr-v2/p06-kaukes, ≤1000 px — veikia ir lokaliai, ir Pages) — jei failo nėra, rodomas pieštas pakaitalas.
+  KAUKĖ AR VARDAS? — fonas: sandėliuko durys iš deck'o (comics/p06-kauke/02-uzrakintas-sandeliukas.png).
+      6 kortelės (2 eilės po 3), virš kiekvienos — žalias slapyvardis (kaip vartų Sargybinio). Verdiktas pagal SLAPYVARDĮ.
+      Paėmus kortelę slapyvardis perskaitomas (jei balsas įjungtas). Klasė balsuoja KŪNU: 🙌 = gera kaukė · 🙅 = išduoda.
+      Gera (3: GeltonasDramblys, KosminisZaliukas, SabonisTikraiTikrai) → ant skenerio ant durų, spyna +1 (3 langeliai).
+      Išduodanti (Miste2005, Ona7metai, LinaPetraite) → durys sudreba, Šešėlio akys, balsas pasako KODĖL, kortelė į 🙅 krūvą.
+      Surūšiavus visas 6 — durys atsidaro (žalias švytėjimas), ✅, „Valio!“, konfeti. Daugiau etapų nėra.
+      (Buvę 2 etapas „Užsidėk kaukę“ ir 3 etapas „Klasės kaukė“ pašalinti 2026-10-14 — laiko pjūvis.)
+  Kaukių PNG: dirbtuves-assets/img/p06-kaukes/*.png — jei failo nėra, rodomas pieštas pakaitalas.
   Garsas: dirbtuves-assets/*.mp3 (ElevenLabs eleven_v4); jei failo nėra — naršyklės lietuviškas balsas.
 -->
 <style>
@@ -45,18 +41,10 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 .top{position:absolute;left:0;right:0;top:0;height:120px;display:flex;align-items:center;padding:0 40px;gap:26px;z-index:40}
 .title{text-shadow:0 4px 10px #000;font-size:52px;font-weight:900;letter-spacing:.01em;display:flex;align-items:center;gap:18px}
 .title .ti{font-size:66px}
-.dots{position:absolute;z-index:45;left:50%;top:36px;transform:translateX(-50%);display:flex;gap:16px}
-.dots i{width:26px;height:26px;border-radius:50%;background:#ffffff26;border:3px solid #ffffff44}
-.dots i.on{background:var(--gold);border-color:#fff}
-.dots i.done{background:var(--green)}
 .mbtn{position:absolute;top:18px;z-index:50;border:4px solid #ffffff55;background:#ffffff14;color:#fff;border-radius:26px;
   font:900 54px/1 var(--display);cursor:pointer;display:flex;align-items:center;justify-content:center}
-#next{right:30px;width:150px;height:96px;background:var(--purple);border-color:#fff;font-size:64px}
-#next.pulse{animation:pulseN 1s ease-in-out infinite;background:var(--green)}
-@keyframes pulseN{0%,100%{transform:scale(1);box-shadow:0 0 0 0 #1fb47a99}50%{transform:scale(1.1);box-shadow:0 0 0 22px #1fb47a00}}
-#prev{right:200px;width:84px;height:84px;top:24px;font-size:40px;opacity:.6}
-#reset{right:300px;width:84px;height:84px;top:24px;font-size:40px;opacity:.6}
-#snd{right:410px;top:18px;width:110px;height:96px;font-size:56px;z-index:60;background:#ffffff22;border-color:#fff}
+#reset{right:30px;width:84px;height:84px;top:24px;font-size:40px;opacity:.6}
+#snd{right:140px;top:18px;width:110px;height:96px;font-size:56px;z-index:60;background:#ffffff22;border-color:#fff}
 #snd.off{background:#E8503F66}
 
 /* ── durys (piešta CSS) ── */
@@ -172,71 +160,6 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 .confetti i{position:absolute;top:-40px;width:22px;height:34px;border-radius:5px;animation:fall 2.2s linear forwards}
 @keyframes fall{to{transform:translateY(1200px) rotate(720deg)}}
 
-/* ── 2 etapas ── */
-.spot{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff6e0 0%,#fff2d6 60%,#ffeac0 100%);overflow:hidden;box-shadow:0 0 120px 10px #ffd27a55}
-.klaidas{position:absolute}
-.klaidas img{width:100%;height:100%;object-fit:contain}
-.klaidas.fallback img{mix-blend-mode:multiply}
-.stool{position:absolute;background:#6a3f1f;border-radius:20px 20px 8px 8px;border:8px solid #4a2a12}
-.m2{position:absolute;width:300px;height:300px;cursor:pointer;z-index:20;transition:transform .7s cubic-bezier(.5,-.3,.4,1.3),width .7s,height .7s,left .7s,top .7s}
-.m2 img{width:100%;height:100%;object-fit:contain}
-.m2.wig{animation:wig .5s}
-@keyframes wig{0%,100%{rotate:0deg}20%{rotate:-12deg}40%{rotate:12deg}60%{rotate:-8deg}80%{rotate:8deg}}
-.bubble{position:absolute;background:#fff;color:#1a1030;border-radius:40px;padding:18px 34px;font:900 70px/1 var(--display);display:flex;gap:16px;align-items:center;
-  box-shadow:0 14px 30px #0009;opacity:0;transform:scale(.4);transition:opacity .2s,transform .3s cubic-bezier(.3,1.6,.5,1);pointer-events:none;z-index:60}
-.bubble.on{opacity:1;transform:scale(1)}
-.bubble .hh{font-size:84px;letter-spacing:-20px;margin-right:18px}
-
-/* ── 3 etapas ── */
-.chip{position:absolute;width:250px;height:160px;border-radius:30px;border:5px solid #ffffff55;touch-action:none;cursor:grab;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .45s cubic-bezier(.3,1.4,.5,1);z-index:10;
-  box-shadow:0 10px 20px -8px #000a}
-.chip .ci{font-size:80px;line-height:1}
-.chip .cl{font:900 30px/1 var(--display);color:#fff;text-shadow:0 2px 4px #000a}
-.chip.drag{cursor:grabbing;z-index:60;transition:none;border-color:#fff}
-.chip.sel,.card.sel{border-color:var(--gold);box-shadow:0 0 0 6px var(--gold),0 0 40px var(--gold)}
-.c3{width:200px;height:200px}
-.blank{position:absolute;border-radius:50%;cursor:pointer;z-index:15}
-.blank .bm{position:absolute;inset:0;border-radius:50%;border:10px dashed #ffffff66;background:#ffffff10;transition:border-color .2s,background .2s}
-.blank.hot .bm{border-color:#fff;border-style:solid;background:#ffffff22}
-.blank.has .bm{border-color:transparent;background:transparent}
-.blank .holes{position:absolute;left:22%;right:22%;top:36%;display:flex;justify-content:space-between;pointer-events:none}
-.blank .holes i{width:70px;height:50px;border-radius:50%;background:#ffffff33}
-.blank.has .holes{display:none}
-.blank .bimg{position:absolute;inset:0;display:none}
-.blank.has .bimg{display:block}
-.blank .bimg img{width:100%;height:100%;object-fit:contain;transition:filter .4s}
-.blank .ticon{position:absolute;right:-20px;top:-20px;font-size:110px;display:none;filter:drop-shadow(0 6px 8px #000a);pointer-events:none}
-.blank.trait .ticon{display:block;animation:pop .5s}
-.blank.wig{animation:wig .5s}
-.blank.fun .bimg{animation:wob 1.2s ease-in-out infinite}
-@keyframes wob{0%,100%{rotate:-5deg}50%{rotate:5deg}}
-.blank.fast .bimg::after{content:"";position:absolute;left:-90px;top:30%;width:90px;height:40%;
-  background:repeating-linear-gradient(180deg,#fff 0 8px,transparent 8px 26px);opacity:.7;border-radius:8px}
-.blank.gold .bimg img{filter:drop-shadow(0 0 30px #FFC53D)}
-.slot{position:absolute;width:110px;height:110px;border-radius:50%;border:6px dashed #ffffff55;display:flex;align-items:center;justify-content:center;font-size:60px}
-.slot.ok{border-style:solid;border-color:var(--green);background:#1fb47a33}
-.kid{position:absolute}
-.kid .head{position:absolute;left:50%;transform:translateX(-50%);border-radius:50%;background:#3a2f6a;border:6px solid #5a4b9a}
-.kid .body{position:absolute;left:0;right:0;bottom:0;border-radius:200px 200px 30px 30px;background:#3a2f6a;border:6px solid #5a4b9a}
-.kid .onface{position:absolute;inset:-6%;display:none}
-.kid .onface img{width:100%;height:100%;object-fit:contain}
-.kid.masked .onface{display:block;animation:pop .5s}
-.nick{position:absolute;left:0;right:0;text-align:center;pointer-events:none;z-index:30}
-.nick span{display:inline-block;font:900 92px/1.1 var(--mono);color:var(--raso);background:#071d10;border:5px solid var(--raso);border-radius:22px;
-  padding:14px 30px;box-shadow:0 0 40px #7ee78766;min-height:1.4em}
-.nick span:empty{display:none}
-.nick .car{display:inline-block;width:.55em;height:.9em;background:var(--raso);vertical-align:-0.1em;margin-left:4px;animation:car .8s steps(1) infinite}
-@keyframes car{50%{opacity:0}}
-.check{position:absolute;border-radius:40px;border:6px solid #ffffff66;background:#ffffff14;color:#fff;cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font:900 38px/1.1 var(--display);text-align:center;transition:background .2s}
-.check .qi{font-size:120px;line-height:1}
-.check.ready{animation:pulseN 1s ease-in-out infinite;border-color:var(--gold)}
-.check.yes{background:var(--green);border-color:#fff;animation:none}
-.bigok{position:absolute;font:900 300px/1 var(--display);color:var(--green);text-shadow:0 0 50px #1fb47a,0 10px 0 #0a5a3a;opacity:0;transform:scale(.3);
-  transition:opacity .25s,transform .4s cubic-bezier(.3,1.6,.5,1);pointer-events:none;z-index:70}
-.bigok.on{opacity:1;transform:scale(1)}
-
 /* ── paslėptas test sąrašas ── */
 #testMenu{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:999}
 #testMenu.on{display:flex}
@@ -248,18 +171,15 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 <div id="stage">
 
   <!-- ══ VIRŠUS ══ -->
-  <div class="dots"><i></i><i></i><i></i></div>
   <button class="mbtn" id="snd" title="balsas (M)">🔇</button>
   <button class="mbtn" id="reset" title="iš naujo">⟲</button>
-  <button class="mbtn" id="prev" title="atgal">⬅</button>
-  <button class="mbtn" id="next" title="toliau">➡</button>
 
   <!-- ══ 1 · KAUKĖ AR VEIDAS? ══ -->
   <section class="scene" id="s1">
     <div id="door1"><img class="bgimg" src="dirbtuves-assets/img/02-uzrakintas-sandeliukas.png" alt="">
       <div class="topfade"></div><div class="botfade"></div><div class="winglow"></div><div class="redflash"></div></div>
     <div class="top"><div class="title"><span class="ti">🎭</span>Kaukė ar vardas?</div></div>
-    <div id="lock1"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div id="lock1"><i></i><i></i><i></i></div>
     <div id="sign1"><b>🎭</b><b id="d1mask">❔</b></div>
     <div class="pile" id="pile" style="left:40px;top:150px;width:420px;height:400px"><div class="ph">🙅</div></div>
     <div class="eyes" id="eyes" style="left:1530px;top:330px"><i></i><i></i></div>
@@ -273,45 +193,6 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
     <div id="tray1"></div>
   </section>
 
-  <!-- ══ 2 · UŽSIDĖK KAUKĘ ══ -->
-  <section class="scene" id="s2">
-    <div class="top"><div class="title"><span class="ti">👆👆</span>Užsidėk kaukę</div></div>
-    <div class="spot" style="left:170px;top:150px;width:860px;height:860px"></div>
-    <div class="klaidas" id="klaidas" style="left:200px;top:170px;width:800px;height:820px"><img id="klaidasImg" alt=""></div>
-    <div class="stool" style="left:1060px;top:760px;width:300px;height:180px"></div>
-    <div class="m2" id="m2" style="left:1060px;top:470px"></div>
-    <div class="tap2" id="tap2" style="left:1180px;top:640px"><div class="ring"></div><div class="ring b"></div><div class="hand">👆</div><div class="x2">2×</div></div>
-    <div class="bubble" id="bub2" style="left:800px;top:180px"><span class="hh">👆👆</span>du kartus!</div>
-    <div class="door photo" id="door2" style="left:1440px;top:230px;width:420px;height:600px">
-      <img class="dimg" src="dirbtuves-assets/img/02-uzrakintas-sandeliukas.png" alt="" style="width:1150px;left:-379px;top:-40px">
-      <div class="signs" style="top:18%"><div class="sign"><b>🎭</b><b id="d2mask">❔</b></div><div class="sign"><b>🔑</b><b id="d2key">❔</b></div></div>
-      <div class="redflash"></div>
-    </div>
-  </section>
-
-  <!-- ══ 3 · KLASĖS KAUKĖ ══ -->
-  <section class="scene" id="s3">
-    <div class="top"><div class="title"><span class="ti">✨</span>Klasės kaukė</div></div>
-    <div id="row3c"></div>
-    <div class="slot" id="slotC" style="left:620px;top:420px">🐾</div>
-    <div class="slot" id="slotT" style="left:620px;top:560px">🎨</div>
-    <div class="kid" id="kid" style="left:110px;top:380px;width:420px;height:470px">
-      <div class="body" style="height:220px"></div>
-      <div class="head" style="top:0;width:250px;height:270px"><div class="onface" id="onface"></div></div>
-    </div>
-    <div class="blank" id="blank" style="left:790px;top:330px;width:380px;height:380px">
-      <div class="bm"></div><div class="holes"><i></i><i></i></div>
-      <div class="bimg" id="bimg"></div><div class="ticon" id="ticon"></div>
-    </div>
-    <div class="tap2" id="tap3" style="left:1100px;top:560px;display:none"><div class="ring"></div><div class="ring b"></div><div class="hand">👆</div><div class="x2">2×</div></div>
-    <div class="arrow" id="arC" style="left:930px;top:250px">⬆</div>
-    <div class="arrow" id="arT" style="left:930px;top:700px">⬇</div>
-    <div class="nick" id="nick" style="top:735px"><span id="nickT"></span></div>
-    <div class="check" id="check" style="left:1450px;top:380px;width:420px;height:380px"><div class="qi">🔍</div>Ar padės mane<br>SURASTI?</div>
-    <div class="bigok" id="bigok" style="left:1530px;top:370px">✓</div>
-    <div id="row3t"></div>
-  </section>
-
   <div class="ghost" id="ghost">👆</div>
   <div class="reward" id="reward"><span class="re"></span><span class="rw"></span></div>
   <div class="confetti" id="confetti"></div>
@@ -319,13 +200,8 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 
 <div id="testMenu"><div>
   <b style="color:#fff">test · šuoliai</b>
-  <button data-j="1">1 · Kaukė ar veidas (pradžia)</button>
-  <button data-j="1done">1 · visos surūšiuotos</button>
-  <button data-j="2">2 · Užsidėk kaukę (pradžia)</button>
-  <button data-j="2done">2 · kaukė uždėta</button>
-  <button data-j="3">3 · Klasės kaukė (pradžia)</button>
-  <button data-j="3ready">3 · drakonas + kosminis, laukia 2×</button>
-  <button data-j="3done">3 · uždėta + patikra</button>
+  <button data-j="1">Kaukė ar veidas (pradžia)</button>
+  <button data-j="1done">visos surūšiuotos</button>
 </div></div>
 
 <script>
@@ -334,39 +210,19 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 var CFG={
   W:1920,H:1080,
   MASKS:"dirbtuves-assets/img/p06-kaukes/",
-  KLAIDAS:["dirbtuves-assets/img/cutout-klaidas.png","dirbtuves-assets/img/01-kaleidas-hero.png"],
-  /* Klaido veido vieta paveikslėlio dalimis (x,y = centras, w = kaukės plotis). [0] = cutout, [1] = hero atsarga */
-  FACE:[{x:.5,y:.36,w:.36},{x:.5,y:.36,w:.36}],
   SFX:"dirbtuves-assets/",
-  DBL_MS:650,          /* du spustelėjimai per tiek ms = „du kartus“ */
   TAP_PX:10,           /* mažiau pajudėjo = paspaudimas, ne tempimas */
   GHOST_MS:2600
 };
-var MASKS1=[ /* 10 kortelių: verdiktas pagal SLAPYVARDĮ. snd = vardo įrašas, why = kodėl išduoda. Eilės: 5 + 5 */
+var MASKS1=[ /* 6 kortelių: verdiktas pagal SLAPYVARDĮ. snd = vardo įrašas, why = kodėl išduoda. Eilės: 3 + 3 */
   {id:"dramblys",ok:true,tag:"GeltonasDramblys",snd:"n-geltonas-dramblys"},
   {id:"miste-veidas",ok:false,tag:"Miste2005",snd:"u-miste2005",why:"w-miste"},
-  {id:"krepsininkas",ok:true,tag:"SabonisTikraiTikrai",snd:"u-sabonis-tikrai-tikrai"},
-  {id:"vaiko-veidas",ok:false,tag:"Ona7metai",snd:"u-ona7metai",why:"w-ona"},
-  {id:"robotas",ok:true,tag:"Robotas3000",snd:"u-robotas3000"},
   {id:"ateivis",ok:true,tag:"KosminisZaliukas",snd:"u-kosminis-zaliukas"},
-  {id:"vaiko-veidas",ok:false,tag:"RokasRiese",snd:"u-rokas-riese",why:"w-rokas",flip:true,flt:"hue-rotate(160deg) saturate(.9)"},
-  {id:"krepsininkas",ok:true,tag:"MelynasKrepsininkas",snd:"n-melynas-krepsininkas",flip:true,flt:"hue-rotate(190deg) saturate(1.3)"},
-  {id:"saule",ok:false,tag:"LinaPetraite",snd:"u-lina-petraite",why:"w-lina"},
-  {id:"drakonas",ok:true,tag:"UgnisDrakonas",snd:"u-ugnis-drakonas"}
+  {id:"vaiko-veidas",ok:false,tag:"Ona7metai",snd:"u-ona7metai",why:"w-ona"},
+  {id:"krepsininkas",ok:true,tag:"SabonisTikraiTikrai",snd:"u-sabonis-tikrai-tikrai"},
+  {id:"saule",ok:false,tag:"LinaPetraite",snd:"u-lina-petraite",why:"w-lina"}
 ];
 var GOOD1=MASKS1.filter(function(m){return m.ok;}).length;
-var CREAT=[
-  {id:"dramblys",n:"Dramblys"},{id:"ateivis",n:"Ateivis"},{id:"drakonas",n:"Drakonas"},
-  {id:"robotas",n:"Robotas"},{id:"saule",n:"Saulė",f:true},{id:"krepsininkas",n:"Krepšininkas"}
-];
-var TRAITS=[
-  {id:"geltonas",m:"Geltonas",f:"Geltona",icon:"🟡",bg:"#F2C21B",flt:"sepia(1) saturate(5) hue-rotate(5deg) brightness(1.05)"},
-  {id:"greitas",m:"Greitas",f:"Greita",icon:"⚡",bg:"#FF8A3D",flt:"",cls:"fast"},
-  {id:"kosminis",m:"Kosminis",f:"Kosminė",icon:"🪐",bg:"#4B2A9A",flt:"hue-rotate(240deg) saturate(1.6)"},
-  {id:"juokingas",m:"Juokingas",f:"Juokinga",icon:"😜",bg:"#E85FA8",flt:"",cls:"fun"},
-  {id:"melynas",m:"Mėlynas",f:"Mėlyna",icon:"🔵",bg:"#2D7BE8",flt:"sepia(1) saturate(5) hue-rotate(180deg)"},
-  {id:"auksinis",m:"Auksinis",f:"Auksinė",icon:"✨",bg:"#C99A1A",flt:"sepia(1) saturate(3) hue-rotate(-12deg) brightness(1.15)",cls:"gold"}
-];
 var CHEERS=[["🎉","ŠAUNUOLIS!","saunuolis"],["💪","JĖGA!","jega"],["⭐","SUPER!","super"],["🌟","PASAKA!","pasaka"],["🙌","VALIO!","valio"]];
 var SAYTXT={gera:"Gera kaukė!",isduoda:"Oi! Ši kaukė tave išduoda!","du-kartus":"Du kartus!",uzdeta:"Kaukė uždėta!",
   patikra:"Ar ši kaukė padės mane surasti? Ne! Puiku!",slaptazodis:"Kaukė yra! Dar reikia slaptažodžio.",
@@ -570,8 +426,8 @@ function build1(){
   $("d1mask").textContent="❔"; $("door1").classList.remove("win");
   MASKS1.forEach(function(m,i){
     var c=document.createElement("div"); c.className="card"+(m.flip?" flip":""); c.dataset.id=m.id; c.dataset.ok=m.ok?"1":"0"; c.dataset.i=i;
-    var col=i%5, row=Math.floor(i/5);
-    c.style.left=(100+col*384)+"px"; c.style.top=(row?868:610)+"px";
+    var col=i%3, row=Math.floor(i/3);
+    c.style.left=(440+col*440)+"px"; c.style.top=(row?868:610)+"px";
     var im=maskImg(m.id); if(m.flt) im.style.filter=m.flt; c.appendChild(im);
     var t=document.createElement("div"); t.className="tag"; c.appendChild(t);
     $("tray1").appendChild(c);
@@ -620,173 +476,17 @@ function done1(c){
   S1.placed++;
   setTimeout(function(){ c.classList.remove("pop"); },600);
   if(S1.placed>=MASKS1.length){
-    setTimeout(function(){ $("door1").classList.add("win"); $("d1mask").textContent="✅"; SFX.fan(); confetti(); setTimeout(function(){ say("pasaka"); },3800); $("next").classList.add("pulse"); },900);
+    setTimeout(function(){ $("door1").classList.add("win"); $("d1mask").textContent="✅"; SFX.fan(); confetti(); setTimeout(function(){ say("pasaka"); },3800); },900);
   }
 }
 
-/* ═════════ 2 · UŽSIDĖK KAUKĘ ═════════ */
-var S2={done:false,last:0,t:null,kSrc:0};
-function build2(){
-  S2.done=false; S2.last=0; clearTimeout(S2.t);
-  var m=$("m2"); m.innerHTML=""; m.appendChild(maskImg("dramblys"));
-  m.style.cssText="left:1060px;top:470px"; m.className="m2";
-  $("tap2").style.display="flex"; $("d2mask").textContent="❔"; $("d2key").textContent="❔"; $("door2").classList.remove("win");
-}
-function loadKlaidas(){
-  var im=$("klaidasImg"); S2.kSrc=0;
-  im.onerror=function(){ if(S2.kSrc===0){ S2.kSrc=1; $("klaidas").classList.add("fallback"); im.src=CFG.KLAIDAS[1]; } };
-  im.src=CFG.KLAIDAS[0];
-}
-function faceRect(){ /* stage px */
-  var k=$("klaidas"), f=CFG.FACE[S2.kSrc], im=$("klaidasImg");
-  var W=k.offsetWidth, H=k.offsetHeight, nw=im.naturalWidth||1024, nh=im.naturalHeight||1024;
-  var sc=Math.min(W/nw,H/nh), dw=nw*sc, dh=nh*sc, ox=(W-dw)/2, oy=(H-dh)/2;
-  var w=f.w*dw*1.15;
-  return {x:k.offsetLeft+ox+f.x*dw-w/2, y:k.offsetTop+oy+f.y*dh-w/2, w:w};
-}
-function wear2(){
-  if(S2.done) return; S2.done=true; clearTimeout(S2.t);
-  $("tap2").style.display="none"; $("bub2").classList.remove("on");
-  var m=$("m2"), r=faceRect(); SFX.whoosh();
-  m.style.left=r.x+"px"; m.style.top=r.y+"px"; m.style.width=r.w+"px"; m.style.height=r.w+"px"; m.style.transform="rotate(360deg)";
-  setTimeout(function(){ SFX.pop(); flash(m,"wig",500); say("uzdeta"); reward(false); $("d2mask").textContent="✅"; flash($("door2"),"win",1600); },750);
-  setTimeout(function(){ say("slaptazodis"); flash($("d2key").parentNode,"shake",600); $("next").classList.add("pulse"); },2300);
-}
-$("m2").addEventListener("pointerdown",function(e){
-  e.preventDefault(); ac(); if(S2.done) return;
-  var now=performance.now();
-  if(now-S2.last<CFG.DBL_MS){ S2.last=0; wear2(); return; }
-  S2.last=now; SFX.click();
-  clearTimeout(S2.t);
-  S2.t=setTimeout(function(){ /* vienas spustelėjimas — sukrusteli + „du kartus!“ */
-    if(S2.done) return; flash($("m2"),"wig",500); SFX.wig(); var b=$("bub2"); b.classList.add("on"); say("du-kartus");
-    clearTimeout(b._t); b._t=setTimeout(function(){ b.classList.remove("on"); },1800);
-  },CFG.DBL_MS);
-});
-
-/* ═════════ 3 · KLASĖS KAUKĖ ═════════ */
-var S3={c:null,t:null,worn:false,checked:false,last:0};
-var CHECK_HTML=null;
-function resetCheck(){ var ch=$("check"); if(CHECK_HTML===null) CHECK_HTML=ch.innerHTML; ch.innerHTML=CHECK_HTML; ch.className="check"; }
-function build3(){
-  S3={c:null,t:null,worn:false,checked:false,last:0};
-  $("row3c").innerHTML=""; $("row3t").innerHTML="";
-  CREAT.forEach(function(cr,i){
-    var c=document.createElement("div"); c.className="card c3"; c.dataset.id=cr.id;
-    c.style.left=(150+i*280)+"px"; c.style.top="125px"; c.appendChild(maskImg(cr.id));
-    $("row3c").appendChild(c);
-    draggable(c,{over:over3,drop:drop3c,tap:function(){ say("c-"+cr.id,cr.n); }});
-  });
-  TRAITS.forEach(function(tr,i){
-    var c=document.createElement("div"); c.className="chip"; c.dataset.id=tr.id; c.style.background=tr.bg;
-    c.style.left=(110+i*290)+"px"; c.style.top="895px";
-    c.innerHTML='<div class="ci">'+tr.icon+'</div><div class="cl">'+tr.m+'</div>';
-    $("row3t").appendChild(c);
-    draggable(c,{over:over3,drop:drop3t,tap:function(){ say("t-"+tr.id,tr.m); }});
-  });
-  var b=$("blank"); b.className="blank"; $("bimg").innerHTML=""; $("ticon").textContent="";
-  $("slotC").className="slot"; $("slotT").className="slot"; $("slotC").textContent="🐾"; $("slotT").textContent="🎨";
-  $("kid").classList.remove("masked"); $("onface").innerHTML=""; $("nickT").innerHTML=""; $("tap3").style.display="none";
-  resetCheck(); $("bigok").classList.remove("on");
-}
-function over3(x,y){ $("blank").classList.toggle("hot",hit($("blank"),x,y)); }
-function getC(){ return CREAT.filter(function(x){return x.id===S3.c;})[0]; }
-function getT(){ return TRAITS.filter(function(x){return x.id===S3.t;})[0]; }
-function paint3(){
-  var b=$("blank"), im=$("bimg").querySelector("img"), t=getT();
-  b.classList.remove("fast","fun","gold","trait");
-  if(im) im.style.filter=t?t.flt:"";
-  if(t){ $("ticon").textContent=t.icon; b.classList.add("trait"); if(t.cls) b.classList.add(t.cls); }
-  [].slice.call(document.querySelectorAll("#row3c .card")).forEach(function(c){ c.classList.toggle("sel",c.dataset.id===S3.c); });
-  [].slice.call(document.querySelectorAll("#row3t .chip")).forEach(function(c){ c.classList.toggle("sel",c.dataset.id===S3.t); });
-  $("tap3").style.display=(S3.c&&S3.t&&!S3.worn)?"flex":"none";
-}
-function unwear3(){ /* pakeitus būtybę/savybę po uždėjimo — kaukė nuimama, vardas ištrinamas */
-  if(!S3.worn) return; S3.worn=false; S3.checked=false;
-  $("kid").classList.remove("masked"); $("nickT").innerHTML=""; resetCheck(); $("bigok").classList.remove("on");
-}
-function drop3c(el,x,y){
-  if(!hit($("blank"),x,y)){
-    if(hit($("row3t"),x,y)) return false;
-    return false;
-  }
-  el.style.transform=""; unwear3();
-  S3.c=el.dataset.id; $("bimg").innerHTML=""; $("bimg").appendChild(maskImg(S3.c)); $("blank").classList.add("has");
-  $("slotC").className="slot ok"; $("slotC").textContent="✓";
-  SFX.pop(); flash($("blank"),"wig",500); paint3(); say("c-"+S3.c,getC().n); reward(false);
-  if(!S3.t) setTimeout(function(){ if(!S3.t) ghostLoop(document.querySelector('#row3t .chip'),$("blank")); },1600);
-  return true;
-}
-function drop3t(el,x,y){
-  if(!hit($("blank"),x,y)) return false;
-  el.style.transform="";
-  if(!S3.c){ /* pirma būtybė — sudreba, rodyklė į būtybes */
-    flash($("blank"),"shake",600); SFX.bad(); showArrow("arC"); return true;
-  }
-  unwear3(); S3.t=el.dataset.id; $("slotT").className="slot ok"; $("slotT").textContent="✓";
-  SFX.good(); paint3(); say("t-"+S3.t,getT().m); reward(false);
-  return true;
-}
-function nickParts(){ var c=getC(), t=getT(); return {lbl:(c.f?t.f:t.m)+c.n, clip:"n-"+t.id+"-"+c.id, txt:(c.f?t.f:t.m)+" "+c.n+"!"}; }
-function wear3(){
-  if(S3.worn) return;
-  if(!S3.c || !S3.t){ flash($("blank"),"shake",600); SFX.bad(); showArrow(S3.c?"arT":"arC"); return; }
-  S3.worn=true; hideGhost(); $("tap3").style.display="none";
-  /* skrydis: klonas nuo kaukės iki vaiko galvos */
-  var src=$("blank"), head=document.querySelector("#kid .head"), s=stage.getBoundingClientRect();
-  var a=src.getBoundingClientRect(), h=head.getBoundingClientRect();
-  var fly=src.cloneNode(true); fly.removeAttribute("id"); fly.classList.remove("hot");
-  fly.style.cssText="left:"+((a.left-s.left)/SC)+"px;top:"+((a.top-s.top)/SC)+"px;width:"+(a.width/SC)+"px;height:"+(a.height/SC)+"px;transition:all .7s cubic-bezier(.5,-.3,.4,1.3);z-index:70;pointer-events:none";
-  stage.appendChild(fly); SFX.whoosh(); void fly.offsetWidth;
-  var w=h.width/SC*1.12;
-  fly.style.left=((h.left-s.left)/SC+(h.width/SC-w)/2)+"px"; fly.style.top=((h.top-s.top)/SC+(h.height/SC-w)/2)+"px";
-  fly.style.width=w+"px"; fly.style.height=w+"px"; fly.style.transform="rotate(360deg)";
-  setTimeout(function(){
-    fly.remove(); var of=$("onface"); of.innerHTML="";
-    var im=$("bimg").querySelector("img").cloneNode(true); of.appendChild(im);
-    var ti=document.createElement("div"); ti.textContent=getT().icon; ti.style.cssText="position:absolute;right:-30px;top:-30px;font-size:80px"; of.appendChild(ti);
-    $("kid").classList.add("masked"); SFX.pop(); reward(false);
-    typeNick();
-  },750);
-}
-function typeNick(){
-  var p=nickParts(), el=$("nickT"), i=0; el.innerHTML='<b></b><i class="car"></i>'; var b=el.querySelector("b"); b.style.fontWeight="900";
-  (function step(){
-    if(!S3.worn) return;
-    if(i<p.lbl.length){ b.textContent=p.lbl.slice(0,++i); SFX.type(); setTimeout(step,90); }
-    else { say(p.clip,p.txt); setTimeout(function(){ if(S3.worn) $("check").classList.add("ready"); },900); }
-  })();
-}
-$("blank").addEventListener("pointerdown",function(e){
-  if(dragging) return; e.preventDefault(); ac();
-  var now=performance.now();
-  if(now-S3.last<CFG.DBL_MS){ S3.last=0; clearTimeout(S3.tt); wear3(); return; }
-  S3.last=now; clearTimeout(S3.tt);
-  S3.tt=setTimeout(function(){ if(S3.worn) return; flash($("blank"),"wig",500); SFX.wig();
-    if(S3.c&&S3.t) say("du-kartus"); else { showArrow(S3.c?"arT":"arC"); } },CFG.DBL_MS);
-});
-$("check").addEventListener("click",function(){
-  ac();
-  if(!S3.worn){ flash($("check"),"shake",600); SFX.bad(); flash($("blank"),"wig",500); showArrow(S3.c?(S3.t?"arT":"arT"):"arC"); return; }
-  if(S3.checked) return; S3.checked=true; SFX.scan(); say("patikra");
-  setTimeout(function(){ var ch=$("check"); ch.className="check yes"; ch.innerHTML='<div class="qi" style="font-size:230px">✓</div>'; SFX.fan(); confetti(); },2300);
-});
-
-/* ═════════ etapai ═════════ */
-var cur=1;
-function go(n){
+/* ═════════ pradžia / iš naujo ═════════ */
+function go(){
   hideGhost(); if(curAu) try{ curAu.pause(); }catch(e){}
-  cur=Math.max(1,Math.min(3,n));
-  ["s1","s2","s3"].forEach(function(s,i){ $(s).classList.toggle("on",i+1===cur); });
-  [].slice.call(document.querySelectorAll(".dots i")).forEach(function(d,i){ d.className=i+1===cur?"on":(i+1<cur?"done":""); });
-  $("next").classList.remove("pulse"); $("next").style.visibility=cur===3?"hidden":"visible"; $("prev").style.visibility=cur===1?"hidden":"visible";
-  if(cur===1){ build1(); setTimeout(function(){ if(cur===1&&S1.placed===0) ghostLoop(document.querySelector("#tray1 .card"),$("scanner")); },500); }
-  if(cur===2){ build2(); }
-  if(cur===3){ build3(); setTimeout(function(){ if(cur===3&&!S3.c) ghostLoop(document.querySelector("#row3c .card"),$("blank")); },500); }
+  $("s1").classList.add("on");
+  build1(); setTimeout(function(){ if(S1.placed===0) ghostLoop(document.querySelector("#tray1 .card"),$("scanner")); },500);
 }
-$("next").addEventListener("click",function(){ ac(); SFX.click(); go(cur+1); });
-$("prev").addEventListener("click",function(){ go(cur-1); });
-$("reset").addEventListener("click",function(){ go(cur); });
+$("reset").addEventListener("click",function(){ go(); });
 
 /* ═════════ paslėptas „test“ sąrašas (klavišai perimami PIRMIAU už viską) ═════════ */
 var kbuf="";
@@ -794,28 +494,19 @@ document.addEventListener("keydown",function(e){
   if((e.key==="m"||e.key==="M")&&!e.ctrlKey&&!e.metaKey&&!e.altKey){ toggleVoice(); }
   if(e.key==="Escape"){ $("testMenu").classList.remove("on"); return; }
   if(e.key&&e.key.length===1){ kbuf=(kbuf+e.key.toLowerCase()).slice(-4); if(kbuf==="test"){ $("testMenu").classList.add("on"); kbuf=""; return; } }
-  if(e.key==="ArrowRight"||e.key==="PageDown"){ if(cur<3) go(cur+1); }
-  if(e.key==="ArrowLeft"||e.key==="PageUp"){ if(cur>1) go(cur-1); }
 },true);
 $("testMenu").addEventListener("click",function(e){
   var b=e.target.closest("button"); if(!b){ $("testMenu").classList.remove("on"); return; }
   $("testMenu").classList.remove("on"); var j=b.dataset.j;
-  go(+j[0]); hideGhost();
+  go(); hideGhost();
   if(j==="1done"){ [].slice.call(document.querySelectorAll("#tray1 .card")).forEach(function(c){
       c.dataset.lock="1"; if(c.dataset.ok==="1"){ $("shelf").appendChild(c); $("lock1").children[S1.good++].classList.add("f"); } else { c.classList.add("red"); $("pile").appendChild(c); } S1.placed++; });
-    $("door1").classList.add("win"); $("d1mask").textContent="✅"; $("next").classList.add("pulse"); }
-  if(j==="2done"){ wear2(); }
-  if(j==="3ready"||j==="3done"){
-    S3.c="drakonas"; $("bimg").appendChild(maskImg("drakonas")); $("blank").classList.add("has"); $("slotC").className="slot ok"; $("slotC").textContent="✓";
-    S3.t="kosminis"; $("slotT").className="slot ok"; $("slotT").textContent="✓"; paint3();
-    if(j==="3done") setTimeout(wear3,100);
-  }
+    $("door1").classList.add("win"); $("d1mask").textContent="✅"; }
 });
 
 document.getElementById("snd").addEventListener("click",toggleVoice);
 paintSnd();
-loadKlaidas();
-go(1);
+go();
 </script>
 </body>
 </html>
