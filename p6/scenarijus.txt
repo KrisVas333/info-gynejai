@@ -486,13 +486,18 @@ Prie KIEKVIENOS kortelės:
 
 > **„Spausk išrinkto žaidimo kortelę vartuose.“** *(arba adresas su `?zaidimas=…`)*
 
-**VARTAI — du žingsniai, ~4 min, paskui išrinktas žaidimas:**
+**VARTAI — du žingsniai, ~4–5 min, paskui išrinktas žaidimas:**
 
-**1 · SARGYBINIS** *(~1 min)* — vaikas yra sargybinis: 6 žaidėjai su slapyvardžiais. Kaukę (neišduodančią) **praleidžia** 🟢, slapyvardį su tikru vardu / amžiumi / miestu **sustabdo** 🔴. Klaida grįžta vėliau.
+**1 · SARGYBINIS** *(~1 min)* — vaikas yra sargybinis: 6 žaidėjai su slapyvardžiais. Kaukę (neišduodančią) **praleidžia** 🟢 — *ateiviaiVALDO67, yomama3000, GreitasVezlys*; slapyvardį su tikru vardu / amžiumi / miestu **sustabdo** 🔴 — *Riesesgatve173, EmaKazlauskaite, Jonas2018*. Klaida grįžta vėliau.
 
 > **„Tu — sargybinis! Kaukę praleisk. Tikrą vardą — sustabdyk!“** *(taip sako pats puslapis)*
 
-**2 · PRISIMINK** *(~3 min)* — vaikas: pasirenka būtybę ir savybę → **pats parašo** savo slapyvardį iš atminties (pirmai raidei laiko ⇧ Shift) → paskui rakto žingsnis: du paveikslėliai → žodis, pirma raidė su Shift, skaičius. Puslapis primena: „Kaukė ir raktas — niekada ne iš to paties!“ → „Aš — [slapyvardis]!“ → išrinktas žaidimas.
+**2 · PRISIMINK** *(~3–4 min)* — keturi pošūkiai:
+- **2A · Būtybė** — vaikas pasirenka savo būtybę (ir savybę). ⚠️ Spąstai: kortelė „Tavo vardas“ — tai NE kaukė, nespausk jos.
+- **2B · Žodis** — vienas iš 30 žodžių.
+- **2C · Parašyk** — pats **parašo** savo slapyvardį iš atminties; pirmai raidei laiko ⇧ **Shift** (+ pasirinktinai skaičius, tada Enter).
+- **2D · Slaptažodžiai** — 8 paslėpti slaptažodžiai: paspausk 👁, kad pamatytum, ir **nutempk** į „Geras slaptažodis“ arba „Blogas slaptažodis“.
+Puslapis primena: „Kaukė ir raktas — niekada ne iš to paties!“ → „Aš — [slapyvardis]!“ → išrinktas žaidimas.
 
 🔴 **KAI VAIKAS PAMIRŠTA SAVO SLAPYVARDĮ:**
 1. Prieik, **pritūpk prie jo akių lygio**, ramiai: „Pažiūrėkim į tavo kaukę.“
