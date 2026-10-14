@@ -2,6 +2,76 @@
 <html lang="lt">
 <head>
 <meta charset="utf-8">
+<!-- ═══ KAUKIŲ VARTAI · P6 savaitė (Kris 2026-10-14) ═══
+     Iki KAUKIU_VARTAI_IKI: be ?vardas=<slapyvardis> (ateina iš p6/kaukiu-vartai.html) žaidimas nerodomas —
+     kortelė „Pirma — Kaukių vartai!" ir nukreipimas į vartus. Su ?vardas — slapyvardis rodomas virš bėgiko.
+     Slapyvardis NIEKUR nesiunčiamas: išimamas iš adreso (prieš track.js / Clarity), laikomas tik sessionStorage,
+     etiketė Clarity'ui maskuojama. Po datos — viskas kaip anksčiau (šis blokas nieko nedaro). ═══ -->
+<script>
+var KAUKIU_VARTAI_IKI = '2026-10-22T00:00:00+03:00';
+(function () {
+  'use strict';
+  try {
+    if (!(new Date() < new Date(KAUKIU_VARTAI_IKI))) return;
+    var p = new URLSearchParams(location.search);
+    /* headless patikros / demo jungikliai — be vartų */
+    if (['selftest','demo','tutselftest','tutshot','nosend','auto','ff','quiz'].some(function (k) { return p.has(k); })) return;
+    var VARTAI = 'https://krisvas333.github.io/info-gynejai/p6/kaukiu-vartai.html?zaidimas=miste-runner';
+    var SS = 'kv_vardas';
+    var nick = (p.get('vardas') || '').trim().slice(0, 40);
+    if (nick) {
+      try { sessionStorage.setItem(SS, nick); } catch (e) {}
+      p.delete('vardas');                                   /* vardas neturi patekti į Clarity URL */
+      try { history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : '') + location.hash); } catch (e) {}
+    } else {
+      try { nick = sessionStorage.getItem(SS) || ''; } catch (e) {}
+    }
+    var css = document.createElement('style');
+    css.textContent =
+      '#kvVardas{margin:0 0 8px;min-height:1.6em;font-family:"Press Start 2P","Courier New",monospace;font-size:clamp(11px,1.8vw,16px);color:#1f9d4a;letter-spacing:.06em;white-space:nowrap;overflow:hidden}' +
+      '#kvVardas .kv-cur{display:inline-block;width:.6em;animation:kvCur 1s steps(1) infinite}' +
+      '@keyframes kvCur{50%{opacity:0}}' +
+      '#kvVartai{position:fixed;inset:0;z-index:2147483000;background:#f7f7f7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4vh;padding:16px;box-sizing:border-box;text-align:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#151a35}' +
+      '#kvVartai .kv-e{font-size:clamp(90px,22vmin,200px);line-height:1;animation:kvBob 1.6s ease-in-out infinite}' +
+      '#kvVartai h1{margin:0;font-size:clamp(34px,7vw,72px);font-weight:900}' +
+      '#kvVartai a{display:inline-block;padding:22px 46px;border-radius:999px;background:#1f9d4a;color:#fff;text-decoration:none;font-weight:900;font-size:clamp(26px,4.4vw,46px);box-shadow:0 8px 0 #146b32}' +
+      '#kvVartai a:active{transform:translateY(6px);box-shadow:0 2px 0 #146b32}' +
+      '@keyframes kvBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}';
+    document.head.appendChild(css);
+
+    if (!nick) {
+      /* žaidimas už kortelės neturi gauti klavišų */
+      var block = function (e) { e.stopImmediatePropagation(); if (e.key !== 'Tab') e.preventDefault(); };
+      window.addEventListener('keydown', block, true);
+      window.addEventListener('keyup', block, true);
+      var showCard = function () {
+        var d = document.createElement('div');
+        d.id = 'kvVartai'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Pirma — Kaukių vartai');
+        d.innerHTML = '<div class="kv-e">🎭</div><h1>Pirma — Kaukių vartai!</h1><a id="kvEik" href="' + VARTAI + '">🚪 Eiti ➜</a>';
+        document.body.appendChild(d);
+        window.__kvVartai = 'kortele';
+        setTimeout(function () { location.href = VARTAI; }, 2500);
+      };
+      if (document.body) showCard(); else document.addEventListener('DOMContentLoaded', showCard);
+      return;
+    }
+
+    window.__kvVartai = 'vardas';
+    var showNick = function () {
+      var stage = document.querySelector('.stage'); if (!stage) return;
+      var el = document.createElement('p');
+      el.id = 'kvVardas'; el.setAttribute('data-clarity-mask', 'true'); el.setAttribute('aria-label', 'Tavo slapyvardis');
+      var t = document.createElement('span'), c = document.createElement('span');
+      c.className = 'kv-cur'; c.textContent = '_';
+      el.appendChild(document.createTextNode('🎭 ')); el.appendChild(t); el.appendChild(c);
+      stage.insertBefore(el, stage.firstChild);
+      var i = 0; (function type() { t.textContent = nick.slice(0, ++i); if (i < nick.length) setTimeout(type, 70); })();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showNick); else showNick();
+  } catch (e) { /* vartai niekada nelaužo žaidimo */ }
+})();
+</script>
+<!-- ═══ /KAUKIŲ VARTAI ═══ -->
 <script src="../track.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Miste Runner</title>
