@@ -139,6 +139,34 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
 .big.alt{display:block;margin:12px auto 0;font-size:20px;padding:10px 22px;background:transparent;color:#ffd27a;border:2px solid #ffd27a88}
 .big.alt:hover{background:#ffd27a22}
 @media (prefers-reduced-motion: reduce){#tutWord.on,#tutArrow.on,#tutRing.on,#hH.tpulse{animation:none}}
+/* hit counter (5 dots = next heart), speed pill, streak meter (left), heart-gain moment */
+#hX{display:flex;align-items:center;gap:4px;padding:6px 10px}
+#hX i{width:11px;height:11px;border-radius:50%;border:2px solid #ffffffaa;display:block}
+#hX i.on{background:#ff5a4f;border-color:#ff5a4f;box-shadow:0 0 6px #ff5a4f}
+#hX.warn i.on{animation:xw .5s ease-in-out infinite alternate}
+@keyframes xw{to{transform:scale(1.35)}}
+#hX.bump{animation:pulse .35s ease-out}
+#hV{min-width:44px;text-align:center}
+#spdFlash{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);font-size:clamp(60px,9vw,110px);pointer-events:none;opacity:0;text-shadow:0 4px 0 #0008}
+#spdFlash.on{animation:spf 1.2s ease-out forwards}
+@keyframes spf{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+#streak{position:absolute;left:12px;top:calc(60px + var(--rearw)*9/16 + 22px);display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;background:var(--panel);border:2px solid #ffffff44;border-radius:18px;pointer-events:none}
+#streak[hidden]{display:none}
+#streak .goal{font-size:30px;line-height:1;filter:grayscale(.7) brightness(.8);transition:filter .3s}
+#streak .slots{display:flex;flex-direction:column-reverse;gap:6px}
+#streak i{width:40px;height:40px;border-radius:12px;border:3px solid #ffffff55;background:#0006;display:grid;place-items:center;font-style:normal;font-size:22px;transition:background .2s,border-color .2s}
+#streak i::after{content:"🛡️";opacity:.25}
+#streak i.on{background:#ffd23f;border-color:#fff3b0;box-shadow:0 0 14px #ffd23f}
+#streak i.on::after{opacity:1}
+#streak i.pop{animation:pulse .45s ease-out}
+#streak.full{border-color:#ff7a8a;box-shadow:0 0 26px #ff4d6d}
+#streak.full .goal{filter:none;animation:pulse .5s ease-in-out 3}
+.hgain{position:absolute;left:50%;top:36%;font-size:120px;pointer-events:none;z-index:7;filter:drop-shadow(0 0 22px #ff4d6d)}
+.hplus{position:absolute;left:50%;top:30%;transform:translateX(-50%);font-size:clamp(56px,8vw,96px);font-weight:900;color:#fff;-webkit-text-stroke:2px #7a1020;text-shadow:0 0 24px #ff4d6d;pointer-events:none;z-index:7;animation:fly 1.6s ease-out forwards}
+#hH.glow{animation:hg .6s ease-in-out 3}
+@keyframes hg{50%{transform:scale(1.35);box-shadow:0 0 26px 8px #ff4d6d;background:#7a1020}}
+#wrap.tut #hX,#wrap.tut #hV{opacity:.3}
+@media (prefers-reduced-motion: reduce){#hX.warn i.on,#streak.full .goal,#hH.glow,.hplus{animation:none}#spdFlash.on{animation-duration:.6s}}
 @media (prefers-reduced-motion: reduce){.boil .msg span.tx,.boil .card .q span,.boil .card .jt{animation:none}.card{animation:none}.fx{animation-duration:.01s}.sb{animation:none}}
 /* „test" — paslėptas šuolių sąrašas mentoriui (stilius kaip Mistė Runner) */
 #testMenu{position:fixed;inset:0;z-index:99;background:#000a;display:flex;align-items:center;justify-content:center}
@@ -165,8 +193,10 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
 <div id="wrap" class="boil">
   <canvas id="cv" class="px" aria-label="Klaido bėgimo žaidimas"></canvas>
   <div id="tag">XxDingailiukexX</div>
-  <div id="hud"><span class="pill" id="hH" aria-label="Širdelės">❤️❤️❤️</span><span class="pill" id="hB">🍌 0</span><span class="pill" id="hS">✨ 0</span><span class="pill" id="hP" hidden>⭐ 0</span><span class="pill" id="hT">⏱ 0:00</span></div>
+  <div id="hud"><span class="pill" id="hH" aria-label="Širdelės">❤️❤️❤️</span><span class="pill" id="hX" aria-label="Smūgiai iki širdelės"></span><span class="pill" id="hV" aria-label="Greitis">🏃</span><span class="pill" id="hB">🍌 0</span><span class="pill" id="hS">✨ 0</span><span class="pill" id="hP" hidden>⭐ 0</span><span class="pill" id="hT">⏱ 0:00</span></div>
   <div id="gapbar" hidden><span class="end" id="gapL">🏃</span><div class="track"><div id="gapFill"></div><span id="gapMk">🏃</span></div><span class="end" id="gapR">🎭</span><span id="gapTxt"></span></div>
+  <div id="streak" hidden aria-label="Gerų atsakymų serija"><div class="goal">❤️</div><div class="slots"><i></i><i></i><i></i><i></i></div></div>
+  <div id="spdFlash"></div>
   <div id="rear" hidden><span>Už nugaros 👀</span></div>
   <div id="hint"></div>
   <div id="toast"></div>
@@ -221,7 +251,7 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
 (function(){
 'use strict';
 function $(id){return document.getElementById(id);}
-var wrap=$('wrap'),cv=$('cv'),chatEl=$('chat'),hB=$('hB'),hS=$('hS'),hP=$('hP'),hH=$('hH'),hT=$('hT'),tag=$('tag'),hint=$('hint'),toastEl=$('toast'),pop=$('pop'),
+var streakEl=$('streak'),hX=$('hX'),hV=$('hV'),spdFlashEl=$('spdFlash'),wrap=$('wrap'),cv=$('cv'),chatEl=$('chat'),hB=$('hB'),hS=$('hS'),hP=$('hP'),hH=$('hH'),hT=$('hT'),tag=$('tag'),hint=$('hint'),toastEl=$('toast'),pop=$('pop'),
   startScr=$('start'),loseScr=$('lose'),fadeEl=$('fade'),pxBtn=$('px'),turb=$('turb'),gapbar=$('gapbar'),gapFill=$('gapFill'),gapMk=$('gapMk'),gapTxt=$('gapTxt'),
   gapL=$('gapL'),gapR=$('gapR'),rearEl=$('rear'),cutEl=$('cut'),vid=$('vid'),board=$('board');
 var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -237,7 +267,8 @@ if(!window.THREE){startScr.querySelector('.panel').innerHTML='<h1>Oi!</h1><p>Nep
 var TURN_WIN=7;              // metres before a corner where ←/→ turns
 var SPEED0=8,RAMP=0.35,RAMP_T=120;   // +35 % over 2 min, then capped
 var BAD_FIRST=18,BAD_MIN=18,BAD_MAX=22;   // one popup about every 20 s (Kris 2026-10-21); ~1 decoy per 3 real
-var LOSE_BAD=3,LOSE_HITS=5,HEARTS=3,REAR_RESET=20;   // a lose trigger costs one heart; 0 hearts = fall + fade
+var POP_TIMEOUT=10,LOSE_HITS=5,HEARTS=3,REAR_RESET=20,HEART_RUN=4;   // every 5 hits in total = 1 heart; a bad answer = 1 heart; 4 safe answers in a row = heart back; 0 hearts = fall + fade
+var SPD_LV=[.75,1,1.25,1.5],SPD_UP=7,SPD_WIN=10,SPD_DROP=4;   // adaptive speed: 7 clean in a row (Kris 2026-10-21) = +1 level; >=4 hits in the last 10 = -1 level (10+ obstacles apart)
 var LVL_W=[4,2.8,2],LVL_GAP=[[13,20],[10,14],[7,10]];
 // phase 1: chase Dingailė
 var GAP0=38,GAP_MAX=45,GAP_CLEAN=2,GAP_SAFE=2,GAP_HIT=3,GAP_BAD=8,GAP_DRIFT=0.2;  // drift: she keeps running (m/s); eases off when far ahead so slower kids still catch up
@@ -658,7 +689,7 @@ var tutLong=false,P,S,tmp={x:0,z:0},tmp2={x:0,z:0},v3=new THREE.Vector3(),v2=new
 function resetState(){
   P={seg:null,s:2,lane:1,lat:0,y:0,vy:0,slide:0,slow:0,pend:0,ph:0,off:{x:0,z:0},yaw:0,spd:SPEED0,fall:0};
   S={state:'menu',phase:1,t:0,t2:0,ts:1,tsT:1,bananas:0,safe:0,shown:0,points:0,shake:0,camYaw:0,nextNoise:2,nextPeek:6,nextPeel:RR(8,12),glanceT:0,tossT:0,flight:null,peels:0,nextBad:BAD_FIRST,popup:null,popAt:-1,popEntry:null,
-     level:0,darkMix:0,badStreak:0,hitStreak:0,clean:0,gap:GAP0,rear:REAR0,toastT:0,hitCool:0,loseT:0,deck:[],ddeck:[],gRate:0,gLast:GAP0,rRate:0,rLast:REAR0,realSince:0,nextIsDecoy:false,catchT:-1,hearts:HEARTS};
+     level:0,darkMix:0,badStreak:0,hitStreak:0,clean:0,gap:GAP0,rear:REAR0,toastT:0,hitCool:0,loseT:0,deck:[],ddeck:[],gRate:0,gLast:GAP0,rRate:0,rLast:REAR0,realSince:0,nextIsDecoy:false,hitCount:0,safeRun:0,spdLvl:1,spdMul:1,cleanRun:0,obsHist:[],sinceDrop:SPD_WIN,catchT:-1,hearts:HEARTS};
 }
 function buildWorld(){
   for(var i=0;i<segs.length;i++)dropSeg(segs[i]);
@@ -731,8 +762,10 @@ function nudge(kind){
   if(S.phase===1){
     if(kind==='safe'){S.gap=Math.max(Math.min(S.gap,NOQ_GAP+.5),S.gap-GAP_SAFE);return;}   // an answer never makes the catch
     var hm=Math.max(.33,Math.min(1,1-(S.t-90)/60));   // after 90 s hits cost less too, so slower kids still catch her
-    S.gap+=({clean:-GAP_CLEAN,hit:GAP_HIT*hm,bad:GAP_BAD})[kind];S.gap=Math.min(GAP_MAX,S.gap);}
-  else{S.rear+=({clean:REAR_CLEAN,safe:REAR_SAFE,hit:-REAR_HIT,bad:-REAR_BAD})[kind];S.rear=Math.min(REAR_MAX,S.rear);
+    var sk=kind==='bad'?1:1/S.spdMul;   // obstacles come less often when slower: each one is worth more, so the gap per SECOND stays the same
+    S.gap+=({clean:-GAP_CLEAN,hit:GAP_HIT*hm,bad:GAP_BAD})[kind]*sk;S.gap=Math.min(GAP_MAX,S.gap);}
+  else{var sk2=(kind==='clean'||kind==='hit')?1/S.spdMul:1;
+    S.rear+=({clean:REAR_CLEAN,safe:REAR_SAFE,hit:-REAR_HIT,bad:-REAR_BAD})[kind]*sk2;S.rear=Math.min(REAR_MAX,S.rear);
     if(kind==='clean')S.points+=1;if(kind==='safe')S.points+=3;}
 }
 function cleanPass(){S.hitStreak=0;S.clean++;nudge('clean');if(S.clean%6===0)toast(PRAISE[Math.floor(Math.random()*PRAISE.length)],1.1);}
@@ -825,15 +858,18 @@ function choose(k){
   stopVoice();
   if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
   S.nextBad=Math.max(S.popOpenedAt+planNext(m),S.t+3);
-  if(m.decoy){   // harmless question: every answer is fine, nothing changes but a small cheer
+  if(k==='timeout'){   // left unanswered for 10 s: closes by itself, counts as nothing
+    closePopup(function(){addMsg('Klaidas','…','me skip');});
+  }else if(m.decoy){   // harmless question: every answer is fine, nothing changes but a small cheer
     if(S.phase===2)S.points+=1;sparkle('👍');
     closePopup(function(){addMsg('Klaidas',k==='x'?'…':m.a[+k.slice(1)],k==='x'?'me skip':'me');});
   }else if(k==='bad'){
-    S.badStreak++;S.level=Math.min(2,S.level+1);rebuildAhead();shake(.7);nudge('bad');
+    S.badStreak++;S.safeRun=0;S.level=Math.min(2,S.level+1);rebuildAhead();shake(.7);nudge('bad');
     closePopup(function(){addMsg('Klaidas',m.bad,'me');});
-    if(S.badStreak>=LOSE_BAD)loseHeart('bad');
+    loseHeart('bad');   // one wrong answer = one heart, right away
   }else{
     S.badStreak=0;S.safe++;sparkle(S.phase===2?'✨ +3':'✨ +1');nudge('safe');
+    if(k!=='x'){S.safeRun++;streakPop(S.safeRun);if(S.safeRun>=HEART_RUN){S.safeRun=0;streakFull();}}   // ✕ neither fills nor breaks the streak
     if(S.level>0){S.level--;rebuildAhead();}
     closePopup(function(){if(k==='x')addMsg('Klaidas','…','me skip');else addMsg('Klaidas',k==='off'?m.off:'Pasakysiu suaugusiam','me');});
   }
@@ -889,7 +925,11 @@ function fpsWatch(dt){
 
 /* ---------- HUD + distance bar ---------- */
 function hud(){
-  hH.textContent='❤️'.repeat(Math.max(0,S.hearts))+'🤍'.repeat(Math.max(0,HEARTS-S.hearts));hB.textContent='🍌 '+S.bananas;hS.textContent='✨ '+S.safe;hP.textContent='⭐ '+S.points;hP.hidden=S.phase!==2;
+  hH.textContent='❤️'.repeat(Math.max(0,S.hearts))+'🤍'.repeat(Math.max(0,HEARTS-S.hearts));
+  var hk=S.hitCount+'';if(hX.dataset.v!==hk){hX.dataset.v=hk;hX.innerHTML='';for(var xi=0;xi<LOSE_HITS;xi++){var d=document.createElement('i');if(xi<S.hitCount)d.className='on';hX.appendChild(d);}hX.classList.toggle('warn',S.hitCount>=LOSE_HITS-1);}
+  hV.textContent=['🐢','🏃','⚡','⚡⚡'][S.spdLvl];
+  streakEl.hidden=!!S.tut||S.state==='menu'||S.state==='cut';
+  if(!streakEl.classList.contains('full')){var sl=streakEl.querySelectorAll('i');for(var si=0;si<sl.length;si++)sl[si].classList.toggle('on',si<S.safeRun);}hB.textContent='🍌 '+S.bananas;hS.textContent='✨ '+S.safe;hP.textContent='⭐ '+S.points;hP.hidden=S.phase!==2&&!S.points;
   var t=Math.floor(S.t);hT.textContent='⏱ '+Math.floor(t/60)+':'+(t%60<10?'0':'')+(t%60);
   if(S.phase===1){var f=Math.max(0,Math.min(1,1-S.gap/GAP_MAX));   // Klaidas marker moves right toward the mask
     gapMk.style.left=(f*100)+'%';gapFill.style.left=(f*100)+'%';gapFill.style.right='0';gapFill.style.width='';
@@ -951,6 +991,7 @@ function startPhase2(){
 function loseHeart(why){
   if(S.state!=='run')return;
   S.hearts--;
+  S.hitCount=0;
   if(why==='bad')S.badStreak=0;else if(why==='hit')S.hitStreak=0;else S.rear=REAR_RESET;
   hud();
   if(S.hearts<=0){lose();return;}
@@ -958,6 +999,27 @@ function loseHeart(why){
   var e=document.createElement('div');e.className='heart';e.textContent='💔';wrap.appendChild(e);
   setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e);},1400);
   hH.classList.remove('pulse');void hH.offsetWidth;hH.classList.add('pulse');
+}
+/* streak of safe answers on real messages: 4 in a row = a heart back (at full hearts: bonus points) */
+var sfxEl=null;
+function sfx(f){try{if(!sfxEl){sfxEl=new Audio();sfxEl.preload='auto';}sfxEl.src=ASSET+'balsai/'+f;sfxEl.currentTime=0;var pr=sfxEl.play();if(pr&&pr.catch)pr.catch(function(){});}catch(e){}}
+function streakPop(n){var sl=streakEl.querySelectorAll('i');var el=sl[Math.min(n,HEART_RUN)-1];if(el){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}}
+function streakFull(){
+  var id=runId;streakEl.classList.add('full');streakEl.querySelectorAll('i').forEach(function(i){i.classList.add('on');});
+  setTimeout(function(){if(id!==runId)return;streakEl.classList.remove('full');hud();},1800);
+  sfx('SFX_HEART.mp3');
+  if(S.hearts<HEARTS){S.hearts++;
+    var e=document.createElement('div');e.className='hgain';e.textContent='❤️';wrap.appendChild(e);
+    var r=hH.getBoundingClientRect(),w=wrap.getBoundingClientRect();
+    var dx=(r.left+r.width/2)-(w.left+w.width/2),dy=(r.top+r.height/2)-(w.top+w.height*.36);
+    var a0='translate(-50%,-50%) scale(.3)',a1='translate(-50%,-50%) scale(1.3)',a2='translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px)) scale(.25)';
+    if(e.animate){var an=e.animate([{transform:a0,opacity:0},{transform:a1,opacity:1,offset:.35},{transform:a1,opacity:1,offset:.55},{transform:a2,opacity:.9}],{duration:reduce?400:1500,easing:'ease-in-out',fill:'forwards'});
+      an.onfinish=function(){if(e.parentNode)e.parentNode.removeChild(e);};}
+    setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e);},1700);
+    var t=document.createElement('div');t.className='hplus';t.textContent='+❤️';wrap.appendChild(t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},1700);
+    setTimeout(function(){hH.classList.remove('glow');void hH.offsetWidth;hH.classList.add('glow');},reduce?0:1100);
+  }else{S.points+=5;var b=document.createElement('div');b.className='hplus';b.textContent='⭐ +5';wrap.appendChild(b);setTimeout(function(){if(b.parentNode)b.parentNode.removeChild(b);},1700);}
+  hud();
 }
 /* lose: trip on a root, fall, two silhouettes come close (never touch), fade to black */
 function lose(){
@@ -1057,6 +1119,14 @@ $('how').addEventListener('click',startTut);
 $('tutSkip').addEventListener('click',function(){endTut(true);});
 $('retry').addEventListener('click',start);
 
+function obsResult(hit){   // adaptive speed: one entry per obstacle crossed
+  S.obsHist.push(hit?1:0);if(S.obsHist.length>SPD_WIN)S.obsHist.shift();S.sinceDrop++;
+  if(hit){S.cleanRun=0;
+    var n=S.obsHist.reduce(function(a,b){return a+b;},0);
+    if(S.obsHist.length>=SPD_WIN&&n>=SPD_DROP&&S.sinceDrop>=SPD_WIN&&S.spdLvl>0){S.spdLvl--;S.sinceDrop=0;spdFlash('🐢');}}
+  else{S.cleanRun++;if(S.cleanRun>=SPD_UP){S.cleanRun=0;if(S.spdLvl<SPD_LV.length-1){S.spdLvl++;spdFlash('⚡');}}}
+}
+function spdFlash(ic){spdFlashEl.textContent=ic;spdFlashEl.classList.remove('on');void spdFlashEl.offsetWidth;spdFlashEl.classList.add('on');}
 function stumble(){if(S.hitCool>0)return false;S.hitCool=.6;P.slow=1;shake(.35);return true;}
 function checkHits(seg,a,b){
   var crossed=false,hitAny=false;
@@ -1069,12 +1139,14 @@ function checkHits(seg,a,b){
     else if(o.type==='peel')hit=Math.abs(P.lat-o.lat)<seg.w*0.18&&P.y<0.4;   // banana peel: jump or dodge
     else if(o.type==='boulder')hit=Math.abs(P.lat-o.lat)<seg.w*.3*.5+seg.w*.18;   // no jump clears it
     else hit=Math.abs(P.lat-o.lat)<seg.w*0.18&&P.y<0.5;                          // small rock: jump or dodge
-    if(hit&&!S.popup){hitAny=true;if(o.type==='rock'||o.type==='boulder'||o.type==='peel')o.mesh.visible=false;}
+    if(window.__botHit)hit=window.__botHit(o,hit);   // test hook: scripted bot players
+    if(hit){hitAny=true;if(o.type==='rock'||o.type==='boulder'||o.type==='peel')o.mesh.visible=false;}
   }
   if(crossed&&S.tut){if(hitAny&&stumble()){S.tut.bumped=true;}}
-  else if(crossed&&!S.popup){
-    if(hitAny){if(stumble()){S.hitStreak++;nudge('hit');if(S.hitStreak>=LOSE_HITS)loseHeart('hit');}}
-    else cleanPass();
+  else if(crossed){   // hits count while a popup is open too
+    if(hitAny){if(stumble()){S.hitStreak++;nudge('hit');obsResult(true);S.hitCount++;hX.classList.remove('bump');void hX.offsetWidth;hX.classList.add('bump');
+      if(S.hitCount>=LOSE_HITS)loseHeart('hit');}}
+    else{cleanPass();obsResult(false);}
   }
   for(var j=0;j<seg.ban.length;j++){var bn=seg.ban[j];
     if(!bn.got&&Math.abs(bn.s-P.s)<0.9&&Math.abs(bn.lat-P.lat)<0.7&&P.y<1.7){bn.got=true;bn.mesh.visible=false;S.bananas++;if(S.phase===2)S.points++;}}
@@ -1093,11 +1165,13 @@ function update(dtR){
   if(noQ&&S.popAt>=0){S.popAt=-1;S.popEntry=null;S.nextBad=S.t+2;}
   if(!noQ&&!S.popup&&S.popAt<0&&!S.popEntry&&S.t>=S.nextBad){var m=nextMsg();S.popEntry=addMsg(m.u,m.disp,'lure');S.popAt=S.t+0.9;S.popMsg=m;}
   if(S.popAt>=0&&S.t>=S.popAt){S.popAt=-1;openPopup(S.popMsg);}
+  if(S.popup&&S.t-S.popOpenedAt>POP_TIMEOUT)choose('timeout');
 
   // movement: gentle ramp to +35 % over 2 min, then capped
   var base=SPEED0*(1+RAMP*Math.min(1,S.t/RAMP_T));
   if(P.slow>0)P.slow-=dt;
-  var spd=base*(P.slow>0?0.45:1);P.spd=spd;
+  S.spdMul+=(SPD_LV[S.spdLvl]-S.spdMul)*Math.min(1,dtR*3);   // eases to the new level in about 1 s
+  var spd=base*S.spdMul*(P.slow>0?0.45:1);P.spd=spd;
   var prevS=P.s;P.s+=spd*dt;
   var tgt=(P.lane-1)*P.seg.w*0.3,dl=tgt-P.lat,mx=9*dt;P.lat+=Math.max(-mx,Math.min(mx,dl));
   if(P.y>0||P.vy>0){P.vy-=22*dt;P.y+=P.vy*dt;if(P.y<=0){P.y=0;P.vy=0;}}
@@ -1270,6 +1344,7 @@ function openTestMenu(){
   item('⛰ Didelis riedulys',function(){midChase();testObs('boulder');});
   item('🍌 Bananų žievė',function(){midChase();S.gap=40;S.nextPeel=S.t+.6;S.nextBad=S.t+12;});
   item('🏃 2 dalis: pabėgimas',function(){midChase();S.gap=0;startPhase2();});
+  item('❤️ Širdelės grąžinimas (3 iš 4)',function(){midChase();S.hearts=2;S.safeRun=3;S.nextBad=S.t+1.5;hud();});
   item('💔 Liko 1 širdelė',function(){midChase();S.hearts=1;hud();});
   item('🏁 Pralaimėjimo ekranas',function(){midChase();lose();});
   item('⏰ Pamokos pabaiga (timer seka)',function(){['t','i','m','e','r'].forEach(function(k){window.dispatchEvent(new KeyboardEvent('keydown',{key:k}));});});
