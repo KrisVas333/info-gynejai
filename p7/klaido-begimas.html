@@ -105,6 +105,40 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
 .stats:empty{display:none}
 #phone{display:none;position:fixed;inset:0;z-index:9;background:#0d1a12;place-items:center;text-align:center;padding:24px;font-size:22px;font-weight:700}
 @media (max-width:700px){#phone{display:grid}}
+/* controls tutorial (Kris 2026-10-21): real scene in slow motion, keycaps + finger, arrows at the HUD */
+#tut[hidden]{display:none}
+#tut{position:absolute;inset:0;pointer-events:none;z-index:6}
+#wrap.tut #chat,#wrap.tut #pop,#wrap.tut #gapbar,#wrap.tut #tag,#wrap.tut #hint,#wrap.tut #rear,#wrap.tut #toast{display:none!important}
+#wrap.tut #hS,#wrap.tut #hT,#wrap.tut #hP{opacity:.3}
+#tutSkip{position:absolute;right:14px;top:12px;pointer-events:auto;font:inherit;font-size:20px;font-weight:800;padding:10px 18px;border-radius:14px;border:2px solid #ffffff66;background:rgba(8,20,13,.8);color:#fff;cursor:pointer}
+#tutSkip:hover{background:#ffd27a;color:#17231b}
+#tutWord{position:absolute;left:50%;top:15%;transform:translateX(-50%);font-size:clamp(48px,7.5vw,92px);font-weight:900;color:#fff;white-space:nowrap;
+  text-shadow:0 4px 0 #0009,0 0 18px #000a;-webkit-text-stroke:2px #17231b;opacity:0;transition:opacity .2s}
+#tutWord.on{opacity:1;animation:twPop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes twPop{0%{transform:translateX(-50%) scale(.4)}100%{transform:translateX(-50%) scale(1)}}
+#tutKeys{--k:clamp(40px,7.2vh,60px);position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;align-items:flex-end;gap:calc(var(--k)*.6)}
+#tutKeys .arrows{display:grid;grid-template-columns:repeat(3,var(--k));grid-template-rows:repeat(2,var(--k));gap:6px}
+.kc{width:var(--k);height:var(--k);display:grid;place-items:center;font-size:calc(var(--k)*.55);font-weight:900;color:#1d1d1d;line-height:1;
+  background:linear-gradient(#fbf8ef,#d4cebd);border:2px solid #2a2a2a;border-bottom-width:7px;border-radius:11px;box-shadow:0 5px 0 #0007;transition:transform .08s,background .08s,box-shadow .08s}
+.kc.space{width:calc(var(--k)*4.4);font-size:calc(var(--k)*.36);letter-spacing:.08em}
+.kc.dim{opacity:.35}
+.kc.down{transform:translateY(5px);border-bottom-width:2px;background:linear-gradient(#fff6b0,#ffd23f);box-shadow:0 0 22px 6px #ffd23fcc}
+#tutHand{position:absolute;left:0;top:0;transform:rotate(-40deg);transform-origin:50% 3%;width:calc(var(--k,56px)*1.35);transition:left .45s ease-in-out,top .45s ease-in-out,opacity .3s;opacity:0;filter:drop-shadow(0 4px 4px #0008)}
+#tutHand.on{opacity:1}
+#tutHand svg{display:block;width:100%;height:auto;transition:transform .08s}
+#tutHand.push svg{transform:translateY(-5px) scale(.94)}
+#tutArrow{position:absolute;width:64px;height:84px;opacity:0;transition:opacity .25s,left .35s,top .35s}
+#tutArrow.on{opacity:1;animation:taB .6s ease-in-out infinite alternate}
+@keyframes taB{to{transform:translateY(-12px)}}
+#tutRing{position:absolute;border:5px solid #ffd23f;border-radius:999px;box-shadow:0 0 18px #ffd23f;opacity:0;transition:opacity .25s}
+#tutRing.on{opacity:1;animation:trP .7s ease-in-out infinite alternate}
+@keyframes trP{to{transform:scale(1.08)}}
+#hB.pulse{animation:bpulse .45s ease-out 2}
+@keyframes bpulse{50%{transform:scale(1.3);background:#7a6510}}
+#hH.tpulse{animation:pulse .6s ease-in-out infinite}
+.big.alt{display:block;margin:12px auto 0;font-size:20px;padding:10px 22px;background:transparent;color:#ffd27a;border:2px solid #ffd27a88}
+.big.alt:hover{background:#ffd27a22}
+@media (prefers-reduced-motion: reduce){#tutWord.on,#tutArrow.on,#tutRing.on,#hH.tpulse{animation:none}}
 @media (prefers-reduced-motion: reduce){.boil .msg span.tx,.boil .card .q span,.boil .card .jt{animation:none}.card{animation:none}.fx{animation-duration:.01s}.sb{animation:none}}
 /* „test" — paslėptas šuolių sąrašas mentoriui (stilius kaip Mistė Runner) */
 #testMenu{position:fixed;inset:0;z-index:99;background:#000a;display:flex;align-items:center;justify-content:center}
@@ -139,6 +173,22 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
   <div id="chat" aria-live="polite"></div>
   <div id="pop" hidden></div>
   <div id="tools"><button id="px" type="button" aria-pressed="true">Pikseliai: įj.</button></div>
+  <div id="tut" hidden>
+    <div id="tutWord"></div>
+    <div id="tutKeys" aria-hidden="true">
+      <div class="kc space" data-k="space">TARPAS</div>
+      <div class="arrows"><span></span><div class="kc" data-k="up">↑</div><span></span><div class="kc" data-k="left">←</div><div class="kc dim" data-k="down">↓</div><div class="kc" data-k="right">→</div></div>
+    </div>
+    <div id="tutHand" aria-hidden="true"><svg viewBox="0 0 80 132"><g stroke="#3a2414" stroke-width="3.5" stroke-linejoin="round">
+      <rect x="15" y="98" width="50" height="34" rx="6" fill="#ff8a1f"/><rect x="15" y="98" width="50" height="8" fill="#d9690a"/>
+      <rect x="13" y="46" width="56" height="58" rx="18" fill="#f6cfa6"/>
+      <rect x="30" y="3" width="20" height="62" rx="10" fill="#f6cfa6"/>
+      <ellipse cx="13" cy="74" rx="9" ry="17" fill="#f6cfa6" transform="rotate(-18 13 74)"/></g>
+      <path d="M33 14 q7 -5 14 0" stroke="#e7b48a" stroke-width="3" fill="none"/><path d="M52 60 q8 -3 14 2 M52 72 q8 -3 14 2" stroke="#3a2414" stroke-width="2.5" fill="none"/></svg></div>
+    <div id="tutArrow" aria-hidden="true"><svg viewBox="0 0 64 84" width="64" height="84"><path d="M32 4 L60 40 L42 40 L42 80 L22 80 L22 40 L4 40 Z" fill="#ffd23f" stroke="#17231b" stroke-width="5" stroke-linejoin="round"/></svg></div>
+    <div id="tutRing" aria-hidden="true"></div>
+    <button id="tutSkip" type="button">Praleisti ⏭</button>
+  </div>
   <div id="fade"></div>
   <div id="cut" hidden><video id="vid" playsinline preload="auto"></video><div id="board"></div><button id="skip" type="button">Toliau ⏭</button></div>
   <div class="screen" id="start">
@@ -147,6 +197,7 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
       <p>Pasivyk Dingailę miške! 🎭</p>
       <p class="legend">← → bėk šonu ir sukis · Tarpas šok · ↓ pasilenk</p>
       <button class="big" id="go" type="button">▶ Pradėti</button>
+      <button class="big alt" id="how" type="button">❓ Kaip žaisti?</button>
     </div>
   </div>
   <div class="screen" id="lose" hidden>
@@ -542,7 +593,7 @@ function makeSeg(prev){
   s.lvl=prev?buildLvl:0;
   s.w=LVL_W[s.lvl];
   s.turn=s.h===0?(Math.random()<.5?-1:1):-s.h;
-  s.L=!prev?55:(s.lvl===2?Math.round(28+Math.random()*8):Math.round(32+Math.random()*20));
+  s.L=!prev?(tutLong?100:55):(s.lvl===2?Math.round(28+Math.random()*8):Math.round(32+Math.random()*20));
   s.yaw=yawOf(s.dir);s.right={x:-s.dir.z,z:s.dir.x};
   s.obs=[];s.ban=[];s.geos=[];s.prevTurn=prev?prev.turn:0;s.prevW=prev?prev.w:0;
   s.group=new THREE.Group();s.group.position.set(s.start.x,0,s.start.z);s.group.rotation.y=s.yaw;
@@ -603,7 +654,7 @@ var rootMesh=new THREE.Mesh(G.log,M.root);rootMesh.visible=false;rootMesh.scale.
 function animLegs(f,ph,amp){var u=f.userData;u.legL.rotation.x=Math.sin(ph)*amp;u.legR.rotation.x=-Math.sin(ph)*amp;u.armL.rotation.x=-Math.sin(ph)*amp*.8;u.armR.rotation.x=Math.sin(ph)*amp*.8;}
 
 /* ---------- state ---------- */
-var P,S,tmp={x:0,z:0},tmp2={x:0,z:0},v3=new THREE.Vector3(),v2=new THREE.Vector2(),runId=0;
+var tutLong=false,P,S,tmp={x:0,z:0},tmp2={x:0,z:0},v3=new THREE.Vector3(),v2=new THREE.Vector2(),runId=0;
 function resetState(){
   P={seg:null,s:2,lane:1,lat:0,y:0,vy:0,slide:0,slow:0,pend:0,ph:0,off:{x:0,z:0},yaw:0,spd:SPEED0,fall:0};
   S={state:'menu',phase:1,t:0,t2:0,ts:1,tsT:1,bananas:0,safe:0,shown:0,points:0,shake:0,camYaw:0,nextNoise:2,nextPeek:6,nextPeel:RR(8,12),glanceT:0,tossT:0,flight:null,peels:0,nextBad:BAD_FIRST,popup:null,popAt:-1,popEntry:null,
@@ -686,7 +737,7 @@ function nudge(kind){
 }
 function cleanPass(){S.hitStreak=0;S.clean++;nudge('clean');if(S.clean%6===0)toast(PRAISE[Math.floor(Math.random()*PRAISE.length)],1.1);}
 /* voices: ElevenLabs V4 mp3 per line (p07-begimas/balsai), speechSynthesis only if a file is missing or fails */
-var VO={"ADULT":"ADULT.mp3","BAD_0_bad":"BAD_0_bad.mp3","BAD_0_off":"BAD_0_off.mp3","BAD_0_q":"BAD_0_q.mp3","BAD_10_bad":"BAD_10_bad.mp3","BAD_10_off":"BAD_10_off.mp3","BAD_10_q":"BAD_10_q.mp3","BAD_11_bad":"BAD_11_bad.mp3","BAD_11_off":"BAD_11_off.mp3","BAD_11_q":"BAD_11_q.mp3","BAD_1_bad":"BAD_1_bad.mp3","BAD_1_off":"BAD_1_off.mp3","BAD_1_q":"BAD_1_q.mp3","BAD_2_bad":"BAD_2_bad.mp3","BAD_2_off":"BAD_2_off.mp3","BAD_2_q":"BAD_2_q.mp3","BAD_3_bad":"BAD_3_bad.mp3","BAD_3_off":"BAD_3_off.mp3","BAD_3_q":"BAD_3_q.mp3","BAD_4_bad":"BAD_4_bad.mp3","BAD_4_off":"BAD_4_off.mp3","BAD_4_q":"BAD_4_q.mp3","BAD_5_bad":"BAD_5_bad.mp3","BAD_5_off":"BAD_5_off.mp3","BAD_5_q":"BAD_5_q.mp3","BAD_6_bad":"BAD_6_bad.mp3","BAD_6_off":"BAD_6_off.mp3","BAD_6_q":"BAD_6_q.mp3","BAD_7_bad":"BAD_7_bad.mp3","BAD_7_off":"BAD_7_off.mp3","BAD_7_q":"BAD_7_q.mp3","BAD_8_bad":"BAD_8_bad.mp3","BAD_8_off":"BAD_8_off.mp3","BAD_8_q":"BAD_8_q.mp3","BAD_9_bad":"BAD_9_bad.mp3","BAD_9_off":"BAD_9_off.mp3","BAD_9_q":"BAD_9_q.mp3","CARD_0":"CARD_0.mp3","CARD_1":"CARD_1.mp3","CARD_2":"CARD_2.mp3","DECOY_0_a0":"DECOY_0_a0.mp3","DECOY_0_a1":"DECOY_0_a1.mp3","DECOY_0_a2":"DECOY_0_a2.mp3","DECOY_0_q":"DECOY_0_q.mp3","DECOY_1_a0":"DECOY_1_a0.mp3","DECOY_1_a1":"DECOY_1_a1.mp3","DECOY_1_q":"DECOY_1_q.mp3","DECOY_2_a0":"DECOY_2_a0.mp3","DECOY_2_a1":"DECOY_2_a1.mp3","DECOY_2_q":"DECOY_2_q.mp3","DECOY_3_a0":"DECOY_3_a0.mp3","DECOY_3_a1":"DECOY_3_a1.mp3","DECOY_3_q":"DECOY_3_q.mp3","DECOY_4_a0":"DECOY_4_a0.mp3","DECOY_4_a1":"DECOY_4_a1.mp3","DECOY_4_q":"DECOY_4_q.mp3","DECOY_5_a0":"DECOY_5_a0.mp3","DECOY_5_a1":"DECOY_5_a1.mp3","DECOY_5_q":"DECOY_5_q.mp3","DECOY_6_a0":"DECOY_6_a0.mp3","DECOY_6_a1":"DECOY_6_a1.mp3","DECOY_6_q":"DECOY_6_q.mp3","DECOY_7_a0":"DECOY_7_a0.mp3","DECOY_7_a1":"DECOY_7_a1.mp3","DECOY_7_q":"DECOY_7_q.mp3","DECOY_8_a0":"DECOY_8_a0.mp3","DECOY_8_a1":"DECOY_8_a1.mp3","DECOY_8_q":"DECOY_8_q.mp3","DECOY_9_a0":"DECOY_9_a0.mp3","DECOY_9_a1":"DECOY_9_a1.mp3","DECOY_9_q":"DECOY_9_q.mp3"};
+var VO={"TUT_7":"TUT_7.mp3","TUT_6":"TUT_6.mp3","TUT_5":"TUT_5.mp3","TUT_4":"TUT_4.mp3","TUT_3":"TUT_3.mp3","TUT_2":"TUT_2.mp3","TUT_1":"TUT_1.mp3","TUT_0":"TUT_0.mp3","ADULT":"ADULT.mp3","BAD_0_bad":"BAD_0_bad.mp3","BAD_0_off":"BAD_0_off.mp3","BAD_0_q":"BAD_0_q.mp3","BAD_10_bad":"BAD_10_bad.mp3","BAD_10_off":"BAD_10_off.mp3","BAD_10_q":"BAD_10_q.mp3","BAD_11_bad":"BAD_11_bad.mp3","BAD_11_off":"BAD_11_off.mp3","BAD_11_q":"BAD_11_q.mp3","BAD_1_bad":"BAD_1_bad.mp3","BAD_1_off":"BAD_1_off.mp3","BAD_1_q":"BAD_1_q.mp3","BAD_2_bad":"BAD_2_bad.mp3","BAD_2_off":"BAD_2_off.mp3","BAD_2_q":"BAD_2_q.mp3","BAD_3_bad":"BAD_3_bad.mp3","BAD_3_off":"BAD_3_off.mp3","BAD_3_q":"BAD_3_q.mp3","BAD_4_bad":"BAD_4_bad.mp3","BAD_4_off":"BAD_4_off.mp3","BAD_4_q":"BAD_4_q.mp3","BAD_5_bad":"BAD_5_bad.mp3","BAD_5_off":"BAD_5_off.mp3","BAD_5_q":"BAD_5_q.mp3","BAD_6_bad":"BAD_6_bad.mp3","BAD_6_off":"BAD_6_off.mp3","BAD_6_q":"BAD_6_q.mp3","BAD_7_bad":"BAD_7_bad.mp3","BAD_7_off":"BAD_7_off.mp3","BAD_7_q":"BAD_7_q.mp3","BAD_8_bad":"BAD_8_bad.mp3","BAD_8_off":"BAD_8_off.mp3","BAD_8_q":"BAD_8_q.mp3","BAD_9_bad":"BAD_9_bad.mp3","BAD_9_off":"BAD_9_off.mp3","BAD_9_q":"BAD_9_q.mp3","CARD_0":"CARD_0.mp3","CARD_1":"CARD_1.mp3","CARD_2":"CARD_2.mp3","DECOY_0_a0":"DECOY_0_a0.mp3","DECOY_0_a1":"DECOY_0_a1.mp3","DECOY_0_a2":"DECOY_0_a2.mp3","DECOY_0_q":"DECOY_0_q.mp3","DECOY_1_a0":"DECOY_1_a0.mp3","DECOY_1_a1":"DECOY_1_a1.mp3","DECOY_1_q":"DECOY_1_q.mp3","DECOY_2_a0":"DECOY_2_a0.mp3","DECOY_2_a1":"DECOY_2_a1.mp3","DECOY_2_q":"DECOY_2_q.mp3","DECOY_3_a0":"DECOY_3_a0.mp3","DECOY_3_a1":"DECOY_3_a1.mp3","DECOY_3_q":"DECOY_3_q.mp3","DECOY_4_a0":"DECOY_4_a0.mp3","DECOY_4_a1":"DECOY_4_a1.mp3","DECOY_4_q":"DECOY_4_q.mp3","DECOY_5_a0":"DECOY_5_a0.mp3","DECOY_5_a1":"DECOY_5_a1.mp3","DECOY_5_q":"DECOY_5_q.mp3","DECOY_6_a0":"DECOY_6_a0.mp3","DECOY_6_a1":"DECOY_6_a1.mp3","DECOY_6_q":"DECOY_6_q.mp3","DECOY_7_a0":"DECOY_7_a0.mp3","DECOY_7_a1":"DECOY_7_a1.mp3","DECOY_7_q":"DECOY_7_q.mp3","DECOY_8_a0":"DECOY_8_a0.mp3","DECOY_8_a1":"DECOY_8_a1.mp3","DECOY_8_q":"DECOY_8_q.mp3","DECOY_9_a0":"DECOY_9_a0.mp3","DECOY_9_a1":"DECOY_9_a1.mp3","DECOY_9_q":"DECOY_9_q.mp3"};
 var voEl=null,voTok=0;
 function stopVoice(){voTok++;try{if(voEl){voEl.pause();voEl.onerror=null;}}catch(e){}try{window.speechSynthesis&&window.speechSynthesis.cancel();}catch(e){}}
 function tts(text){
@@ -800,7 +851,9 @@ function slide(){if(P.y>0.05)P.vy=-14;P.slide=.75;}
 window.addEventListener('keydown',function(e){
   var k=e.key;
   if(k==='ArrowLeft'||k==='ArrowRight'||k==='ArrowUp'||k==='ArrowDown'||k===' '||k==='Spacebar')e.preventDefault();
-  if(k==='Enter'&&(S.state==='menu'||(S.state==='lose'&&!loseScr.hidden))){start();return;}
+  if(S.tut){if(k==='Escape'&&!testOpen&&!e.defaultPrevented)endTut(true);e.preventDefault();return;}   // Esc that just closed the test menu must not skip
+  if(k==='Enter'&&S.state==='menu'){startTut();return;}
+  if(k==='Enter'&&S.state==='lose'&&!loseScr.hidden){start();return;}
   if(S.state!=='run'||e.repeat)return;
   if(k==='ArrowLeft'||k==='a'||k==='A')lr(-1);
   else if(k==='ArrowRight'||k==='d'||k==='D')lr(1);
@@ -853,7 +906,7 @@ function setBar(phase){
 
 /* ---------- game flow ---------- */
 function start(){
-  runId++;
+  runId++;tutHide();
   resetState();buildWorld();chatEl.innerHTML='';pop.hidden=true;pop.innerHTML='';
   startScr.hidden=true;loseScr.hidden=true;cutEl.hidden=true;board.innerHTML='';rearEl.hidden=true;measureRear();
   try{vid.pause();vid.removeAttribute('src');vid.load();}catch(e){}
@@ -933,7 +986,75 @@ function loseUpdate(dt){
   if(t>3.4&&loseScr.hidden){loseScr.hidden=false;}
   if(S.shake>0)S.shake=Math.max(0,S.shake-dt*1.4);
 }
-$('go').addEventListener('click',start);
+
+/* ---------- controls tutorial: slow motion on a scripted straight, a finger presses on-screen keys ----------
+   steps: a keys -> b ↑ jump -> c SPACE jump -> d ← / → / → -> e bananas + arrow at 🍌 -> f bump + arrow at ❤️ -> g Pirmyn! */
+var tutEl=$('tut'),tutWord=$('tutWord'),tutHand=$('tutHand'),tutArrow=$('tutArrow'),tutRing=$('tutRing'),tutWT=null;
+var TUT_OBS={rockB:16,rockC:27,rockD:36,ban:[44,46.5,49],rockF:55};
+var TUT_SPOT={up:[.5,.8],space:[.8,.42],left:[.55,.5],right:[.55,.5]};   // fingertip spot on each key: glyph stays visible, hand shows
+function tutKey(k){return tutEl.querySelector('.kc[data-k="'+k+'"]');}
+function tutRect(el){var r=el.getBoundingClientRect(),w=wrap.getBoundingClientRect();return {x:r.left-w.left,y:r.top-w.top,w:r.width,h:r.height};}
+function tutAim(k){var r=tutRect(tutKey(k)),hw=tutHand.offsetWidth||75;   // fingertip (40,4 of 80x132) on the key centre, hand hangs below the keys
+  var sp=TUT_SPOT[k]||[.5,.5];tutHand.style.left=(r.x+r.w*sp[0]-hw*40/80)+'px';tutHand.style.top=(r.y+r.h*sp[1]-hw*4/80)+'px';tutHand.classList.add('on');}
+function tutPress(k){var el=tutKey(k);tutAim(k);el.classList.add('down');tutHand.classList.add('push');
+  setTimeout(function(){el.classList.remove('down');tutHand.classList.remove('push');},600);}
+function tutSay(n,word){tutWord.textContent=word;tutWord.classList.remove('on');void tutWord.offsetWidth;tutWord.classList.add('on');say('TUT_'+n,word);}
+function tutPoint(el,part){   // big arrow under a HUD pill (part: 0..1 across its width), optional ring around it
+  var r=tutRect(el),x=r.x+r.w*(part==null?.5:part);tutArrow.style.left=(x-32)+'px';tutArrow.style.top=(r.y+r.h+6)+'px';tutArrow.classList.add('on');}
+function tutRingOn(el){var r=tutRect(el);tutRing.style.left=(r.x-8)+'px';tutRing.style.top=(r.y-8)+'px';tutRing.style.width=(r.w+16)+'px';tutRing.style.height=(r.h+16)+'px';tutRing.classList.add('on');}
+function tutHide(){
+  wrap.classList.remove('tut');tutEl.hidden=true;tutWord.classList.remove('on');tutHand.classList.remove('on','push');
+  tutArrow.classList.remove('on');tutRing.classList.remove('on');hH.classList.remove('tpulse');
+  tutEl.querySelectorAll('.kc.down').forEach(function(k){k.classList.remove('down');});}
+function startTut(){
+  tutLong=true;start();tutLong=false;
+  S.tut={t:0,step:'a',st:0,did:0,bumped:false,ban:0};
+  S.ts=S.tsT=.3;S.nextBad=S.nextNoise=S.nextPeel=S.nextPeek=1e9;S.gap=GAP0;
+  chatEl.innerHTML='';shadowFig.visible=false;tag.style.display='none';
+  var seg=P.seg,g=seg.group,lw=seg.w*.3;   // clear the random first stretch, place the scripted one
+  seg.obs.forEach(function(o){o.done=true;if(o.mesh)o.mesh.visible=false;});
+  seg.ban.forEach(function(b){b.got=true;b.mesh.visible=false;});
+  seg.obs.push(mkRock(g,TUT_OBS.rockB,0,.8),mkRock(g,TUT_OBS.rockC,0,.8),mkRock(g,TUT_OBS.rockD,0,.8),mkRock(g,TUT_OBS.rockF,lw,.8));
+  TUT_OBS.ban.forEach(function(s){seg.ban.push({s:s,lat:lw,mesh:add(g,G.banana,M.banana,lw,1,-s),got:false});});
+  wrap.classList.add('tut');tutEl.hidden=false;hud();
+  tutSay(0,'Žiūrėk!');
+}
+function endTut(skip){
+  if(!S.tut)return;
+  if(skip)stopVoice();
+  start();
+  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+}
+function tutUpdate(dtR){
+  var T=S.tut,s=P.s;T.t+=dtR;T.st+=dtR;S.gap=GAP0;S.tsT=.3;
+  function go(n){T.step=n;T.st=0;T.did=0;}
+  if(P.seg.n!==0){endTut(false);return;}
+  switch(T.step){
+    case 'a': if(T.st>2.6){tutAim('up');go('b');}break;
+    case 'b': if(!T.did&&s>=TUT_OBS.rockB-2.6){tutPress('up');jump();tutSay(1,'Šok!');T.did=1;}
+              if(T.did&&s>TUT_OBS.rockB+3.6){tutAim('space');go('c');}break;
+    case 'c': if(!T.did&&s>=TUT_OBS.rockC-2.6){tutPress('space');jump();tutSay(2,'Tarpas! Šok!');T.did=1;}
+              if(T.did&&s>TUT_OBS.rockC+3.6){tutAim('left');go('d');}break;
+    case 'd': if(T.did===0&&s>=TUT_OBS.rockD-4.5){tutPress('left');lr(-1);tutSay(3,'Į kairę!');T.did=1;}
+              else if(T.did===1&&s>=TUT_OBS.rockD+1){tutAim('right');T.did=2;}
+              else if(T.did===2&&s>=TUT_OBS.rockD+2){tutPress('right');lr(1);T.did=3;}
+              else if(T.did===3&&s>=TUT_OBS.rockD+4){tutPress('right');lr(1);tutSay(4,'Į dešinę!');T.did=4;}
+              else if(T.did===4&&s>=TUT_OBS.rockD+5.5){tutHand.classList.remove('on');go('e');}break;
+    case 'e': if(S.bananas>T.ban){T.ban=S.bananas;hB.classList.remove('pulse');void hB.offsetWidth;hB.classList.add('pulse');
+                if(!T.did){tutPoint(hB);tutSay(5,'Bananai!');T.did=1;}}
+              if(T.did&&s>=TUT_OBS.ban[2]+3){tutArrow.classList.remove('on');go('f');}break;
+    case 'f': if(T.bumped&&!T.did){T.did=1;T.st=0;tutPoint(hH,.22);hH.classList.add('tpulse');tutSay(6,'Širdelės!');shake(.25);}
+              if(T.did===1&&T.st>1.6){T.did=2;tutPoint(hH,.5);tutRingOn(hH);}
+              if(T.did===2&&T.st>3.4){tutArrow.classList.remove('on');tutRing.classList.remove('on');hH.classList.remove('tpulse');go('g');}
+              if(!T.bumped&&s>TUT_OBS.rockF+3){T.bumped=true;}   // safety: never stall here
+              break;
+    case 'g': if(!T.did){T.did=1;tutSay(7,'Pirmyn!');}
+              if(T.st>1.1){endTut(false);return;}break;
+  }
+}
+$('go').addEventListener('click',startTut);
+$('how').addEventListener('click',startTut);
+$('tutSkip').addEventListener('click',function(){endTut(true);});
 $('retry').addEventListener('click',start);
 
 function stumble(){if(S.hitCool>0)return false;S.hitCool=.6;P.slow=1;shake(.35);return true;}
@@ -950,7 +1071,8 @@ function checkHits(seg,a,b){
     else hit=Math.abs(P.lat-o.lat)<seg.w*0.18&&P.y<0.5;                          // small rock: jump or dodge
     if(hit&&!S.popup){hitAny=true;if(o.type==='rock'||o.type==='boulder'||o.type==='peel')o.mesh.visible=false;}
   }
-  if(crossed&&!S.popup){
+  if(crossed&&S.tut){if(hitAny&&stumble()){S.tut.bumped=true;}}
+  else if(crossed&&!S.popup){
     if(hitAny){if(stumble()){S.hitStreak++;nudge('hit');if(S.hitStreak>=LOSE_HITS)loseHeart('hit');}}
     else cleanPass();
   }
@@ -982,6 +1104,7 @@ function update(dtR){
   if(P.slide>0)P.slide-=dt;
   checkHits(P.seg,prevS,Math.min(P.s,P.seg.L));
   if(S.state!=='run')return;
+  if(S.tut){tutUpdate(dtR);if(!S.tut)return;}
 
   // corner
   if(P.s>=P.seg.L){
@@ -1139,6 +1262,7 @@ function openTestMenu(){
   function item(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=function(){closeTestMenu();fn();};list.appendChild(b);}
   function midChase(){start();S.t=50;S.nextBad=S.t+4;S.nextPeek=S.t+2;S.gap=40;}
   item('▶ Pradžia',function(){start();});
+  item('🎓 Kaip žaisti (pamoka)',function(){startTut();});
   item('🌑 Vidurys, tamsa 2',function(){midChase();S.level=2;rebuildAhead();hud();});
   item('🎭 Prieš pagavimą (5 m)',function(){midChase();S.gap=5;hud();});
   item('🎬 Pagavimo klipas',function(){midChase();S.gap=0;hud();playCut();});
