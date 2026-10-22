@@ -669,7 +669,8 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
 @keyframes p7in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 /* 🛤️ Kelias ant grindų: pokalbis kairėje, dvi taisyklės dešinėje */
 .floor{display:flex;gap:clamp(14px,2.4vw,44px);width:min(96vw,1800px);align-items:flex-start;height:86vh}
-.floor .chat.big{flex:1 1 62%;min-height:84vh;justify-content:flex-start}
+.floor .chat.big{flex:1 1 62%;height:84vh;min-height:84vh;justify-content:flex-end;overflow:hidden}
+.floor .chat.big .cmsg{flex:none}
 .floor .legend{flex:0 0 31%;display:flex;flex-direction:column;gap:clamp(12px,2.4vh,30px)}
 .floor .legend .tile{flex-direction:column;align-items:center;justify-content:center;max-width:none}
 .floor .legend .tile .e{font-size:clamp(3rem,7vw,7rem)}
@@ -966,7 +967,7 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
 </section>
 
 <section class="slide" data-type="veiksmas" data-blk="14–21 · 🛤️ KELIAS ANT GRINDŲ" data-emo="🛤️🏃✋"
- data-lt-note="⏱ 15:00–21:00 · 🧠 ĮRANKIS: Patikrink → atsakas → pataisyk + Erdvės linija (nauja modalybė). 🔧 PRIEŠ PAMOKĄ: per klasę priklijuotas juostos takas. · 4–6 vaikai stoja ant tako vienas paskui kitą. Klasė puslankyje teisėjauja. · SPAUSK ➡️, pasirodo VIENA nauja žinutė. SKAITYK ją garsiai. · 🏃 paprasta žinutė (gg, glhf, „bėk greičiau“) = BĖGAM VIETOJE. · 🗿 pavojinga žinutė (klausia, kur gyveni, kiek metų, kviečia rašyti tik jam) = SUSTINGSTAM! Visi sustoja kaip statulos, nejuda. Tada paklausk: „Ką darysim?“ ▲ „Pasakysiu suaugusiam!“ · Kas suklydo (bėgo, kai reikėjo sustingti): be juoko paklausk: „Ar tai padės tave SURASTI?“ · Po 8 žinučių pasikeičia bėgikai (2–3 ratai). Žinutes gali skaityti ir iš naujo (← ir vėl ➡️). · 🔑 ⚓1 grįžta (🤸 kūnas): po kiekvieno sustingimo visi kartu „sakau STOP ir pasakau suaugusiam“. · Žaidėjų žodžiai „gg“, „glhf“ lieka angliškai, nes taip rašo tikruose žaidimuose. · ✂️ Trūksta laiko: tik 4 vaikai, vienas ratas (−3 min)."
+ data-lt-note="⏱ 15:00–21:00 · 🧠 ĮRANKIS: Patikrink → atsakas → pataisyk + Erdvės linija (nauja modalybė). 🔧 PRIEŠ PAMOKĄ: per klasę priklijuotas juostos takas. · 4–6 vaikai stoja ant tako vienas paskui kitą. Klasė puslankyje teisėjauja. · SPAUSK ➡️, pasirodo VIENA nauja žinutė. SKAITYK ją garsiai. · 🏃 paprasta žinutė (gg, glhf, „bėk greičiau“) = BĖGAM VIETOJE. · 🗿 pavojinga žinutė (klausia, kur gyveni, kiek metų, kviečia rašyti tik jam) = SUSTINGSTAM! Visi sustoja kaip statulos, nejuda. Tada paklausk: „Ką darysim?“ ▲ „Pasakysiu suaugusiam!“ · Kas suklydo (bėgo, kai reikėjo sustingti): be juoko paklausk: „Ar tai padės tave SURASTI?“ · 15 žinučių: po kas 5 pasikeičia bėgikai (3 ratai). Langas kaip tikras pokalbis — senos žinutės slenka aukštyn. Žinutes gali skaityti ir iš naujo (← ir vėl ➡️). · 🔑 ⚓1 grįžta (🤸 kūnas): po kiekvieno sustingimo visi kartu „sakau STOP ir pasakau suaugusiam“. · Žaidėjų žodžiai „gg“, „glhf“ lieka angliškai, nes taip rašo tikruose žaidimuose. · ✂️ Trūksta laiko: tik 4 vaikai, vienas ratas (−3 min)."
 >
   <div class="floor">
     <div class="chat big">
@@ -978,6 +979,13 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
       <div class="cmsg p7s"><i class="av" style="background:#3b7a3b">🐸</i><b style="color:#b6e3b6">Varle_Ula</b> kur tiltas? 🌉</div>
       <div class="cmsg p7s"><i class="av" style="background:#2b6fae">😊</i><b style="color:#a9d0f5">NoriuDraugo</b> Rašyk tik man 💬</div>
       <div class="cmsg p7s"><i class="av" style="background:#e3a42b">🎭</i><b style="color:#ffd27a">XxDingailiukexX</b> 🌲 Tik tu ir aš, slaptai</div>
+      <div class="cmsg p7s"><i class="av" style="background:#a5552b">🦊</i><b style="color:#f3b48a">Lape_Rude</b> oho, kaip greitai! 🔥</div>
+      <div class="cmsg p7s"><i class="av" style="background:#2b2b33">👤</i><b style="color:#c9c9d6">Seselis_9</b> Kokia tavo mokykla? 🏫</div>
+      <div class="cmsg p7s"><i class="av" style="background:#6b5a3b">🦔</i><b style="color:#e3cfa0">Ezys_77</b> lol 😂</div>
+      <div class="cmsg p7s"><i class="av" style="background:#2b6fae">😊</i><b style="color:#a9d0f5">NoriuDraugo</b> Duok savo telefono numerį 📱</div>
+      <div class="cmsg p7s"><i class="av" style="background:#7a4b2b">🐻</i><b style="color:#e3b88a">Meskiukas</b> liko 1 gyvybė 😬</div>
+      <div class="cmsg p7s"><i class="av" style="background:#5b5b6b">🐭</i><b style="color:#d6d6e3">Pele_Mini</b> dar vienas ratas? 🔁</div>
+      <div class="cmsg p7s"><i class="av" style="background:#e3a42b">🎭</i><b style="color:#ffd27a">XxDingailiukexX</b> Atsiųsk savo nuotrauką 📸</div>
     </div>
     <div class="legend">
       <div class="tile"><div class="e">🏃</div><div class="s"><span data-lt="Bėgam vietoje">Bėgam vietoje</span></div></div>
