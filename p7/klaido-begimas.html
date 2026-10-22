@@ -123,6 +123,14 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
 .kc.space{width:calc(var(--k)*4.4);font-size:calc(var(--k)*.36);letter-spacing:.08em}
 .kc.dim{opacity:.35}
 .kc.down{transform:translateY(5px);border-bottom-width:2px;background:linear-gradient(#fff6b0,#ffd23f);box-shadow:0 0 22px 6px #ffd23fcc}
+#tutKeys .kc{pointer-events:auto;cursor:pointer}
+.kc.want{animation:kwant .6s ease-in-out infinite alternate;border-color:#ffd23f}
+@keyframes kwant{from{box-shadow:0 5px 0 #0007,0 0 0 0 #ffd23f00}to{box-shadow:0 5px 0 #0007,0 0 26px 10px #ffd23fcc;transform:translateY(-4px)}}
+.kc.flash{animation:kflash .25s ease-in-out 4}
+@keyframes kflash{50%{background:linear-gradient(#ffe36b,#ffb300);transform:scale(1.12)}}
+#tutOk{position:absolute;left:50%;top:33%;transform:translate(-50%,-50%);font-size:clamp(64px,8vw,104px);opacity:0;pointer-events:none;filter:drop-shadow(0 0 20px #3ddc84)}
+#tutOk.on{animation:tok 1.3s ease-out forwards}
+@keyframes tok{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}75%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0}}
 #tutHand{position:absolute;left:0;top:0;transform:rotate(-40deg);transform-origin:50% 3%;width:calc(var(--k,56px)*1.35);transition:left .45s ease-in-out,top .45s ease-in-out,opacity .3s;opacity:0;filter:drop-shadow(0 4px 4px #0008)}
 #tutHand.on{opacity:1}
 #tutHand svg{display:block;width:100%;height:auto;transition:transform .08s}
@@ -138,7 +146,7 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
 #hH.tpulse{animation:pulse .6s ease-in-out infinite}
 .big.alt{display:block;margin:12px auto 0;font-size:20px;padding:10px 22px;background:transparent;color:#ffd27a;border:2px solid #ffd27a88}
 .big.alt:hover{background:#ffd27a22}
-@media (prefers-reduced-motion: reduce){#tutWord.on,#tutArrow.on,#tutRing.on,#hH.tpulse{animation:none}}
+@media (prefers-reduced-motion: reduce){#tutWord.on,#tutArrow.on,#tutRing.on,#hH.tpulse,.kc.want{animation:none}#tutOk.on{animation-duration:.8s}}
 /* hit counter (5 dots = next heart), speed pill, streak meter (left), heart-gain moment */
 #hX{display:flex;align-items:center;gap:4px;padding:6px 10px}
 #hX i{width:11px;height:11px;border-radius:50%;border:2px solid #ffffffaa;display:block}
@@ -207,7 +215,7 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
     <div id="tutWord"></div>
     <div id="tutKeys" aria-hidden="true">
       <div class="kc space" data-k="space">TARPAS</div>
-      <div class="arrows"><span></span><div class="kc" data-k="up">↑</div><span></span><div class="kc" data-k="left">←</div><div class="kc dim" data-k="down">↓</div><div class="kc" data-k="right">→</div></div>
+      <div class="arrows"><span></span><div class="kc" data-k="up">↑</div><span></span><div class="kc" data-k="left">←</div><div class="kc" data-k="down">↓</div><div class="kc" data-k="right">→</div></div>
     </div>
     <div id="tutHand" aria-hidden="true"><svg viewBox="0 0 80 132"><g stroke="#3a2414" stroke-width="3.5" stroke-linejoin="round">
       <rect x="15" y="98" width="50" height="34" rx="6" fill="#ff8a1f"/><rect x="15" y="98" width="50" height="8" fill="#d9690a"/>
@@ -217,6 +225,7 @@ body{background:#0d1a12;color:#f2f7f3;font-family:system-ui,"Segoe UI",Roboto,Ar
       <path d="M33 14 q7 -5 14 0" stroke="#e7b48a" stroke-width="3" fill="none"/><path d="M52 60 q8 -3 14 2 M52 72 q8 -3 14 2" stroke="#3a2414" stroke-width="2.5" fill="none"/></svg></div>
     <div id="tutArrow" aria-hidden="true"><svg viewBox="0 0 64 84" width="64" height="84"><path d="M32 4 L60 40 L42 40 L42 80 L22 80 L22 40 L4 40 Z" fill="#ffd23f" stroke="#17231b" stroke-width="5" stroke-linejoin="round"/></svg></div>
     <div id="tutRing" aria-hidden="true"></div>
+    <div id="tutOk" aria-hidden="true">✅</div>
     <button id="tutSkip" type="button">Praleisti ⏭</button>
   </div>
   <div id="fade"></div>
@@ -266,7 +275,7 @@ if(!window.THREE){startScr.querySelector('.panel').innerHTML='<h1>Oi!</h1><p>Nep
 /* ---------- tuning ---------- */
 var TURN_WIN=7;              // metres before a corner where ←/→ turns
 var SPEED0=8,RAMP=0.35,RAMP_T=120;   // +35 % over 2 min, then capped
-var BAD_FIRST=18,BAD_MIN=18,BAD_MAX=22;   // one popup about every 20 s (Kris 2026-10-21); ~1 decoy per 3 real
+var BAD_FIRST=24,BAD_MIN=24,BAD_MAX=29;   // one popup about every 26 s (Kris 2026-10-22: 25 % fewer); ~1 decoy per 3 real
 var POP_TIMEOUT=10,LOSE_HITS=5,HEARTS=3,REAR_RESET=20,HEART_RUN=4;   // every 5 hits in total = 1 heart; a bad answer = 1 heart; 4 safe answers in a row = heart back; 0 hearts = fall + fade
 var SPD_LV=[.75,1,1.25,1.5],SPD_UP=7,SPD_WIN=10,SPD_DROP=4;   // adaptive speed: 7 clean in a row (Kris 2026-10-21) = +1 level; >=4 hits in the last 10 = -1 level (10+ obstacles apart)
 var LVL_W=[4,2.8,2],LVL_GAP=[[13,20],[10,14],[7,10]];
@@ -624,7 +633,7 @@ function makeSeg(prev){
   s.lvl=prev?buildLvl:0;
   s.w=LVL_W[s.lvl];
   s.turn=s.h===0?(Math.random()<.5?-1:1):-s.h;
-  s.L=!prev?(tutLong?100:55):(s.lvl===2?Math.round(28+Math.random()*8):Math.round(32+Math.random()*20));
+  s.L=!prev?(tutLong?230:55):(s.lvl===2?Math.round(28+Math.random()*8):Math.round(32+Math.random()*20));
   s.yaw=yawOf(s.dir);s.right={x:-s.dir.z,z:s.dir.x};
   s.obs=[];s.ban=[];s.geos=[];s.prevTurn=prev?prev.turn:0;s.prevW=prev?prev.w:0;
   s.group=new THREE.Group();s.group.position.set(s.start.x,0,s.start.z);s.group.rotation.y=s.yaw;
@@ -770,7 +779,7 @@ function nudge(kind){
 }
 function cleanPass(){S.hitStreak=0;S.clean++;nudge('clean');if(S.clean%6===0)toast(PRAISE[Math.floor(Math.random()*PRAISE.length)],1.1);}
 /* voices: ElevenLabs V4 mp3 per line (p07-begimas/balsai), speechSynthesis only if a file is missing or fails */
-var VO={"TUT_7":"TUT_7.mp3","TUT_6":"TUT_6.mp3","TUT_5":"TUT_5.mp3","TUT_4":"TUT_4.mp3","TUT_3":"TUT_3.mp3","TUT_2":"TUT_2.mp3","TUT_1":"TUT_1.mp3","TUT_0":"TUT_0.mp3","ADULT":"ADULT.mp3","BAD_0_bad":"BAD_0_bad.mp3","BAD_0_off":"BAD_0_off.mp3","BAD_0_q":"BAD_0_q.mp3","BAD_10_bad":"BAD_10_bad.mp3","BAD_10_off":"BAD_10_off.mp3","BAD_10_q":"BAD_10_q.mp3","BAD_11_bad":"BAD_11_bad.mp3","BAD_11_off":"BAD_11_off.mp3","BAD_11_q":"BAD_11_q.mp3","BAD_1_bad":"BAD_1_bad.mp3","BAD_1_off":"BAD_1_off.mp3","BAD_1_q":"BAD_1_q.mp3","BAD_2_bad":"BAD_2_bad.mp3","BAD_2_off":"BAD_2_off.mp3","BAD_2_q":"BAD_2_q.mp3","BAD_3_bad":"BAD_3_bad.mp3","BAD_3_off":"BAD_3_off.mp3","BAD_3_q":"BAD_3_q.mp3","BAD_4_bad":"BAD_4_bad.mp3","BAD_4_off":"BAD_4_off.mp3","BAD_4_q":"BAD_4_q.mp3","BAD_5_bad":"BAD_5_bad.mp3","BAD_5_off":"BAD_5_off.mp3","BAD_5_q":"BAD_5_q.mp3","BAD_6_bad":"BAD_6_bad.mp3","BAD_6_off":"BAD_6_off.mp3","BAD_6_q":"BAD_6_q.mp3","BAD_7_bad":"BAD_7_bad.mp3","BAD_7_off":"BAD_7_off.mp3","BAD_7_q":"BAD_7_q.mp3","BAD_8_bad":"BAD_8_bad.mp3","BAD_8_off":"BAD_8_off.mp3","BAD_8_q":"BAD_8_q.mp3","BAD_9_bad":"BAD_9_bad.mp3","BAD_9_off":"BAD_9_off.mp3","BAD_9_q":"BAD_9_q.mp3","CARD_0":"CARD_0.mp3","CARD_1":"CARD_1.mp3","CARD_2":"CARD_2.mp3","DECOY_0_a0":"DECOY_0_a0.mp3","DECOY_0_a1":"DECOY_0_a1.mp3","DECOY_0_a2":"DECOY_0_a2.mp3","DECOY_0_q":"DECOY_0_q.mp3","DECOY_1_a0":"DECOY_1_a0.mp3","DECOY_1_a1":"DECOY_1_a1.mp3","DECOY_1_q":"DECOY_1_q.mp3","DECOY_2_a0":"DECOY_2_a0.mp3","DECOY_2_a1":"DECOY_2_a1.mp3","DECOY_2_q":"DECOY_2_q.mp3","DECOY_3_a0":"DECOY_3_a0.mp3","DECOY_3_a1":"DECOY_3_a1.mp3","DECOY_3_q":"DECOY_3_q.mp3","DECOY_4_a0":"DECOY_4_a0.mp3","DECOY_4_a1":"DECOY_4_a1.mp3","DECOY_4_q":"DECOY_4_q.mp3","DECOY_5_a0":"DECOY_5_a0.mp3","DECOY_5_a1":"DECOY_5_a1.mp3","DECOY_5_q":"DECOY_5_q.mp3","DECOY_6_a0":"DECOY_6_a0.mp3","DECOY_6_a1":"DECOY_6_a1.mp3","DECOY_6_q":"DECOY_6_q.mp3","DECOY_7_a0":"DECOY_7_a0.mp3","DECOY_7_a1":"DECOY_7_a1.mp3","DECOY_7_q":"DECOY_7_q.mp3","DECOY_8_a0":"DECOY_8_a0.mp3","DECOY_8_a1":"DECOY_8_a1.mp3","DECOY_8_q":"DECOY_8_q.mp3","DECOY_9_a0":"DECOY_9_a0.mp3","DECOY_9_a1":"DECOY_9_a1.mp3","DECOY_9_q":"DECOY_9_q.mp3"};
+var VO={"TUT_17":"TUT_17.mp3","TUT_16":"TUT_16.mp3","TUT_15":"TUT_15.mp3","TUT_14":"TUT_14.mp3","TUT_13":"TUT_13.mp3","TUT_12":"TUT_12.mp3","TUT_11":"TUT_11.mp3","TUT_10":"TUT_10.mp3","TUT_9":"TUT_9.mp3","TUT_8":"TUT_8.mp3","TUT_7":"TUT_7.mp3","TUT_6":"TUT_6.mp3","TUT_5":"TUT_5.mp3","TUT_4":"TUT_4.mp3","TUT_3":"TUT_3.mp3","TUT_2":"TUT_2.mp3","TUT_1":"TUT_1.mp3","TUT_0":"TUT_0.mp3","ADULT":"ADULT.mp3","BAD_0_bad":"BAD_0_bad.mp3","BAD_0_off":"BAD_0_off.mp3","BAD_0_q":"BAD_0_q.mp3","BAD_10_bad":"BAD_10_bad.mp3","BAD_10_off":"BAD_10_off.mp3","BAD_10_q":"BAD_10_q.mp3","BAD_11_bad":"BAD_11_bad.mp3","BAD_11_off":"BAD_11_off.mp3","BAD_11_q":"BAD_11_q.mp3","BAD_1_bad":"BAD_1_bad.mp3","BAD_1_off":"BAD_1_off.mp3","BAD_1_q":"BAD_1_q.mp3","BAD_2_bad":"BAD_2_bad.mp3","BAD_2_off":"BAD_2_off.mp3","BAD_2_q":"BAD_2_q.mp3","BAD_3_bad":"BAD_3_bad.mp3","BAD_3_off":"BAD_3_off.mp3","BAD_3_q":"BAD_3_q.mp3","BAD_4_bad":"BAD_4_bad.mp3","BAD_4_off":"BAD_4_off.mp3","BAD_4_q":"BAD_4_q.mp3","BAD_5_bad":"BAD_5_bad.mp3","BAD_5_off":"BAD_5_off.mp3","BAD_5_q":"BAD_5_q.mp3","BAD_6_bad":"BAD_6_bad.mp3","BAD_6_off":"BAD_6_off.mp3","BAD_6_q":"BAD_6_q.mp3","BAD_7_bad":"BAD_7_bad.mp3","BAD_7_off":"BAD_7_off.mp3","BAD_7_q":"BAD_7_q.mp3","BAD_8_bad":"BAD_8_bad.mp3","BAD_8_off":"BAD_8_off.mp3","BAD_8_q":"BAD_8_q.mp3","BAD_9_bad":"BAD_9_bad.mp3","BAD_9_off":"BAD_9_off.mp3","BAD_9_q":"BAD_9_q.mp3","CARD_0":"CARD_0.mp3","CARD_1":"CARD_1.mp3","CARD_2":"CARD_2.mp3","DECOY_0_a0":"DECOY_0_a0.mp3","DECOY_0_a1":"DECOY_0_a1.mp3","DECOY_0_a2":"DECOY_0_a2.mp3","DECOY_0_q":"DECOY_0_q.mp3","DECOY_1_a0":"DECOY_1_a0.mp3","DECOY_1_a1":"DECOY_1_a1.mp3","DECOY_1_q":"DECOY_1_q.mp3","DECOY_2_a0":"DECOY_2_a0.mp3","DECOY_2_a1":"DECOY_2_a1.mp3","DECOY_2_q":"DECOY_2_q.mp3","DECOY_3_a0":"DECOY_3_a0.mp3","DECOY_3_a1":"DECOY_3_a1.mp3","DECOY_3_q":"DECOY_3_q.mp3","DECOY_4_a0":"DECOY_4_a0.mp3","DECOY_4_a1":"DECOY_4_a1.mp3","DECOY_4_q":"DECOY_4_q.mp3","DECOY_5_a0":"DECOY_5_a0.mp3","DECOY_5_a1":"DECOY_5_a1.mp3","DECOY_5_q":"DECOY_5_q.mp3","DECOY_6_a0":"DECOY_6_a0.mp3","DECOY_6_a1":"DECOY_6_a1.mp3","DECOY_6_q":"DECOY_6_q.mp3","DECOY_7_a0":"DECOY_7_a0.mp3","DECOY_7_a1":"DECOY_7_a1.mp3","DECOY_7_q":"DECOY_7_q.mp3","DECOY_8_a0":"DECOY_8_a0.mp3","DECOY_8_a1":"DECOY_8_a1.mp3","DECOY_8_q":"DECOY_8_q.mp3","DECOY_9_a0":"DECOY_9_a0.mp3","DECOY_9_a1":"DECOY_9_a1.mp3","DECOY_9_q":"DECOY_9_q.mp3"};
 var voEl=null,voTok=0;
 function stopVoice(){voTok++;try{if(voEl){voEl.pause();voEl.onerror=null;}}catch(e){}try{window.speechSynthesis&&window.speechSynthesis.cancel();}catch(e){}}
 function tts(text){
@@ -833,6 +842,7 @@ function openPopup(m){
     var b=document.createElement('button');b.type='button';b.className='ans';var jt=document.createElement('span');jt.className='jt';jt.textContent=o.t;jt.style.animationDelay=(-Math.random()*.4).toFixed(2)+'s';b.appendChild(jt);b.dataset.k=o.k;b.onclick=function(){choose(o.k);};
     row.appendChild(b);row.appendChild(sndBtn(o.id,o.t,'Perskaityk atsakymą'));opts.appendChild(row);});
   card.appendChild(opts);pop.appendChild(cw);pop.hidden=false;
+  say(pre+m.i+'_q',m.q);   // the question is read aloud once; answers only on their 🔊
   var entry=S.popEntry;
   if(entry){var from=flipFrom(cw,entry);entry.style.visibility='hidden';
     if(from&&cw.animate)cw.animate([{transform:from,opacity:.7},{transform:'none',opacity:1}],{duration:reduce?1:600,easing:'cubic-bezier(.2,1.15,.4,1)'});}
@@ -887,7 +897,7 @@ function slide(){if(P.y>0.05)P.vy=-14;P.slide=.75;}
 window.addEventListener('keydown',function(e){
   var k=e.key;
   if(k==='ArrowLeft'||k==='ArrowRight'||k==='ArrowUp'||k==='ArrowDown'||k===' '||k==='Spacebar')e.preventDefault();
-  if(S.tut){if(k==='Escape'&&!testOpen&&!e.defaultPrevented)endTut(true);e.preventDefault();return;}   // Esc that just closed the test menu must not skip
+  if(S.tut){if(k==='Escape'&&!testOpen&&!e.defaultPrevented)endTut(true);else if(!e.repeat&&!testOpen)tutInput(tutKeyName(k));e.preventDefault();return;}   // Esc that just closed the test menu must not skip
   if(k==='Enter'&&S.state==='menu'){startTut();return;}
   if(k==='Enter'&&S.state==='lose'&&!loseScr.hidden){start();return;}
   if(S.state!=='run'||e.repeat)return;
@@ -1049,35 +1059,55 @@ function loseUpdate(dt){
   if(S.shake>0)S.shake=Math.max(0,S.shake-dt*1.4);
 }
 
-/* ---------- controls tutorial: slow motion on a scripted straight, a finger presses on-screen keys ----------
-   steps: a keys -> b ↑ jump -> c SPACE jump -> d ← / → / → -> e bananas + arrow at 🍌 -> f bump + arrow at ❤️ -> g Pirmyn! */
-var tutEl=$('tut'),tutWord=$('tutWord'),tutHand=$('tutHand'),tutArrow=$('tutArrow'),tutRing=$('tutRing'),tutWT=null;
-var TUT_OBS={rockB:16,rockC:27,rockD:36,ban:[44,46.5,49],rockF:55};
-var TUT_SPOT={up:[.5,.8],space:[.8,.42],left:[.55,.5],right:[.55,.5]};   // fingertip spot on each key: glyph stays visible, hand shows
+/* ---------- controls tutorial (interactive, Kris 2026-10-22) ----------
+   For each control: SHOW (finger presses, Klaidas moves in slow motion) then TRY (same obstacle, Klaidas waits
+   before it until the kid presses that key; wrong key = small shake + the right key flashes; ~8 s idle = finger shows again).
+   Order: ↑, TARPAS, ←, →, ↓ (slide under a branch), banana peel (show + try), bananas, hearts, Pirmyn! */
+var tutEl=$('tut'),tutWord=$('tutWord'),tutHand=$('tutHand'),tutArrow=$('tutArrow'),tutRing=$('tutRing'),tutOk=$('tutOk');
+var TUT_SPOT={up:[.5,.8],space:[.8,.42],left:[.55,.5],right:[.55,.5],down:[.55,.5]};   // fingertip spot on each key: glyph stays visible, hand shows
+var TUT_PLAN=[   // s = obstacle position on the 230 m tutorial straight; lead = how far before it the move starts
+  {k:'up',   type:'rock',  show:16, tr:30, lead:2.6,word:'Šok!',            vo:1, pv:9, pw:'Dabar tu! ↑'},
+  {k:'space',type:'rock',  show:42, tr:56, lead:2.6,word:'Tarpas! Šok!',    vo:2, pv:10,pw:'Dabar tu! TARPAS'},
+  {k:'left', type:'rock',  show:68, tr:82, lead:4,  word:'Į kairę!',        vo:3, pv:11,pw:'Dabar tu! ←'},
+  {k:'right',type:'rock',  show:94, tr:108,lead:4,  word:'Į dešinę!',       vo:4, pv:12,pw:'Dabar tu! →'},
+  {k:'down', type:'branch',show:120,tr:134,lead:2,  word:'Pritūpk!',        vo:16,pv:13,pw:'Dabar tu! ↓'},
+  {k:'peel', type:'peel',  show:152,tr:172,lead:2.6,word:'Saugokis žievės!',vo:14,pv:17,pw:'Dabar tu!'}];
+var TUT_BAN=[186,188.5,191],TUT_BUMP=202,TUT_KEYS={up:['up'],space:['space'],left:['left'],right:['right'],down:['down'],peel:['up','space','left','right']};
 function tutKey(k){return tutEl.querySelector('.kc[data-k="'+k+'"]');}
 function tutRect(el){var r=el.getBoundingClientRect(),w=wrap.getBoundingClientRect();return {x:r.left-w.left,y:r.top-w.top,w:r.width,h:r.height};}
-function tutAim(k){var r=tutRect(tutKey(k)),hw=tutHand.offsetWidth||75;   // fingertip (40,4 of 80x132) on the key centre, hand hangs below the keys
+function tutAim(k){var r=tutRect(tutKey(k)),hw=tutHand.offsetWidth||75;   // fingertip (40,4 of 80x132) on the key, hand hangs below the keys
   var sp=TUT_SPOT[k]||[.5,.5];tutHand.style.left=(r.x+r.w*sp[0]-hw*40/80)+'px';tutHand.style.top=(r.y+r.h*sp[1]-hw*4/80)+'px';tutHand.classList.add('on');}
-function tutPress(k){var el=tutKey(k);tutAim(k);el.classList.add('down');tutHand.classList.add('push');
-  setTimeout(function(){el.classList.remove('down');tutHand.classList.remove('push');},600);}
+function tutKeyDown(k){var el=tutKey(k);el.classList.add('down');setTimeout(function(){el.classList.remove('down');},600);}
+function tutPress(k){tutAim(k);tutKeyDown(k);tutHand.classList.add('push');setTimeout(function(){tutHand.classList.remove('push');},600);}
 function tutSay(n,word){tutWord.textContent=word;tutWord.classList.remove('on');void tutWord.offsetWidth;tutWord.classList.add('on');say('TUT_'+n,word);}
-function tutPoint(el,part){   // big arrow under a HUD pill (part: 0..1 across its width), optional ring around it
+function tutPoint(el,part){   // big arrow under a HUD pill (part: 0..1 across its width)
   var r=tutRect(el),x=r.x+r.w*(part==null?.5:part);tutArrow.style.left=(x-32)+'px';tutArrow.style.top=(r.y+r.h+6)+'px';tutArrow.classList.add('on');}
 function tutRingOn(el){var r=tutRect(el);tutRing.style.left=(r.x-8)+'px';tutRing.style.top=(r.y-8)+'px';tutRing.style.width=(r.w+16)+'px';tutRing.style.height=(r.h+16)+'px';tutRing.classList.add('on');}
+function tutWant(keys){tutEl.querySelectorAll('.kc').forEach(function(el){el.classList.toggle('want',!!keys&&keys.indexOf(el.dataset.k)>=0);});}
 function tutHide(){
-  wrap.classList.remove('tut');tutEl.hidden=true;tutWord.classList.remove('on');tutHand.classList.remove('on','push');
-  tutArrow.classList.remove('on');tutRing.classList.remove('on');hH.classList.remove('tpulse');
-  tutEl.querySelectorAll('.kc.down').forEach(function(k){k.classList.remove('down');});}
+  wrap.classList.remove('tut');tutEl.hidden=true;tutWord.classList.remove('on');tutHand.classList.remove('on','push');tutOk.classList.remove('on');
+  tutArrow.classList.remove('on');tutRing.classList.remove('on');hH.classList.remove('tpulse');tutWant(null);
+  tutEl.querySelectorAll('.kc.down,.kc.flash').forEach(function(k){k.classList.remove('down','flash');});}
+function tutMove(k){if(k==='up'||k==='space')jump();else if(k==='left')lr(-1);else if(k==='right')lr(1);else if(k==='down')slide();}
+function tutBranch(seg,s){var g=seg.group,w=seg.w,hw=w/2,o={type:'branch',s:s,lat:0};var bg=new THREE.Group();bg.position.set(0,0,-s);g.add(bg);
+  add(bg,G.box,M.trunk,0,1.55,0,w+1.4,.28,.32);add(bg,G.trunk,M.trunk,-hw-.6,1.1,0,1,.75,1);add(bg,G.trunk,M.trunk,hw+.6,1.1,0,1,.75,1);
+  for(var q=-1;q<=1;q++)add(bg,G.bush,M.leafA,q*w*.3,1.85,0,.55,.45,.55);o.mesh=bg;return o;}
+function tutToss(s){   // Dingailė glances back and throws a peel that lands in the middle lane at s
+  var g=walk(P.seg,P.s,S.gap);worldAt(g.seg,g.s,0,tmp);worldAt(P.seg,s,0,tmp2);
+  S.flight={seg:P.seg,s:s,t:0,dur:.9,x0:tmp.x,z0:tmp.z,y0:2.1*Math.max(1,S.gap/FIG_MIN),x1:tmp2.x,z1:tmp2.z};
+  S.glanceT=1.1;S.tossT=.6;flyPeel.visible=true;}
 function startTut(){
   tutLong=true;start();tutLong=false;
-  S.tut={t:0,step:'a',st:0,did:0,bumped:false,ban:0};
+  S.tut={t:0,i:0,ph:'intro',st:0,want:null,holdAt:null,waitT:0,bumped:false,ban:0,gap:GAP0};
   S.ts=S.tsT=.3;S.nextBad=S.nextNoise=S.nextPeel=S.nextPeek=1e9;S.gap=GAP0;
   chatEl.innerHTML='';shadowFig.visible=false;tag.style.display='none';
-  var seg=P.seg,g=seg.group,lw=seg.w*.3;   // clear the random first stretch, place the scripted one
+  var seg=P.seg,g=seg.group;   // clear the random straight, place the scripted one
   seg.obs.forEach(function(o){o.done=true;if(o.mesh)o.mesh.visible=false;});
   seg.ban.forEach(function(b){b.got=true;b.mesh.visible=false;});
-  seg.obs.push(mkRock(g,TUT_OBS.rockB,0,.8),mkRock(g,TUT_OBS.rockC,0,.8),mkRock(g,TUT_OBS.rockD,0,.8),mkRock(g,TUT_OBS.rockF,lw,.8));
-  TUT_OBS.ban.forEach(function(s){seg.ban.push({s:s,lat:lw,mesh:add(g,G.banana,M.banana,lw,1,-s),got:false});});
+  TUT_PLAN.forEach(function(st){if(st.type==='rock'){seg.obs.push(mkRock(g,st.show,0,.8),mkRock(g,st.tr,0,.8));}
+    else if(st.type==='branch'){seg.obs.push(tutBranch(seg,st.show),tutBranch(seg,st.tr));}});   // peels are thrown live
+  seg.obs.push(mkRock(g,TUT_BUMP,0,.8));
+  TUT_BAN.forEach(function(s){seg.ban.push({s:s,lat:0,mesh:add(g,G.banana,M.banana,0,1,-s),got:false});});
   wrap.classList.add('tut');tutEl.hidden=false;hud();
   tutSay(0,'Žiūrėk!');
 }
@@ -1087,31 +1117,63 @@ function endTut(skip){
   start();
   if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
 }
+/* kid input during TRY steps (keys or clicking the on-screen keycaps) */
+function tutInput(k){
+  var T=S.tut;if(!T||!T.want||!k)return;
+  if(T.want.indexOf(k)>=0){
+    if(P.s<T.holdAt-.05){T.queued=k;tutKeyDown(k);return;}   // pressed a bit early: do it as soon as he reaches the spot
+    tutKeyDown(k);if(k==='left'||k==='right')tutMove(k);else T.pendMove=k;T.holdAt=null;T.want=null;tutWant(null);tutHand.classList.remove('on');T.ph='done';
+    tutOk.classList.remove('on');void tutOk.offsetWidth;tutOk.classList.add('on');sfx('SFX_OK.mp3');tutSay(15,'Šaunu!');
+  }else{
+    shake(.15);var el=tutKey(T.want[0]);el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');
+  }
+}
+function tutKeyName(k){return k==='ArrowUp'||k==='w'||k==='W'?'up':k===' '||k==='Spacebar'?'space':k==='ArrowLeft'||k==='a'||k==='A'?'left':
+  k==='ArrowRight'||k==='d'||k==='D'?'right':k==='ArrowDown'||k==='s'||k==='S'?'down':null;}
+tutEl.querySelectorAll('.kc').forEach(function(el){el.addEventListener('pointerdown',function(e){e.preventDefault();tutInput(el.dataset.k);});});
 function tutUpdate(dtR){
-  var T=S.tut,s=P.s;T.t+=dtR;T.st+=dtR;S.gap=GAP0;S.tsT=.3;
-  function go(n){T.step=n;T.st=0;T.did=0;}
+  var T=S.tut,s=P.s,st=TUT_PLAN[T.i];T.t+=dtR;T.st+=dtR;S.gap=T.gap;
   if(P.seg.n!==0){endTut(false);return;}
-  switch(T.step){
-    case 'a': if(T.st>2.6){tutAim('up');go('b');}break;
-    case 'b': if(!T.did&&s>=TUT_OBS.rockB-2.6){tutPress('up');jump();tutSay(1,'Šok!');T.did=1;}
-              if(T.did&&s>TUT_OBS.rockB+3.6){tutAim('space');go('c');}break;
-    case 'c': if(!T.did&&s>=TUT_OBS.rockC-2.6){tutPress('space');jump();tutSay(2,'Tarpas! Šok!');T.did=1;}
-              if(T.did&&s>TUT_OBS.rockC+3.6){tutAim('left');go('d');}break;
-    case 'd': if(T.did===0&&s>=TUT_OBS.rockD-4.5){tutPress('left');lr(-1);tutSay(3,'Į kairę!');T.did=1;}
-              else if(T.did===1&&s>=TUT_OBS.rockD+1){tutAim('right');T.did=2;}
-              else if(T.did===2&&s>=TUT_OBS.rockD+2){tutPress('right');lr(1);T.did=3;}
-              else if(T.did===3&&s>=TUT_OBS.rockD+4){tutPress('right');lr(1);tutSay(4,'Į dešinę!');T.did=4;}
-              else if(T.did===4&&s>=TUT_OBS.rockD+5.5){tutHand.classList.remove('on');go('e');}break;
-    case 'e': if(S.bananas>T.ban){T.ban=S.bananas;hB.classList.remove('pulse');void hB.offsetWidth;hB.classList.add('pulse');
-                if(!T.did){tutPoint(hB);tutSay(5,'Bananai!');T.did=1;}}
-              if(T.did&&s>=TUT_OBS.ban[2]+3){tutArrow.classList.remove('on');go('f');}break;
-    case 'f': if(T.bumped&&!T.did){T.did=1;T.st=0;tutPoint(hH,.22);hH.classList.add('tpulse');tutSay(6,'Širdelės!');shake(.25);}
-              if(T.did===1&&T.st>1.6){T.did=2;tutPoint(hH,.5);tutRingOn(hH);}
-              if(T.did===2&&T.st>3.4){tutArrow.classList.remove('on');tutRing.classList.remove('on');hH.classList.remove('tpulse');go('g');}
-              if(!T.bumped&&s>TUT_OBS.rockF+3){T.bumped=true;}   // safety: never stall here
-              break;
-    case 'g': if(!T.did){T.did=1;tutSay(7,'Pirmyn!');}
-              if(T.st>1.1){endTut(false);return;}break;
+  // slow motion near anything scripted, a bit quicker on the empty stretches in between
+  var near=T.holdAt!=null||!!S.flight||T.ph==='bump'||T.ph==='hearts';
+  [].concat(TUT_PLAN.map(function(x){return x.show;}),TUT_PLAN.map(function(x){return x.tr;}),TUT_BAN,[TUT_BUMP]).forEach(function(f){if(f-s<8&&f-s>-2)near=true;});
+  S.tsT=near?.3:.7;
+  function go(ph){T.ph=ph;T.st=0;}
+  function lane0(){if(P.lane!==1)P.lane=1;}   // glide back to the middle quietly after a lane move
+  switch(T.ph){
+    case 'intro': if(T.st>2.2){tutAim(st.k==='peel'?'up':st.k);go('show');}break;
+    case 'show':   // finger presses, Klaidas moves
+      if(st.type==='peel'&&!T.tossed&&s>=st.show-14){T.gap=24;shadowFig.visible=true;tutToss(st.show);T.tossed=1;tutSay(st.vo,st.word);}
+      if(st.type!=='peel'&&!T.aimed&&s>=st.show-10){tutAim(st.k);T.aimed=1;}
+      if(s>=st.show-st.lead&&!T.pressed){var kk=st.k==='peel'?'up':st.k;tutPress(kk);tutMove(kk);T.pressed=1;if(st.type!=='peel')tutSay(st.vo,st.word);}
+      if(T.pressed&&s>st.show+2){lane0();tutHand.classList.remove('on');T.aimed=T.pressed=T.tossed=0;go('try');}
+      break;
+    case 'try':    // same obstacle again: wait in front of it for the kid's key
+      if(st.type==='peel'&&!T.tossed&&s>=st.tr-14){tutToss(st.tr);T.tossed=1;}
+      if(!T.want&&s>=st.tr-st.lead-(st.type==='peel'?11:6)){T.want=TUT_KEYS[st.k];T.holdAt=st.tr-st.lead-(st.type==='peel'?8:3.5);T.waitT=0;tutWant(T.want);tutSay(st.pv,st.pw);}
+      if(T.want&&T.queued&&P.s>=T.holdAt-.01){var qk=T.queued;T.queued=null;tutInput(qk);break;}
+      if(T.want&&P.s>=T.holdAt-.01){T.waitT+=dtR;
+        if(T.waitT>8){T.waitT=0;var dk=T.want[0];tutPress(dk);setTimeout(function(){if(S.tut&&S.tut.want)tutHand.classList.remove('on');},1400);tutSay(st.pv,st.pw);}}   // finger shows again, no penalty
+      break;
+    case 'done':   // rewarded: run past, then the next control
+      if(T.pendMove&&s>=st.tr-st.lead){tutMove(T.pendMove);T.pendMove=null;}
+      if(s>st.tr+2){lane0();T.tossed=0;tutOk.classList.remove('on');
+        if(st.type==='peel'){shadowFig.visible=false;T.gap=GAP0;}
+        T.i++;if(T.i<TUT_PLAN.length){st=TUT_PLAN[T.i];tutAim(st.k==='peel'?'up':st.k);go('show');}else go('bananas');}
+      break;
+    case 'bananas':
+      if(S.bananas>T.ban){T.ban=S.bananas;hB.classList.remove('pulse');void hB.offsetWidth;hB.classList.add('pulse');
+        if(!T.ptd){tutPoint(hB);tutSay(5,'Bananai!');T.ptd=1;}}
+      if(s>=TUT_BAN[2]+3){tutArrow.classList.remove('on');T.ptd=0;T.bumped=false;go('bump');}
+      break;
+    case 'bump':   // a gentle bump: hearts are shown, never lost here
+      if(T.bumped||s>TUT_BUMP+2){T.st=0;tutPoint(hH,.22);hH.classList.add('tpulse');tutSay(6,'Širdelės!');shake(.25);go('hearts');}
+      break;
+    case 'hearts':
+      if(T.st>1.6&&!T.ring){T.ring=1;tutPoint(hH,.5);tutRingOn(hH);}
+      if(T.st>3.4){tutArrow.classList.remove('on');tutRing.classList.remove('on');hH.classList.remove('tpulse');tutSay(7,'Pirmyn!');go('end');}
+      break;
+    case 'end': if(T.st>1.1){endTut(false);return;}break;
   }
 }
 $('go').addEventListener('click',startTut);
@@ -1173,6 +1235,7 @@ function update(dtR){
   S.spdMul+=(SPD_LV[S.spdLvl]-S.spdMul)*Math.min(1,dtR*3);   // eases to the new level in about 1 s
   var spd=base*S.spdMul*(P.slow>0?0.45:1);P.spd=spd;
   var prevS=P.s;P.s+=spd*dt;
+  var held=false;if(S.tut&&S.tut.holdAt!=null&&P.s>=S.tut.holdAt){P.s=Math.max(prevS,S.tut.holdAt);held=true;}   // tutorial TRY: wait for the kid
   var tgt=(P.lane-1)*P.seg.w*0.3,dl=tgt-P.lat,mx=9*dt;P.lat+=Math.max(-mx,Math.min(mx,dl));
   if(P.y>0||P.vy>0){P.vy-=22*dt;P.y+=P.vy*dt;if(P.y<=0){P.y=0;P.vy=0;}}
   if(P.slide>0)P.slide-=dt;
@@ -1223,7 +1286,7 @@ function update(dtR){
   updPeel(dtR);
   // shadow peekers: every 8–15 s, more often in phase 2 and in the dark
   if(S.t>=S.nextPeek){if(PEEK.active()<2)PEEK.spawn();S.nextPeek=S.t+RR(8,15)*(S.phase===2?.6:1)*(1-.2*S.level);}
-  P.ph+=spd*dt*1.5;
+  if(!held)P.ph+=spd*dt*1.5;
   if(S.shake>0)S.shake=Math.max(0,S.shake-dtR*1.4);
   hud();
 }
