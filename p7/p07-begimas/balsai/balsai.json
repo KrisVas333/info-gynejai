@@ -1,0 +1,634 @@
+{
+ "BAD_0_q": {
+  "file": "BAD_0_q.mp3",
+  "text": "Kaip tavo mamos vardas?",
+  "voice": "Ugne (EnnOVsVNRrPWieNQUZem, eleven_v4)",
+  "source": "BAD[0].q",
+  "dur": 1.74
+ },
+ "BAD_0_bad": {
+  "file": "BAD_0_bad.mp3",
+  "text": "Rasa",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[0].bad",
+  "dur": 0.74
+ },
+ "BAD_0_off": {
+  "file": "BAD_0_off.mp3",
+  "text": "Nesakysiu! Atstok.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[0].off",
+  "dur": 2.18
+ },
+ "BAD_1_q": {
+  "file": "BAD_1_q.mp3",
+  "text": "Koks tavo šuns vardas?",
+  "voice": "AIstis aukstesnis (i7EJApuFEXSWsVxfzPVE, eleven_v4)",
+  "source": "BAD[1].q",
+  "dur": 1.54
+ },
+ "BAD_1_bad": {
+  "file": "BAD_1_bad.mp3",
+  "text": "Reksas",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[1].bad",
+  "dur": 1.04
+ },
+ "BAD_1_off": {
+  "file": "BAD_1_off.mp3",
+  "text": "Ne tavo reikalas!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[1].off",
+  "dur": 1.65
+ },
+ "BAD_2_q": {
+  "file": "BAD_2_q.mp3",
+  "text": "Eikim į privatų pokalbį, tik tu ir aš",
+  "voice": "Ugne (EnnOVsVNRrPWieNQUZem, eleven_v4)",
+  "source": "BAD[2].q",
+  "dur": 3.29
+ },
+ "BAD_2_bad": {
+  "file": "BAD_2_bad.mp3",
+  "text": "Einam!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[2].bad",
+  "dur": 0.81
+ },
+ "BAD_2_off": {
+  "file": "BAD_2_off.mp3",
+  "text": "Ne, liekam čia!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[2].off",
+  "dur": 1.78
+ },
+ "BAD_3_q": {
+  "file": "BAD_3_q.mp3",
+  "text": "Kokioje mokykloje mokaisi?",
+  "voice": "AIstis zemesnis (8ZwcV9ne6SKWl9oEI63s, eleven_v4)",
+  "source": "BAD[3].q",
+  "dur": 1.81
+ },
+ "BAD_3_bad": {
+  "file": "BAD_3_bad.mp3",
+  "text": "Saulės mokykloje",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[3].bad",
+  "dur": 1.52
+ },
+ "BAD_3_off": {
+  "file": "BAD_3_off.mp3",
+  "text": "Nesakysiu!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[3].off",
+  "dur": 1.26
+ },
+ "BAD_4_q": {
+  "file": "BAD_4_q.mp3",
+  "text": "Koks tavo slaptažodis?",
+  "voice": "AIstis aukstesnis (i7EJApuFEXSWsVxfzPVE, eleven_v4)",
+  "source": "BAD[4].q",
+  "dur": 1.45
+ },
+ "BAD_4_bad": {
+  "file": "BAD_4_bad.mp3",
+  "text": "Katė7Mėnulis",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[4].bad",
+  "dur": 2.28
+ },
+ "BAD_4_off": {
+  "file": "BAD_4_off.mp3",
+  "text": "Niekam nesakau!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[4].off",
+  "dur": 1.58
+ },
+ "BAD_5_q": {
+  "file": "BAD_5_q.mp3",
+  "text": "Kur tu gyveni?",
+  "voice": "Ugne (EnnOVsVNRrPWieNQUZem, eleven_v4)",
+  "source": "BAD[5].q",
+  "dur": 1.04
+ },
+ "BAD_5_bad": {
+  "file": "BAD_5_bad.mp3",
+  "text": "Prie didelio parko",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[5].bad",
+  "dur": 2
+ },
+ "BAD_5_off": {
+  "file": "BAD_5_off.mp3",
+  "text": "Nesakysiu! Atstok.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[5].off",
+  "dur": 2.17
+ },
+ "BAD_6_q": {
+  "file": "BAD_6_q.mp3",
+  "text": "Koks tavo tikras vardas?",
+  "voice": "AIstis zemesnis (8ZwcV9ne6SKWl9oEI63s, eleven_v4)",
+  "source": "BAD[6].q",
+  "dur": 1.84
+ },
+ "BAD_6_bad": {
+  "file": "BAD_6_bad.mp3",
+  "text": "Klaidas Medaitis",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[6].bad",
+  "dur": 1.6
+ },
+ "BAD_6_off": {
+  "file": "BAD_6_off.mp3",
+  "text": "Ne tavo reikalas!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[6].off",
+  "dur": 1.67
+ },
+ "BAD_7_q": {
+  "file": "BAD_7_q.mp3",
+  "text": "Kada tavo gimtadienis?",
+  "voice": "AIstis aukstesnis (i7EJApuFEXSWsVxfzPVE, eleven_v4)",
+  "source": "BAD[7].q",
+  "dur": 1.37
+ },
+ "BAD_7_bad": {
+  "file": "BAD_7_bad.mp3",
+  "text": "Gegužės penktą",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[7].bad",
+  "dur": 1.51
+ },
+ "BAD_7_off": {
+  "file": "BAD_7_off.mp3",
+  "text": "Nesakysiu!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[7].off",
+  "dur": 1.25
+ },
+ "BAD_8_q": {
+  "file": "BAD_8_q.mp3",
+  "text": "Kokia tavo gatvė?",
+  "voice": "Ugne (EnnOVsVNRrPWieNQUZem, eleven_v4)",
+  "source": "BAD[8].q",
+  "dur": 1.34
+ },
+ "BAD_8_bad": {
+  "file": "BAD_8_bad.mp3",
+  "text": "Liepų gatvė",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[8].bad",
+  "dur": 1.19
+ },
+ "BAD_8_off": {
+  "file": "BAD_8_off.mp3",
+  "text": "Nesakysiu! Atstok.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[8].off",
+  "dur": 2.14
+ },
+ "BAD_9_q": {
+  "file": "BAD_9_q.mp3",
+  "text": "Parašyk man privačiai",
+  "voice": "AIstis zemesnis (8ZwcV9ne6SKWl9oEI63s, eleven_v4)",
+  "source": "BAD[9].q",
+  "dur": 1.57
+ },
+ "BAD_9_bad": {
+  "file": "BAD_9_bad.mp3",
+  "text": "Gerai, rašau!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[9].bad",
+  "dur": 1.56
+ },
+ "BAD_9_off": {
+  "file": "BAD_9_off.mp3",
+  "text": "Ne, rašom čia!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[9].off",
+  "dur": 1.87
+ },
+ "BAD_10_q": {
+  "file": "BAD_10_q.mp3",
+  "text": "Atsiųsk savo nuotrauką",
+  "voice": "AIstis aukstesnis (i7EJApuFEXSWsVxfzPVE, eleven_v4)",
+  "source": "BAD[10].q",
+  "dur": 1.54
+ },
+ "BAD_10_bad": {
+  "file": "BAD_10_bad.mp3",
+  "text": "Siunčiu!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[10].bad",
+  "dur": 0.96
+ },
+ "BAD_10_off": {
+  "file": "BAD_10_off.mp3",
+  "text": "Ne! Nesiųsiu.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[10].off",
+  "dur": 1.66
+ },
+ "BAD_11_q": {
+  "file": "BAD_11_q.mp3",
+  "text": "Koks tavo telefono numeris?",
+  "voice": "Ugne (EnnOVsVNRrPWieNQUZem, eleven_v4)",
+  "source": "BAD[11].q",
+  "dur": 1.84
+ },
+ "BAD_11_bad": {
+  "file": "BAD_11_bad.mp3",
+  "text": "Šeši, nulis, du…",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[11].bad",
+  "dur": 2.42
+ },
+ "BAD_11_off": {
+  "file": "BAD_11_off.mp3",
+  "text": "Nesakysiu! Atstok.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "BAD[11].off",
+  "dur": 2.22
+ },
+ "ADULT": {
+  "file": "ADULT.mp3",
+  "text": "Pasakysiu suaugusiam",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "literal '🛑 Pasakysiu suaugusiam' (openPopup option k=adult)",
+  "dur": 1.59
+ },
+ "CARD_0": {
+  "file": "CARD_0.mp3",
+  "text": "Klaidas pagauna Dingailę už rankos",
+  "voice": "Egle (neOkJCtTBu6UseSuVtwd, eleven_v4)",
+  "source": "CARDS[0].cap",
+  "dur": 2.62
+ },
+ "CARD_1": {
+  "file": "CARD_1.mp3",
+  "text": "Kaukė nuslysta… tai šešėlis! Pūkšt!",
+  "voice": "Egle (neOkJCtTBu6UseSuVtwd, eleven_v4)",
+  "source": "CARDS[1].cap",
+  "dur": 4
+ },
+ "CARD_2": {
+  "file": "CARD_2.mp3",
+  "text": "Iš šonų artėja šešėliai",
+  "voice": "Egle (neOkJCtTBu6UseSuVtwd, eleven_v4)",
+  "source": "CARDS[2].cap",
+  "dur": 2.1
+ },
+ "DECOY_1_q": {
+  "file": "DECOY_1_q.mp3",
+  "text": "Ar tu mėgsti picą?",
+  "voice": "AIstis aukstesnis (ElevenLabs i7EJApuFEXSWsVxfzPVE), eleven_v4",
+  "source": "DECOY[1].q",
+  "dur": 1.3
+ },
+ "DECOY_6_q": {
+  "file": "DECOY_6_q.mp3",
+  "text": "Kas skanesnis, ledai ar sausainiai?",
+  "voice": "AIstis aukstesnis (ElevenLabs i7EJApuFEXSWsVxfzPVE), eleven_v4",
+  "source": "DECOY[6].q",
+  "dur": 2.67
+ },
+ "DECOY_8_q": {
+  "file": "DECOY_8_q.mp3",
+  "text": "Kiek bananų surinkai?",
+  "voice": "AIstis aukstesnis (ElevenLabs i7EJApuFEXSWsVxfzPVE), eleven_v4",
+  "source": "DECOY[8].q",
+  "dur": 1.38
+ },
+ "DECOY_2_q": {
+  "file": "DECOY_2_q.mp3",
+  "text": "Kas greitesnis, katė ar šuo?",
+  "voice": "AIstis zemesnis (ElevenLabs 8ZwcV9ne6SKWl9oEI63s), eleven_v4",
+  "source": "DECOY[2].q",
+  "dur": 2.65
+ },
+ "DECOY_4_q": {
+  "file": "DECOY_4_q.mp3",
+  "text": "Kiek kojų turi voras?",
+  "voice": "AIstis zemesnis (ElevenLabs 8ZwcV9ne6SKWl9oEI63s), eleven_v4",
+  "source": "DECOY[4].q",
+  "dur": 1.8
+ },
+ "DECOY_9_q": {
+  "file": "DECOY_9_q.mp3",
+  "text": "Ar tu matei drugelį?",
+  "voice": "AIstis zemesnis (ElevenLabs 8ZwcV9ne6SKWl9oEI63s), eleven_v4",
+  "source": "DECOY[9].q",
+  "dur": 1.38
+ },
+ "DECOY_0_q": {
+  "file": "DECOY_0_q.mp3",
+  "text": "Kokia tavo mėgstamiausia spalva?",
+  "voice": "Egle (ElevenLabs neOkJCtTBu6UseSuVtwd), eleven_v4",
+  "source": "DECOY[0].q",
+  "dur": 2.12
+ },
+ "DECOY_5_q": {
+  "file": "DECOY_5_q.mp3",
+  "text": "Ar debesys minkšti?",
+  "voice": "Egle (ElevenLabs neOkJCtTBu6UseSuVtwd), eleven_v4",
+  "source": "DECOY[5].q",
+  "dur": 1.66
+ },
+ "DECOY_7_q": {
+  "file": "DECOY_7_q.mp3",
+  "text": "Ar varlės moka plaukti?",
+  "voice": "Egle (ElevenLabs neOkJCtTBu6UseSuVtwd), eleven_v4",
+  "source": "DECOY[7].q",
+  "dur": 1.86
+ },
+ "DECOY_0_a0": {
+  "file": "DECOY_0_a0.mp3",
+  "text": "Žalia!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[0].a[0]",
+  "dur": 0.87
+ },
+ "DECOY_0_a1": {
+  "file": "DECOY_0_a1.mp3",
+  "text": "Mėlyna!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[0].a[1]",
+  "dur": 0.92
+ },
+ "DECOY_0_a2": {
+  "file": "DECOY_0_a2.mp3",
+  "text": "Oranžinė!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[0].a[2]",
+  "dur": 1.02
+ },
+ "DECOY_1_a0": {
+  "file": "DECOY_1_a0.mp3",
+  "text": "Taip!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[1].a[0]",
+  "dur": 0.66
+ },
+ "DECOY_1_a1": {
+  "file": "DECOY_1_a1.mp3",
+  "text": "Ne, mėgstu sriubą.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[1].a[1]",
+  "dur": 2.01
+ },
+ "DECOY_2_a0": {
+  "file": "DECOY_2_a0.mp3",
+  "text": "Katė!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[2].a[0]",
+  "dur": 0.68
+ },
+ "DECOY_2_a1": {
+  "file": "DECOY_2_a1.mp3",
+  "text": "Šuo!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[2].a[1]",
+  "dur": 0.68
+ },
+ "DECOY_3_a0": {
+  "file": "DECOY_3_a0.mp3",
+  "text": "Moku!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[3].a[0]",
+  "dur": 0.77
+ },
+ "DECOY_3_a1": {
+  "file": "DECOY_3_a1.mp3",
+  "text": "Dar mokausi.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[3].a[1]",
+  "dur": 1.32
+ },
+ "DECOY_4_a0": {
+  "file": "DECOY_4_a0.mp3",
+  "text": "Aštuonias!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[4].a[0]",
+  "dur": 1.14
+ },
+ "DECOY_4_a1": {
+  "file": "DECOY_4_a1.mp3",
+  "text": "Šešias?",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[4].a[1]",
+  "dur": 0.94
+ },
+ "DECOY_5_a0": {
+  "file": "DECOY_5_a0.mp3",
+  "text": "Atrodo minkšti!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[5].a[0]",
+  "dur": 1.86
+ },
+ "DECOY_5_a1": {
+  "file": "DECOY_5_a1.mp3",
+  "text": "Nežinau.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[5].a[1]",
+  "dur": 0.98
+ },
+ "DECOY_6_a0": {
+  "file": "DECOY_6_a0.mp3",
+  "text": "Ledai!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[6].a[0]",
+  "dur": 0.92
+ },
+ "DECOY_6_a1": {
+  "file": "DECOY_6_a1.mp3",
+  "text": "Sausainiai!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[6].a[1]",
+  "dur": 1.18
+ },
+ "DECOY_7_a0": {
+  "file": "DECOY_7_a0.mp3",
+  "text": "Taip!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[7].a[0]",
+  "dur": 0.69
+ },
+ "DECOY_7_a1": {
+  "file": "DECOY_7_a1.mp3",
+  "text": "Gal?",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[7].a[1]",
+  "dur": 0.61
+ },
+ "DECOY_8_a0": {
+  "file": "DECOY_8_a0.mp3",
+  "text": "Daug!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[8].a[0]",
+  "dur": 0.85
+ },
+ "DECOY_8_a1": {
+  "file": "DECOY_8_a1.mp3",
+  "text": "Dar renku!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[8].a[1]",
+  "dur": 1.08
+ },
+ "DECOY_9_a0": {
+  "file": "DECOY_9_a0.mp3",
+  "text": "Mačiau!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[9].a[0]",
+  "dur": 0.9
+ },
+ "DECOY_9_a1": {
+  "file": "DECOY_9_a1.mp3",
+  "text": "Dar ne.",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ElevenLabs ytARIPxr985DUzw1udo1), eleven_v4",
+  "source": "DECOY[9].a[1]",
+  "dur": 0.8
+ },
+ "DECOY_3_q": {
+  "file": "DECOY_3_q.mp3",
+  "text": "Ar moki šokinėti kaip kiškis?",
+  "voice": "Ugne (ElevenLabs EnnOVsVNRrPWieNQUZem), eleven_v4",
+  "source": "DECOY[3].q",
+  "dur": 2.18
+ },
+ "TUT_0": {
+  "file": "TUT_0.mp3",
+  "text": "Žiūrėk!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[0]",
+  "dur": 0.93
+ },
+ "TUT_1": {
+  "file": "TUT_1.mp3",
+  "text": "Šok!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[1]",
+  "dur": 0.85
+ },
+ "TUT_2": {
+  "file": "TUT_2.mp3",
+  "text": "Tarpas! Šok!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[2]",
+  "dur": 1.91
+ },
+ "TUT_3": {
+  "file": "TUT_3.mp3",
+  "text": "Į kairę!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[3]",
+  "dur": 0.87
+ },
+ "TUT_4": {
+  "file": "TUT_4.mp3",
+  "text": "Į dešinę!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[4]",
+  "dur": 1.03
+ },
+ "TUT_5": {
+  "file": "TUT_5.mp3",
+  "text": "Bananai!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[5]",
+  "dur": 1.12
+ },
+ "TUT_6": {
+  "file": "TUT_6.mp3",
+  "text": "Širdelės!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[6]",
+  "dur": 1.28
+ },
+ "TUT_7": {
+  "file": "TUT_7.mp3",
+  "text": "Pirmyn!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[7]",
+  "dur": 0.76
+ },
+ "TUT_8": {
+  "file": "TUT_8.mp3",
+  "text": "Dabar tu!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[8]"
+ },
+ "TUT_9": {
+  "file": "TUT_9.mp3",
+  "text": "Dabar tu! Spausk rodyklę aukštyn!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[9]"
+ },
+ "TUT_10": {
+  "file": "TUT_10.mp3",
+  "text": "Dabar tu! Spausk tarpą!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[10]"
+ },
+ "TUT_11": {
+  "file": "TUT_11.mp3",
+  "text": "Dabar tu! Spausk rodyklę į kairę!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[11]"
+ },
+ "TUT_12": {
+  "file": "TUT_12.mp3",
+  "text": "Dabar tu! Spausk rodyklę į dešinę!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[12]"
+ },
+ "TUT_13": {
+  "file": "TUT_13.mp3",
+  "text": "Dabar tu! Pritūpk! Spausk rodyklę žemyn!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[13]"
+ },
+ "TUT_14": {
+  "file": "TUT_14.mp3",
+  "text": "Saugokis žievės!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[14]"
+ },
+ "TUT_15": {
+  "file": "TUT_15.mp3",
+  "text": "Puiku!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[15]",
+  "dur": 0.74
+ },
+ "TUT_16": {
+  "file": "TUT_16.mp3",
+  "text": "Pritūpk!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[16]"
+ },
+ "TUT_17": {
+  "file": "TUT_17.mp3",
+  "text": "Dabar tu! Peršok žievę arba bėk šonu!",
+  "voice": "Klaidas (Info-Gynejai kids hero) (ytARIPxr985DUzw1udo1, eleven_v4)",
+  "source": "TUT[17]"
+ },
+ "MUSIC_loop": {
+  "file": "MUSIC_loop.mp3",
+  "text": "ElevenLabs Music API music_v1: Temple Run style jungle chase loop, 160 BPM, 32 bars, 48 s (2026-10-23)",
+  "voice": "-",
+  "source": "sfx"
+ },
+ "SFX_DODGE": {
+  "file": "SFX_DODGE.mp3",
+  "text": "ElevenLabs sound-generation v2: rising UI success chime (2026-10-23)",
+  "voice": "-",
+  "source": "sfx"
+ },
+ "SFX_TEXT": {
+  "file": "SFX_TEXT.mp3",
+  "text": "ElevenLabs sound-generation v2: soft chat pop (2026-10-23)",
+  "voice": "-",
+  "source": "sfx"
+ }
+}
