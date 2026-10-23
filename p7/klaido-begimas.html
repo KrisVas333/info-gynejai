@@ -276,7 +276,7 @@ if(!window.THREE){startScr.querySelector('.panel').innerHTML='<h1>Oi!</h1><p>Nep
 var TURN_WIN=7;              // metres before a corner where ←/→ turns
 var SPEED0=8,RAMP=0.35,RAMP_T=120;   // +35 % over 2 min, then capped
 var BAD_FIRST=24,BAD_MIN=24,BAD_MAX=29;   // one popup about every 26 s (Kris 2026-10-22: 25 % fewer); ~1 decoy per 3 real
-var POP_TIMEOUT=10,LOSE_HITS=5,HEARTS=3,REAR_RESET=20,HEART_RUN=4;   // every 5 hits in total = 1 heart; a bad answer = 1 heart; 4 safe answers in a row = heart back; 0 hearts = fall + fade
+var POP_TIMEOUT=10,LOSE_HITS=5,HEARTS=3,REAR_RESET=20,HEART_RUN=4;   // every 5 hits in total = 1 heart; a bad answer only darkens the forest (no heart, Kris 10-23); 4 safe answers in a row = heart back; 0 hearts = fall + fade
 var SPD_LV=[.75,1,1.25,1.5],SPD_UP=7,SPD_WIN=10,SPD_DROP=4;   // adaptive speed: 7 clean in a row (Kris 2026-10-21) = +1 level; >=4 hits in the last 10 = -1 level (10+ obstacles apart)
 var LVL_W=[4,2.8,2],LVL_GAP=[[13,20],[10,14],[7,10]];
 // phase 1: chase Dingailė
@@ -876,7 +876,6 @@ function choose(k){
   }else if(k==='bad'){
     S.badStreak++;S.safeRun=0;S.level=Math.min(2,S.level+1);rebuildAhead();shake(.7);nudge('bad');
     closePopup(function(){addMsg('Klaidas',m.bad,'me');});
-    loseHeart('bad');   // one wrong answer = one heart, right away
   }else{
     S.badStreak=0;S.safe++;sparkle(S.phase===2?'✨ +3':'✨ +1');nudge('safe');
     if(k!=='x'){S.safeRun++;streakPop(S.safeRun);if(S.safeRun>=HEART_RUN){S.safeRun=0;streakFull();}}   // ✕ neither fills nor breaks the streak
