@@ -1279,7 +1279,7 @@ function update(dtR){
   if(noQ&&S.popAt>=0){S.popAt=-1;S.popEntry=null;S.nextBad=S.t+2;}
   if(!noQ&&!S.popup&&S.popAt<0&&!S.popEntry&&S.t>=S.nextBad){var m=nextMsg();S.popEntry=addMsg(m.u,m.disp,'lure');S.popAt=S.t+0.9;S.popMsg=m;}
   if(S.popAt>=0&&S.t>=S.popAt){S.popAt=-1;openPopup(S.popMsg);}
-  if(S.popup&&S.t-S.popOpenedAt>POP_TIMEOUT)choose('timeout');
+  // no question timer (Kris 10-23): the popup waits until the kid answers; the run is slowed meanwhile
 
   // movement: gentle ramp to +35 % over 2 min, then capped
   var base=SPEED0*(1+RAMP*Math.min(1,S.t/RAMP_T));
