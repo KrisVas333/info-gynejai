@@ -965,6 +965,7 @@ let fbAuto=null;
 /* Kris 2026-10-26: kas 5-tas vertinamas atsakymas — vietoj „Toliau" dukart spustelėti (Chrome įprotis). Nevertinama, tik tyliai skaičiuojam. */
 const DBL_EVERY=5;let dblN=0,dblFirstDone=false;
 function dblWanted(it){
+  return false;   /* Kris 2026-11-12: „Chrome double-click is confusing. Remove it altogether." — dvigubas spustelėjimas išjungtas */
   if(!it||["scam","break","trap"].includes(it.kind))return false;
   dblN++;return dblN%DBL_EVERY===0;
 }
