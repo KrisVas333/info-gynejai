@@ -600,7 +600,7 @@ const ITEMS=[
   rules:"pw",prefill:"Katinas7",fixQ:"Pataisyk! Pridėk žodžių.",fixSay:"Dabar pataisyk! Pridėk dar žodžių, kad būtų ilgas.",done:"Dabar slaptažodis stiprus!"},
  {id:"r4_onekey",kind:"pick",r:4,skill:"🚪 Kiekvienoms durims — savas raktas",illus:"img:p4",
   q:"Klaidas turi vieną raktą visoms durims.<br>Vagis jį pavogė.<br>Kiek durų atidarys vagis?",say:"Klaidas turi vieną raktą visoms durims. Vagis jį pavogė. Kiek durų atidarys vagis?",
-  opts:[{ic:"🚪",tx:"Vienas"},{ic:"🚪🚪🚪",tx:"Visas"},{ic:"🚪🚪",tx:"Dvejas"}],correct:1,
+  opts:[{ic:"🚪",tx:"Vienerias"},{ic:"🚪🚪🚪",tx:"Visas"},{ic:"🚪🚪",tx:"Dvejas"}],correct:1,
   why:"Vagis su vienu raktu atrakina visas duris."},
  {id:"r4_recall",kind:"nickrecall",r:4,skill:"🧠 Prisiminti slapyvardį",
   q:"Koks tavo slapyvardis?<br><small>Parašyk čia.</small>",say:"Prisimeni? Koks tavo slapyvardis? Parašyk čia.",
@@ -654,7 +654,7 @@ const ITEMS=[
  {id:"round6",kind:"round",r:6},
  {id:"r6_room",kind:"pick",r:6,skill:"✋ Sakyti STOP",
   q:"Nepažįstamas kviečia tave vieną<br>į slaptą kambarį. Ką darai?",say:"Nepažįstamas žmogus kviečia tave vieną į slaptą kambarį. Ką darai?",
-  opts:[{ic:"🧍",tx:"Neinu, pasakau suaugusiam"},{ic:"🍬",tx:"Einu, jei jis malonus"},{ic:"👫",tx:"Einu kartu su draugu"}],correct:0,
+  opts:[{ic:"🧍",tx:"Neinu, pasakau suaugusiam"},{ic:"🙂",tx:"Einu, jei jis malonus"},{ic:"👫",tx:"Einu kartu su draugu"}],correct:0,
   why:"Su nepažįstamu neinam net su draugu, o pasakom suaugusiam."},
  {id:"r6_mistake",kind:"pick",r:6,skill:"👥 Neik vienas",illus:"img:p7",
   q:"Ką Klaidas padarė ne taip miške?",say:"Prisimeni mišką? Ką Klaidas padarė ne taip?",
@@ -983,7 +983,8 @@ function scheduleReturn(it){
   S.returned.add(it.id);
   /* niekada po paskutinio (boto) klausimo */
   const last=S.queue.length-1;
-  const at=Math.min(last,S.idx+1+4+Math.floor(Math.random()*3));
+  /* 2026-11-12: r6_bot eilėje nebėra (tik finale), todėl leidžiam ir į galą; niekada ne prieš dabartinį — kitaip paskutinis klausimas pasikartodavo kaip „pirmas bandymas“ */
+  const at=Math.max(S.idx+1,Math.min(last+1,S.idx+1+4+Math.floor(Math.random()*3)));
   S.queue.splice(at,0,Object.assign({},it,{ret:true}));
 }
 
@@ -1887,7 +1888,15 @@ addEventListener("resize",()=>{if(S.cur&&S.cur.kind==="grid"&&S.G&&S.G.fit)S.G.f
    indeksą (data-i / data-s), todėl vertinimas, 🔊 ir duomenys (extra.pick = originalus indeksas) nuo tvarkos nepriklauso. */
 function shuffleOpts(){
   const L=ITEMS.filter(x=>(x.kind==="pick"||x.kind==="lack")&&x.skill&&x.opts);
-  const rhythm=p=>{const n=p.length;for(let k=2;k<=4;k++){if(n<2*k)continue;let same=true;for(let j=n-k;j<n;j++)if(p[j]!==p[j-k]){same=false;break;}if(same)return true;}return false;};
+  /* vienintelė „be ritmo“ taisyklė (tikrinama pridedant kiekvieną vietą): (a) ta pati vieta du kartus iš eilės;
+     (b) ciklas ilgesnis nei 4: paskutiniai 4 žingsniai ta pačia kryptimi (A→B→C→A→B ar atvirkščiai; D vieta nutraukia seką);
+     (c) kaitaliojimas ABAB; (d) kvadratas ABCABC */
+  const rhythm=p=>{const n=p.length,L=n-1;
+    if(n>=2&&p[L]===p[L-1])return true;
+    if(n>=5){const w=p.slice(n-5);if(w.every(v=>v<3)){const d=[];for(let j=1;j<5;j++)d.push((w[j]-w[j-1]+3)%3);if(d.every(x=>x===d[0]))return true;}}
+    if(n>=4&&p[L]===p[L-2]&&p[L-1]===p[L-3])return true;
+    if(n>=6&&p[L]===p[L-3]&&p[L-1]===p[L-4]&&p[L-2]===p[L-5])return true;
+    return false;};
   let pos=null;
   for(let tries=0;tries<20000&&!pos;tries++){
     const p=[];let bad=false;
@@ -1901,7 +1910,7 @@ function shuffleOpts(){
     if(Math.max(...cnt)-Math.min(...cnt)>2)continue;
     pos=p;
   }
-  if(!pos)pos=L.map((it,i)=>[2,0,1,0,2,1,3,0,2,1,0,2,0,1][i]%it.opts.length);   /* atsarginė: rankinė seka iš standarto */
+  if(!pos)pos=L.map((it,i)=>[2,1,2,0,1,0,3,1,0,2,1,2,0,2][i]%it.opts.length);   /* atsarginė seka (atitinka a–d taisykles) */
   L.forEach((it,i)=>{
     const rest=[...Array(it.opts.length).keys()].filter(v=>v!==it.correct);
     for(let j=rest.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[rest[j],rest[k]]=[rest[k],rest[j]];}
