@@ -1549,7 +1549,7 @@ RENDER.popups=it=>{
 /* ---- Klaido rašybos klaida: tik Backspace (ir rodyklės) keičia lauką, Enter patvirtina ---- */
 RENDER.typo=it=>{
   $("stage").innerHTML=`<div class="typo"><div class="typebox"><input id="tyin" data-clarity-mask="true" class="tin" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Klaido žodis"></div></div>
-    <div class="keyrow">${keycap(640,230,"Backspace","⌫",84)}${keycap(420,230,"Enter","↵",84)}</div><div id="tyh" class="fr" style="font-size:calc(var(--u)*4)"></div>`;
+    <div class="keyrow"><span id="tyBk" role="button" aria-label="Backspace" style="cursor:pointer">${keycap(640,230,"Backspace","⌫",84)}</span><span id="tyEn" role="button" aria-label="Enter" style="cursor:pointer">${keycap(420,230,"Enter","↵",84)}</span></div><div id="tyw" class="fr" style="font-size:calc(var(--u)*4)"></div><div id="tyh" class="fr" style="font-size:calc(var(--u)*4)"></div>`;
   const inp=$("tyin"),st={back:0,early:0,resets:0,t:performance.now()};S.TY=st;
   function reset(){inp.value=it.prefill;try{inp.focus();inp.setSelectionRange(it.caret,it.caret);}catch(e){}$("tyh").innerHTML="";}
   reset();
@@ -1559,17 +1559,27 @@ RENDER.typo=it=>{
   inp.addEventListener("keydown",e=>{
     e.stopPropagation();
     if(e.key==="Enter"){e.preventDefault();check();return;}
-    if(e.key==="Backspace"){st.back++;setTimeout(()=>{if(!canReach(inp.value)&&!$("tyre")){$("tyh").innerHTML=`<button class="send" id="tyre">🔄 Iš naujo</button>`;$("tyre").onclick=()=>{st.resets++;reset();};}},0);return;}
+    if(e.key==="Backspace"){if(!e.isTrusted){e.preventDefault();delAt();}st.back++;setTimeout(afterBack,0);return;}
     if(/^Arrow|^Home$|^End$|^Tab$/.test(e.key))return;
     e.preventDefault();                                   /* raidės ir kita — nieko nedaro */
   });
   inp.addEventListener("click",()=>{});
+  /* 2026-11-12 klasėje: kai kurie vaikai paspaudė ekrano ⌫/↵ paveiksliuką arba kitur — įvedimas prarado fokusą ir Enter „nieko nedarė".
+     Dabar: paveiksliukai veikia kaip klavišai ir fokuso nevagia; Enter/Backspace be fokuso pagauna bendras klavišų gaudytojas. */
+  function afterBack(){if(!canReach(inp.value)&&!$("tyre")){$("tyh").innerHTML=`<button class="send" id="tyre">🔄 Iš naujo</button>`;$("tyre").onmousedown=e=>e.preventDefault();$("tyre").onclick=()=>{st.resets++;reset();};}}
+  function delAt(){if(inp.disabled)return;let a=inp.selectionStart,b=inp.selectionEnd;if(a==null){a=b=inp.value.length;}
+    if(a!==b){inp.value=inp.value.slice(0,a)+inp.value.slice(b);}else if(a>0){inp.value=inp.value.slice(0,a-1)+inp.value.slice(a);a--;}
+    try{inp.focus();inp.setSelectionRange(a,a);}catch(e){}}
+  ["tyBk","tyEn"].forEach(id=>{$(id).onmousedown=e=>e.preventDefault();});
+  $("tyBk").onclick=()=>{if(S.resolved||inp.disabled)return;delAt();st.back++;afterBack();};
+  $("tyEn").onclick=()=>{try{inp.focus();}catch(e){}check();};
   later(()=>{try{inp.focus();inp.setSelectionRange(it.caret,it.caret);}catch(e){}},250);
   function check(){
     if(S.resolved)return;
     if(inp.value===it.word){inp.disabled=true;inp.style.borderColor="var(--yes)";
       resolveScored(it,st.resets===0&&st.early<=1,{backspace:st.back,anksti_enter:st.early,is_naujo:st.resets,ms:Math.round(performance.now()-st.t),pavyko:true});return;}
     st.early++;inp.classList.remove("shake");void inp.offsetWidth;inp.classList.add("shake");
+    $("tyw").textContent="🔎 "+it.early;   /* matomas atsakas, ne tik balsas (2026-11-12) */
     speak([it.early]);
     if(st.early>=4){inp.value=it.word;inp.disabled=true;S.resolved=false;resolveScored(it,false,{backspace:st.back,anksti_enter:st.early,is_naujo:st.resets,ms:Math.round(performance.now()-st.t),pavyko:false});}
   }
@@ -1764,6 +1774,14 @@ function toCalm(){clearTimeout(S.evT);if(!$("calm").hidden)return;igEv("p8_i_kla
 addEventListener("keydown",e=>{
   if(S.keyH&&!S.resolved&&S.keyH(e))return;
   if(e.target&&e.target.tagName==="INPUT")return;
+  /* rašymo ekranai: įvedimas prarado fokusą (vaikas spustelėjo kitur) — Enter/Backspace vis tiek veikia (2026-11-12) */
+  if(S.cur&&!S.resolved&&(e.key==="Enter"||e.key==="Backspace")){
+    const fi=document.querySelector("#tyin:not([disabled]),#tin:not([disabled])");
+    if(fi){e.preventDefault();try{fi.focus();}catch(_){}
+      if(e.key==="Enter"||fi.id==="tyin"){fi.dispatchEvent(new KeyboardEvent("keydown",{key:e.key,bubbles:true,cancelable:true}));}
+      else{let p=fi.selectionStart;if(p==null)p=fi.value.length;if(p>0){fi.value=fi.value.slice(0,p-1)+fi.value.slice(p);try{fi.setSelectionRange(p-1,p-1);}catch(_){}}}
+      return;}
+  }
   if(e.key==="Enter"||e.key===" "){
     if(!$("start").hidden){e.preventDefault();begin();return;}
     if(!$("intro").hidden){e.preventDefault();go();return;}
