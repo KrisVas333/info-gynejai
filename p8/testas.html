@@ -1,6 +1,32 @@
 <!doctype html>
 <html lang="lt">
 <head>
+<script>/* 🔇 Visos pamokos garso jungiklis (Kris 2026-11-12): viršuje dešinėje, prisimenamas (localStorage bcjr_p8_mute — tas pats raktas deck'e ir teste). */
+(function(){var K="bcjr_p8_mute",M=false;try{M=localStorage.getItem(K)==="1";}catch(e){}
+var mp=HTMLMediaElement.prototype,op=mp.play;
+function hush(el){if(!el.muted){el.muted=true;el._bm=1;}}
+mp.play=function(){if(M)hush(this);return op.apply(this,arguments);};
+document.addEventListener("play",function(e){if(M&&e.target&&e.target.tagName)hush(e.target);},true);
+var ss=window.speechSynthesis;if(ss){var sp=ss.speak.bind(ss);try{ss.speak=function(u){if(M)return;return sp(u);};}catch(e){}}
+var AC=window.AudioContext||window.webkitAudioContext,ctxs=[];
+if(AC){var R=AC.prototype.resume;AC.prototype.resume=function(){if(M)return Promise.resolve();return R.apply(this,arguments);};
+  var X=function(a){var c=a?new AC(a):new AC();ctxs.push(c);if(M)try{c.suspend();}catch(e){}return c;};X.prototype=AC.prototype;
+  window.AudioContext=X;window.webkitAudioContext=X;}
+function apply(){
+  document.querySelectorAll("audio,video").forEach(function(el){if(M)hush(el);else if(el._bm){el.muted=false;el._bm=0;}});
+  if(M){try{ss&&ss.cancel();}catch(e){}ctxs.forEach(function(c){try{c.suspend();}catch(e){}});}
+  else ctxs.forEach(function(c){try{R.call(c);}catch(e){}});
+  var b=document.getElementById("bcjr-mute");try{window.dispatchEvent(new CustomEvent("bcjrmute",{detail:M}));}catch(e){}
+  if(b){b.textContent=M?"🔇":"🔊";b.title=M?"Garsas išjungtas":"Garsas įjungtas";}
+}
+window.bcjrMuted=function(){return M;};
+window.bcjrSetMute=function(v){M=!!v;try{localStorage.setItem(K,M?"1":"0");}catch(e){}apply();};
+function mk(){if(document.getElementById("bcjr-mute"))return;var b=document.createElement("button");b.id="bcjr-mute";b.setAttribute("aria-label","Garsas");
+  b.style.cssText="position:fixed;top:12px;right:12px;z-index:2147483000;width:56px;height:56px;border-radius:50%;border:2px solid #ffffff55;background:#0b0f2acc;color:#fff;font-size:28px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0";
+  b.tabIndex=-1;b.onmousedown=function(e){e.preventDefault();};b.onclick=function(e){e.stopPropagation();e.preventDefault();window.bcjrSetMute(!M);b.blur();};
+  document.body.appendChild(b);apply();}
+if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);
+})();</script>
 <script src="../track.js"></script>
 <meta charset="utf-8">
 <title>Gynėjų patikrinimas — P8</title>
@@ -315,7 +341,7 @@ input{font-family:inherit;user-select:text}
 #calm{background:#0a0d26}
 #calm h1{font-size:calc(var(--u)*10)}
 #calm img{height:calc(var(--u)*34)}
-#mute{position:fixed;left:calc(var(--u)*1.4);bottom:calc(var(--u)*1.4);z-index:70;width:calc(var(--u)*7.5);height:calc(var(--u)*7.5);border-radius:50%;background:#ffffff1c;font-size:calc(var(--u)*3.8)}
+#mute{display:none!important;position:fixed;left:calc(var(--u)*1.4);bottom:calc(var(--u)*1.4);z-index:70;width:calc(var(--u)*7.5);height:calc(var(--u)*7.5);border-radius:50%;background:#ffffff1c;font-size:calc(var(--u)*3.8)}
 #mentor{position:fixed;right:8px;bottom:34px;z-index:70;font:12px Consolas,monospace;color:#9aa;opacity:.7}
 
 #stage>*{flex-shrink:0}
@@ -748,6 +774,7 @@ const muteBtn=$("mute");
 function muteUi(){muteBtn.textContent=muted?"🔇":"🔊";}
 muteUi();
 muteBtn.onclick=()=>{muted=!muted;try{localStorage.setItem("bcjr_p8_mute",muted?"1":"0");}catch(e){}muteUi();if(muted)stopVoice();};
+addEventListener("bcjrmute",e=>{muted=!!e.detail;muteUi();if(muted)stopVoice();}); /* viršutinis dešinysis 🔇 (visai pamokai) */
 
 /* ======================= duomenys (bcjr-duomenys § 3, 3b) ======================= */
 const SB_BASE="https://iiekmeylpppczicrsxho.supabase.co/rest/v1/";
