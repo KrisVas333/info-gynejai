@@ -680,6 +680,72 @@ const ITEMS=[
   reply:"Hmm… įdomu! Sužinosim kitą kartą."}
 ];
 
+/* ======================= maišyta eilė kiekvienam vaikui (Kris 2026-11-13) =======================
+   „Most kids don't get through the whole test" → per pusę testo vaikas turi sutikti VISAS 6 galias.
+   Dalinam ratu: kiekvienos galios klausimai sumaišomi, tada ėjimais — po vieną iš kiekvienos galios, kurioje dar liko,
+   galių tvarka kiekvieną ėjimą nauja; ta pati galia niekada du kartus iš eilės (ir per ėjimų ribą).
+   Priklausomybės: r1_bubble — pats pirmas (pelės apšilimas) · r2_keys — pirmas iš klavišų · r3_nick ne pirmas iš failų
+   (kad 3 galia turėtų vertinamą klausimą pirmame ėjime) · r2_typo→r2_lempos · r2_gridB→r2_gridC · r6_popup→r6_popups ·
+   r3_nick→r4_recall (bent 3 ekranai tarp jų). Juokingi + spąstai — į atsitiktinius tarpus, niekada du nevertinami greta.
+   Pertraukos — ~1/4, 2/4, 3/4 eilės. Raundų ekranų (su „Pirma/Antra… galia" balsu) eilėje nebėra. r6_bot — tik finale. */
+const MIX={first:{1:"r1_bubble",2:"r2_keys"},notFirst:{3:"r3_nick"},
+  pairs:[["r2_typo","r2_lempos"],["r2_gridB","r2_gridC"],["r6_popup","r6_popups"]],
+  cross:[["r3_nick","r4_recall",3]]};
+function mixQueue(rand){
+  rand=rand||Math.random;
+  const shuf=a=>{for(let j=a.length-1;j>0;j--){const k=Math.floor(rand()*(j+1));[a[j],a[k]]=[a[k],a[j]];}return a;};
+  const ns=it=>!it.skill;                                   /* nevertinamas: juokingas, spąstai, pertrauka, slapyvardžio kūrimas */
+  const extraK=["funny","trap"];
+  const core=ITEMS.filter(it=>it.kind!=="round"&&it.kind!=="bot"&&it.kind!=="break"&&!extraK.includes(it.kind));
+  const extras=ITEMS.filter(it=>extraK.includes(it.kind));
+  const breaks=ITEMS.filter(it=>it.kind==="break");
+  const pos=q=>{const m={};q.forEach((it,i)=>m[it.id]=i);return m;};
+  for(let attempt=0;attempt<500;attempt++){
+    const by={};core.forEach(it=>(by[it.r]=by[it.r]||[]).push(it));
+    Object.keys(by).forEach(r=>{
+      const L=shuf(by[r]);
+      MIX.pairs.forEach(([a,b])=>{const ia=L.findIndex(x=>x.id===a),ib=L.findIndex(x=>x.id===b);if(ia>=0&&ib>=0&&ia>ib){const t=L[ia];L[ia]=L[ib];L[ib]=t;}});
+      const f=MIX.first[r];if(f){const i=L.findIndex(x=>x.id===f);if(i>0)L.unshift(L.splice(i,1)[0]);}
+      const nf=MIX.notFirst[r];if(nf&&L.length>1&&L[0].id===nf){const k=1+Math.floor(rand()*(L.length-1));const t=L[0];L[0]=L[k];L[k]=t;}
+      /* pirmo / „ne pirmo" taisymas galėjo sugadinti porą — patikrinsim visą eilę žemiau */
+    });
+    const q=[];let last=0,bad=false,pass=0;
+    while(Object.values(by).some(a=>a.length)){
+      const av=shuf(Object.keys(by).filter(r=>by[r].length).map(Number));
+      if(pass===0&&av.includes(1)){av.splice(av.indexOf(1),1);av.unshift(1);}
+      if(av[0]===last){if(av.length<2){bad=true;break;}const k=1+Math.floor(rand()*(av.length-1));const t=av[0];av[0]=av[k];av[k]=t;}
+      av.forEach(r=>q.push(by[r].shift()));last=av[av.length-1];pass++;
+    }
+    if(bad)continue;
+    let P=pos(q);
+    if(MIX.pairs.some(([a,b])=>P[a]>P[b]))continue;
+    if(MIX.cross.some(([a,b,g])=>P[b]-P[a]-1<g))continue;
+    /* juokingi + spąstai: į tarpą tarp dviejų vertinamų (ne prieš pirmą, ne gale) */
+    for(const x of shuf(extras.slice())){
+      const gaps=[];for(let g=1;g<q.length;g++)if(!ns(q[g-1])&&!ns(q[g]))gaps.push(g);
+      if(!gaps.length){bad=true;break;}
+      q.splice(gaps[Math.floor(rand()*gaps.length)],0,x);
+    }
+    if(bad)continue;
+    /* pertraukos ~ kas ketvirtį: artimiausias tinkamas tarpas */
+    const total=q.length+breaks.length;
+    breaks.forEach((b,i)=>{
+      if(bad)return;
+      const want=Math.round(total*(i+1)/(breaks.length+1));
+      const gaps=[];for(let g=1;g<q.length;g++)if(!ns(q[g-1])&&!ns(q[g]))gaps.push(g);
+      if(!gaps.length){bad=true;return;}
+      gaps.sort((a,c)=>Math.abs(a-want)-Math.abs(c-want));
+      q.splice(gaps[0],0,b);
+    });
+    if(bad)continue;
+    if(q.some((it,i)=>i&&ns(it)&&ns(q[i-1])))continue;
+    P=pos(q);
+    if(MIX.cross.some(([a,b,g])=>P[b]-P[a]-1<g))continue;
+    return q;
+  }
+  return ITEMS.filter(it=>it.kind!=="round"&&it.kind!=="bot");   /* atsarginė — kanoninė tvarka */
+}
+
 /* Klaido „spėjimas" mokymo klausimuose */
 function optSay(o){return o.say||o.tx||"";}
 function allLines(){
@@ -711,7 +777,7 @@ const NAMIE=Q.get("namie")==="1";
 const GO=Q.get("go");
 const MENTOR=Q.get("m")==="1";
 let TEST=Q.get("test")==="1"||Q.has("p");   /* Kris: TEST režimas — nesiunčia, be laiko ribos (nebent ?baigti=) */
-const VERSION="p8-2026-11-12";   /* 2026-11-12: perrašyti 14 vertinamų klausimų + maišoma variantų tvarka (ankstesnė — p8-2026-10-24) */
+const VERSION="p8-2026-11-13";   /* 2026-11-13: klausimai maišomi iš visų 6 galių ratu kiekvienam vaikui (mixQueue), be raundų ekranų; eilė — įraše _eile; momentinė eilutė kas 5 vertinamus (ankstesnė — p8-2026-11-12) */
 /* ---- Clarity (../track.js → window.ig). Tik kai: gyvas github.io, ne iframe, ne ?sim/?go/?nosend, ne TEST. Niekada nesiunčiam įvesto teksto. ---- */
 const IGP=(()=>{try{return /(^|.)github.io$/.test(location.hostname||"")&&window.self===window.top;}catch(e){return false;}})();
 function igOk(){return !!(window.ig&&IGP&&!TEST&&!SIM&&!GO&&!Q.has("nosend"));}
@@ -790,9 +856,12 @@ try{
 function newId(){try{return crypto.randomUUID();}catch(e){return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==="x"?r:(r&3|8)).toString(16);});}}
 const R={zaidimas:newId(),t0:0,sent:false};
 window.__rows=[];   /* QA: kas BŪTŲ išsiųsta (spąstų tekstas čia niekada nepatenka) */
+/* 2026-11-13: eilė maišyta → `raundas` = kiek skirtingų galių vaikas jau sutiko (0–6), ne raundo numeris.
+   atsakymai[0] = {id:"_eile",ok:null,extra:{ids:[…]}} — šio vaiko išdalinta eilė (rodiniai ima tik ok true/false, todėl jo neskaičiuoja). */
 function runRow(unfinished,raundas){
+  const head=S.eile?[S.eile]:[];const room=200-head.length-(S.sum?1:0);
   return {versija:VERSION,nebaigta:!!unfinished,zaidimas:R.zaidimas,raundas:Math.max(0,Math.min(7,raundas|0)),
-    trukme_s:Math.round((performance.now()-R.t0)/1000),namie:false,atsakymai:S.log.slice(0,S.sum?199:200).concat(S.sum?[S.sum]:[])};
+    trukme_s:Math.round((performance.now()-R.t0)/1000),namie:false,atsakymai:head.concat(S.log.slice(0,room)).concat(S.sum?[S.sum]:[])};
 }
 function post(row){
   return fetch(SB_URL,{method:"POST",keepalive:true,
@@ -802,6 +871,9 @@ function post(row){
 function qadd(row){try{const q=JSON.parse(localStorage.getItem(QKEY)||"[]");q.push(row);localStorage.setItem(QKEY,JSON.stringify(q.slice(-30)));}catch(e){}}
 function ship(row,label){window.__rows.push(row);if(NOSEND){console.log("(nesiunčiama — "+label+")",row);return;}if(typeof fetch!=="function")return;post(row).catch(()=>qadd(row));}
 function sendSnapshot(raundas){if(R.sent||!S.log.length)return;ship(runRow(true,raundas),"momentinė");}
+/* momentinė eilutė kas SNAP_EVERY vertinamų atsakymų (anksčiau — keičiantis raundui; maišytoje eilėje tai būtų beveik kas klausimą) */
+const SNAP_EVERY=5;
+function maybeSnapshot(){const n=S.log.filter(l=>typeof l.ok==="boolean").length;if(n>=S.snapAt+SNAP_EVERY){S.snapAt=n-(n%SNAP_EVERY);sendSnapshot(S.seen.size);}}
 function sendRun(unfinished,raundas){if(R.sent)return;R.sent=true;ship(runRow(unfinished,raundas),"galutinė");}
 function flushQueue(){
   if(NOSEND||typeof fetch!=="function")return;
@@ -810,7 +882,7 @@ function flushQueue(){
   Promise.all(q.map(r=>post(r).then(()=>null).catch(()=>r))).then(left=>{try{localStorage.setItem(QKEY,JSON.stringify(left.filter(Boolean)));}catch(e){}});
 }
 try{flushQueue();}catch(e){}
-addEventListener("pagehide",()=>{if(S.started&&!S.ended)sendRun(true,S.round);});
+addEventListener("pagehide",()=>{if(S.started&&!S.ended)sendRun(true,S.seen.size);});
 
 /* ======================= pabaigos laikas (Kris 2026-10-26, 45 min pamoka) =======================
    Finalas = pamokos pradžia + 38 min (iš bcjr_tvarkarastis_v, serverio laikas). Laikrodis niekur nerodomas.
@@ -875,7 +947,7 @@ function startFinale(){
 }
 
 /* ======================= būsena ======================= */
-const S={queue:[],idx:-1,cur:null,round:0,streak:0,stars:{1:0,2:0,3:0,4:0,5:0,6:0},log:[],
+const S={queue:[],idx:-1,cur:null,round:0,seen:new Set(),snapAt:0,eile:null,streak:0,stars:{1:0,2:0,3:0,4:0,5:0,6:0},log:[],
   t0:0,started:false,ended:false,dlHit:false,finale:false,allDone:false,inBreak:false,keyH:null,returned:new Set(),timers:[],simT:null,done:false};
 function later(fn,ms){const t=setTimeout(fn,FAST?Math.min(ms,150):ms);S.timers.push(t);return t;}
 function clearTimers(){S.timers.forEach(clearTimeout);S.timers=[];if(S.raf)cancelAnimationFrame(S.raf);S.raf=0;S.keyH=null;}
@@ -883,9 +955,10 @@ function clearTimers(){S.timers.forEach(clearTimeout);S.timers=[];if(S.raf)cance
 function buildPowers(){
   $("powers").innerHTML=ROUNDS.slice(1).map(r=>`<div class="pw" id="pw${r.n}" title="${r.nm}">${r.ic}<span class="st"></span></div>`).join("");
 }
+/* 2026-11-13: juosta seka DABARTINIO klausimo galią (.now); jau sutiktos galios — .done (auksinis kraštas) */
 function setRound(n){
-  S.round=n;
-  for(let i=1;i<=6;i++){const p=$("pw"+i);p.classList.toggle("now",i===n);p.classList.toggle("done",i<n);}
+  S.round=n;S.seen.add(n);
+  for(let i=1;i<=6;i++){const p=$("pw"+i);p.classList.toggle("now",i===n);p.classList.toggle("done",i!==n&&S.seen.has(i));}
 }
 /* serija: 5 teisingi iš eilės → žvaigždė į dabartinę galią */
 function streakUi(){if($("streak").classList.contains("full"))return;$("streak").querySelectorAll("i").forEach((el,i)=>el.classList.toggle("on",i<S.streak));}
@@ -914,8 +987,11 @@ function flyStar(){
 
 /* ======================= eiga ======================= */
 function buildQueue(){
-  let q=ITEMS.filter(x=>x.id!==FIN_ID);     /* r6_bot — tik finale */
-  if(GO){const i=q.findIndex(x=>x.id===GO);if(i>0){const r=q[i].r;const ri=q.findIndex(x=>x.kind==="round"&&x.r===r);q=q.slice(i);if(ri>=0&&q[0].kind!=="round")q.unshift(ITEMS[ri]);}}
+  let q;
+  if(GO){                                   /* kūrėjui: kanoninė ITEMS tvarka nuo ?go=<id> (be raundų ekranų) */
+    q=ITEMS.filter(x=>x.id!==FIN_ID&&x.kind!=="round");const i=q.findIndex(x=>x.id===GO);if(i>0)q=q.slice(i);
+  }else q=mixQueue();                       /* kiekvienam vaikui — sava maišyta eilė; r6_bot — tik finale */
+  S.eile={id:"_eile",ok:null,extra:{ids:q.map(x=>x.id)}};
   if(NAMIE){
     let miss=[];try{miss=JSON.parse(localStorage.getItem("bcjr_p8_pamirsta")||"[]");}catch(e){}
     const pre=miss.map(id=>ITEM[id]).filter(it=>it&&it.kind==="pick").map(it=>Object.assign({},it,{ret:true,home:true}));
@@ -941,6 +1017,7 @@ function next(){
   if(S.ended)return;
   if(S.finale){finish(S.dlHit);return;}     /* po r6_bot — įvertinimas */
   if(S.dlHit){startFinale();return;}
+  maybeSnapshot();
   S.idx++;
   if(S.idx>=S.queue.length){S.allDone=true;startFinale();return;}
   showItem(S.queue[S.idx]);
@@ -952,7 +1029,7 @@ function showItem(it){
   else if(it.kind==="home")igEv("p8_namie_kartojimas");
   else if(it.kind==="break")igEv("p8_pertrauka",{p8_item:it.id});
   else igStuck=setTimeout(()=>{igEv("p8_strigo",{p8_item:it.id});igUp("p8_strigo");},90000);
-  if(it.r&&!it.ret&&!it.fin&&it.r>S.round){if(S.round)sendSnapshot(S.round);setRound(it.r);}
+  if(it.r&&it.kind!=="break"&&it.kind!=="round")setRound(it.r);   /* juosta ir žvaigždės — dabartinio klausimo galiai */
   const rr=ROUNDS[it.r]||ROUNDS[1];
   $("whoImg").src=IMG[rr.who];
   $("who").hidden=(it.kind==="round"||it.kind==="home");
@@ -1750,7 +1827,9 @@ function catEval(r){
   else if(r===2){const k=recs.find(l=>l.id==="r2_keys");if(k&&k.extra){const ms=k.extra.keys.map(x=>x.ms).sort((a,b)=>a-b);fast=ms[Math.floor(ms.length/2)]<3000;}}
   else{const ms=recs.filter(l=>ITEM[l.id].kind==="pick").map(l=>l.ms).sort((a,b)=>a-b);fast=ms.length>0&&ms[Math.floor(ms.length/2)]<12000;}
   const n=recs.length,pct=n?Math.round(100*ok/n):0;
-  const lvl=!n?"none":pct>=80?"top":pct>=50?"mid":"low";
+  /* 2026-11-13: % nuo ATSAKYTŲ (ne nuo visų galios klausimų) — nebaigęs testo vaikas gali gauti bet kurį ženklelį;
+     „top" tik nuo 2 atsakytų (vienas atsakymas — daugiausia „mid") */
+  const lvl=!n?"none":(pct>=80&&n>=2)?"top":pct>=50?"mid":"low";
   return {n,ok,bad,pct,fast,lvl,title:lvl==="top"?CATS[r].top:lvl==="mid"?CATS[r].mid:lvl==="low"?CAT_LOW:"Kitą kartą"};
 }
 function finish(byDeadline){
@@ -1770,7 +1849,7 @@ function finish(byDeadline){
   const headCat=best&&E[best.n].lvl!=="low"?best:null;
   S.sum={id:"_suvestine",ok:null,extra:{rangas:rank.nm,proc:pct,teisingai:okT,klaidos:badT,
     sritys:Object.fromEntries(ROUNDS.slice(1).map(r=>[r.n,{ok:E[r.n].ok,klaidos:E[r.n].bad,titulas:E[r.n].title,greitai:E[r.n].fast}]))}};
-  sendRun(!reachedEnd,S.round);
+  sendRun(!reachedEnd,S.seen.size);
   clearTimeout(igStuck);
   igEv("p8_pabaiga",{p8_rangas:rank.nm,p8_proc:String(pct),p8_klaidu:String(badT),p8_det:(byDeadline&&!reachedEnd)?"riba":"visa"});
   igUp("p8_pabaiga");
@@ -1887,7 +1966,10 @@ addEventListener("resize",()=>{if(S.cur&&S.cur.kind==="grid"&&S.G&&S.G.fit)S.G.f
    pasikartojančio ritmo (ABAB, ABCABC, ABCDABCD) · vietos pasiskirsto maždaug po lygiai. Mygtukai nešioja originalų
    indeksą (data-i / data-s), todėl vertinimas, 🔊 ir duomenys (extra.pick = originalus indeksas) nuo tvarkos nepriklauso. */
 function shuffleOpts(){
-  const L=ITEMS.filter(x=>(x.kind==="pick"||x.kind==="lack")&&x.skill&&x.opts);
+  /* 2026-11-13: ritmo taisyklės taikomos ta tvarka, kurią vaikas MATO (S.queue), ne ITEMS tvarka */
+  const qi={};S.queue.forEach((x,i)=>{if(!(x.id in qi))qi[x.id]=i;});
+  const L=ITEMS.filter(x=>(x.kind==="pick"||x.kind==="lack")&&x.skill&&x.opts)
+    .map((x,i)=>[x,x.id in qi?qi[x.id]:1e4+i]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
   /* vienintelė „be ritmo“ taisyklė (tikrinama pridedant kiekvieną vietą): (a) ta pati vieta du kartus iš eilės;
      (b) ciklas ilgesnis nei 4: paskutiniai 4 žingsniai ta pačia kryptimi (A→B→C→A→B ar atvirkščiai; D vieta nutraukia seką);
      (c) kaitaliojimas ABAB; (d) kvadratas ABCABC */
@@ -1956,7 +2038,7 @@ function simStep(it){
 }
 
 /* ======================= paleidimas ======================= */
-buildPowers();shuffleOpts();buildQueue();initDeadline();setPage("start");
+buildPowers();buildQueue();shuffleOpts();initDeadline();setPage("start");
 if(TEST)enterTest();
 if(Q.has("p")){const n=parseInt(Q.get("p"),10);if(n>=1&&n<=SCREENS.length)setTimeout(()=>jumpTo(n),0);}
 if(SIM)setTimeout(()=>{begin();},300);
