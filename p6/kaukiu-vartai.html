@@ -1111,7 +1111,7 @@ try{ document.documentElement.setAttribute('data-patikra', '__PATIKRA_OK__'); }c
       try { if (typeof window.__pamokaUzrakinta === 'function') window.__pamokaUzrakinta(); } catch(e){}
       try { document.activeElement && document.activeElement.blur(); } catch(e){}
     }
-    if (b.f !== 'uzrakinta' && locked){ locked = false; location.reload(); }   // atrakinta — švarus startas
+    if (b.f !== 'uzrakinta' && locked){ locked = false; location.href = 'https://infogynejai.lt/'; }   // atrakinta — nauja pamoka prasideda nuo infogynejai.lt (Kris 2026-11-20)
   }
 
   /* ────────────── 2. Scena: laikrodis, burbulas, garsai, 3D arba 2D ────────────── */
