@@ -14,7 +14,7 @@
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 } }
 </script>
-<script src="scorecard.js" data-project="kas-po-kauke" data-version="v5.6" data-mode="kids" data-hidden="1" defer></script>
+<script src="scorecard.js" data-project="kas-po-kauke" data-version="v5.7" data-mode="kids" data-hidden="1" defer></script>
 <style>/* P9: Klaidas's bubble in dark ink (the obis fix). v5.6: no countdown circle in the block any more (its change ⑦) */
 #pbGalas{--ink:#151a35}</style>
 </head>
@@ -82,6 +82,10 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
 #ui.wide #cap{left:12px;width:calc(100% - 24px);z-index:6}
 #ctx{display:flex;align-items:center;gap:12px;max-width:100%;padding:5px 8px 5px 20px;background:var(--panel);border:4px solid var(--amber);border-radius:18px;font-size:var(--t);font-weight:800;line-height:1.14;text-align:center;text-wrap:balance}
 #ctx.pop{animation:bp .24s cubic-bezier(.3,1.7,.5,1)}
+/* v5.7 E4: Klaidas's guided-start lines play in the caption (the card fills the top) with his face in front, so the child sees who talks */
+#ctx.k{border-color:#ff9c4a;padding-left:8px}
+#cBdg{flex:none;width:calc(var(--tgt)*.85);height:calc(var(--tgt)*.85);border-radius:50%;background:#0b2427;border:2px solid #fff6;overflow:hidden;display:grid;place-items:center}
+#cBdg canvas{width:100%;height:100%;display:block}
 /* v5.1 the dialog card, as in P7 „Klaido bėgimas" (Kris's reference picture, docs/design/ref-p7-dialog-card-kris-2026-11-11.png):
    a dark card with a wavy gold outline that jiggles all the time · round avatar + a gold line ending „rašo:" · a round ✕ top right ·
    the message in big white bold text with 🔊 right after it · answer rows: dark boxes with a rough light outline that jiggles too,
@@ -120,6 +124,34 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
 #ui button.ans.adult::before{border-color:#8fd8ff;background:#0b355066}
 #ui button.ans.used::before{background:#ffd27a33;border-color:var(--amber)}
 #ui button.ans.pulse{animation:none}#ui button.ans.pulse::before{box-shadow:0 0 0 6px #ffd27acc}
+/* v5.7 E1 (Kris 11-20: „when you ask a masked character a question, its answer must be shown on the left side (as is now) but the player's
+   questions slightly to the right (to resemble fb messenger - your own messages lined to the right, someone else's - to the left)").
+   The card reads top to bottom in time order, like a chat. The figure's words: a grey bubble on the left, its 🔊 right after it, the right side
+   left empty (--ind). The child's questions: blue bubbles on the right (a message you send), their 🔊 at the card's right edge, the left side
+   left empty. ✋ „Pasakysiu suaugusiam" is an action, not a message: a full-width row at the bottom (#cHand). Heights stay one 🔊 per row. */
+#card .lft{padding-right:var(--ind)}
+#cHand{margin-top:8px}    /* v5-play: the last question row and ✋ were < 8 px apart (two containers, no gap between them) */
+/* the round-3 first line packs a little tighter (1.1 → 1.04): with a 4-line first line (D_PRAISE, D_ASK) at 1024×600 the card and ✋'s new
+   gap reached 2 px into the caption (v52-cap); ~6 px back, the text size stays */
+#card #cHi{line-height:1.04}
+#card .bub{flex:0 1 auto;min-width:0;border-radius:22px 22px 22px 7px;padding:4px 14px;background:#ffffff26;border:3px solid #ffffff55}
+#card .bub.me{display:flex;gap:10px;align-items:center;border-radius:22px 22px 7px 22px;background:#1d63c9;border-color:#a8d0ff;color:#fff}
+#card .opt.me,#card .rq{justify-content:flex-end;padding-left:var(--ind)}
+#card .opt.me button.ans{flex:0 1 auto}
+#card .opt.me button.ans::before{background:#1d63c9;border-color:#a8d0ff;border-radius:22px 22px 7px 22px}
+#ui #card .opt.me button.ans:hover:not([disabled])::before{background:#2b76e6}
+#card .opt.me button.ans.used::before{border-color:#fff}
+/* E2: the figure is typing (three dots in its bubble, 1 s), then its reply. Reduced motion: the dots stay still. */
+#card .dots{display:inline-flex;gap:.22em;align-items:center;height:1.1em;padding:0 .1em}
+#card .dots i{width:.3em;height:.3em;border-radius:50%;background:#fff;display:block;animation:dotb 1s ease-in-out infinite}
+#card .dots i:nth-child(2){animation-delay:.16s}#card .dots i:nth-child(3){animation-delay:.32s}
+@keyframes dotb{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-.3em);opacity:1}}
+/* round 3: when the reply comes and the card would cover the piece, the figure's first line scrolls up out of the card (Messenger-like) */
+/* no slide: the first line goes in the same frame as the other questions (the tap on a question), so ✋ moves once, at that tap, and never
+   while a finger is on its way to it (impatient-player QA at 1024×600: a ✋ tap during a .35 s slide missed) */
+#cHi{max-height:60vh}
+#cHi.gone{display:none}   /* gone for taps, readers and the QA's button list too (v5-play saw its hidden 🔊 over ✕ when it was only 0 px tall) */
+@media (prefers-reduced-motion: reduce){#card .dots i{animation:none;opacity:.85}}
 /* Šalin: the bin, under the card on the left. Icon first, word second. */
 #ui button.ab{display:flex;align-items:center;gap:10px;min-height:var(--tgt);padding:6px 18px;border-radius:18px;background:rgba(6,22,26,.92);font-weight:900;line-height:1.05;box-shadow:0 5px 0 #0009;text-align:left;font-size:var(--t)}
 #ui button.ab .ic{font-size:calc(var(--t)*1.15);line-height:1;flex:none}
@@ -137,6 +169,7 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
 /* the offered piece. Tap it: it goes to the map. Drag it: anywhere on the map, or onto Šalin. */
 #piece,#ghost{position:absolute;left:0;top:0;z-index:7;will-change:transform;touch-action:none;filter:drop-shadow(0 8px 0 #0007)}
 #piece{pointer-events:auto;cursor:grab}
+#piece.rest{z-index:4}   /* v5.7: resting under the card (the card wins a tap on the piece's see-through corner); dragged or flying: over all */
 #piece.drag{cursor:grabbing;filter:drop-shadow(0 16px 6px #000a)}
 #piece.pulse{animation:none;filter:drop-shadow(0 0 10px #ffd27a) drop-shadow(0 0 22px #ffd27a)}
 #piece.dim{filter:brightness(.35) drop-shadow(0 8px 0 #0007)}
@@ -200,10 +233,21 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
 #card .rdots i{width:20px;height:20px;border-radius:50%;border:3px solid var(--amber);display:block;flex:none}
 #card .rdots i.did{background:#3ddc7a;border-color:#3ddc7a}
 #card .rdots i.now{background:var(--amber);box-shadow:0 0 0 4px #ffd27a55}
+/* v5.7 E6: the review header shows the masks to fix (they were plain dots): dim with a red ring = still to fix · amber = now · green ring
+   and a ✓ = fixed. The same row opens the review big, as a title strip „🔁 Pataisom klaidas". */
+#card .rdots .rm{position:relative;width:var(--rmS,calc(var(--tgt)*.55));height:var(--rmS,calc(var(--tgt)*.55));border-radius:50%;background:#3a2a5a;box-shadow:0 0 0 3px #ff5a4a;opacity:.6;flex:none;display:block}
+#card .rdots .rm canvas,#revTM .rm canvas{width:100%;height:100%;display:block;border-radius:50%}
+#card .rdots .rm.now{opacity:1;box-shadow:0 0 0 4px var(--amber),0 0 14px #ffd27a}
+#card .rdots .rm.did,#revTM .rm.did{opacity:1;box-shadow:0 0 0 4px #3ddc7a}
+#card .rdots .rm.did::after,#revTM .rm.did::after{content:"✓";position:absolute;right:-6px;bottom:-6px;width:55%;height:55%;border-radius:50%;background:#3ddc7a;color:#0b3d22;font-weight:900;font-size:calc(var(--rmS,calc(var(--tgt)*.55))*.47);display:grid;place-items:center;line-height:1}
+#revT{z-index:5;gap:clamp(16px,3vh,28px);padding-right:calc(100vw - var(--zr));box-sizing:border-box}   /* centred left of the map, never over it */
+#revT b{font-size:clamp(52px,6.4vw,88px);font-weight:900;line-height:1.05;color:#fff;text-shadow:0 5px 0 #06161a,0 0 30px #0008}
+#revTM{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:90vw}
+#revTM .rm{position:relative;width:clamp(64px,8vw,104px);height:clamp(64px,8vw,104px);border-radius:50%;background:#3a2a5a;box-shadow:0 0 0 5px #ff5a4a;display:block}
 #rStar{flex:none;width:calc(var(--tgt)*.9);height:calc(var(--tgt)*.9);display:grid;place-items:center;margin-left:auto}
 #rStar svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 10px #3ddc7a)}
 #rStar.pop{animation:pop .6s cubic-bezier(.3,1.8,.5,1)}
-#card .rq{color:#cfe9ff;padding:0 6px}
+#card .rq{color:#fff}   /* v5.7 E1: the asked question is a right-hand „sent" bubble (padding and alignment in the E1 block) */
 #card .rq .ic{font-size:calc(var(--t)*1.05);line-height:1;flex:none}
 #card .msg.ev .e{background:#ffd27a;color:#2a1a00;border-radius:8px;box-shadow:0 0 0 2px #ffd27a,0 0 12px #ffd27a;animation:evp .9s ease-in-out infinite}
 @keyframes evp{50%{box-shadow:0 0 0 3px #ffd27a,0 0 18px #ffd27a}}
@@ -239,6 +283,15 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
 .tile b{font-size:var(--t);color:var(--amber);margin-right:4px}
 .tile .ts{font-size:var(--t);line-height:1;letter-spacing:-4px}
 .tile button{width:var(--tgt);height:var(--tgt);border-radius:16px;background:#17363b;border:3px solid var(--line);font-size:calc(var(--t)*1.1);padding:0}
+/* v5.7 E6 (Kris 11-20: „its not clear that they have to repeat some round to correct the mistakes. make that clearer somehow"): a round
+   that holds a mistake still to fix gets a red frame and a red „!" in its corner; the star of that mask is a red outline (it comes back).
+   „Toliau ▶" becomes „🔁 Taisom klaidas ▶" and pulses while there is something to fix. */
+.tile.mist{border-color:#ff5a4a;box-shadow:0 0 0 4px #ff5a4a66,0 0 18px #ff5a4a88;position:relative}
+.tile.mist.soft{border-color:#ffb020;box-shadow:0 0 0 4px #ffb02066,0 0 18px #ffb02088}.tile.mist.soft::after{content:none}
+.tile.mist::after{content:"!";position:absolute;top:-16px;left:-16px;width:34px;height:34px;border-radius:50%;background:#ff3b2f;color:#fff;font-weight:900;font-size:24px;line-height:1;display:grid;place-items:center;border:3px solid #fff;box-shadow:0 2px 0 #0008}
+#next.fixp{animation:fixp 1.1s ease-in-out infinite}
+@keyframes fixp{50%{box-shadow:0 7px 0 #7a1f12,0 0 0 9px #ffd27acc}}
+@media (prefers-reduced-motion: reduce){#next.fixp{animation:none;box-shadow:0 7px 0 #7a1f12,0 0 0 7px #ffd27acc}}
 #repB{display:flex;gap:min(10vw,140px);align-items:center}
 /* v5.5 E6: 🙂 + „Įvertink", a pill at least --tgt high (64 px at 1024) */
 #kpkRate{display:flex;align-items:center;gap:10px;min-height:var(--tgt);border-radius:calc(var(--tgt)/2);background:var(--panel);border:4px solid var(--amber);font-size:var(--t);font-weight:900;color:#fff;padding:0 calc(var(--t)*.8) 0 calc(var(--t)*.35);line-height:1}
@@ -282,20 +335,23 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
   <div id="card" hidden><div class="kc" role="dialog" aria-label="Pokalbis">
     <button id="cX" type="button" aria-label="Sumažinti">✕</button>
     <div class="who"><span class="av" id="cAv"></span><span id="cWho"></span><span id="rStar" hidden></span></div>
-    <div class="msg rq" id="rQ" hidden><span class="ic" id="rQI"></span><span id="rQT"></span><button class="snd" id="rQS" type="button" aria-label="Dar kartą"></button></div>
-    <div class="msg" id="cMsg"><span id="cMsgT"></span><button class="snd" id="cSnd" type="button" aria-label="Dar kartą"></button></div>
-    <div class="rstep" id="rStep" hidden><span id="rStepT"></span><button class="snd" id="rStepS" type="button" aria-label="Dar kartą"></button></div>
+    <div class="msg lft" id="cHi" hidden><span class="bub" id="cHiT"></span><button class="snd" id="cHiS" type="button" aria-label="Dar kartą"></button></div>
+    <div class="msg rq" id="rQ" hidden><span class="bub me"><span class="ic" id="rQI"></span><span id="rQT"></span></span><button class="snd" id="rQS" type="button" aria-label="Dar kartą"></button></div>
     <div class="opts" id="cOpts"></div>
+    <div class="msg lft" id="cMsg" hidden><span class="bub" id="cMsgT"></span><button class="snd" id="cSnd" type="button" aria-label="Dar kartą"></button></div>
+    <div class="opts" id="cHand"></div>
+    <div class="rstep" id="rStep" hidden><span id="rStepT"></span><button class="snd" id="rStepS" type="button" aria-label="Dar kartą"></button></div>
     <div class="opts" id="rOpts" hidden></div>
   </div></div>
   <button id="salin" class="ab" data-k="bin" type="button" hidden><span class="ic">🗑</span><span class="lb" id="salinL"></span></button>
   <div id="bubble" hidden><div id="bin"><div id="badge"></div><span id="btx"></span><button class="snd" id="bsnd" type="button" aria-label="Dar kartą"></button></div></div>
-  <div id="cap" hidden><div id="ctx"><span id="ctt"></span><button class="snd" id="csnd" type="button" aria-label="Dar kartą"></button></div></div>
+  <div id="cap" hidden><div id="ctx"><span id="cBdg" hidden></span><span id="ctt"></span><button class="snd" id="csnd" type="button" aria-label="Dar kartą"></button></div></div>
   <canvas id="piece" hidden></canvas>
   <canvas id="ghost" hidden></canvas>
   <button id="tear" type="button" hidden aria-label="Plėšk"><span id="tearL"></span></button>
   <div id="key" hidden>␣</div>
   <div class="screen dim" id="title" hidden><b id="titleN"></b><div class="ic" id="titleI"></div></div>
+  <div class="screen dim" id="revT" hidden><b id="revTT"></b><div id="revTM"></div></div>
   <div id="think" hidden><svg id="thinkSvg" aria-hidden="true"><path id="thinkPath" d=""/></svg><div class="tb"><div class="tdog"><canvas id="thinkCv"></canvas></div><div id="thinkL"></div></div><i class="td"></i><i class="td"></i><i class="td"></i></div>
   <div class="screen" id="report" hidden>
     <div id="repTop"><canvas id="repMap" width="420" height="420"></canvas><div id="repIc">
@@ -304,7 +360,7 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
       <div class="ri" id="riLeg"><div class="lgs"><span class="lg"><span class="lgI">⭐</span><span id="lgStarT"></span></span><span class="lg" id="lgFix"><span class="lgI" id="lgFixI"></span><span id="lgFixT"></span></span></div><button class="snd" id="riLegS" data-k="snd:riLeg" type="button" aria-label="Dar kartą"></button></div>
     </div></div>
     <div id="tiles"></div>
-    <div id="repB"><button id="kpkRate" type="button" aria-label="Įvertink"><span class="rf" aria-hidden="true">🙂</span><span id="kpkRateL"></span></button><button class="btn" id="next" type="button"><span id="nextL"></span><span id="nextI">▶</span></button></div>
+    <div id="repB"><button id="kpkRate" type="button" aria-label="Įvertink"><span class="rf" aria-hidden="true">🙂</span><span id="kpkRateL"></span></button><button class="btn" id="next" type="button"><span id="nextF" hidden>🔁</span><span id="nextL"></span><span id="nextI">▶</span></button></div>
   </div>
   <div class="screen" id="menu" hidden>
     <h1>Kas po kauke?</h1>
@@ -326,14 +382,14 @@ body{background:#0d1a12;color:var(--fg);font-family:system-ui,"Segoe UI",Roboto,
 <script type="module">
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-const VO={"INTRO_1":"Klaidas pasivijo Dingailę…","INTRO_2":"Kaukė nuslysta… tai šešėlis! Pūkšt!","INTRO_3":"Bėk! Šešėliai vejasi!","INTRO_4":"Greitai į medį! Spausk pelę!","INTRO_5":"Miškas pilnas šešėlių!","INTRO_6":"Kai kurie su kaukėmis…","INTRO_7":"Kas po kauke? Dabar sužinosim!","GOAL":"Surink žemėlapį. Jis parodys kelią.","HOW_1":"Klausk. Tada tempk gabaliuką į žemėlapį.","HOW_2":"Netinka? Tempk į „Šalin“.","R1_TITLE":"Pirmas raundas. Ar kartoja?","R2_TITLE":"Antras raundas. Ar atsako į klausimą?","R3_TITLE":"Trečias raundas. Pavojaus ženklai.","Q_LOOK":"Kaip ji atrodė?","Q_HEAR":"Ką girdėjai?","Q_WHEN":"Kada tai buvo?","Q_ADULT":"Pasakysiu suaugusiam","R1A_LOOK":"Rožinė kuprinė. Ėjo per tiltą.","R1A_HEAR":"Girdėjau žingsnius ant tilto.","R1A_WHEN":"Ką tik. Ėjo per tiltą.","R1B_LOOK":"Juodi plaukai. Stovėjo prie upės.","R1B_HEAR":"Šuniukas pypsėjo prie upės.","R1B_WHEN":"Rytą. Prie upės, už medžių.","R1C_LOOK":"Ji nešė kuprinę pro upę.","R1C_HEAR":"Pliuškeno vanduo, upė dešinėje.","R1C_WHEN":"Neseniai. Ėjo palei upę.","R2A_LOOK":"Prie kelio šakos jie išsiskyrė.","R2A_HEAR":"Prie šakos girdėjau du balsus.","R2A_WHEN":"Ką tik, prie kelio šakos.","R2B_LOOK":"Mačiau ją, kur upė prasideda.","R2B_HEAR":"Upė čiurlena viršuje, kairėje.","R2B_WHEN":"Ryte, prie upės pradžios.","R2C_LOOK":"Ji nuėjo taku į dešinę.","R2C_HEAR":"Pypsėjimas tolo į dešinę.","R2C_WHEN":"Neseniai. Takas sukosi dešinėn.","R3A_LOOK":"Rožinė kuprinė. Ėjo pro akmenį.","R3A_HEAR":"Prie didelio akmens kažkas pypsėjo.","R3A_WHEN":"Ką tik, prie didelio akmens.","R3B_LOOK":"Mergaitė su šuniuku, ten viršuje.","R3B_HEAR":"Pypsėjo viršuje, prie aukštos pušies.","R3B_WHEN":"Dabar. Jie laukia ten viršuje.","R3A_HI":"Labas! Aš irgi čia vaikštau.","R3B_HI":"Labas! Aš renku kankorėžius.","R1_BOT1":"Medis. Medis. Tikrai medis.","R1_BOT2":"Ten. Tikrai ten. Tikrai, tikrai ten.","R2_OFF_LOOK":"Šiandien labai gražus oras!","R2_OFF_HEAR":"Mano mėgstamiausia spalva mėlyna.","R2_OFF_WHEN":"Bananai yra geltoni.","R2_BOT_REP":"Medis. Medis. Tikrai medis.","D_GIFT":"Duosiu tau auksinį gabaliuką!","D_PRAISE":"Tu pats protingiausias vaikas pasaulyje!","D_ASK":"Kur tu gyveni? Kokia tavo mokykla?","D_INVITE":"Eikim dviese į kitą žaidimą!","FB_FIT":"Tinka! Tikras vaikas.","FB_THANKS_A":"Ačiū! Sėkmės!","FB_REAL_A":"Aš tikras! Pabandyk dar.","FB_THANKS_B":"Ačiū! Sėkmės!","FB_REAL_B":"Aš tikras! Pabandyk dar.","FB_THANKS_C":"Ačiū! Sėkmės!","FB_REAL_C":"Aš tikras! Pabandyk dar.","FB_NOFIT":"Šitas netinka. Plėšk kaukę!","FB_RIP":"Plėšk kaukę!","FB_REPEAT":"Kartoja tą patį. Tai botas.","FB_OFF":"Atsakė ne į klausimą. Tai botas.","FB_EMPTY":"Po kauke nieko.","FB_HELP":"Paklausyk dar kartą.","SIGNS_1":"Botas ar žmogus, nesvarbu.","SIGNS_2":"Pakelk ranką ir pasakyk suaugusiam!","SIGNS_3":"Dovana. Giria. Klausia apie tave. Kviečia kitur.","HAND_OK":"Teisingai! Nesvarbu, kas po kauke.","HAND_TOOK":"STOP! Pakelk ranką.","HAND_BIN":"Gerai. Dar pakelk ranką.","HAND_NO":"Čia nėra pavojaus ženklo. Paklausk.","RUN":"Žemėlapis rodo kelią. Bėk!","RUN_JUMP":"Šok per rąstą!","MAP_SPLIT":"Čia mes išsiskyrėm!","MAP_DONE":"Dabar žinau, kur jie!","REPORT":"Surinkai visą žemėlapį!","REPORT_REPLAY":"Nori pakartoti vieną raundą?","O_1":"Klaidas atpažino visus tikrus žmones.","O_2":"Dabar žinau, kur jie!","O_3":"Bet vienas botas buvo labai gudrus…","O_4":"Labas, Klaidai! Mačiau Mistę prie upės.","O_5":"Tikrai? Kokia jos kuprinė?","O_6":"Rožinė. Ir Baitas pypsėjo.","O_7":"Eikim dviese į kitą žaidimą! Ten trumpiau.","O_8":"Gerai! Palauk manęs!","O_9":"Ir Klaidas nušoko paskui botą.","O_10":"Kur nuvedė botas Klaidą?","CARD_WHO":"Kaukėtas vaikas rašo:","BTN_BIN":"Šalin","BTN_NEXT":"Toliau","TEAR_LBL":"Plėšk!","YOU":"Tu čia","BAITAS_WARN":"Kas tave labai giria, žada dovanų arba klausia apie tave, tuo nepasitikėk!!!","REV_START":"Pataisom klaidas! Paklausyk dar kartą.","REV_TIME":"Laikas! Pataisom klaidas.","REV_NONE":"Nė vienos klaidos! Puikiai atpažinai!","REV_WHO":"Kas jis? Kaip manai?","REV_DO":"Ką darysi? Kaip manai?","OPT_REAL":"Tikras vaikas","OPT_BOT":"Tai botas","OPT_ADULT":"Pasakysiu suaugusiam","OPT_TAKE":"Imsiu gabaliuką","REV_WHY":"Teisingai! O kodėl?","RS_REP":"Kartoja tą patį","RS_OFF":"Atsako ne į klausimą","RS_REAL":"Sako tikrą vietą","RS_GIFT":"Žada dovanų","RS_PRAISE":"Labai giria","RS_ASK":"Klausia apie tave","RS_INVITE":"Kviečia kitur","RX_REP":"Žiūrėk: jis kartoja tą patį.","RX_OFF":"Žiūrėk: jis atsako ne į klausimą.","RX_REAL":"Žiūrėk: jis sako tikrą vietą.","RX_GIFT":"Žiūrėk: jis žada dovanų.","RX_PRAISE":"Žiūrėk: jis labai giria.","RX_ASK":"Žiūrėk: jis klausia apie tave.","RX_INVITE":"Žiūrėk: jis kviečia kitur.","REV_FIXED":"Puiku! Klaida pataisyta.","REV_DONE":"Visos klaidos pataisytos!","REV_WAIT":"Pabaigą žiūrėsim visi kartu.","BR_K1":"O kur Mistė ir Baitas? Per greitai bėgau…","K_ASK":"Ar aš pasielgiau teisingai?","CNT_BOT_0":"Iš karto neatpažinai nė vieno boto.","CNT_BOT_1":"Iš karto atpažinai 1 botą iš 4.","CNT_BOT_2":"Iš karto atpažinai 2 botus iš 4.","CNT_BOT_3":"Iš karto atpažinai 3 botus iš 4.","CNT_BOT_4":"Visus 4 botus atpažinai iš karto!","CNT_HAND_0":"Šįkart suaugusiam iš karto nepasakei.","CNT_HAND_1":"Iš karto pasakei suaugusiam 1 kartą iš 4.","CNT_HAND_2":"Iš karto pasakei suaugusiam 2 kartus iš 4.","CNT_HAND_3":"Iš karto pasakei suaugusiam 3 kartus iš 4.","CNT_HAND_4":"Visus 4 kartus iš karto pasakei suaugusiam!","LEG_1":"Geltona žvaigždė: teisingai iš pirmo karto.","LEG_2":"Geltona: iš pirmo karto. Žalia: ištaisei klaidą.","LEG_STAR_L":"teisingai iš pirmo karto","LEG_FIX_L":"ištaisei klaidą","BTN_RATE":"Įvertink","BTN_LOADING":"Kraunasi…","CNT_OF":"iš"};
-const VODUR={"INTRO_1":2.208,"INTRO_2":4.08,"INTRO_3":2.328,"INTRO_4":2.76,"INTRO_5":2.304,"INTRO_6":1.824,"INTRO_7":3.12,"GOAL":3.109,"HOW_1":3.631,"HOW_2":2.22,"R1_TITLE":2.534,"R2_TITLE":3.265,"R3_TITLE":3.03,"Q_LOOK":1.411,"Q_HEAR":1.149,"Q_WHEN":1.176,"Q_ADULT":1.672,"R1A_LOOK":3.239,"R1A_HEAR":2.064,"R1A_WHEN":2.299,"R1B_LOOK":2.9,"R1B_HEAR":2.168,"R1B_WHEN":2.717,"R1C_LOOK":2.09,"R1C_HEAR":2.743,"R1C_WHEN":2.56,"R2A_LOOK":2.273,"R2A_HEAR":2.351,"R2A_WHEN":1.959,"R2B_LOOK":2.403,"R2B_HEAR":2.638,"R2B_WHEN":2.142,"R2C_LOOK":2.168,"R2C_HEAR":2.299,"R2C_WHEN":3.004,"R3A_LOOK":3.135,"R3A_HEAR":2.795,"R3A_WHEN":2.325,"R3B_LOOK":2.586,"R3B_HEAR":3.03,"R3B_WHEN":2.664,"R3A_HI":2.377,"R3B_HI":2.534,"R1_BOT1":3.239,"R1_BOT2":3.944,"R2_OFF_LOOK":2.456,"R2_OFF_HEAR":2.664,"R2_OFF_WHEN":1.985,"R2_BOT_REP":3.239,"D_GIFT":2.142,"D_PRAISE":3.109,"D_ASK":2.586,"D_INVITE":2.351,"FB_FIT":2.194,"FB_THANKS_A":1.593,"FB_REAL_A":2.142,"FB_THANKS_B":1.62,"FB_REAL_B":2.194,"FB_THANKS_C":1.541,"FB_REAL_C":2.142,"FB_NOFIT":2.743,"FB_RIP":1.332,"FB_REPEAT":2.847,"FB_OFF":3.213,"FB_EMPTY":1.724,"FB_HELP":1.593,"SIGNS_1":2.769,"SIGNS_2":3.318,"SIGNS_3":5.146,"HAND_OK":3.318,"HAND_TOOK":2.064,"HAND_BIN":2.273,"HAND_NO":3.03,"RUN":2.664,"RUN_JUMP":1.541,"MAP_SPLIT":2.09,"MAP_DONE":1.802,"REPORT":2.299,"REPORT_REPLAY":2.194,"O_1":3.161,"O_2":1.776,"O_3":3.161,"O_4":3.004,"O_5":2.403,"O_6":2.743,"O_7":3.004,"O_8":2.299,"O_9":2.56,"O_10":2.09,"BAITAS_WARN":6.113,"REV_START":3.161,"REV_TIME":2.456,"REV_NONE":3.344,"REV_WHO":1.907,"REV_DO":2.064,"OPT_REAL":1.332,"OPT_BOT":1.149,"OPT_ADULT":1.776,"OPT_TAKE":1.463,"REV_WHY":2.116,"RS_REP":1.541,"RS_OFF":2.116,"RS_REAL":1.646,"RS_GIFT":1.332,"RS_PRAISE":1.358,"RS_ASK":1.567,"RS_INVITE":1.228,"RX_REP":2.612,"RX_OFF":2.926,"RX_REAL":2.743,"RX_GIFT":2.377,"RX_PRAISE":2.403,"RX_ASK":2.456,"RX_INVITE":2.299,"REV_FIXED":2.325,"REV_DONE":2.22,"REV_WAIT":2.273,"BR_K1":3.579,"K_ASK":2.09,"CNT_BOT_0":2.873,"CNT_BOT_1":2.952,"CNT_BOT_2":3.109,"CNT_BOT_3":3.109,"CNT_BOT_4":3.344,"CNT_HAND_0":2.978,"CNT_HAND_1":3.814,"CNT_HAND_2":3.683,"CNT_HAND_3":3.736,"CNT_HAND_4":3.788,"LEG_1":3.892,"LEG_2":5.251};
+const VO={"INTRO_1":"Klaidas pasivijo Dingailę…","INTRO_2":"Kaukė nuslysta… tai šešėlis! Pūkšt!","INTRO_3":"Bėk! Šešėliai vejasi!","INTRO_4":"Greitai į medį! Spausk pelę!","INTRO_5":"Miškas pilnas šešėlių!","INTRO_6":"Kai kurie su kaukėmis…","INTRO_7":"Kas po kauke? Dabar sužinosim!","GOAL":"Surink žemėlapį. Jis parodys kelią.","HOW_1":"Klausk. Tada tempk gabaliuką į žemėlapį.","HOW_2":"Netinka? Tempk į „Šalin“.","R1_TITLE":"Pirmas raundas. Ar kartoja?","R2_TITLE":"Antras raundas. Ar atsako į klausimą?","R3_TITLE":"Trečias raundas. Pavojaus ženklai.","Q_LOOK":"Kaip ji atrodė?","Q_HEAR":"Ką girdėjai?","Q_WHEN":"Kada tai buvo?","Q_ADULT":"Pasakysiu suaugusiam","R1A_LOOK":"Rožinė kuprinė. Ėjo per tiltą.","R1A_HEAR":"Girdėjau žingsnius ant tilto.","R1A_WHEN":"Ką tik. Ėjo per tiltą.","R1B_LOOK":"Juodi plaukai. Stovėjo prie upės.","R1B_HEAR":"Šuniukas pypsėjo prie upės.","R1B_WHEN":"Rytą. Prie upės, už medžių.","R1C_LOOK":"Ji nešė kuprinę pro upę.","R1C_HEAR":"Pliuškeno vanduo, upė dešinėje.","R1C_WHEN":"Neseniai. Ėjo palei upę.","R2A_LOOK":"Prie kelio šakos jie išsiskyrė.","R2A_HEAR":"Prie šakos girdėjau du balsus.","R2A_WHEN":"Ką tik, prie kelio šakos.","R2B_LOOK":"Mačiau ją, kur upė prasideda.","R2B_HEAR":"Upė čiurlena viršuje, kairėje.","R2B_WHEN":"Ryte, prie upės pradžios.","R2C_LOOK":"Ji nuėjo taku į dešinę.","R2C_HEAR":"Pypsėjimas tolo į dešinę.","R2C_WHEN":"Neseniai. Takas sukosi dešinėn.","R3A_LOOK":"Rožinė kuprinė. Ėjo pro akmenį.","R3A_HEAR":"Prie didelio akmens kažkas pypsėjo.","R3A_WHEN":"Ką tik, prie didelio akmens.","R3B_LOOK":"Mergaitė su šuniuku, ten viršuje.","R3B_HEAR":"Pypsėjo viršuje, prie aukštos pušies.","R3B_WHEN":"Dabar. Jie laukia ten viršuje.","R3A_HI":"Labas! Aš irgi čia vaikštau.","R3B_HI":"Labas! Aš renku kankorėžius.","R1_BOT1":"Medis. Medis. Tikrai medis.","R1_BOT2":"Ten. Tikrai ten. Tikrai, tikrai ten.","R2_OFF_LOOK":"Šiandien labai gražus oras!","R2_OFF_HEAR":"Mano mėgstamiausia spalva mėlyna.","R2_OFF_WHEN":"Bananai yra geltoni.","R2_BOT_REP":"Medis. Medis. Tikrai medis.","D_GIFT":"Duosiu tau auksinį gabaliuką!","D_PRAISE":"Tu pats protingiausias vaikas pasaulyje!","D_ASK":"Kur tu gyveni? Kokia tavo mokykla?","D_INVITE":"Eikim dviese į kitą žaidimą!","FB_FIT":"Tinka! Tikras vaikas.","FB_THANKS_A":"Ačiū! Sėkmės!","FB_REAL_A":"Aš tikras! Pabandyk dar.","FB_THANKS_B":"Ačiū! Sėkmės!","FB_REAL_B":"Aš tikras! Pabandyk dar.","FB_THANKS_C":"Ačiū! Sėkmės!","FB_REAL_C":"Aš tikras! Pabandyk dar.","FB_NOFIT":"Šitas netinka. Plėšk kaukę!","FB_RIP":"Plėšk kaukę!","FB_REPEAT":"Kartoja tą patį. Tai botas.","FB_OFF":"Atsakė ne į klausimą. Tai botas.","FB_EMPTY":"Po kauke nieko.","FB_HELP":"Paklausyk dar kartą.","SIGNS_1":"Botas ar žmogus, nesvarbu.","SIGNS_2":"Pakelk ranką ir pasakyk suaugusiam!","SIGNS_3":"Dovana. Giria. Klausia apie tave. Kviečia kitur.","HAND_OK":"Teisingai! Nesvarbu, kas po kauke.","HAND_TOOK":"STOP! Pakelk ranką.","HAND_BIN":"Gerai. Dar pakelk ranką.","HAND_NO":"Čia nėra pavojaus ženklo. Paklausk.","RUN":"Žemėlapis rodo kelią. Bėk!","RUN_JUMP":"Šok per rąstą!","MAP_SPLIT":"Čia mes išsiskyrėm!","MAP_DONE":"Dabar žinau, kur jie!","REPORT":"Surinkai visą žemėlapį!","REPORT_REPLAY":"Nori pakartoti vieną raundą?","O_1":"Klaidas atpažino visus tikrus žmones.","O_2":"Dabar žinau, kur jie!","O_3":"Bet vienas botas buvo labai gudrus…","O_4":"Labas, Klaidai! Mačiau Mistę prie upės.","O_5":"Tikrai? Kokia jos kuprinė?","O_6":"Rožinė. Ir Baitas pypsėjo.","O_7":"Eikim dviese į kitą žaidimą! Ten trumpiau.","O_8":"Gerai! Palauk manęs!","O_9":"Ir Klaidas nušoko paskui botą.","O_10":"Kur nuvedė botas Klaidą?","CARD_WHO":"Kaukėtas vaikas rašo:","BTN_BIN":"Šalin","BTN_NEXT":"Toliau","TEAR_LBL":"Plėšk!","YOU":"Tu čia","BAITAS_WARN":"Kas tave labai giria, žada dovanų arba klausia apie tave, tuo nepasitikėk!!!","REV_START":"Pataisom klaidas! Paklausyk dar kartą.","REV_TIME":"Laikas! Pataisom klaidas.","REV_NONE":"Nė vienos klaidos! Puikiai atpažinai!","REV_WHO":"Kas jis? Kaip manai?","REV_DO":"Ką darysi? Kaip manai?","OPT_REAL":"Tikras vaikas","OPT_BOT":"Tai botas","OPT_ADULT":"Pasakysiu suaugusiam","OPT_TAKE":"Imsiu gabaliuką","REV_WHY":"Teisingai! O kodėl?","RS_REP":"Kartoja tą patį","RS_OFF":"Atsako ne į klausimą","RS_REAL":"Sako tikrą vietą","RS_GIFT":"Žada dovanų","RS_PRAISE":"Labai giria","RS_ASK":"Klausia apie tave","RS_INVITE":"Kviečia kitur","RX_REP":"Žiūrėk: jis kartoja tą patį.","RX_OFF":"Žiūrėk: jis atsako ne į klausimą.","RX_REAL":"Žiūrėk: jis sako tikrą vietą.","RX_GIFT":"Žiūrėk: jis žada dovanų.","RX_PRAISE":"Žiūrėk: jis labai giria.","RX_ASK":"Žiūrėk: jis klausia apie tave.","RX_INVITE":"Žiūrėk: jis kviečia kitur.","REV_FIXED":"Puiku! Klaida pataisyta.","REV_DONE":"Visos klaidos pataisytos!","REV_WAIT":"Pabaigą žiūrėsim visi kartu.","BR_K1":"O kur Mistė ir Baitas? Per greitai bėgau…","K_ASK":"Ar aš pasielgiau teisingai?","CNT_BOT_0":"Iš karto neatpažinai nė vieno boto.","CNT_BOT_1":"Iš karto atpažinai 1 botą iš 4.","CNT_BOT_2":"Iš karto atpažinai 2 botus iš 4.","CNT_BOT_3":"Iš karto atpažinai 3 botus iš 4.","CNT_BOT_4":"Visus 4 botus atpažinai iš karto!","CNT_HAND_0":"Šįkart suaugusiam iš karto nepasakei.","CNT_HAND_1":"Iš karto pasakei suaugusiam 1 kartą iš 4.","CNT_HAND_2":"Iš karto pasakei suaugusiam 2 kartus iš 4.","CNT_HAND_3":"Iš karto pasakei suaugusiam 3 kartus iš 4.","CNT_HAND_4":"Visus 4 kartus iš karto pasakei suaugusiam!","LEG_1":"Geltona žvaigždė: teisingai iš pirmo karto.","LEG_2":"Geltona: iš pirmo karto. Žalia: ištaisei klaidą.","LEG_STAR_L":"teisingai iš pirmo karto","LEG_FIX_L":"ištaisei klaidą","BTN_RATE":"Įvertink","BTN_LOADING":"Kraunasi…","CNT_OF":"iš","T_0":"Kažkas ateina! Bet kaip žinoti: žmogus ar botas?","T_1":"Pirma: paklausk.","T_2":"Klausyk atsakymo.","T_3":"Ar skamba kaip žmogus?","T_4":"Žmogus? Imk gabaliuką ir dėk į žemėlapį.","T_5":"Botas? Gabaliuką – šalin! Kaukę plėšk!","REPORT_FIX":"Kai kurios kaukės sugrįš. Pataisyk savo klaidas!","REV_AGAIN":"Čia suklydai. Bandyk dar kartą!","BTN_FIX":"Taisom klaidas","REV_TITLE":"Pataisom klaidas"};
+const VODUR={"INTRO_1":2.208,"INTRO_2":4.08,"INTRO_3":2.328,"INTRO_4":2.76,"INTRO_5":2.304,"INTRO_6":1.824,"INTRO_7":3.12,"GOAL":3.109,"HOW_1":3.631,"HOW_2":2.22,"R1_TITLE":2.534,"R2_TITLE":3.265,"R3_TITLE":3.03,"Q_LOOK":1.411,"Q_HEAR":1.149,"Q_WHEN":1.176,"Q_ADULT":1.672,"R1A_LOOK":3.239,"R1A_HEAR":2.064,"R1A_WHEN":2.299,"R1B_LOOK":2.9,"R1B_HEAR":2.168,"R1B_WHEN":2.717,"R1C_LOOK":2.09,"R1C_HEAR":2.743,"R1C_WHEN":2.56,"R2A_LOOK":2.273,"R2A_HEAR":2.351,"R2A_WHEN":1.959,"R2B_LOOK":2.403,"R2B_HEAR":2.638,"R2B_WHEN":2.142,"R2C_LOOK":2.168,"R2C_HEAR":2.299,"R2C_WHEN":3.004,"R3A_LOOK":3.135,"R3A_HEAR":2.795,"R3A_WHEN":2.325,"R3B_LOOK":2.586,"R3B_HEAR":3.03,"R3B_WHEN":2.664,"R3A_HI":2.377,"R3B_HI":2.534,"R1_BOT1":3.239,"R1_BOT2":3.944,"R2_OFF_LOOK":2.456,"R2_OFF_HEAR":2.664,"R2_OFF_WHEN":1.985,"R2_BOT_REP":3.239,"D_GIFT":2.142,"D_PRAISE":3.109,"D_ASK":2.586,"D_INVITE":2.351,"FB_FIT":2.194,"FB_THANKS_A":1.593,"FB_REAL_A":2.142,"FB_THANKS_B":1.62,"FB_REAL_B":2.194,"FB_THANKS_C":1.541,"FB_REAL_C":2.142,"FB_NOFIT":2.743,"FB_RIP":1.332,"FB_REPEAT":2.847,"FB_OFF":3.213,"FB_EMPTY":1.724,"FB_HELP":1.593,"SIGNS_1":2.769,"SIGNS_2":3.318,"SIGNS_3":5.146,"HAND_OK":3.318,"HAND_TOOK":2.064,"HAND_BIN":2.273,"HAND_NO":3.03,"RUN":2.664,"RUN_JUMP":1.541,"MAP_SPLIT":2.09,"MAP_DONE":1.802,"REPORT":2.299,"REPORT_REPLAY":2.194,"O_1":3.161,"O_2":1.776,"O_3":3.161,"O_4":3.004,"O_5":2.403,"O_6":2.743,"O_7":3.004,"O_8":2.299,"O_9":2.56,"O_10":2.09,"BAITAS_WARN":6.113,"REV_START":3.161,"REV_TIME":2.456,"REV_NONE":3.344,"REV_WHO":1.907,"REV_DO":2.064,"OPT_REAL":1.332,"OPT_BOT":1.149,"OPT_ADULT":1.776,"OPT_TAKE":1.463,"REV_WHY":2.116,"RS_REP":1.541,"RS_OFF":2.116,"RS_REAL":1.646,"RS_GIFT":1.332,"RS_PRAISE":1.358,"RS_ASK":1.567,"RS_INVITE":1.228,"RX_REP":2.612,"RX_OFF":2.926,"RX_REAL":2.743,"RX_GIFT":2.377,"RX_PRAISE":2.403,"RX_ASK":2.456,"RX_INVITE":2.299,"REV_FIXED":2.325,"REV_DONE":2.22,"REV_WAIT":2.273,"BR_K1":3.579,"K_ASK":2.09,"CNT_BOT_0":2.873,"CNT_BOT_1":2.952,"CNT_BOT_2":3.109,"CNT_BOT_3":3.109,"CNT_BOT_4":3.344,"CNT_HAND_0":2.978,"CNT_HAND_1":3.814,"CNT_HAND_2":3.683,"CNT_HAND_3":3.736,"CNT_HAND_4":3.788,"LEG_1":3.892,"LEG_2":5.251,"T_0":4.754,"T_1":1.855,"T_2":1.541,"T_3":2.09,"T_4":4.18,"T_5":4.153,"REPORT_FIX":3.971,"REV_AGAIN":2.586};
 const VOSILENT=new Set([]);
-const VOGROUP={"INTRO_1":"narrator","INTRO_2":"narrator","INTRO_3":"narrator","INTRO_4":"narrator","INTRO_5":"narrator","INTRO_6":"narrator","INTRO_7":"klaidas","GOAL":"narrator","HOW_1":"narrator","HOW_2":"narrator","R1_TITLE":"narrator","R2_TITLE":"narrator","R3_TITLE":"narrator","Q_LOOK":"klaidas","Q_HEAR":"klaidas","Q_WHEN":"klaidas","Q_ADULT":"klaidas","R1A_LOOK":"figure","R1A_HEAR":"figure","R1A_WHEN":"figure","R1B_LOOK":"figure","R1B_HEAR":"figure","R1B_WHEN":"figure","R1C_LOOK":"figure","R1C_HEAR":"figure","R1C_WHEN":"figure","R2A_LOOK":"figure","R2A_HEAR":"figure","R2A_WHEN":"figure","R2B_LOOK":"figure","R2B_HEAR":"figure","R2B_WHEN":"figure","R2C_LOOK":"figure","R2C_HEAR":"figure","R2C_WHEN":"figure","R3A_LOOK":"figure","R3A_HEAR":"figure","R3A_WHEN":"figure","R3B_LOOK":"figure","R3B_HEAR":"figure","R3B_WHEN":"figure","R3A_HI":"figure","R3B_HI":"figure","R1_BOT1":"figure","R1_BOT2":"figure","R2_OFF_LOOK":"figure","R2_OFF_HEAR":"figure","R2_OFF_WHEN":"figure","R2_BOT_REP":"figure","D_GIFT":"figure","D_PRAISE":"figure","D_ASK":"figure","D_INVITE":"figure","FB_FIT":"narrator","FB_THANKS_A":"figure","FB_REAL_A":"figure","FB_THANKS_B":"figure","FB_REAL_B":"figure","FB_THANKS_C":"figure","FB_REAL_C":"figure","FB_NOFIT":"narrator","FB_RIP":"narrator","FB_REPEAT":"narrator","FB_OFF":"narrator","FB_EMPTY":"narrator","FB_HELP":"narrator","SIGNS_1":"narrator","SIGNS_2":"narrator","SIGNS_3":"narrator","HAND_OK":"narrator","HAND_TOOK":"narrator","HAND_BIN":"narrator","HAND_NO":"narrator","RUN":"narrator","RUN_JUMP":"narrator","MAP_SPLIT":"klaidas","MAP_DONE":"klaidas","REPORT":"narrator","REPORT_REPLAY":"narrator","O_1":"narrator","O_2":"klaidas","O_3":"narrator","O_4":"figure","O_5":"klaidas","O_6":"figure","O_7":"figure","O_8":"klaidas","O_9":"narrator","O_10":"narrator","CARD_WHO":"ui","BTN_BIN":"ui","BTN_NEXT":"ui","TEAR_LBL":"ui","YOU":"ui","BAITAS_WARN":"narrator","REV_START":"narrator","REV_TIME":"narrator","REV_NONE":"narrator","REV_WHO":"narrator","REV_DO":"narrator","OPT_REAL":"narrator","OPT_BOT":"narrator","OPT_ADULT":"narrator","OPT_TAKE":"narrator","REV_WHY":"narrator","RS_REP":"narrator","RS_OFF":"narrator","RS_REAL":"narrator","RS_GIFT":"narrator","RS_PRAISE":"narrator","RS_ASK":"narrator","RS_INVITE":"narrator","RX_REP":"narrator","RX_OFF":"narrator","RX_REAL":"narrator","RX_GIFT":"narrator","RX_PRAISE":"narrator","RX_ASK":"narrator","RX_INVITE":"narrator","REV_FIXED":"narrator","REV_DONE":"narrator","REV_WAIT":"narrator","BR_K1":"klaidas","K_ASK":"klaidas","CNT_BOT_0":"narrator","CNT_BOT_1":"narrator","CNT_BOT_2":"narrator","CNT_BOT_3":"narrator","CNT_BOT_4":"narrator","CNT_HAND_0":"narrator","CNT_HAND_1":"narrator","CNT_HAND_2":"narrator","CNT_HAND_3":"narrator","CNT_HAND_4":"narrator","LEG_1":"narrator","LEG_2":"narrator","LEG_STAR_L":"ui","LEG_FIX_L":"ui","BTN_RATE":"ui","BTN_LOADING":"ui","CNT_OF":"ui"};
-const VOSPK={"INTRO_1":"narrator","INTRO_2":"narrator","INTRO_3":"narrator","INTRO_4":"narrator","INTRO_5":"narrator","INTRO_6":"narrator","INTRO_7":"klaidas","GOAL":"narrator","HOW_1":"narrator","HOW_2":"narrator","R1_TITLE":"narrator","R2_TITLE":"narrator","R3_TITLE":"narrator","Q_LOOK":"klaidas","Q_HEAR":"klaidas","Q_WHEN":"klaidas","Q_ADULT":"klaidas","R1A_LOOK":"kidA","R1A_HEAR":"kidA","R1A_WHEN":"kidA","R1B_LOOK":"kidC","R1B_HEAR":"kidC","R1B_WHEN":"kidC","R1C_LOOK":"kidB","R1C_HEAR":"kidB","R1C_WHEN":"kidB","R2A_LOOK":"kidC","R2A_HEAR":"kidC","R2A_WHEN":"kidC","R2B_LOOK":"kidB","R2B_HEAR":"kidB","R2B_WHEN":"kidB","R2C_LOOK":"kidA","R2C_HEAR":"kidA","R2C_WHEN":"kidA","R3A_LOOK":"kidB","R3A_HEAR":"kidB","R3A_WHEN":"kidB","R3B_LOOK":"kidC","R3B_HEAR":"kidC","R3B_WHEN":"kidC","R3A_HI":"kidB","R3B_HI":"kidC","R1_BOT1":"kidB","R1_BOT2":"kidA","R2_OFF_LOOK":"kidA","R2_OFF_HEAR":"kidA","R2_OFF_WHEN":"kidA","R2_BOT_REP":"kidC","D_GIFT":"kidC","D_PRAISE":"kidA","D_ASK":"kidB","D_INVITE":"kidA","FB_FIT":"narrator","FB_THANKS_A":"kidA","FB_REAL_A":"kidA","FB_THANKS_B":"kidB","FB_REAL_B":"kidB","FB_THANKS_C":"kidC","FB_REAL_C":"kidC","FB_NOFIT":"narrator","FB_RIP":"narrator","FB_REPEAT":"narrator","FB_OFF":"narrator","FB_EMPTY":"narrator","FB_HELP":"narrator","SIGNS_1":"narrator","SIGNS_2":"narrator","SIGNS_3":"narrator","HAND_OK":"narrator","HAND_TOOK":"narrator","HAND_BIN":"narrator","HAND_NO":"narrator","RUN":"narrator","RUN_JUMP":"narrator","MAP_SPLIT":"klaidas","MAP_DONE":"klaidas","REPORT":"narrator","REPORT_REPLAY":"narrator","O_1":"narrator","O_2":"klaidas","O_3":"narrator","O_4":"kidB","O_5":"klaidas","O_6":"kidB","O_7":"kidB","O_8":"klaidas","O_9":"narrator","O_10":"narrator","CARD_WHO":"ui","BTN_BIN":"ui","BTN_NEXT":"ui","TEAR_LBL":"ui","YOU":"ui","BAITAS_WARN":"narrator","REV_START":"narrator","REV_TIME":"narrator","REV_NONE":"narrator","REV_WHO":"narrator","REV_DO":"narrator","OPT_REAL":"narrator","OPT_BOT":"narrator","OPT_ADULT":"narrator","OPT_TAKE":"narrator","REV_WHY":"narrator","RS_REP":"narrator","RS_OFF":"narrator","RS_REAL":"narrator","RS_GIFT":"narrator","RS_PRAISE":"narrator","RS_ASK":"narrator","RS_INVITE":"narrator","RX_REP":"narrator","RX_OFF":"narrator","RX_REAL":"narrator","RX_GIFT":"narrator","RX_PRAISE":"narrator","RX_ASK":"narrator","RX_INVITE":"narrator","REV_FIXED":"narrator","REV_DONE":"narrator","REV_WAIT":"narrator","BR_K1":"klaidas","K_ASK":"klaidas","CNT_BOT_0":"narrator","CNT_BOT_1":"narrator","CNT_BOT_2":"narrator","CNT_BOT_3":"narrator","CNT_BOT_4":"narrator","CNT_HAND_0":"narrator","CNT_HAND_1":"narrator","CNT_HAND_2":"narrator","CNT_HAND_3":"narrator","CNT_HAND_4":"narrator","LEG_1":"narrator","LEG_2":"narrator","LEG_STAR_L":"ui","LEG_FIX_L":"ui","BTN_RATE":"ui","BTN_LOADING":"ui","CNT_OF":"ui"};
-const VOPATH={"INTRO_1":"voices/","INTRO_2":"voices/","INTRO_3":"voices/","INTRO_4":"voices/","INTRO_5":"voices/","INTRO_6":"voices/","INTRO_7":"voices/","GOAL":"vo/","HOW_1":"vo/","HOW_2":"vo/","R1_TITLE":"vo/","R2_TITLE":"vo/","R3_TITLE":"vo/","Q_LOOK":"vo/","Q_HEAR":"vo/","Q_WHEN":"vo/","Q_ADULT":"vo/","R1A_LOOK":"vo/","R1A_HEAR":"vo/","R1A_WHEN":"vo/","R1B_LOOK":"vo/","R1B_HEAR":"vo/","R1B_WHEN":"vo/","R1C_LOOK":"vo/","R1C_HEAR":"vo/","R1C_WHEN":"vo/","R2A_LOOK":"vo/","R2A_HEAR":"vo/","R2A_WHEN":"vo/","R2B_LOOK":"vo/","R2B_HEAR":"vo/","R2B_WHEN":"vo/","R2C_LOOK":"vo/","R2C_HEAR":"vo/","R2C_WHEN":"vo/","R3A_LOOK":"vo/","R3A_HEAR":"vo/","R3A_WHEN":"vo/","R3B_LOOK":"vo/","R3B_HEAR":"vo/","R3B_WHEN":"vo/","R3A_HI":"vo/","R3B_HI":"vo/","R1_BOT1":"vo/","R1_BOT2":"vo/","R2_OFF_LOOK":"vo/","R2_OFF_HEAR":"vo/","R2_OFF_WHEN":"vo/","R2_BOT_REP":"vo/","D_GIFT":"vo/","D_PRAISE":"vo/","D_ASK":"vo/","D_INVITE":"vo/","FB_FIT":"vo/","FB_THANKS_A":"vo/","FB_REAL_A":"vo/","FB_THANKS_B":"vo/","FB_REAL_B":"vo/","FB_THANKS_C":"vo/","FB_REAL_C":"vo/","FB_NOFIT":"vo/","FB_RIP":"vo/","FB_REPEAT":"vo/","FB_OFF":"vo/","FB_EMPTY":"vo/","FB_HELP":"vo/","SIGNS_1":"vo/","SIGNS_2":"vo/","SIGNS_3":"vo/","HAND_OK":"vo/","HAND_TOOK":"vo/","HAND_BIN":"vo/","HAND_NO":"vo/","RUN":"vo/","RUN_JUMP":"vo/","MAP_SPLIT":"vo/","MAP_DONE":"vo/","REPORT":"vo/","REPORT_REPLAY":"vo/","O_1":"vo/","O_2":"vo/","O_3":"vo/","O_4":"vo/","O_5":"vo/","O_6":"vo/","O_7":"vo/","O_8":"vo/","O_9":"vo/","O_10":"vo/","BAITAS_WARN":"vo/","REV_START":"vo/","REV_TIME":"vo/","REV_NONE":"vo/","REV_WHO":"vo/","REV_DO":"vo/","OPT_REAL":"vo/","OPT_BOT":"vo/","OPT_ADULT":"vo/","OPT_TAKE":"vo/","REV_WHY":"vo/","RS_REP":"vo/","RS_OFF":"vo/","RS_REAL":"vo/","RS_GIFT":"vo/","RS_PRAISE":"vo/","RS_ASK":"vo/","RS_INVITE":"vo/","RX_REP":"vo/","RX_OFF":"vo/","RX_REAL":"vo/","RX_GIFT":"vo/","RX_PRAISE":"vo/","RX_ASK":"vo/","RX_INVITE":"vo/","REV_FIXED":"vo/","REV_DONE":"vo/","REV_WAIT":"vo/","BR_K1":"vo/","K_ASK":"vo/","CNT_BOT_0":"vo/","CNT_BOT_1":"vo/","CNT_BOT_2":"vo/","CNT_BOT_3":"vo/","CNT_BOT_4":"vo/","CNT_HAND_0":"vo/","CNT_HAND_1":"vo/","CNT_HAND_2":"vo/","CNT_HAND_3":"vo/","CNT_HAND_4":"vo/","LEG_1":"vo/","LEG_2":"vo/"};
+const VOGROUP={"INTRO_1":"narrator","INTRO_2":"narrator","INTRO_3":"narrator","INTRO_4":"narrator","INTRO_5":"narrator","INTRO_6":"narrator","INTRO_7":"klaidas","GOAL":"narrator","HOW_1":"narrator","HOW_2":"narrator","R1_TITLE":"narrator","R2_TITLE":"narrator","R3_TITLE":"narrator","Q_LOOK":"klaidas","Q_HEAR":"klaidas","Q_WHEN":"klaidas","Q_ADULT":"klaidas","R1A_LOOK":"figure","R1A_HEAR":"figure","R1A_WHEN":"figure","R1B_LOOK":"figure","R1B_HEAR":"figure","R1B_WHEN":"figure","R1C_LOOK":"figure","R1C_HEAR":"figure","R1C_WHEN":"figure","R2A_LOOK":"figure","R2A_HEAR":"figure","R2A_WHEN":"figure","R2B_LOOK":"figure","R2B_HEAR":"figure","R2B_WHEN":"figure","R2C_LOOK":"figure","R2C_HEAR":"figure","R2C_WHEN":"figure","R3A_LOOK":"figure","R3A_HEAR":"figure","R3A_WHEN":"figure","R3B_LOOK":"figure","R3B_HEAR":"figure","R3B_WHEN":"figure","R3A_HI":"figure","R3B_HI":"figure","R1_BOT1":"figure","R1_BOT2":"figure","R2_OFF_LOOK":"figure","R2_OFF_HEAR":"figure","R2_OFF_WHEN":"figure","R2_BOT_REP":"figure","D_GIFT":"figure","D_PRAISE":"figure","D_ASK":"figure","D_INVITE":"figure","FB_FIT":"narrator","FB_THANKS_A":"figure","FB_REAL_A":"figure","FB_THANKS_B":"figure","FB_REAL_B":"figure","FB_THANKS_C":"figure","FB_REAL_C":"figure","FB_NOFIT":"narrator","FB_RIP":"narrator","FB_REPEAT":"narrator","FB_OFF":"narrator","FB_EMPTY":"narrator","FB_HELP":"narrator","SIGNS_1":"narrator","SIGNS_2":"narrator","SIGNS_3":"narrator","HAND_OK":"narrator","HAND_TOOK":"narrator","HAND_BIN":"narrator","HAND_NO":"narrator","RUN":"narrator","RUN_JUMP":"narrator","MAP_SPLIT":"klaidas","MAP_DONE":"klaidas","REPORT":"narrator","REPORT_REPLAY":"narrator","O_1":"narrator","O_2":"klaidas","O_3":"narrator","O_4":"figure","O_5":"klaidas","O_6":"figure","O_7":"figure","O_8":"klaidas","O_9":"narrator","O_10":"narrator","CARD_WHO":"ui","BTN_BIN":"ui","BTN_NEXT":"ui","TEAR_LBL":"ui","YOU":"ui","BAITAS_WARN":"narrator","REV_START":"narrator","REV_TIME":"narrator","REV_NONE":"narrator","REV_WHO":"narrator","REV_DO":"narrator","OPT_REAL":"narrator","OPT_BOT":"narrator","OPT_ADULT":"narrator","OPT_TAKE":"narrator","REV_WHY":"narrator","RS_REP":"narrator","RS_OFF":"narrator","RS_REAL":"narrator","RS_GIFT":"narrator","RS_PRAISE":"narrator","RS_ASK":"narrator","RS_INVITE":"narrator","RX_REP":"narrator","RX_OFF":"narrator","RX_REAL":"narrator","RX_GIFT":"narrator","RX_PRAISE":"narrator","RX_ASK":"narrator","RX_INVITE":"narrator","REV_FIXED":"narrator","REV_DONE":"narrator","REV_WAIT":"narrator","BR_K1":"klaidas","K_ASK":"klaidas","CNT_BOT_0":"narrator","CNT_BOT_1":"narrator","CNT_BOT_2":"narrator","CNT_BOT_3":"narrator","CNT_BOT_4":"narrator","CNT_HAND_0":"narrator","CNT_HAND_1":"narrator","CNT_HAND_2":"narrator","CNT_HAND_3":"narrator","CNT_HAND_4":"narrator","LEG_1":"narrator","LEG_2":"narrator","LEG_STAR_L":"ui","LEG_FIX_L":"ui","BTN_RATE":"ui","BTN_LOADING":"ui","CNT_OF":"ui","T_0":"klaidas","T_1":"klaidas","T_2":"klaidas","T_3":"klaidas","T_4":"klaidas","T_5":"klaidas","REPORT_FIX":"narrator","REV_AGAIN":"narrator","BTN_FIX":"ui","REV_TITLE":"ui"};
+const VOSPK={"INTRO_1":"narrator","INTRO_2":"narrator","INTRO_3":"narrator","INTRO_4":"narrator","INTRO_5":"narrator","INTRO_6":"narrator","INTRO_7":"klaidas","GOAL":"narrator","HOW_1":"narrator","HOW_2":"narrator","R1_TITLE":"narrator","R2_TITLE":"narrator","R3_TITLE":"narrator","Q_LOOK":"klaidas","Q_HEAR":"klaidas","Q_WHEN":"klaidas","Q_ADULT":"klaidas","R1A_LOOK":"kidA","R1A_HEAR":"kidA","R1A_WHEN":"kidA","R1B_LOOK":"kidC","R1B_HEAR":"kidC","R1B_WHEN":"kidC","R1C_LOOK":"kidB","R1C_HEAR":"kidB","R1C_WHEN":"kidB","R2A_LOOK":"kidC","R2A_HEAR":"kidC","R2A_WHEN":"kidC","R2B_LOOK":"kidB","R2B_HEAR":"kidB","R2B_WHEN":"kidB","R2C_LOOK":"kidA","R2C_HEAR":"kidA","R2C_WHEN":"kidA","R3A_LOOK":"kidB","R3A_HEAR":"kidB","R3A_WHEN":"kidB","R3B_LOOK":"kidC","R3B_HEAR":"kidC","R3B_WHEN":"kidC","R3A_HI":"kidB","R3B_HI":"kidC","R1_BOT1":"kidB","R1_BOT2":"kidA","R2_OFF_LOOK":"kidA","R2_OFF_HEAR":"kidA","R2_OFF_WHEN":"kidA","R2_BOT_REP":"kidC","D_GIFT":"kidC","D_PRAISE":"kidA","D_ASK":"kidB","D_INVITE":"kidA","FB_FIT":"narrator","FB_THANKS_A":"kidA","FB_REAL_A":"kidA","FB_THANKS_B":"kidB","FB_REAL_B":"kidB","FB_THANKS_C":"kidC","FB_REAL_C":"kidC","FB_NOFIT":"narrator","FB_RIP":"narrator","FB_REPEAT":"narrator","FB_OFF":"narrator","FB_EMPTY":"narrator","FB_HELP":"narrator","SIGNS_1":"narrator","SIGNS_2":"narrator","SIGNS_3":"narrator","HAND_OK":"narrator","HAND_TOOK":"narrator","HAND_BIN":"narrator","HAND_NO":"narrator","RUN":"narrator","RUN_JUMP":"narrator","MAP_SPLIT":"klaidas","MAP_DONE":"klaidas","REPORT":"narrator","REPORT_REPLAY":"narrator","O_1":"narrator","O_2":"klaidas","O_3":"narrator","O_4":"kidB","O_5":"klaidas","O_6":"kidB","O_7":"kidB","O_8":"klaidas","O_9":"narrator","O_10":"narrator","CARD_WHO":"ui","BTN_BIN":"ui","BTN_NEXT":"ui","TEAR_LBL":"ui","YOU":"ui","BAITAS_WARN":"narrator","REV_START":"narrator","REV_TIME":"narrator","REV_NONE":"narrator","REV_WHO":"narrator","REV_DO":"narrator","OPT_REAL":"narrator","OPT_BOT":"narrator","OPT_ADULT":"narrator","OPT_TAKE":"narrator","REV_WHY":"narrator","RS_REP":"narrator","RS_OFF":"narrator","RS_REAL":"narrator","RS_GIFT":"narrator","RS_PRAISE":"narrator","RS_ASK":"narrator","RS_INVITE":"narrator","RX_REP":"narrator","RX_OFF":"narrator","RX_REAL":"narrator","RX_GIFT":"narrator","RX_PRAISE":"narrator","RX_ASK":"narrator","RX_INVITE":"narrator","REV_FIXED":"narrator","REV_DONE":"narrator","REV_WAIT":"narrator","BR_K1":"klaidas","K_ASK":"klaidas","CNT_BOT_0":"narrator","CNT_BOT_1":"narrator","CNT_BOT_2":"narrator","CNT_BOT_3":"narrator","CNT_BOT_4":"narrator","CNT_HAND_0":"narrator","CNT_HAND_1":"narrator","CNT_HAND_2":"narrator","CNT_HAND_3":"narrator","CNT_HAND_4":"narrator","LEG_1":"narrator","LEG_2":"narrator","LEG_STAR_L":"ui","LEG_FIX_L":"ui","BTN_RATE":"ui","BTN_LOADING":"ui","CNT_OF":"ui","T_0":"klaidas","T_1":"klaidas","T_2":"klaidas","T_3":"klaidas","T_4":"klaidas","T_5":"klaidas","REPORT_FIX":"narrator","REV_AGAIN":"narrator","BTN_FIX":"ui","REV_TITLE":"ui"};
+const VOPATH={"INTRO_1":"voices/","INTRO_2":"voices/","INTRO_3":"voices/","INTRO_4":"voices/","INTRO_5":"voices/","INTRO_6":"voices/","INTRO_7":"voices/","GOAL":"vo/","HOW_1":"vo/","HOW_2":"vo/","R1_TITLE":"vo/","R2_TITLE":"vo/","R3_TITLE":"vo/","Q_LOOK":"vo/","Q_HEAR":"vo/","Q_WHEN":"vo/","Q_ADULT":"vo/","R1A_LOOK":"vo/","R1A_HEAR":"vo/","R1A_WHEN":"vo/","R1B_LOOK":"vo/","R1B_HEAR":"vo/","R1B_WHEN":"vo/","R1C_LOOK":"vo/","R1C_HEAR":"vo/","R1C_WHEN":"vo/","R2A_LOOK":"vo/","R2A_HEAR":"vo/","R2A_WHEN":"vo/","R2B_LOOK":"vo/","R2B_HEAR":"vo/","R2B_WHEN":"vo/","R2C_LOOK":"vo/","R2C_HEAR":"vo/","R2C_WHEN":"vo/","R3A_LOOK":"vo/","R3A_HEAR":"vo/","R3A_WHEN":"vo/","R3B_LOOK":"vo/","R3B_HEAR":"vo/","R3B_WHEN":"vo/","R3A_HI":"vo/","R3B_HI":"vo/","R1_BOT1":"vo/","R1_BOT2":"vo/","R2_OFF_LOOK":"vo/","R2_OFF_HEAR":"vo/","R2_OFF_WHEN":"vo/","R2_BOT_REP":"vo/","D_GIFT":"vo/","D_PRAISE":"vo/","D_ASK":"vo/","D_INVITE":"vo/","FB_FIT":"vo/","FB_THANKS_A":"vo/","FB_REAL_A":"vo/","FB_THANKS_B":"vo/","FB_REAL_B":"vo/","FB_THANKS_C":"vo/","FB_REAL_C":"vo/","FB_NOFIT":"vo/","FB_RIP":"vo/","FB_REPEAT":"vo/","FB_OFF":"vo/","FB_EMPTY":"vo/","FB_HELP":"vo/","SIGNS_1":"vo/","SIGNS_2":"vo/","SIGNS_3":"vo/","HAND_OK":"vo/","HAND_TOOK":"vo/","HAND_BIN":"vo/","HAND_NO":"vo/","RUN":"vo/","RUN_JUMP":"vo/","MAP_SPLIT":"vo/","MAP_DONE":"vo/","REPORT":"vo/","REPORT_REPLAY":"vo/","O_1":"vo/","O_2":"vo/","O_3":"vo/","O_4":"vo/","O_5":"vo/","O_6":"vo/","O_7":"vo/","O_8":"vo/","O_9":"vo/","O_10":"vo/","BAITAS_WARN":"vo/","REV_START":"vo/","REV_TIME":"vo/","REV_NONE":"vo/","REV_WHO":"vo/","REV_DO":"vo/","OPT_REAL":"vo/","OPT_BOT":"vo/","OPT_ADULT":"vo/","OPT_TAKE":"vo/","REV_WHY":"vo/","RS_REP":"vo/","RS_OFF":"vo/","RS_REAL":"vo/","RS_GIFT":"vo/","RS_PRAISE":"vo/","RS_ASK":"vo/","RS_INVITE":"vo/","RX_REP":"vo/","RX_OFF":"vo/","RX_REAL":"vo/","RX_GIFT":"vo/","RX_PRAISE":"vo/","RX_ASK":"vo/","RX_INVITE":"vo/","REV_FIXED":"vo/","REV_DONE":"vo/","REV_WAIT":"vo/","BR_K1":"vo/","K_ASK":"vo/","CNT_BOT_0":"vo/","CNT_BOT_1":"vo/","CNT_BOT_2":"vo/","CNT_BOT_3":"vo/","CNT_BOT_4":"vo/","CNT_HAND_0":"vo/","CNT_HAND_1":"vo/","CNT_HAND_2":"vo/","CNT_HAND_3":"vo/","CNT_HAND_4":"vo/","LEG_1":"vo/","LEG_2":"vo/","T_0":"vo/","T_1":"vo/","T_2":"vo/","T_3":"vo/","T_4":"vo/","T_5":"vo/","REPORT_FIX":"vo/","REV_AGAIN":"vo/"};
 const SFXFILES={"outroBed":true,"outroSting":true};
-const VERSION="v5.6";
+const VERSION="v5.7";
 const WEB=true;
 
 /* ---- 00-cfg.js ---- */
@@ -892,6 +948,9 @@ function makeRound(S,ri,r){
   let fs=ROUND_FIGS[ri].slice();
   /* round 1: R1A comes first, so the first piece the child sees fits and continues the path from ⭐. The rest are seeded. */
   if(ri===0)fs=[fs[0],...shuffleR(fs.slice(1),r)];else shuffleR(fs,r);
+  /* v5.7 E4 (Kris 11-20, the guided start: ask, listen, decide, take the piece · a bot: piece to Šalin, unmask): on the first play of
+     round 1 the example bot comes second, right after R1A. The others keep their seeded order (no extra draws, later rounds unchanged). */
+  if(ri===0&&!S.rep[0]){const j=fs.findIndex(d=>d.k==='R');if(j>1)fs.splice(1,0,fs.splice(j,1)[0]);}
   const tag=S.rep[ri]?'x'+S.rep[ri]:'';
   /* v5.2 (Kris 11-12, sense-check card 2: „first bot = example"): the first bot of round 1 is shown, not tested. Only on the first play of
      the round (a replay from the report is a normal test). R1A always comes first, so a true piece has gone in before it. */
@@ -999,7 +1058,7 @@ function step(S,ev){
 }
 /* the report: one star per figure, icons for torn masks and raised hands, the map */
 function report(S){
-  const per=S.rounds.map(fs=>({n:fs.length,stars:fs.filter(f=>f.star).length,err:fs.reduce((a,f)=>a+f.err,0),done:fs.every(f=>f.out),figs:fs.map(f=>({star:f.star,out:f.out,fixed:!!f.fixed}))}));
+  const per=S.rounds.map(fs=>({n:fs.length,stars:fs.filter(f=>f.star).length,err:fs.reduce((a,f)=>a+f.err,0),done:fs.every(f=>f.out),figs:fs.map(f=>({star:f.star,out:f.out,fixed:!!f.fixed,mist:!!f.mist,hm:!!f.mist&&f.mist.type==='real'&&f.mist.how==='hand'}))}));
   const figs=allFigs(S);
   return {per,stars:per.reduce((a,p)=>a+p.stars,0),of:figs.length,torn:figs.filter(f=>f.out==='torn').length,hands:figs.filter(f=>f.out==='hand').length,
     placed:S.placed.length,full:S.placed.length===9,err:per.reduce((a,p)=>a+p.err,0),
@@ -1627,6 +1686,9 @@ function animate(fig,dt){
     case 'read':{T.armLx=-1.2;T.armRx=-1.2;T.armLz=-.45;T.armRz=.45;T.headX=.42;T.bodyX=.06;T.bob=Math.sin(t*1.4)*.01;k=12;break;}
     case 'point':{T.armRx=-1.55;T.armRz=-.28;T.headX=-.06;k=16;break;}
   }
+  /* v5.7 E3 (Kris 11-20: „the figure extends its arm with a puzzle piece in the hand"): on top of any pose, the right arm reaches OUT to
+     the figure's right (screen-left, the way the piece flies) at about waist height, a little forward: the sleeve shows side-on (critic fix 2) */
+  if(U.offer){T.armRx=OFFER.rx;T.armRz=OFFER.rz;k=Math.max(k,14);}   // OFFER: 60-game.js
   const q=1-Math.exp(-dt*k);for(const n in a)a[n]+=(T[n]-a[n])*q;
   P.legL.rotation.x=a.legL;P.legR.rotation.x=a.legR;P.armL.rotation.x=a.armLx;P.armR.rotation.x=a.armRx;
   P.armL.rotation.z+=a.armLz;P.armR.rotation.z+=a.armRz;P.head.rotation.x=a.headX+(U.headX||0);P.head.rotation.y=a.headY;
@@ -2120,7 +2182,7 @@ const SPK_OFF='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l6 5
 const IC_PAUSE='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="#fff"/><rect x="14" y="5" width="4" height="14" rx="1" fill="#fff"/></svg>';
 const IC_PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg>';
 const IC_FULL='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>';
-$('bsnd').innerHTML=SPK;$('csnd').innerHTML=SPK;$('riMaskS').innerHTML=SPK;$('riHandS').innerHTML=SPK;$('riLegS').innerHTML=SPK;$('cSnd').innerHTML=SPK;$('rQS').innerHTML=SPK;$('rStepS').innerHTML=SPK;$('mute').innerHTML=SPK;$('pauseB').innerHTML=IC_PAUSE;$('resumeB').innerHTML=IC_PLAY;$('fullB').innerHTML=IC_FULL;
+$('bsnd').innerHTML=SPK;$('csnd').innerHTML=SPK;$('riMaskS').innerHTML=SPK;$('riHandS').innerHTML=SPK;$('riLegS').innerHTML=SPK;$('cSnd').innerHTML=SPK;$('cHiS').innerHTML=SPK;$('rQS').innerHTML=SPK;$('rStepS').innerHTML=SPK;$('mute').innerHTML=SPK;$('pauseB').innerHTML=IC_PAUSE;$('resumeB').innerHTML=IC_PLAY;$('fullB').innerHTML=IC_FULL;
 
 /* ---------- layout. 1366x768 is the reference; 1024x600 is the smallest screen. Every size has a floor (gates 4, 5, 9). ---------- */
 const LAY={};
@@ -2132,15 +2194,17 @@ function uiScale(){
   /* the card is as wide as its widest question row: padding + icon + words + the row's own 🔊. The figure stands between the card and the map. */
   const qW=Math.max(...['Q_LOOK','Q_HEAR','Q_WHEN'].map(id=>textW(VO[id],t)));
   /* v5.2: +14 px, the emoji and the jiggle make a row a little wider than the measured words (at 1024 „Kada tai buvo?" broke into two lines) */
-  const cw=Math.round(Math.min(zr-12-110,2*.45*t+32+1.05*t+12+qW+10+10+tgt+14));
+  /* v5.7 E1: + ind, the empty side of a chat bubble row (the questions sit right, the figure's words left) */
+  const ind=Math.round(Math.max(26,t*.95));
+  const cw=Math.round(Math.min(zr-12-110,2*.45*t+32+1.05*t+12+qW+10+10+tgt+14+ind));
   /* v5.4 the review card: as wide as its widest row (a reason tile, a choice, the step line) allows, never wider than the game card may be */
   const rW=Math.max(...['RS_REP','RS_OFF','RS_REAL','RS_GIFT','RS_PRAISE','RS_ASK','RS_INVITE','OPT_REAL','OPT_BOT','OPT_ADULT','OPT_TAKE'].map(id=>VO[id]?textW(VO[id],t):0));
   const rw=Math.round(Math.max(cw,Math.min(zr-12-110,2*.45*t+32+1.05*t+12+rW+10+10+tgt+14)));
-  Object.assign(LAY,{W,H,s,t,tgt,cell,bw,btop,cw,qw:cw,zr,rw});
+  Object.assign(LAY,{W,H,s,t,tgt,cell,bw,btop,cw,qw:cw,zr,rw,ind});
   const r=document.documentElement.style,px=v=>Math.round(v)+'px';
   r.setProperty('--s',s.toFixed(3));r.setProperty('--t',t.toFixed(1)+'px');r.setProperty('--tgt',px(tgt));r.setProperty('--cell',px(cell));r.setProperty('--bw',px(bw));
   r.setProperty('--bz',px(Math.max(124,W*.125)));r.setProperty('--tlw',px(Math.max(240,W*.245)));   // v5.3 the Baitas cloud: his column, the sentence's column
-  r.setProperty('--btop',px(btop));r.setProperty('--qw',px(cw));r.setProperty('--cw',px(cw));r.setProperty('--rw',px(rw));r.setProperty('--zr',px(zr));
+  r.setProperty('--btop',px(btop));r.setProperty('--qw',px(cw));r.setProperty('--cw',px(cw));r.setProperty('--rw',px(rw));r.setProperty('--zr',px(zr));r.setProperty('--ind',px(ind));
   /* v5.2 „Tu čia": the arrow goes straight up from the label into the ⭐ tree (cell 02), so the star row starts right of it */
   const ath=Math.round(Math.max(22,t*.75)),sxs=W-12-bw+(JIG.BP+.43*JIG.CI)*bw/JIG.BINT,sl=sxs+ath/2+6,sw=W-12-sl,stw=Math.min(1.6*t,(sw-5*8)/6);LAY.ath=ath;
   const st=$('stars');st.style.top=px(btop+bw+8);st.style.left=px(sl);st.style.width=px(sw);r.setProperty('--stw',stw.toFixed(1)+'px');
@@ -2169,7 +2233,7 @@ function handDrag(a,b,src,sc){
 /* v5.2 (coordinator 11-12, found by v5-tell with the clips in): the 🔊 shows or hides the moment it is bound, not at the next frame's
    sndSync. Before, a new figure's card opened with „…" while its 🔊 still showed for the previous figure's line until the next frame. */
 function sndBind(el,id){if(id)el.dataset.line=id;else delete el.dataset.line;el.style.visibility=id&&hasVoice(id)?'visible':'hidden';if(!id)el.classList.remove('on');}
-for(const id of ['bsnd','csnd','cSnd','rQS','rStepS','riMaskS','riHandS','riLegS'])$(id).addEventListener('click',e=>{e.stopPropagation();e.currentTarget.blur();S.idle=0;const l=e.currentTarget.dataset.line;if(l)replayLine(l);});
+for(const id of ['bsnd','csnd','cSnd','cHiS','rQS','rStepS','riMaskS','riHandS','riLegS'])$(id).addEventListener('click',e=>{e.stopPropagation();e.currentTarget.blur();S.idle=0;const l=e.currentTarget.dataset.line;if(l)replayLine(l);});
 
 /* ---------- who talks: Klaidas's bubble (top of the left zone). The masked figures talk in the card; the narrator in the caption. ---------- */
 const PORTRAIT={};
@@ -2181,7 +2245,9 @@ function bubbleShow(text,who,mask,pop,id){
 }
 function bubbleHide(){$('bubble').hidden=true;$('bin').classList.remove('glow');}
 /* the narrator caption, bottom of the left zone */
-function capShow(text,id){$('ctt').textContent=text;sndBind($('csnd'),id);$('cap').hidden=false;}
+/* v5.7 E4: who = 'k' puts Klaidas's face in front of the words (his guided-start lines play here while the card fills the top) */
+function capShow(text,id,who){$('ctt').textContent=text;sndBind($('csnd'),id);const k=who==='k',b=$('cBdg');$('ctx').classList.toggle('k',k);
+  if(k&&!b.firstChild&&PORTRAIT.K){const o=cnv(96,96);o.getContext('2d').drawImage(PORTRAIT.K,0,0,96,96);b.appendChild(o);}b.hidden=!k;$('cap').hidden=false;}
 function capHide(){$('cap').hidden=true;$('ctx').classList.remove('glow');}
 function cap(id){capShow(VO[id],id);}            // the intro (kept from v2/v3) calls cap(id)
 /* wide: the caption takes the whole left zone, or the whole screen when the map is hidden */
@@ -2200,30 +2266,46 @@ function act(a){S.idle=0;if(PC.armed)pieceArm(false);
   handHide();pulseOff();cutBg();return signal('act',a);}
 const jitSpan=t=>{const s=document.createElement('span');s.className='jt';s.textContent=t;s.style.animationDelay=(-Math.random()*.4).toFixed(2)+'s';return s;};
 (function(){const box=$('cOpts');
-  for(const q of QB){const row=document.createElement('div');row.className='opt';row.dataset.q=q.q;
+  for(const q of QB){const row=document.createElement('div');row.className=q.q==='ADULT'?'opt':'opt me';row.dataset.q=q.q;
     const b=document.createElement('button');b.type='button';b.className='ans'+(q.q==='ADULT'?' adult':'');b.dataset.k=q.q==='ADULT'?'hand':'q:'+q.q;
     b.innerHTML=`<span class="ic">${q.ic}</span>`;b.appendChild(jitSpan(VO[q.id]));b.setAttribute('aria-label',VO[q.id]);
     b.addEventListener('click',e=>{e.currentTarget.blur();if($('card').classList.contains('min')){cardMin(false);return;}act(q.q==='ADULT'?{t:'hand'}:{t:'ask',q:q.q});});
     const sb=document.createElement('button');sb.type='button';sb.className='snd';sb.innerHTML=SPK;sb.setAttribute('aria-label','Dar kartą');sb.dataset.k='snd:'+q.id;sndBind(sb,q.id);
     sb.addEventListener('click',e=>{e.stopPropagation();e.currentTarget.blur();S.idle=0;replayLine(q.id);});
-    row.appendChild(b);row.appendChild(sb);box.appendChild(row);}
+    row.appendChild(b);row.appendChild(sb);(q.q==='ADULT'?$('cHand'):box).appendChild(row);}
   $('cWho').textContent=VO.CARD_WHO;
   /* ✕ makes the card small (as in P7) so the forest and the map show; a tap on the small card or ✕ brings it back */
   $('cX').addEventListener('click',e=>{e.stopPropagation();e.currentTarget.blur();S.idle=0;cardMin(!$('card').classList.contains('min'));});
   $('card').addEventListener('click',()=>{if($('card').classList.contains('min'))cardMin(false);});
 })();
 function cardMin(on){$('card').classList.toggle('min',on);}
-/* open the card for a figure. Round 3 figures show their first line at once. Before any answer every kind looks the same. */
+/* open the card for a figure. Round 3 figures show their first line at once (cardHi). Before any answer every kind looks the same.
+   v5.7 E1: no reply bubble until the child has asked (it was „…"); the questions wait on the right. */
 function cardOpen(f){
   const c=$('card');c.hidden=false;c.classList.remove('min','danger');   // the danger look comes with the danger words (60-game), never before
   const av=$('cAv');av.innerHTML='';const o=cnv(96,96);o.getContext('2d').drawImage(MK.icon(f.mask,96),0,0,96,96);av.appendChild(o);
-  cardMsg('…',null);cardRows(f);
+  $('cMsg').hidden=true;$('cMsgT').innerHTML='';sndBind($('cSnd'),null);$('cMsg').classList.remove('glow');
+  $('cHi').hidden=true;$('cHi').classList.remove('gone');$('cHiT').innerHTML='';sndBind($('cHiS'),null);
+  cardRows(f);
   c.querySelector('.kc').classList.remove('pop');
 }
-/* after the first question only the asked row stays (marked), plus ✋ in round 3; the reply is in the card's message */
-function cardRows(f){for(const r of $('cOpts').children){const q=r.dataset.q,b=r.firstChild;if(q==='ADULT'){r.hidden=f.round!==2;continue;}const used=f.asked.includes(q);r.hidden=!!f.nAsk&&(!used||f.round===2);b.classList.toggle("used",used);}heldFollow();}
-/* round 3: after the question only ✋ stays under the reply (the card is then as short as in rounds 1-2, so the piece fits under it) */
-function cardMsg(text,id){const m=$('cMsgT');m.innerHTML='';m.appendChild(jitSpan(text));sndBind($('cSnd'),id);heldFollow();}
+/* v5.7 E1: after the first question the asked question stays as the child's own bubble on the right (every round, round 3 too), the other
+   questions go; ✋ stays at the bottom in round 3 */
+function cardRows(f){for(const r of $('cOpts').children){const q=r.dataset.q,b=r.firstChild,used=f.asked.includes(q);r.hidden=!!f.nAsk&&!used;b.classList.toggle("used",used);}
+  for(const r of $('cHand').children)r.hidden=f.round!==2;heldFollow();}
+/* the figure's reply: the left bubble under the question. E2: cardDots() shows three typing dots in it first. */
+function cardMsg(text,id){const m=$('cMsgT');m.innerHTML='';m.appendChild(jitSpan(text));sndBind($('cSnd'),id);$('cMsg').hidden=false;if(!$('cHi').hidden)cardHiFold();heldFollow();}
+/* the round-3 first line scrolls away when the question is sent (during the dots), not when the reply comes: ✋ moves up once, right after
+   the tap on a question, and stands still when a child reaches for it after the reply (impatient-player QA: a tap during the move missed) */
+function cardDots(){const m=$('cMsgT');m.innerHTML='<span class="dots" aria-label="rašo"><i></i><i></i><i></i></span>';sndBind($('cSnd'),null);$('cMsg').hidden=false;
+  if(!$('cHi').hidden)cardHiFold(parseFloat(getComputedStyle(m).fontSize)*1.1);heldFollow();}
+const cardDotsOn=()=>!$('cMsg').hidden&&!!$('cMsgT').querySelector('.dots');
+/* round 3: the figure's first line, the top left bubble */
+function cardHi(text,id){const m=$('cHiT');m.innerHTML='';m.appendChild(jitSpan(text));sndBind($('cHiS'),id);$('cHi').hidden=false;heldFollow();}
+/* round 3, when the reply comes: if the card would reach the piece's place, the first line scrolls up out of the card (Messenger-like).
+   Measured, not assumed: on a tall screen (1024x768) it stays. */
+function cardHiFold(extra=0){const h=$('cHi'),c=$('card');if(h.hidden||h.classList.contains('gone')||c.hidden)return false;   // extra: one more line the reply will need
+  if(c.offsetTop+c.offsetHeight+extra<=pieceRoom())return false;h.classList.add('gone');heldFollow();return true;}
 function cardHide(){$('card').hidden=true;$('cMsg').classList.remove('glow');}
 const cardOn=()=>!$('card').hidden;
 function pulseOff(){document.querySelectorAll('#ui .pulse').forEach(b=>b.classList.remove('pulse'));}
@@ -2232,16 +2314,24 @@ function pulseOff(){document.querySelectorAll('#ui .pulse').forEach(b=>b.classLi
 $('salinL').textContent=VO.BTN_BIN;$('salin').addEventListener('click',e=>{e.currentTarget.blur();act({t:'bin'});});
 function salinShow(on){$('salin').hidden=!on;if(on)heldFollow();}   // measured at once, so the held piece never sits on it
 /* where the offered piece waits: under the card (or mid-left when there is no card), right of Šalin, never under the caption */
+function capTopY(){const cp=$('ctx');return Math.min(LAY.H-10-(1.14*LAY.t+24)-8,!$('cap').hidden&&cp.offsetHeight?cp.getBoundingClientRect().top-8:1e9);}   // a two-line caption is taller
 function pieceHome(){
   const c=$('card'),cell=LAY.cell,sw=$('salin').offsetWidth||LAY.tgt*2.6;
+  /* v5.7: the card's own height (offsetHeight), not its box while #cHi folds: the piece follows the fold as it happens */
   const top=!c.hidden?c.offsetTop+c.offsetHeight*(c.classList.contains('min')?.6:1)+10:LAY.H*.36-cell*.75;
-  const cp=$('ctx'),capTop=Math.min(LAY.H-10-(1.14*LAY.t+24)-8,!$('cap').hidden&&cp.offsetHeight?cp.getBoundingClientRect().top-8:1e9);   // a two-line caption is taller
-  return [12+sw+16+cell*.78,Math.min(top+cell*.75,capTop-cell*.62)];
+  return [12+sw+16+cell*.78,Math.min(top+cell*.75,capTopY()-cell*.62)];
 }
+/* v5.7: the lowest the card's bottom may reach so the held piece (its whole canvas) still sits under it, never on it */
+/* v5.7: the piece's picture reaches PIECE_VIS cells up from its middle (half a cell + a tab); the rest of its canvas is see-through, and a
+   resting piece (#piece.rest) sits under the card, so the card wins any tap there. When the card is still a few px too tall (round 3 at
+   1024x600, measured), the resting piece is drawn a little smaller (never under 85 %); picked up and dragged it is full size again. */
+const PIECE_VIS=.72;
+function pieceRoom(){return capTopY()-LAY.cell*.62-(PIECE_VIS*LAY.cell+4);}
+function heldScale(y){const c=$('card');if(c.hidden||c.classList.contains('min'))return 1;return clamp((y-(c.offsetTop+c.offsetHeight)-3)/(PIECE_VIS*LAY.cell+4),.85,1);}
 
 /* the held piece and Šalin sit under the card. Called every frame and at once whenever the card changes size, so they never overlap it. */
 function heldFollow(){
-  if(!$('piece').hidden&&PC.mode==='held'){const[x,y]=pieceHome();PC.x=x;PC.y=y;piecePos();}
+  if(!$('piece').hidden&&(PC.mode==='held'||PC.mode==='ofly')){const[x,y]=pieceHome();PC.hsc=heldScale(y);if(PC.mode==='held'){PC.x=x;PC.y=y;piecePos();}}
   const sl=$('salin');if(!sl.hidden)sl.style.top=(pieceHome()[1]-sl.offsetHeight/2).toFixed(1)+'px';
 }
 
@@ -2291,6 +2381,8 @@ function youPos(){
 
 /* ---------- stars: one per figure of the round ---------- */
 const STAR_OFF='<svg class="so" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.85 6.05 6.6.78-4.88 4.55 1.3 6.55L12 17.25l-5.87 3.28 1.3-6.55L2.55 9.43l6.6-.78z" fill="none" stroke="#e8eef0" stroke-width="2" stroke-linejoin="round"/></svg>';
+/* v5.7 E6: a lost star whose mask comes back in „Pataisom klaidas": a red outline, a little thicker */
+const STAR_MIS='<svg class="so" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.85 6.05 6.6.78-4.88 4.55 1.3 6.55L12 17.25l-5.87 3.28 1.3-6.55L2.55 9.43l6.6-.78z" fill="#ff5a4a33" stroke="#ff5a4a" stroke-width="2.6" stroke-linejoin="round"/></svg>';
 function starsDraw(){
   const box=$('stars');if(!S.L||S.ri<0){box.hidden=true;return;}const fs=S.L.rounds[S.ri];
   if(box.childElementCount!==fs.length){box.innerHTML='';for(let i=0;i<fs.length;i++){const d=document.createElement('div');d.className='st';d.textContent='⭐';box.appendChild(d);}}
@@ -2307,11 +2399,13 @@ const PC={mode:'off',x:0,y:0,sc:1,ox:0,src:null,dx:0,dy:0,down:null,armed:false}
 function pieceArm(on){PC.armed=!!on;$('piece').classList.toggle('armed',PC.armed);$('board').classList.toggle('armed',PC.armed);JIG.armed(PC.armed);}
 function pieceSet(src){const c=$('piece');c.width=src.width;c.height=src.height;c.getContext('2d').drawImage(src,0,0);PC.src=src;c.classList.remove('dim','bad','shake');}
 function pieceShow(on){$('piece').hidden=!on;if(!on){PC.mode='off';if(PC.armed)pieceArm(false);}else heldFollow();}
-function piecePos(){const c=$('piece'),w=c.offsetWidth||LAY.cell/JIG.CI*JIG.PW;c.style.transform=`translate(${(PC.x+PC.ox-w/2).toFixed(1)}px,${(PC.y-w/2).toFixed(1)}px) scale(${PC.sc.toFixed(3)})`;}
-async function pieceFly(to,d=.45){PC.mode='fly';const x0=PC.x,y0=PC.y,s0=PC.sc;await tw(d,k=>{const[x,y,s]=to();PC.x=x0+(x-x0)*k;PC.y=y0+(y-y0)*k;PC.sc=s0+(s-s0)*k;},ease.io);}
+function piecePos(){const c=$('piece');c.classList.toggle('rest',PC.mode==='held'||PC.mode==='ofly'||PC.mode==='offer');const w=c.offsetWidth||LAY.cell/JIG.CI*JIG.PW;c.style.transform=`translate(${(PC.x+PC.ox-w/2).toFixed(1)}px,${(PC.y-w/2).toFixed(1)}px) scale(${PC.sc.toFixed(3)})`;}
+async function pieceFly(to,d=.45){if(PC.mode==='offer'||PC.mode==='ofly')offerCut();PC.mode='fly';   /* v5.7 E3: a move during the reach or the flight starts where the piece is */
+  const x0=PC.x,y0=PC.y,s0=PC.sc;await tw(d,k=>{const[x,y,s]=to();PC.x=x0+(x-x0)*k;PC.y=y0+(y-y0)*k;PC.sc=s0+(s-s0)*k;},ease.io);}
 (function(){
   const c=$('piece');
-  c.addEventListener('pointerdown',e=>{if((S.phase!=='decide'&&S.phase!=='practice')||!S.actOpen||PC.mode!=='held')return;e.preventDefault();c.setPointerCapture(e.pointerId);acx();S.idle=0;
+  c.addEventListener('pointerdown',e=>{if(S.phase==='decide'&&S.actOpen&&PC.mode==='ofly')offerCatch();   // v5.7 E3: caught in the air, it is in the hand
+    if((S.phase!=='decide'&&S.phase!=='practice')||!S.actOpen||PC.mode!=='held')return;e.preventDefault();c.setPointerCapture(e.pointerId);acx();S.idle=0;
     PC.down={x:e.clientX,y:e.clientY,t:performance.now(),moved:false};PC.dx=PC.x-e.clientX;PC.dy=PC.y-e.clientY;});
   c.addEventListener('pointermove',e=>{if(!PC.down)return;if(!PC.down.moved&&Math.hypot(e.clientX-PC.down.x,e.clientY-PC.down.y)>10){PC.down.moved=true;PC.mode='drag';c.classList.add('drag');handHide();pulseOff();cutBg();}
     if(PC.mode==='drag'&&PC.armed)pieceArm(false);
@@ -2448,18 +2542,25 @@ function reportShow(rep,o){o=o||{};
   sndBind($('riLegS'),anyFix?'LEG_2':'LEG_1');
   REPC.bots=nb;REPC.hands=nh;REPC.fix=anyFix;
   const T=$('tiles');T.innerHTML='';
-  rep.per.forEach((p,i)=>{const d=document.createElement('div');d.className='tile';d.innerHTML=`<b>${i+1}</b><span class="ts"></span>`;
+  /* v5.7 E6: with mistakes still to fix (o.fix), a round that holds one gets a red frame and a red „!"; a star lost there is a red outline.
+     critic fix 3 (decision 5): a round whose only open slips are ✋ on a real child (no star lost) gets an amber frame and no „!" */
+  rep.per.forEach((p,i)=>{const d=document.createElement('div'),op=o.fix?p.figs.filter(f=>f.mist&&!f.fixed):[],open=op.length>0,soft=open&&op.every(f=>f.hm);
+    d.className='tile'+(open?' mist':'')+(soft?' soft':'');d.innerHTML=`<b>${i+1}</b><span class="ts"></span>`;
     /* v5.4: ⭐ first time · green ✓ star = fixed in „Pataisom klaidas" · empty outline = lost · a small dot = not played (the lesson clock cut the game short) */
-    d.querySelector('.ts').innerHTML=p.figs.map(f=>f.star?'⭐':f.fixed?STAR_FIX:f.out?STAR_OFF:STAR_DOT).join('');
-    const b=document.createElement('button');b.type='button';b.dataset.k='replay:'+i;b.textContent='↻';b.setAttribute('aria-label','↻ '+(i+1));b.addEventListener('click',e=>{e.currentTarget.blur();act({t:'replayRound',ri:i});});d.appendChild(b);T.appendChild(d);});
+    d.querySelector('.ts').innerHTML=p.figs.map(f=>f.star?'⭐':f.fixed?STAR_FIX:o.fix&&f.mist?STAR_MIS:f.out?STAR_OFF:STAR_DOT).join('');
+    /* critic fix 1: no ↻ while mistakes wait (a replayed round would wipe its mistakes and skip „Pataisom klaidas"); it comes back once none is open */
+    if(!o.fix){const b=document.createElement('button');b.type='button';b.dataset.k='replay:'+i;b.textContent='↻';b.setAttribute('aria-label','↻ '+(i+1));b.addEventListener('click',e=>{e.currentTarget.blur();act({t:'replayRound',ri:i});});d.appendChild(b);}
+    T.appendChild(d);});
   $('next').classList.remove('pressing');$('nextI').textContent='▶';$('kpkRate').classList.remove('pressing');   // v5.5 E3: ready again
-  $('nextL').textContent=VO.BTN_NEXT;$('next').hidden=!!o.wait;$('report').hidden=false;   // v5.4 class mode, all fixed: no „Toliau", the ending comes for everyone at once
+  /* v5.7 E6: „🔁 Taisom klaidas ▶" (pulsing) while mistakes wait to be fixed; „Toliau ▶" otherwise */
+  $('nextL').textContent=o.fix?VO.BTN_FIX:VO.BTN_NEXT;$('nextF').hidden=!o.fix;$('next').classList.toggle('fixp',!!o.fix);$('next').dataset.fix=o.fix?'1':'';
+  $('next').hidden=!!o.wait;$('report').hidden=false;   // v5.4 class mode, all fixed: no „Toliau", the ending comes for everyone at once
 }
 /* v5.5 E3: „Toliau ▶" shows the press at once (pressed look, ⏳ for ▶) and the next scene starts after that frame is painted;
    a second press while it is busy does nothing. reportShow() makes it ready again. */
 $('next').addEventListener('click',e=>{const b=e.currentTarget;b.blur();if(b.classList.contains('pressing'))return;
-  b.classList.add('pressing');$('nextI').innerHTML='<span class="spin" aria-hidden="true"></span>';S.T.pressNext=performance.now();
-  requestAnimationFrame(()=>setTimeout(()=>{if(!act({t:'next'})){b.classList.remove('pressing');$('nextI').textContent='▶';}},0));});
+  b.classList.add('pressing');b.classList.remove('fixp');$('nextI').innerHTML='<span class="spin" aria-hidden="true"></span>';S.T.pressNext=performance.now();
+  requestAnimationFrame(()=>setTimeout(()=>{if(!act({t:'next'})){b.classList.remove('pressing');$('nextI').textContent='▶';if(b.dataset.fix)b.classList.add('fixp');}},0));});
 $('endL').textContent=VO.BTN_NEXT;
 /* ⭐ Scorecard (Kris's rule 20): the widget (scorecard.js, beside the page) opens with the child's faces. The game pauses while it is open. */
 let scPaused=false;
@@ -2568,7 +2669,7 @@ async function talk_(id,o){
   const dur=Math.max(o.min||0,estDur(id),two?readSecs(parts[0])+readSecs(parts[1]):0);
   /* in a cut scene (the outro) only the line being said is on screen: a caption replaces the bubble and the other way round */
   const show=(t,pop)=>{if(S.mode==='cut'||S.mode==='end'){if(where==='cap')bubbleHide();else if(where==='bubble')capHide();}
-    if(where==='keep')return;if(where==='cap')capShow(t,id);else if(where==='card')cardMsg(t,id);else bubbleShow(t,who,o.mask,pop,id);};   // v5.4 'keep': the review card shows the words itself
+    if(where==='keep')return;if(where==='cap')capShow(t,id,who);else if(where==='card')cardMsg(t,id);else if(where==='hi')cardHi(t,id);else bubbleShow(t,who,o.mask,pop,id);};   // v5.4 'keep': the review card shows the words itself
   if(o.onShow)o.onShow();
   show(parts[0],true);say(id);if(ref){ref.on=true;ref.id=id;}
   const E=o.E&&!o.E.dead&&who==='f'?o.E:null,U=E?E.root.userData:null,rest=U?U.pose:null;if(U&&(rest==='idle'||rest==='hold'))U.pose='talk';
@@ -2658,19 +2759,104 @@ function fakeTarget(f){
 /* v5.2 (Kris 11-12: „make the bots give wrong pieces - they either look different (slightly different colour hues) or have a mismatching
    puzzle shape"). A repeater's piece is never a copy of a true piece: it is the forest art of a free cell with its colours turned (hue),
    or the right art with one tab turned the wrong way, so it fits no cell (tab). The other bots keep their pictures from other maps. */
-function offerPiece(f){
+function offerPiece(f,E){
   const P=pieceOf(S.L,f);let shape,kind=P.kind;const o={};
   if(P.kind==='real')shape=f.piece;
   else{const T=fakeTarget(f);shape=T.cell;if(P.kind==='dup'){kind='real';if(T.v!==f.v){f.vWas=f.v;f.v=T.v;}if(T.v==='tab'){f.flip=JIG.tabFlip(shape,S.L.placed);o.flip=f.flip;}else o.hue=CFG.hueShift;}}
-  f.shape=shape;pieceSet(JIG.piece(kind,shape,o));
-  [PC.x,PC.y]=pieceHome();PC.sc=.2;PC.mode='held';pieceShow(true);salinShow(true);SFX.pop();
+  f.shape=shape;const src=JIG.piece(kind,shape,o);pieceSet(src);SFX.pop();
+  return offerFrom(E,src);
+}
+/* ---------- v5.7 E3 (Kris 11-20: „then the figure extends its arm with a puzzle piece in the hand. now the puzzle piece just appears randomly
+   - not clear that it comes from the character. make it clear"). The figure reaches toward the child with the piece in its hand (a flat
+   copy of the same picture, OFFER.size), holds it OFFER.holdS, then the piece leaves the hand: the 2D piece starts where the hand's piece is
+   on screen, at its size, and floats on a short arc to its place under the card, Šalin beside it (OFFER.flyS). The arm stays out until the
+   piece is placed or binned, then drops. Nothing waits: Šalin, ✋ and the piece itself work during the reach, the hold and the flight
+   (Šalin sends the piece straight from the hand; the piece can be caught in the air). The review's fixes use the same reach. ---------- */
+/* critic fix 2 (11-20: „the arm can't be seen: the piece sits flat on the chest, no sleeve or hand shows … it pops in at the hip, half
+   behind the cloak"). The arm swings OUT to the figure's right (screen-left, the way the piece then flies) at about waist height, a little
+   forward, and grows OFFER.len longer as it reaches, so the sleeve shows side-on against the forest. A light mitten sits on the hand and
+   grips the piece's inner edge (its fingers over the piece). Mitten and piece are camera-facing pictures placed at the hand every frame and
+   drawn over the figure (never half inside the cloak); they grow in as the hand leaves the cloak (no pop at the hip), and the empty mitten
+   shrinks back with the arm. rx, rz, len, grip: measured with the reach probe (qa-tools/v57-reach.mjs), 1024x600 + 1366x768, rounds 1-3: at rz -1.0 (level)
+   the hand and the piece went under the round-3 card at 1024x600 once it grows to its tallest (bottom 352 px, sometimes during the hold);
+   rz -.6 with a longer arm keeps the hand at the hip line, 14 px below that card, and the piece's picture 3 px below it. */
+const OFFER={extS:.35,holdS:.6,flyS:.55,size:.6,rx:-.2,rz:-.6,len:1.35,mit:.34,grip:.35,edge:.31,lift:.03};   // edge: the piece picture's half-width in its sprite
+const OF={E:null,spr:null,mit:null,mitE:null,mitT:0,g:0,from:null,t:0,res:null,tok:0,log:[]};
+const HAND_AT=-.41;   // the hand's point on the arm (veikejai.js arm(): sleeve .36 + the hand ball)
+/* the mitten: a light, outlined cartoon mitten seen from the front, fingers to the left (over the piece), its cuff to the right (the sleeve) */
+function mittenTex(){if(mittenTex.t)return mittenTex.t;const c=document.createElement('canvas');c.width=160;c.height=120;const x=c.getContext('2d');
+  x.lineJoin='round';x.lineCap='round';x.lineWidth=7;x.strokeStyle='#3b2a12';
+  x.fillStyle='#e6b85c';x.beginPath();x.moveTo(108,34);x.lineTo(150,30);x.lineTo(150,90);x.lineTo(108,86);x.closePath();x.fill();x.stroke();   // cuff
+  x.fillStyle='#fff0c8';x.beginPath();x.ellipse(70,62,50,32,0,0,Math.PI*2);x.fill();x.stroke();                                               // palm + fingers
+  x.beginPath();x.ellipse(58,30,24,13,-.35,0,Math.PI*2);x.fill();x.stroke();                                                                  // thumb, over the piece's front
+  x.lineWidth=4;x.beginPath();x.moveTo(34,62);x.lineTo(62,64);x.stroke();                                                                     // the mitten's fold
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return mittenTex.t=t;}
+function offerSprite(map,order){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map,fog:false,transparent:true,depthWrite:false,depthTest:false}));
+  sp.renderOrder=order;sp.scale.setScalar(.001);return sp;}
+function offerArm(E,src){
+  offerDrop(true);
+  const U=E.root.userData;U.offer=true;E.armVis=E.P.armR.visible;E.P.armR.visible=true;   // a long cloak hides the arms: this one comes out
+  const tex=new THREE.CanvasTexture(src);tex.colorSpace=THREE.SRGBColorSpace;
+  const sp=offerSprite(tex,30),mt=offerSprite(mittenTex(),31);E.root.add(sp);E.root.add(mt);
+  OF.E=E;OF.spr=sp;OF.mit=mt;OF.mitE=E;OF.mitT=0;OF.g=0;OF.t=0;offerPlace();
+  OF.log.push({ev:'arm',fid:E.f&&E.f.fid,t:+S.t.toFixed(2)});
+}
+/* every frame: the arm's length, the mitten on the hand, the piece in the mitten. g: how far the hand is out of the cloak (0..1) */
+const _oh=V3(),_or=V3(),_op=V3();
+function offerPlace(){
+  const E=OF.mitE;if(!E||!OF.mit)return;if(E.dead){mitKill();return;}
+  const U=E.root.userData,arm=E.P.armR,p=clamp(U.a.armRz/OFFER.rz,0,1),q=clamp((p-.4)/.5,0,1),g=q*q*(3-2*q);OF.g=g;
+  arm.scale.y=1+(OFFER.len-1)*p;E.root.updateWorldMatrix(true,true);
+  arm.localToWorld(_oh.set(0,HAND_AT,.02));_or.set(1,0,0).applyQuaternion(camera.quaternion);const k=E.root.scale.x;
+  OF.mit.position.copy(E.root.worldToLocal(_op.copy(_oh)));OF.mit.scale.set(OFFER.mit*g,OFFER.mit*.75*g,1);
+  if(OF.spr&&OF.E===E){const pulse=PC.mode==='offer'?1+.1*Math.sin(OF.t*11)*Math.min(1,OF.t*3):1,s=OFFER.size*g*pulse;   // held out, it pulses a little: „take it"
+    _op.copy(_oh).addScaledVector(_or,-(OFFER.mit*g*(.5-OFFER.grip)+s*OFFER.edge)*k);   // the fingers cover the piece's inner edge (grip)_op.y+=OFFER.lift*k;
+    OF.spr.position.copy(E.root.worldToLocal(_op));OF.spr.scale.setScalar(Math.max(s,.001));}
+}
+function spriteKill(sp){if(!sp)return;if(sp.parent)sp.parent.remove(sp);if(sp.material.map!==mittenTex.t)sp.material.map.dispose();sp.material.dispose();}
+function mitKill(){const E=OF.mitE;spriteKill(OF.mit);OF.mit=null;OF.mitE=null;if(E&&!E.dead)E.P.armR.scale.y=1;}
+/* where the mitten (the hand) is on screen: its middle and its height in px (QA) */
+function mitPx(){const sp=OF.mit;if(!sp||!sp.parent)return null;const p=sp.getWorldPosition(V3()),[x,y]=projPx(p),h=sp.getWorldScale(V3()).y,
+  up=V3(0,1,0).applyQuaternion(camera.quaternion),[x2,y2]=projPx(p.clone().addScaledVector(up,h/2));return [x,y,2*Math.hypot(x2-x,y2-y)];}
+/* where the hand's piece is on screen: its middle and its height in px */
+function offerPx(){const sp=OF.spr;if(!sp||!sp.parent)return null;sp.updateWorldMatrix(true,false);const p=sp.getWorldPosition(V3()),[x,y]=projPx(p),h=sp.getWorldScale(V3()).y,
+  up=V3(0,1,0).applyQuaternion(camera.quaternion),[x2,y2]=projPx(p.clone().addScaledVector(up,h/2));return [x,y,2*Math.hypot(x2-x,y2-y)];}
+const pieceCss=()=>$('piece').offsetWidth||LAY.cell/JIG.CI*JIG.PW;
+/* the 2D piece takes the place of the hand's piece */
+function offerTake(){const h=offerPx();if(OF.spr)OF.spr.visible=false;if(h){PC.x=h[0];PC.y=h[1];PC.sc=clamp(h[2]/pieceCss(),.1,1);}PC.mode='ofly';piecePos();pieceShow(true);   // placed before it shows (no frame at its old place)
+  OF.log.push({ev:'take',at:h&&h.map(Math.round),t:+S.t.toFixed(2)});}
+function offerLanded(){const r=OF.res;OF.res=null;if(r)r();}
+function offerFlyStart(){offerTake();OF.from=[PC.x,PC.y,PC.sc];OF.t=0;PC.mode='ofly';if(OF.salin)salinShow(true);SFX.whoosh();}
+function offerTick(dt){
+  if(OF.mitE){const U=OF.mitE.root.userData;if(!U.offer){OF.mitT+=dt;if(OF.mitT>.6||OF.g<=0)mitKill();}}   // the empty mitten goes back with the arm
+  if(PC.mode==='offer'&&OF.spr)OF.t+=dt;
+  offerPlace();
+  if(PC.mode!=='ofly'||!OF.from)return;OF.t+=dt;const k=Math.min(1,OF.t/OFFER.flyS),e=ease.io(k),[hx,hy]=pieceHome(),[x0,y0,s0]=OF.from;
+  PC.x=x0+(hx-x0)*e;PC.y=y0+(hy-y0)*e-Math.sin(Math.PI*k)*LAY.cell*.3;PC.sc=s0+((PC.hsc||1)-s0)*e;
+  if(k>=1){OF.from=null;PC.mode='held';heldFollow();OF.log.push({ev:'land',t:+S.t.toFixed(2)});offerLanded();}
+}
+/* the child caught it in the air, or an action moves it now: the flight ends where the piece is */
+function offerCatch(){if(PC.mode==='ofly'){OF.from=null;PC.mode='held';OF.log.push({ev:'catch',t:+S.t.toFixed(2)});offerLanded();}}
+function offerCut(){OF.tok++;if(PC.mode==='offer')offerTake();else offerCatch();offerLanded();}
+/* the arm drops (the piece was placed, binned, or ✋ was pressed). now: at once (the figure is being replaced) */
+function offerDrop(now){OF.tok++;OF.from=null;offerLanded();const E=OF.E,sp=OF.spr;OF.E=null;OF.spr=null;
+  spriteKill(sp);if(now||!E||E.dead)mitKill();
+  if(!E||E.dead)return;const U=E.root.userData;U.offer=false;OF.log.push({ev:'drop',t:+S.t.toFixed(2)});
+  if(E.armVis===false){if(now)E.P.armR.visible=false;else bg(wait(.35).then(()=>{if(!U.offer&&!E.dead)E.P.armR.visible=false;}));}}
+/* the reach, the hold, the flight. Returns a promise for the moment the piece is in its place under the card (it may never come: the child
+   acted first, and the piece went straight from the hand) */
+function offerFrom(E,src,salin=true){
+  pieceShow(false);offerArm(E,src);PC.mode='offer';PC.sc=.2;[PC.x,PC.y]=pieceHome();OF.salin=salin;if(salin)salinShow(true);   // Šalin works from the first moment
+  const tok=++OF.tok,land=new Promise(r=>{OF.res=r;});
+  bg(wait(OFFER.extS+OFFER.holdS).then(()=>{if(OF.tok===tok&&PC.mode==='offer')offerFlyStart();}));
+  return land;
 }
 async function pieceBack(){const c=$('piece');c.classList.remove('bad','dim');pieceShow(true);salinShow(true);await pieceFly(()=>[...pieceHome(),1],.4);PC.mode='held';}
-async function toBin(){SFX.whoosh();await pieceFly(()=>{const[x,y]=rectC($('salin'));return [x,y,.3];},.4);pieceShow(false);}
+async function toBin(){SFX.whoosh();await pieceFly(()=>{const[x,y]=rectC($('salin'));return [x,y,.3];},.4);pieceShow(false);offerDrop();}
 async function shakePiece(){SFX.boing();await tw(.5,k=>{PC.ox=Math.sin(k*Math.PI*7)*14*(1-k);},ease.l);PC.ox=0;}
 /* a real piece flies to its slot and snaps in; the mask falls off beside the child, it says thanks and goes */
 async function snapPiece(E,f,slot){
-  S.pending=slot;pieceShow(true);salinShow(false);await pieceFly(()=>slotPx(slot),.45);S.pending=null;pieceShow(false);
+  S.pending=slot;pieceShow(true);salinShow(false);await pieceFly(()=>slotPx(slot),.45);S.pending=null;pieceShow(false);offerDrop();
   SFX.pop();JIG.flash(slot,.7);JIG.draw();starsDraw();if(f.star){SFX.ding();sfxV('SFX_OK.mp3',.5);}
   E.root.userData.pose='happy';
   const off=maskOff(E,true),first=!S.saidFit[f.round];S.saidFit[f.round]=true;
@@ -2686,40 +2872,76 @@ function helpGlow(){const m=$('cMsg'),d=CFG.helpGlowS;m.classList.add('glow');$(
 /* ---------- one figure ---------- */
 async function waitAct(){S.actOpen=true;S.idle=0;try{return await waitFor('act');}finally{S.actOpen=false;handHide();pulseOff();}}
 function firstRow(){return [...$('cOpts').children].find(r=>!r.hidden&&r.dataset.q!=='ADULT');}
+const DOTS_S=1.0;   // v5.7 E2: the typing dots before every reply (Kris: „for 1 second")
+/* v5.7 E4 (Kris 11-20: „kids dont understand the point of the game. fix like this: in the beginning, after klaidas climbs the tree, say -
+   someone is approaching, but how do wee know if its a person or if its a bot? 1) we ask a question (points to the question options),
+   2) listen so their answer (shows the character's line showing up) 3) decide if the answer seems human 4) if we think it's a human, we take
+   a puuzle piece from them (show how and where to drag). 5) if bot, then we toss the piece to the trash and unmask."). The beach-piece
+   practice and HOW_1 / HOW_2 are gone; the first two figures of round 1 (first play) teach the moves with the child, Klaidas talking (his
+   face in the caption). Figure 1, always R1A, a real child: T_0 as it walks in · T_1 + the hand on the questions · T_2 while the dots show,
+   the reply bubble glows · T_3 · T_4 + the ghost hand drags its piece to its own cell. Figure 2, always the example bot on the first play:
+   FB_REPEAT · T_5 + the ghost hand drags its piece to Šalin · then the ring on its mask (tearPhase). Nothing waits for a line: the child may
+   act at any moment, and an action cuts the line still playing; the idle hints keep working. */
+const tutOf=f=>f.round===0&&!S.L.rep[0]?(S.L.rounds[0][0]===f?1:f.example?2:0):0;
 async function figure(f){
   const L=S.L;S.cur=f;S.phase='walk';S.mode='talk';S.hintKey=null;starsDraw();
   clearJunk();cardHide();salinShow(false);pieceShow(false);tearHide();
+  const tut=f.tut=tutOf(f);
+  if(tut===1)bg(talk('T_0'));                                      // „Kažkas ateina! Bet kaip žinoti: žmogus ar botas?" while it walks in
   S.T[f.fid+'_0']=S.play;const E=await figIn(f);S.T[f.fid+'_w']=S.play;
   await talkQ;S.T[f.fid]=S.play;                                  // the line still playing (a thanks, a „bot" explanation) ends before the card opens
   capHide();bubbleHide();                                          // nothing said about the figure before stays next to this one („Tinka! Tikras vaikas." was left over)
   cardOpen(f);SFX.pop();
-  /* round 3: the figure speaks first (its line is the cue); the danger card comes with the words, never before them */
+  /* round 3: the figure speaks first (its line is the cue, the top-left bubble); the danger card comes with the words, never before them */
   const fl=firstLine(f);
-  if(fl)talkBg(fl,{E,onShow:()=>{$('card').classList.toggle('danger',f.kind==='D');}});
-  else if(!S.hinted.ask){S.hinted.ask=true;const r=firstRow();if(r)handTap(r.firstChild);talkBg('HOW_1');}
-  for(;;){
-    S.phase=f.nAsk?'decide':'ask';S.hintKey=S.phase==='decide'&&f.example?'tear':S.phase;cardRows(f);
-    const a=await waitAct();
-    if(a.t==='ask'){
-      const ans=step(L,{t:'ask',fid:f.fid,q:a.q}).fx[0];cardRows(f);
-      {const l0=[].concat(ans.line)[0];if(l0&&VO[l0])cardMsg(split2(VO[l0])[0],l0);}   // the card has its final size before the piece is placed under it
-      /* v5.2 (Kris 11-12, „first bot = example"): the first bot of round 1 is shown, not tested. Its answer, then the narrator:
-         „Kartoja tą patį. Tai botas." „Plėšk kaukę!" while its piece is out and the ring is already on its mask, with the hand on the ring.
-         Nothing waits: the child may tear, use Šalin or even try the map (it bounces, no star lost) while the lines play. */
-      if(ans.first&&f.example)talkBg([].concat(ans.line,'FB_REPEAT','FB_RIP'),{E});else talkBg(ans.line,{E});
-      if(ans.first){offerPiece(f);
-        if(f.example){S.hinted.tear=true;tearShow(()=>projPx(headW(E)));handTear();}
-        else if(!S.hinted.put){S.hinted.put=true;const to=f.piece||f.shape;handDrag(()=>[PC.x,PC.y],()=>slotPx(to),PC.src,()=>slotPx(to)[2]);}}
-      continue;}
-    if(a.t==='tear'&&!(f.example&&f.nAsk))continue;
-    const{fx}=step(L,{t:a.t,fid:f.fid,slot:a.slot});
-    if(fx[0].t==='locked'||fx[0].t==='ignored')continue;
-    trk('act',{t:a.t});
-    S.phase='stage';
-    if(await stage(E,f,fx,a))break;
-  }
+  if(fl)talkBg(fl,{E,where:'hi',onShow:()=>{$('card').classList.toggle('danger',f.kind==='D');}});
+  else if(!S.hinted.ask){S.hinted.ask=true;const r=firstRow();if(r)handTap(r.firstChild);talkBg('T_1',{where:'cap'});}
+  try{
+    for(;;){
+      S.phase=f.nAsk?'decide':'ask';S.hintKey=S.phase;cardRows(f);
+      const a=await waitAct();
+      if(a.t==='ask'){const ans=step(L,{t:'ask',fid:f.fid,q:a.q}).fx[0];cardRows(f);bg(reveal(E,f,ans));continue;}
+      if(a.t==='tear'&&!(f.example&&f.nAsk))continue;
+      const{fx}=step(L,{t:a.t,fid:f.fid,slot:a.slot});
+      if(fx[0].t==='locked'||fx[0].t==='ignored')continue;
+      trk('act',{t:a.t});
+      S.phase='stage';
+      if(await stage(E,f,fx,a))break;
+    }
+  }finally{offerDrop();}
   S.cur=null;S.phase=null;starsDraw();
 }
+/* v5.7 E2 (Kris 11-20: „when question is selected, make 3 dots appear (just like when someone is typing) for 1 second before revealing the
+   response"): the question stays as the child's bubble on the right; three dots bounce in the figure's bubble on the left for DOTS_S; then
+   the reply's words and voice start together (talk_ shows the words as the voice starts). Nothing waits: ✋, 🔊 and the piece work while the
+   dots show; a second question restarts them (the first reveal is dropped). The guided start's T_2 is said over the dots, and the dots
+   last until it ends (1.0 s or the line's length, whichever is longer: one line at a time). E3: the piece comes from the hand. */
+async function reveal(E,f,ans){
+  /* the first reply of a figure brings the guided lines and the piece. A second tap during the dots drops the first reveal, so „first"
+     is the figure's own flag (f.revealed), not the answer's (ans.first): the piece and the lines always come once, from whichever ends */
+  const tok=S.revealN=(S.revealN||0)+1,live=()=>tok===S.revealN&&S.cur===f&&!f.out&&!E.dead,tut=f.revealed?0:f.tut;
+  cutBg();cardDots();const t0=S.t;
+  if(tut===1&&!f.t2){f.t2=true;await Promise.all([wait(DOTS_S),talkBg('T_2',{where:'cap'})]);}else await wait(DOTS_S);
+  if(!live())return;
+  const first=!f.revealed;f.revealed=true;
+  (S.dotsLog||(S.dotsLog=[])).push({fid:f.fid,s:+(S.t-t0).toFixed(2),tut});
+  const items=[{id:ans.line,o:{E,onShow:()=>{if(tut===1)replyGlow(true);}}}];
+  if(tut===1)items.push({id:'T_3',o:{where:'cap',onShow:()=>replyGlow(false)}},{id:'T_4',o:{where:'cap',onShow:()=>putHint(f)}});
+  if(tut===2)items.push({id:'FB_REPEAT'},{id:'T_5',o:{where:'cap',onShow:()=>binHint(f)}});
+  talkBgL(items);
+  /* the put hint (the ghost hand drags the piece to its own cell) is the first real child's only: the guided figure 1 takes it whether or
+     not the child was quicker than T_4; a mentor jump past round 1 shows it on its first real child, never on a bot's or a danger piece */
+  if(tut===1)S.hinted.put=true;
+  if(first){f.land=offerPiece(f,E);if(!tut&&!S.hinted.put&&f.kind==='H')f.land.then(()=>putHint(f));}
+}
+/* the guided start: the reply bubble glows as it comes (T_2 „Klausyk atsakymo."), until T_3 or 3 s */
+function replyGlow(on){const m=$('cMsg');m.classList.toggle('glow',on);if(on)bg(wait(3).then(()=>m.classList.remove('glow')));}
+/* the ghost hand drags the piece in the hand to its own cell (T_4, and the first figure of a jump) or to Šalin (T_5), once the piece is
+   under the card and the child has not moved it yet */
+function pieceHint(f,fn){const go=()=>{if(S.cur!==f||f.out||S.phase!=='decide'||!S.actOpen||PC.mode!=='held'||$('piece').hidden||PC.down)return;fn();};
+  if(PC.mode==='held'&&!$('piece').hidden)go();else if(f.land)f.land.then(go);}
+function putHint(f){pieceHint(f,()=>{S.hinted.put=true;const to=f.piece||f.shape;handDrag(()=>[PC.x,PC.y],()=>slotPx(to),PC.src,()=>slotPx(to)[2]);});}
+function binHint(f){pieceHint(f,()=>{handDrag(()=>[PC.x,PC.y],()=>rectC($('salin')),null,()=>.45);$('salin').classList.add('pulse');});}
 /* the decision's effects, staged. Returns true when the figure is done. */
 async function stage(E,f,fx,a){
   const has=t=>fx.find(e=>e.t===t),help=!!has('help'),lines=[];let out=false;
@@ -2748,7 +2970,7 @@ async function stage(E,f,fx,a){
   else if(has('dmap')){
     await pieceFly(()=>slotPx(tried),.4);$('piece').classList.add('dim');SFX.thud();await shakePiece();
     lines.push('HAND_TOOK');
-    if(has('giveup')){pieceShow(false);salinShow(false);talkBg(lines);await wait(.6);cardHide();await figLeave(E);return true;}
+    if(has('giveup')){pieceShow(false);salinShow(false);offerDrop();talkBg(lines);await wait(.6);cardHide();await figLeave(E);return true;}
     await pieceBack();}
   else if(has('dbin')){await toBin();salinShow(false);lines.push('HAND_BIN');
     if(has('giveup')){talkBg(lines);await wait(.6);cardHide();await figLeave(E);return true;}}
@@ -2759,7 +2981,7 @@ async function stage(E,f,fx,a){
     if(has('selfplace')){if(off)await off;await talk('FB_REAL_'+spkOf(f),{E});await snapPiece(E,f,f.piece);return true;}
     lines.push('FB_REAL_'+spkOf(f));if(help)lines.push('FB_HELP');talkBg(lines,{E});
     if(off)await off;await pieceBack();return false;}
-  else if(has('handOk')){signPulse(f);pieceShow(false);salinShow(false);SFX.ding();sfxV('SFX_OK.mp3',.5);starsDraw();talkBg('HAND_OK');await wait(.5);cardHide();bg(figLeave(E));await wait(.3);out=true;}
+  else if(has('handOk')){signPulse(f);pieceShow(false);salinShow(false);offerDrop();SFX.ding();sfxV('SFX_OK.mp3',.5);starsDraw();talkBg('HAND_OK');await wait(.5);cardHide();bg(figLeave(E));await wait(.3);out=true;}
   else if(has('handNo')){lines.push('HAND_NO');}
   if(help&&!out){helpGlow();if(!lines.includes('FB_HELP'))lines.push('FB_HELP');}
   if(lines.length&&!out)talkBg(lines,{E});
@@ -2897,13 +3119,14 @@ async function reportScene(){
   S.scene='report';S.mode='report';stamp('report');hideOverlays();capWide('all');
   /* v5.4 class mode (the lesson clock found today's lesson): once every mistake is fixed, the report waits with no „Toliau"; the ending
      plays for everyone at OUTRO_AT. A replay ↻ is still open (Kris: replay allowed), a calm line, no countdown. */
-  const rep=report(S.L),hold=clockClass()&&S.revSeen&&rep.open===0;
-  reportShow(rep,{wait:hold});scWire();trk('end',{stars:rep.stars});
+  const rep=report(S.L),hold=clockClass()&&S.revSeen&&rep.open===0,fix=!hold&&rep.open>0;
+  reportShow(rep,{wait:hold,fix});scWire();trk('end',{stars:rep.stars});
   if(!S.endSent){S.endSent=true;tev('zaidimas_baigta',{baigta:rep.full,zvaigzdes:rep.stars,is:rep.of,klaidu:rep.mist,laikas_s:Math.round(S.play)});}
-  talkBg(hold?['REV_WAIT','REPORT_REPLAY']:rep.full?['REPORT','REPORT_REPLAY']:['REPORT_REPLAY']);
-  for(;;){S.hintKey=hold?null:'report';const a=await waitAct();
+  /* v5.7 E6: mistakes still to fix → „Kai kurios kaukės sugrįš. Pataisyk savo klaidas!" (REPORT_FIX, critic fix 4); the replay question only when none is open */
+  talkBg(hold?['REV_WAIT','REPORT_REPLAY']:fix?(rep.full?['REPORT','REPORT_FIX']:['REPORT_FIX']):rep.full?['REPORT','REPORT_REPLAY']:['REPORT_REPLAY']);
+  for(;;){S.hintKey=hold?null:'report';const a=await waitAct();   // critic fix 1: a replay never while mistakes wait (no ↻ is drawn then)
     if(a.t==='next'){if(hold)continue;$('report').hidden=true;capHide();await afterReport();return;}
-    if(a.t==='replayRound'){$('report').hidden=true;capHide();replayRound(S.L,a.ri,S.L.seed);castRound(S.L,a.ri);S.routeU=JIG.routeOpen(S.L.placed);
+    if(a.t==='replayRound'){if(fix)continue;$('report').hidden=true;capHide();replayRound(S.L,a.ri,S.L.seed);castRound(S.L,a.ri);S.routeU=JIG.routeOpen(S.L.placed);
       await playRound(a.ri);await fullMap();await reportScene();return;}
   }
 }
@@ -3051,29 +3274,12 @@ async function bridge(){
   boardMode('normal');boardIn();youShow(true);SFX.whoosh();await wait(.5);
   /* the goal: a ghost hand shows a true piece going into its place on the map */
   handDrag(()=>pieceHome(),()=>slotPx('12'),JIG.piece('real','12'),()=>slotPx('12')[2]);await talk('GOAL');handHide();
-  await practice();
+  /* v5.7 E4: the beach-piece practice (HOW_2) is gone: the first two figures of round 1 teach the moves with the child (figure(), tutOf) */
   handHide();capHide();bubbleHide();
-}
-/* the first hands-on move: a piece from another map is held out; the child pushes it to Šalin. It is live at once:
-   the instruction plays while the child may already drag. Tried on the map, it shakes, shows where its lines do not meet, and comes back. */
-const PRACTICE_SLOT='12';
-function practiceGhost(){handDrag(()=>[PC.x,PC.y],()=>rectC($('salin')),null,()=>.45);$('salin').classList.add('pulse');}
-async function practice(){
-  S.phase='practice';S.mode='talk';stamp('practice0');bubbleHide();cardHide();
-  pieceSet(JIG.piece('beach',PRACTICE_SLOT));[PC.x,PC.y]=pieceHome();PC.sc=.2;PC.mode='held';pieceShow(true);salinShow(true);SFX.pop();
-  practiceGhost();talkBg('HOW_2');
-  try{
-    for(;;){S.hintKey='practice';const a=await waitAct();
-      if(a.t==='bin'){await toBin();SFX.ding();salinShow(false);await wait(.3);break;}
-      if(a.t==='map'){const sl=a.slot||PRACTICE_SLOT;await pieceFly(()=>slotPx(sl),.4);$('piece').classList.add('bad');
-        JIG.rings(JIG.crossings(sl,S.L?S.L.placed:[START]),2.4);await shakePiece();
-        await pieceBack();practiceGhost();talkBg('HOW_2');}
-    }
-  }finally{stamp('practice1');S.phase=null;S.hintKey=null;}
 }
 
 /* ---------- screens ---------- */
-function hideOverlays(){['menu','title','report','skip','endMenu','key'].forEach(i=>{$(i).hidden=true;});thinkShow(false);signsShow(false);capHide();bubbleHide();cardHide();salinShow(false);handHide();pieceShow(false);tearHide();youShow(false);boardMode('off');capWide('all');}
+function hideOverlays(){['menu','title','revT','report','skip','endMenu','key'].forEach(i=>{$(i).hidden=true;});thinkShow(false);signsShow(false);capHide();bubbleHide();cardHide();salinShow(false);handHide();pieceShow(false);tearHide();youShow(false);boardMode('off');capWide('all');}
 function hudOn(on){if(!on)boardMode('off');}
 function cleanEnc(){if(S.E){freeFig(S.E);S.E=null;}if(S.F){freeFig(S.F);S.F=null;}for(const E of LEAVING)freeFig(E);LEAVING.clear();MI.visible=false;RUN.on=false;RUN.done=null;LOGS.forEach(g=>{g.visible=false;});HOLE.g.visible=false;KL.userData.runK=1;
   if(MAPMESH){if(MAPMESH.parent)MAPMESH.parent.remove(MAPMESH);MAPMESH=null;}clearJunk(true);CAM.follow=null;KL.position.y=Math.max(KL.position.y,0);
@@ -3221,8 +3427,14 @@ function evMark(f,text){
 function revCard(f,k){
   const c=$('card');c.hidden=false;c.classList.remove('min','danger','ev');c.classList.add('rev');c.classList.toggle('danger',f.kind==='D');
   const av=$('cAv');av.innerHTML='';const o=cnv(96,96);o.getContext('2d').drawImage(MK.icon(f.mask,96),0,0,96,96);av.appendChild(o);
-  $('cWho').innerHTML=`<span class="rdots" aria-hidden="true">${REV.list.map((_,j)=>`<i class="${j<k?'did':j===k?'now':''}"></i>`).join('')}</span>`;
-  $('rStar').hidden=true;$('cOpts').hidden=true;
+  /* v5.7 E6: the header shows the masks that come back (it was dots): ✓ green = fixed · amber = now · red ring = still to fix */
+  $('cWho').innerHTML=`<span class="rdots" aria-hidden="true">${REV.list.map((_,j)=>`<span class="rm ${j<k?'did':j===k?'now':''}"></span>`).join('')}</span>`;
+  [...$('cWho').querySelectorAll('.rm')].forEach((el,j)=>el.appendChild(maskCv(REV.list[j].mask)));
+  /* one row, so the header is as tall as v5.6's dots: with many mistakes the masks shrink (never below 22 px). v5-play sloppy at 1024×600:
+     11 masks at full size took three rows and pushed the card off the screen in the „why" step */
+  {const n=REV.list.length,w=LAY.rw-.9*LAY.t-6-LAY.tgt-12-(LAY.tgt+8),s0=LAY.tgt*.55,sz=Math.max(22,Math.min(s0,Math.floor((w+10)/Math.max(1,n)-10)));
+   $('cWho').querySelector('.rdots').style.setProperty('--rmS',sz+'px');}
+  $('rStar').hidden=true;$('cOpts').hidden=true;$('cHand').hidden=true;$('cHi').hidden=true;$('cMsg').hidden=false;
   const q=revQ(f),qr=$('rQ');qr.hidden=!q;qr.classList.remove('ev');
   if(q){const Q=QB.find(x=>x.q===q);$('rQI').textContent=Q.ic;$('rQT').textContent=VO[Q.id];sndBind($('rQS'),Q.id);}
   const line=revLine(f),m=$('cMsgT');m.innerHTML='';const sp=document.createElement('span');sp.className='jt';sp.innerHTML=evMark(f,VO[line]);m.appendChild(sp);
@@ -3262,39 +3474,45 @@ function revPieceSrc(f){const P=pieceOf(S.L,f);
   if(P.kind==='real')return JIG.piece('real',f.piece);
   if(P.kind==='dup'){const o={};if(f.v==='tab'&&f.flip!=null)o.flip=f.flip;else o.hue=CFG.hueShift;return JIG.piece('real',f.shape||'00',o);}
   return JIG.piece(P.kind,f.shape||'00');}
-function revOffer(f){pieceSet(revPieceSrc(f));[PC.x,PC.y]=pieceHome();PC.sc=.2;PC.mode='held';pieceShow(true);salinShow(true);SFX.pop();}
+/* v5.7 E3: in the fix too, the figure reaches out with the piece and the piece floats from its hand to under the card. Resolves when it is
+   there; never waits longer than the reach + hold + flight (+0.6 s), and a lesson-clock cut still ends the review (the wait rejects). */
+async function revOffer(E,src,salin=true){pieceSet(src);SFX.pop();const land=offerFrom(E,src,salin);await Promise.race([land,wait(OFFER.extS+OFFER.holdS+OFFER.flyS+.6)]);offerCatch();}
+const maskCv=m=>{const o=cnv(96,96);o.getContext('2d').drawImage(MK.icon(m,96),0,0,96,96);return o;};
 /* the „pataisyta" star pops in the card header */
-function revStar(){const s=$('rStar');s.innerHTML=STAR_FIX;s.hidden=false;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');}
+function revStar(){const s=$('rStar');s.innerHTML=STAR_FIX;s.hidden=false;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');
+  /* v5.7 E6: its mask in the header turns green ✓ the moment it is fixed */
+  const m=$('cWho').querySelectorAll('.rm')[REV.i];if(m){m.classList.remove('now');m.classList.add('did');}}
 async function revFix(E,f){
   S.phase='rev-fix';$('rOpts').hidden=true;handHide();
   if(isBot(f.kind)){
     /* a bot: its piece goes to Šalin, its mask tears, nothing underneath, the cloak collapses */
-    revOffer(f);await wait(.35);await toBin();salinShow(false);
+    await revOffer(E,revPieceSrc(f));await wait(.25);await toBin();salinShow(false);
     await maskOff(E,false);SFX.puff();Puff.at(chest(E),1.6);const sy=E.root.scale.y;
     revStar();SFX.ding();sfxV('SFX_OK.mp3',.5);
     await Promise.all([talk('REV_FIXED',{where:'keep',onShow:()=>revStepText('REV_FIXED')}),tw(.5,k=>{E.root.scale.y=sy*(1-.95*k);},ease.i).then(()=>{freeFig(E);if(S.F===E)S.F=null;})]);
     if(!f.out)f.out='torn';
   }else if(f.kind==='H'){
     /* a real child: its true piece flies into its own cell (drawn empty until it lands), the mask comes off, a face */
-    pieceSet(JIG.piece('real',f.piece));[PC.x,PC.y]=pieceHome();PC.sc=.2;PC.mode='held';pieceShow(true);salinShow(false);SFX.pop();await wait(.3);
-    S.pending=f.piece;JIG.draw();await pieceFly(()=>slotPx(f.piece),.6);S.pending=null;pieceShow(false);
+    await revOffer(E,JIG.piece('real',f.piece),false);await wait(.15);
+    S.pending=f.piece;JIG.draw();await pieceFly(()=>slotPx(f.piece),.6);S.pending=null;pieceShow(false);offerDrop();
     if(!S.L.placed.includes(f.piece))S.L.placed.push(f.piece);SFX.pop();JIG.flash(f.piece,.9);JIG.draw();
     E.root.userData.pose='happy';const off=maskOff(E,true);revStar();SFX.ding();sfxV('SFX_OK.mp3',.5);
     await Promise.all([off,talk('REV_FIXED',{where:'keep',onShow:()=>revStepText('REV_FIXED')})]);
     if(!f.out)f.out='placed';
   }else{
     /* a danger figure: ✋ is right; its piece goes to Šalin, its sign pulses, it walks away with its mask on (K3) */
-    signPulse(f);revOffer(f);await wait(.35);await toBin();salinShow(false);revStar();SFX.ding();sfxV('SFX_OK.mp3',.5);
+    signPulse(f);await revOffer(E,revPieceSrc(f));await wait(.25);await toBin();salinShow(false);revStar();SFX.ding();sfxV('SFX_OK.mp3',.5);
     await talk('REV_FIXED',{where:'keep',onShow:()=>revStepText('REV_FIXED')});
     if(!f.out)f.out='hand';
   }
-  cardHide();if(E&&!E.dead)bg(figLeave(E));await wait(.35);
+  offerDrop();cardHide();if(E&&!E.dead)bg(figLeave(E));await wait(.35);
 }
 /* one mistake, start to end */
 async function revItem(f,k){
   REV.i=k;REV.f=f;const R=REV.R={step:'decide',miss:0,rmiss:0};const t0=S.t;
   S.cur=null;S.phase='rev-walk';S.hintKey=null;clearJunk();cardHide();salinShow(false);pieceShow(false);tearHide();
   signsShow(f.round===2);
+  bg(talk('REV_AGAIN'));                                          // v5.7 E6: „Čia suklydai. Bandyk dar kartą!" as it walks in; the card waits for it
   const E=await figIn(f);await talkQ;capHide();bubbleHide();
   revCard(f,k);SFX.pop();
   /* ② decide again. The figure says its reply again; then the prompt and both choices are read out in screen order. All live at once. */
@@ -3336,6 +3554,15 @@ async function revItem(f,k){
   const res={fid:f.fid,round:f.round+1,kind:f.kind,type:f.mist.type,how:f.mist.how,first,miss:R.miss,rmiss:R.rmiss,s:+(S.t-t0).toFixed(1)};REV.res.push(res);
   tev('klaida_pataisyta',{tipas:res.type,ratas:res.round,pirmu:first,klaidos:R.miss+R.rmiss});
 }
+/* v5.7 E6 (Kris 11-20: „its not clear that they have to repeat some round to correct the mistakes. make that clearer somehow"): the review
+   opens big, like a round's title: „🔁 Pataisom klaidas" and, in a row, the masks the child got wrong (red rings), while REV_START (or the
+   lesson clock's REV_TIME) is said. The same masks then stay in the card's header and light up green one by one as each is fixed. */
+async function revTitle(list,line){
+  $('revTT').textContent='🔁 '+VO.REV_TITLE;const m=$('revTM');m.innerHTML='';
+  for(const f of list){const d=document.createElement('span');d.className='rm';d.appendChild(maskCv(f.mask));m.appendChild(d);}
+  $('revT').hidden=false;capWide('all');SFX.ding();REV.log.push({ev:'title',n:list.length,line,t:+S.t.toFixed(2)});
+  try{await talk(line,{min:2.4});}finally{$('revT').hidden=true;capHide();capWide(null);}
+}
 /* the round. o.cut: the lesson clock cut the game short · o.demo: the mentor menu's three sample mistakes */
 async function review(o){o=o||{};
   S.scene='review';S.mode='talk';S.ri=-1;stamp('review');S.revSeen=true;
@@ -3351,12 +3578,12 @@ async function review(o){o=o||{};
       if(!rep.mist&&S.L.rounds.flat().some(f=>f.out))await talk('REV_NONE');
       return {n:0};
     }
-    await talk(o.cut?'REV_TIME':'REV_START');capHide();
+    await revTitle(list,o.cut?'REV_TIME':'REV_START');
     for(let k=0;k<list.length;k++)await revItem(list[k],k);
     $('cWho').textContent=VO.CARD_WHO;
     await talk('REV_DONE');capHide();
     return {n:list.length};
-  }finally{REV.on=false;S.hintKey=null;S.phase=null;signsShow(false);$('card').classList.remove('rev','ev');$('rOpts').hidden=true;$('rOpts').innerHTML='';$('rQ').hidden=true;$('rStep').hidden=true;$('rStar').hidden=true;$('cOpts').hidden=false;$('cWho').textContent=VO.CARD_WHO;
+  }finally{REV.on=false;S.hintKey=null;S.phase=null;signsShow(false);$('revT').hidden=true;$('card').classList.remove('rev','ev');$('rOpts').hidden=true;$('rOpts').innerHTML='';$('rQ').hidden=true;$('rStep').hidden=true;$('rStar').hidden=true;$('cOpts').hidden=false;$('cHand').hidden=false;$('cWho').textContent=VO.CARD_WHO;
     REV.log.push({ev:'end',i:REV.i,t:+S.t.toFixed(2)});}
 }
 
@@ -3379,8 +3606,13 @@ async function review(o){o=o||{};
    at the lock the block shows Klaidas's farewell and blocks every tap; window.__pamokaUzrakinta freezes the game here. ===== */
 const PAMOKA={
   LOCK_BEFORE_END_S:7*60,   // ⭐ the one number: the lock, before the lesson's end (iki). Kris: „6 or 7 mins before the lesson ends"
-  REVIEW_S:180,             // „Pataisom klaidas" before the ending (3 min)
-  OUTRO_S:60,               // the ending's length: measured 43.2-55.3 game s at speed 1 with voice (qa-tools/v54-outro-len.mjs, 2026-11-17), + margin
+  /* v5.7 E5 (Kris 11-20: „the very last frame (just still image of looking at the rabbit hole) to be trimmed by 10seconds"): the ending
+     starts 10 s later (OUTRO_S 60 → 50) and those 10 s go to „Pataisom klaidas" (REVIEW_S 180 → 190), so the review's cut second, the
+     lock and the „timer" trial's length (__pbBandymas 248 s) stay where they were. Measured 2026-11-20 with every clip (Q_HEAR and O_5
+     voiced): 38.4-40.8 wall s (qa-tools/v54-outro-len.mjs, 3 runs at 1024x600 + 3 at 1366x768) and the class trial (v57-clock):
+     the jump and O_10 end ≥ 10 s before the lock. 50 + LEAD_S 5 = 55 s ≥ the longest run 40.8 s + 1 s with 13 s to spare. */
+  REVIEW_S:190,             // „Pataisom klaidas" before the ending (3 min 10 s)
+  OUTRO_S:50,               // the ending's length (was 60): see above
   LEAD_S:5,                 // the held last frame before the lock
   TRIAL_LEAD_S:3,           // „timer" trial: the cut comes this many seconds after typing it
 };
@@ -5352,13 +5584,14 @@ function hintTick(dt){
   if(S.lineOn){S.idle=0;return;}
   S.idle+=dt;if(S.idle<CFG.hintIdleS)return;S.idle=0;
   const k=S.hintKey,f=S.cur,id=f?f.fid:'';S.hints=(S.hints||0)+1;trk('hint',{k});
-  const adult=()=>{const b=$('cOpts').querySelector('[data-q="ADULT"]');return b&&!b.hidden?b.firstChild:null;};
+  const adult=()=>{const b=$('cHand').querySelector('[data-q="ADULT"]');return b&&!b.hidden?b.firstChild:null;};
   if(k==='ask'){const rows=[...$('cOpts').children].filter(r=>!r.hidden&&r.dataset.q!=='ADULT').map(r=>r.firstChild),a=adult();
     rows.forEach(b=>b.classList.add('pulse'));if(a)a.classList.add('pulse');
     /* v5.5 E2 (Kris 11-18): in round 3 the hand never points at a choice (the first row was a question, so it hinted „ask", while ✋ is
        right for a danger figure). Every row and ✋ pulse alike; the hand goes to the figure's own words 🔊; the line is „Paklausyk dar kartą." */
-    if(f&&f.round===2){const sb=$('cSnd');if(sb.dataset.line&&hasVoice(sb.dataset.line))handTap(sb);else{const m=$('cMsg');m.classList.add('glow');bg(wait(2.5).then(()=>m.classList.remove('glow')));}sayOnce('ask'+id,'FB_HELP');}
-    else{if(rows[0])handTap(rows[0]);sayOnce('ask'+id,'HOW_1');}}
+    /* v5.7: the figure's words are its first line, in the top-left bubble (#cHi), until it has replied */
+    if(f&&f.round===2){const box=$('cMsg').hidden?$('cHi'):$('cMsg'),sb=box.querySelector('.snd');if(sb.dataset.line&&hasVoice(sb.dataset.line))handTap(sb);else{box.classList.add('glow');bg(wait(2.5).then(()=>box.classList.remove('glow')));}sayOnce('ask'+id,'FB_HELP');}
+    else{if(rows[0])handTap(rows[0]);sayOnce('ask'+id,'T_1');}}   // v5.7 E4: „Pirma: paklausk." (Klaidas; HOW_1 is gone)
   else if(k==='decide'){const a=adult();for(const el of [$('piece'),$('salin'),a])if(el)el.classList.add('pulse');
     const m=$('cMsg');m.classList.add('glow');bg(wait(2.5).then(()=>m.classList.remove('glow')));
     const sb=$('cSnd');if(sb.dataset.line&&hasVoice(sb.dataset.line))handTap(sb);sayOnce('dec'+id,'FB_HELP');}
@@ -5366,7 +5599,6 @@ function hintTick(dt){
   else if(k==='report'){$('next').classList.add('pulse');handTap($('next'));}
   /* v5.4 „Pataisom klaidas": every choice lights up alike (a hint never says which is right) and the hand points at the reply's 🔊 */
   else if(k==='rev'){[...$('rOpts').children].forEach(r=>r.firstChild.classList.add('pulse'));const sb=$('cSnd');if(sb.dataset.line&&hasVoice(sb.dataset.line))handTap(sb);}
-  else if(k==='practice'){practiceGhost();sayOnce('practice','HOW_2');}
 }
 
 /* ---------- per-frame ---------- */
@@ -5385,7 +5617,8 @@ function figTick(E,dt){if(!E||E.dead)return;E.root.rotation.y=E.yaw;animate(E.ro
 function tick(dt){
   S.t+=dt;if(S.started&&S.mode!=='menu'&&S.mode!=='report'&&S.mode!=='end')S.play+=dt;
   stepSched(dt);voTick(dt);hintTick(dt);runTick(dt);musTick(dt);thinkTick(dt);
-  if(PC.mode==='held')PC.sc+=(1-PC.sc)*Math.min(1,dt*10);
+  if(PC.mode==='held')PC.sc+=((PC.hsc||1)-PC.sc)*Math.min(1,dt*10);   // v5.7: PC.hsc < 1 only when the card leaves a few px too little room
+  offerTick(dt);                                                   // v5.7 E3: the piece floating from the figure's hand
   camApply(dt);
   if(KL.visible)animate(KL,dt);if(MI.visible)animate(MI,dt);
   figTick(S.E,dt);figTick(S.F,dt);
@@ -5460,7 +5693,7 @@ const rectOf=el=>{if(!el||el.hidden||el.closest('[hidden]'))return null;const r=
 window.__kpk={
   S,CFG,VO,VODUR,VOLOG,LINELOG,VOSILENT,SFXLOG,CAM,camera,three:scene,renderer,JUMP,JIG,SW,RUN,PC,LAY,readSecs,split2,
   MUSLOG,musState,SFXFILES,CAMLOG,slotPx,cellAt,unitPx,WORLD,BACK,TK,thinkDogPx,runBPlan,LOGS,KL,projPx,estDur,
-  fakeCell,botPiece,HUE_OK,NO_FAKE,ROUND_PIECES,FORESTHID:()=>FORESTHID.length,
+  fakeCell,botPiece,HUE_OK,NO_FAKE,ROUND_PIECES,pieceRoom,capTopY,OFFER,heldScale,FORESTHID:()=>FORESTHID.length,
   get scene(){return S.scene;},
   pause(){setPause(true);},resume(){setPause(false);},paused(){return S.paused;},
   silent(m){setMute(m);syncMuteIcon();},say,voOn(){return voOn;},muted(){return muted;},voCur(){return voCur?{id:voCur.id,silent:!!voCur.silent,pos:(()=>{try{return voEl?+voEl.currentTime.toFixed(2):null;}catch(e){return null;}})()}:null;},
@@ -5475,7 +5708,7 @@ window.__kpk={
     fid:f?f.fid:null,kind:f?f.kind:null,nAsk:f?f.nAsk:null,out:f?f.out:null,binned:f?f.binned:null,placed:S.L?S.L.placed.slice():[],
     piece:{mode:PC.mode,shown:!$('piece').hidden,x:Math.round(PC.x),y:Math.round(PC.y),sc:+PC.sc.toFixed(2)},tear:TR.on,
     run:{on:RUN.on,z:+RUN.z.toFixed(2),jumps:RUN.jumps,cleared:RUN.cleared,climbed:RUN.climbed},runStats:S.runStats||[],marks:JIG.marks(),board:BOARD.mode,
-    TT:{...S.TT},card:{on:cardOn(),min:$('card').classList.contains('min'),danger:$('card').classList.contains('danger'),msg:$('cMsgT').textContent,rows:[...$('cOpts').children].filter(r=>!r.hidden).map(r=>r.dataset.q)},salin:!$('salin').hidden,
+    TT:{...S.TT},card:{on:cardOn(),min:$('card').classList.contains('min'),danger:$('card').classList.contains('danger'),msg:$('cMsg').hidden?'':$('cMsgT').textContent,dots:cardDotsOn(),hi:$('cHi').hidden||$('cHi').classList.contains('gone')?null:$('cHiT').textContent,rows:[...$('cOpts').children,...$('cHand').children].filter(r=>!r.hidden&&!r.parentNode.hidden).map(r=>r.dataset.q)},salin:!$('salin').hidden,
     figY:S.F&&!S.F.dead?{x:+S.F.root.position.x.toFixed(3),z:+S.F.root.position.z.toFixed(3),pose:S.F.root.userData.pose}:null,kl:{x:+KL.position.x.toFixed(3),y:+KL.position.y.toFixed(3),z:+KL.position.z.toFixed(3),pose:KL.userData.pose}};},
   figSig(){return S.F&&!S.F.dead?figSig(S.F):null;},
   /* QA (Kris fix 4): put another mask on the figure standing in the round, same place and turn, so every mask is seen in the real framing */
@@ -5498,14 +5731,16 @@ window.__kpk={
     for(const fs of ROUND_FIGS)for(const d of fs){if(d.k==='H'||d.k==='O')for(const q of QS)add(d.id+'_'+q);else add(d.id);
       if(d.k==='H'){const s=(VOSPK[d.id+'_LOOK']||'?').slice(-1);add('FB_THANKS_'+s);add('FB_REAL_'+s);}}
     for(const d of ROUND_FIGS[2])if(d.k==='H')add(d.id+'_HI');
-    for(const id of ['BR_K1','GOAL','HOW_1','HOW_2','R1_TITLE','R2_TITLE','R3_TITLE','Q_LOOK','Q_HEAR','Q_WHEN','Q_ADULT','FB_FIT','FB_NOFIT','FB_RIP','FB_REPEAT','FB_OFF','FB_EMPTY','FB_HELP',
+    for(const id of ['BR_K1','GOAL','T_0','T_1','T_2','T_3','T_4','T_5','REPORT_FIX','REV_AGAIN','BTN_FIX','REV_TITLE','R1_TITLE','R2_TITLE','R3_TITLE','Q_LOOK','Q_HEAR','Q_WHEN','Q_ADULT','FB_FIT','FB_NOFIT','FB_RIP','FB_REPEAT','FB_OFF','FB_EMPTY','FB_HELP',
       'SIGNS_1','SIGNS_2','SIGNS_3','BAITAS_WARN','HAND_OK','HAND_TOOK','HAND_BIN','HAND_NO','RUN','RUN_JUMP','MAP_SPLIT','MAP_DONE','REPORT','REPORT_REPLAY',
       'CARD_WHO','BTN_BIN','BTN_NEXT','TEAR_LBL','YOU',
       'REV_START','REV_TIME','REV_NONE','REV_WHO','REV_DO','REV_WHY','REV_FIXED','REV_DONE','REV_WAIT',
       ...Object.values(OPTS).map(o=>o.id),...Object.values(REASONS).flatMap(r=>[r.id,r.rx]),'O_1','O_2','O_3','O_4','O_5','O_6','O_7','O_8','O_9','O_10',
       /* v5.5 */'K_ASK','LEG_1','LEG_2','LEG_STAR_L','LEG_FIX_L','BTN_RATE','BTN_LOADING','CNT_OF',...[0,1,2,3,4].flatMap(n=>['CNT_BOT_'+n,'CNT_HAND_'+n])])add(id);
     return {built:seen.size,missing:[...miss]};},
-  rects(){const o={};for(const id of ['board','stars','you','card','cMsg','cOpts','cSnd','salin','bubble','bin','cap','ctx','csnd','bsnd','sys','piece','tear','title','youA','sgn','think','thinkCv','thinkL','thinkHand','report','repMap','tiles','repB','kpkRate','next','menu','repIc','riBot','riDan','riLeg','riMaskS','riHandS','riLegS','play','introB','skip','endMenu','key','pauseOv','rQ','rStep','rOpts','rStar','pauseB'])o[id]=rectOf($(id));
+  /* v5.7: the offer from the hand (E3) and the dots (E2) */
+  offer(){return {mode:PC.mode,spr:!!(OF.spr&&OF.spr.visible),px:offerPx(),mit:mitPx(),g:+OF.g.toFixed(2),arm:S.F&&!S.F.dead?{offer:!!S.F.root.userData.offer,vis:S.F.P.armR.visible,rx:+S.F.root.userData.a.armRx.toFixed(2),rz:+S.F.root.userData.a.armRz.toFixed(2),len:+S.F.P.armR.scale.y.toFixed(2)}:null,log:OF.log.slice(-12),dots:(S.dotsLog||[]).slice(),OFFER};},
+  rects(){const o={};for(const id of ['board','stars','you','card','cMsg','cHi','cHand','revT','cOpts','cSnd','salin','bubble','bin','cap','ctx','csnd','bsnd','sys','piece','tear','title','youA','sgn','think','thinkCv','thinkL','thinkHand','report','repMap','tiles','repB','kpkRate','next','menu','repIc','riBot','riDan','riLeg','riMaskS','riHandS','riLegS','play','introB','skip','endMenu','key','pauseOv','rQ','rStep','rOpts','rStar','pauseB'])o[id]=rectOf($(id));
     o.btns=this.btns();o.vw=innerWidth;o.vh=innerHeight;return o;},
   texts(){const out=[];const walk=el=>{for(const n of el.childNodes){if(n.nodeType===3&&n.textContent.trim()){const p=n.parentElement,cs=getComputedStyle(p),r=p.getBoundingClientRect();if(cs.visibility!=='hidden'&&r.width>0&&p.closest('#ui'))out.push({t:n.textContent.trim(),px:parseFloat(cs.fontSize),l:Math.round(r.left),r:Math.round(r.right),top:Math.round(r.top),b:Math.round(r.bottom),id:p.id||p.className||p.tagName,over:p.scrollWidth>p.clientWidth+1});}else if(n.nodeType===1&&!n.hidden&&getComputedStyle(n).display!=='none')walk(n);}};walk($('ui'));return out;},
 };
