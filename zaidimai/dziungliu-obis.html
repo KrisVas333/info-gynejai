@@ -3050,7 +3050,7 @@ function finCount() { const e = document.querySelector('#end .fincount'); if (!e
    ③ the lesson clock (the shared BCJR block, built in after this module) freezes the game through window.__pamokaUzrakinta
    ④ anonymous events (kv-track.js kids mode: no cookies, no recordings, no names, no typed text) ===== */
 const PW_KEY = 'dziungliu-obis:pw', PW = 'test';
-const gateOk = () => { try { return sessionStorage.getItem(PW_KEY) === '1'; } catch (e) { return false; } };
+const gateOk = () => true;      // Kris 2026-11-23: no password on infogynejai.lt (was „test“); the „test“ typed in game still opens the mentor menu
 const gateUp = () => WEB && !!$('gate');
 let LOCKED = false;      // the lesson is over: the frame loop stops (70-main.js), the clock block blocks every key and tap
 
@@ -3116,7 +3116,6 @@ function roomShow() {
   o.innerHTML = `<div class="cw"><div class="rbig">
     <div class="rk">${M('Kambarys', 'Room')}</div><div class="rc">${ROOM}</div>
     <div class="rk">${M('Vaikai atsidaro:', 'Children open:')}</div><div class="rl">${link.replace(/[<>&"]/g, '').replace('?', '<wbr>?')}</div>
-    <div class="rk rs">${M('Slaptažodis', 'Password')}: <b>${PW}</b></div>
     <div class="row"><button class="big sec" type="button" data-r="copy">📋 <span>${M('Kopijuoti', 'Copy')}</span></button><button class="big" type="button" data-r="x">✓ <span>${M('Gerai', 'OK')}</span></button></div>
   </div></div>`;
   o.hidden = false;
