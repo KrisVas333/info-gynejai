@@ -1043,6 +1043,39 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
 .slide.qc.qc2 .tile .t .mv{width:clamp(8rem,min(18vw,17vh),13rem);height:clamp(10rem,min(26vw,23vh),18rem)}
 .slide.qc2 h1{font-size:clamp(1.3rem,3.7vw,3.4rem)}
 
+
+/* ══ 🖐️ KURIS ŽENKLAS? (Kris 2026-11-26): 4 P9 ženklai kampuose, reklama viduryje, vaikas tempia ══ */
+.slide.kz .kzh{position:absolute;top:8vh;left:0;right:0;margin:0;text-align:center;font-size:clamp(46px,4.4vw,92px)}
+.slide.kz .kzk{position:absolute;width:25vw;height:31vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2vh;
+  border-radius:30px;background:#1e1650;border:6px solid #ffffff40;box-shadow:0 18px 50px -18px #000;transition:border-color .3s,background .3s,box-shadow .3s,transform .3s;z-index:1}
+.slide.kz .kz-tl{left:2.2vw;top:21.5vh}.slide.kz .kz-tr{right:2.2vw;top:21.5vh}.slide.kz .kz-bl{left:2.2vw;bottom:6.5vh}.slide.kz .kz-br{right:2.2vw;bottom:6.5vh}
+.slide.kz .kzk .e{font-size:clamp(72px,7.6vw,150px);line-height:1}
+.slide.kz .kzk .s{font-size:clamp(42px,3.4vw,70px);font-weight:900;color:#fff;text-align:center;line-height:1.05;padding:0 .3em}
+.slide.kz .kzk.hot{border-color:#ffffffaa;transform:scale(1.03)}
+.slide.kz .kzk.ok{border-color:#1FB47A;background:#0f3d2b;box-shadow:0 0 0 10px #1FB47A55,0 0 70px 6px #1FB47A;transform:scale(1.05)}
+.slide.kz .kzk .okm{display:none;position:absolute;top:-26px;right:-20px;width:68px;height:68px;border-radius:50%;background:#1FB47A;color:#fff;font-size:46px;font-weight:900;line-height:68px;text-align:center;border:5px solid #fff}
+.slide.kz .kzk.ok .okm{display:block}
+.slide.kz .kzmid{position:absolute;left:50%;top:56vh;transform:translate(-50%,-50%);width:min(42vw,760px);z-index:3}
+.slide.kz .kzad{display:none;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;border-radius:32px;padding:12px;
+  background:repeating-linear-gradient(135deg,#ff3fa4 0 22px,#ffd23f 22px 44px);box-shadow:0 22px 60px -12px #000d}
+.slide.kz .kzad.cur{display:block}
+.slide.kz .kzad .in{border-radius:22px;padding:2.4vh 1.6vw;background:radial-gradient(circle at 50% 35%,#7a3cf0,#3b128a 72%);display:flex;flex-direction:column;align-items:center;gap:1.8vh;text-align:center}
+.slide.kz .kzad .tt{background:#fff;color:#2d0d6e;font-weight:900;font-size:clamp(42px,3.2vw,66px);line-height:1.08;border-radius:24px;padding:.22em .6em;box-shadow:0 6px 0 #ff3fa4}
+.slide.kz .kzad .art{font-size:clamp(76px,7.4vw,150px);line-height:1}
+.slide.kz .kzad .btn{background:linear-gradient(#ff6cc0,#ff2f97);color:#fff;font-weight:900;font-size:clamp(42px,3.1vw,62px);border-radius:999px;padding:.16em 1em;border:5px solid #fff}
+.slide.kz .kzad .fld{align-self:stretch;background:#fff;border-radius:18px;padding:.18em .6em;text-align:left;color:#8a86a8;font-size:clamp(42px,3vw,60px);font-weight:800;border:5px solid #ffd23f}
+.slide.kz .kzad.drag{cursor:grabbing;transition:none;box-shadow:0 34px 80px -10px #000}
+.slide.kz .kzad.back{transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.slide.kz .kzad.snap{transition:transform .45s ease-in,opacity .45s ease-in;opacity:0;pointer-events:none}
+.slide.kz .kzwin{display:none;flex-direction:column;align-items:center;gap:1.5vh}
+.slide.kz .kzmid.won .kzwin{display:flex}
+.slide.kz .kzmid.won .kzad{display:none}
+.slide.kz .kzhand{font-size:clamp(90px,9vw,180px);line-height:1;animation:kzp .55s ease-in-out 3}
+@keyframes kzp{50%{transform:scale(1.35)}}
+.slide.kz .kzname{font-size:clamp(48px,4.3vw,92px);font-weight:900;color:#fff;background:#0f3d2b;border:6px solid #1FB47A;border-radius:30px;padding:.12em .6em;text-align:center;line-height:1.1}
+.slide.kz .kzfin{display:none}
+.slide.kz .kzfin.shown{display:block;position:absolute;left:50%;top:56vh;transform:translate(-50%,-50%);width:min(44vw,800px);z-index:3;text-align:center}
+.slide.kz.fin .kzmid{display:none}
 </style></head><body>
 
 <div id="prog"></div>
@@ -1120,7 +1153,7 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   </div>
 </section>
 
-<section class="slide" data-type="veiksmas" data-blk="3.3–3.7 · 🔁 3/5 · 💜 MISTĖS MOTYVACIJA" data-correct="B" data-emo="💜"
+<section class="slide qc" data-type="veiksmas" data-blk="3.3–3.7 · 🔁 3/5 · 💜 MISTĖS MOTYVACIJA" data-correct="B" data-emo="💜"
  data-lt-why="Mistė nori turėti tikrų draugų."
  data-lt-note="⏱ 3:18–3:42 · ✅ B. Motyvacija = ko veikėjas labiausiai nori (paaiškink taip, jei žodis naujas). A — Klaido noras (viską iškart), C — Baito (visada turėti atsakymą). Mistė nori tikrų draugų — todėl šiandien ir nušoks paskui draugą."
 >
@@ -1209,8 +1242,8 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   <h2><span data-lt="Ką Teo turėtų daryti? 🤔">Ką Teo turėtų daryti? 🤔</span></h2>
 </section>
 
-<section class="slide" data-type="taisykle" data-blk="7.75–9.25 · 3b · ⏰ SKUBINA · 2 PAVYZDŽIAI" data-emo="⏰👥"
- data-lt-note="⏱ 7:45–9:15 · Šiame ir dviejuose kituose — kiekvienam paveikslui paklausk: „Ką langas nori, kad padarytum?“ Rankos, tada pasakyk 🔍: ⏰ „Laikrodis tyčia skubina tave pirkti.“ · 👥 „Tų vaikų nematai. Patikrinti negali.“"
+<section class="slide" data-type="taisykle" data-blk="7.75–8.5 · 3b · ⏰ SKUBINA · 2 PAVYZDŽIAI" data-emo="⏰👥"
+ data-lt-note="⏱ 7:45–8:30 · Šiame ir dviejuose kituose — kiekvienam paveikslui paklausk: „Ką langas nori, kad padarytum?“ Rankos, tada pasakyk 🔍: ⏰ „Laikrodis tyčia skubina tave pirkti.“ · 👥 „Tų vaikų nematai. Patikrinti negali.“"
 >
   <div class="grp"><span data-lt="⏰ SKUBINA">⏰ SKUBINA</span></div>
   <div class="tp2 rx">
@@ -1220,8 +1253,8 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   <div class="tips p7s"><span class="tip"><span data-lt="💡 Didelis jausmas? STOP.">💡 Didelis jausmas? STOP.</span></span></div>
 </section>
 
-<section class="slide" data-type="taisykle" data-blk="9.25–10.75 · 3b · 🙏 PRAŠO · 2 PAVYZDŽIAI" data-emo="🎁📦"
- data-lt-note="⏱ 9:15–10:45 · „Ką langas nori, kad padarytum?“ → rankos → 🔍 🎁 „Ten ne dovana, o reklama.“ · 📦 „Nori sužinoti apie tave ir draugus.“ 📦 susijęs su 1-aisiais žaidimo vartais: „Namų adresas. Viešas ar slaptas?“"
+<section class="slide" data-type="taisykle" data-blk="8.5–9.25 · 3b · 🙏 PRAŠO · 2 PAVYZDŽIAI" data-emo="🎁📦"
+ data-lt-note="⏱ 8:30–9:15 · „Ką langas nori, kad padarytum?“ → rankos → 🔍 🎁 „Ten ne dovana, o reklama.“ · 📦 „Nori sužinoti apie tave ir draugus.“ 📦 susijęs su 1-aisiais žaidimo vartais: „Namų adresas. Viešas ar slaptas?“"
 >
   <div class="grp"><span data-lt="🙏 PRAŠO">🙏 PRAŠO</span></div>
   <div class="tp2 rx">
@@ -1231,8 +1264,8 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   <div class="tips p7s"><span class="tip"><span data-lt="🤫 Slaptų dalykų žaidimui nesakom.">🤫 Slaptų dalykų žaidimui nesakom.</span></span></div>
 </section>
 
-<section class="slide" data-type="taisykle" data-blk="10.75–12.25 · 3b · 🙏 PRAŠO PINIGŲ · 2 PAVYZDŽIAI" data-emo="💎⏭"
- data-lt-note="⏱ 10:45–12:15 · „Ką langas nori, kad padarytum?“ → rankos → 🔍 💎 „Žaidimo deimantai kainuoja tikrus pinigus.“ · ⏭ „Tylus langas, bet irgi nori pinigų.“"
+<section class="slide" data-type="taisykle" data-blk="9.25–10 · 3b · 🙏 PRAŠO PINIGŲ · 2 PAVYZDŽIAI" data-emo="💎⏭"
+ data-lt-note="⏱ 9:15–10:00 · „Ką langas nori, kad padarytum?“ → rankos → 🔍 💎 „Žaidimo deimantai kainuoja tikrus pinigus.“ · ⏭ „Tylus langas, bet irgi nori pinigų.“"
 >
   <div class="grp"><span data-lt="🙏 PRAŠO PINIGŲ 💶">🙏 PRAŠO PINIGŲ 💶</span></div>
   <div class="tp2 rx">
@@ -1242,8 +1275,8 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   <div class="tips p7s"><span class="tip"><span data-lt="🤫 Tylus irgi gali būti triukas.">🤫 Tylus irgi gali būti triukas.</span></span></div>
 </section>
 
-<section class="slide" data-type="kalba" data-blk="12.25–13.5 · 3c · 💰 KAS PADARĖ? KODĖL?" data-emo="💰"
- data-lt-note="⏱ 12:15–13:30 · Sakom „jie uždirba“, ne „kūrėjai blogi“. Paveiksle „–53 %“: buvo 49,99 €, dabar 23,49 €. Ar batai kada nors tikrai kainavo 49,99 €? Nežinom — taip atrodo netikra nuolaida. Netikra nuolaida bus ir žaidimo „Rask triuką“ po finišo."
+<section class="slide" data-type="kalba" data-blk="10–10.75 · 3c · 💰 KAS PADARĖ? KODĖL?" data-emo="💰"
+ data-lt-note="⏱ 10:00–10:45 · Sakom „jie uždirba“, ne „kūrėjai blogi“. Paveiksle „–53 %“: buvo 49,99 €, dabar 23,49 €. Ar batai kada nors tikrai kainavo 49,99 €? Nežinom — taip atrodo netikra nuolaida. Netikra nuolaida bus ir žaidimo „Rask triuką“ po finišo."
 >
   <h1><span data-lt="Kas tai padarė? Kodėl? 🤔">Kas tai padarė? Kodėl? 🤔</span></h1>
   <div class="rule o p7s"><span data-lt="💰 Žaidimo kūrėjai. Jie uždirba, kai perki.">💰 Žaidimo kūrėjai. Jie uždirba, kai perki.</span></div>
@@ -1254,8 +1287,8 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
   </div>
 </section>
 
-<section class="slide" data-type="terminas" data-blk="13.5–14.25 · 3c · 📢 REKLAMA" data-emo="📢" data-burn="1"
- data-lt-note="⏱ 13:30–14:15 · ⚠ pasiūlymas, laukia Kris'o. Žaidimo 4-ieji vartai klaus: „Kodėl reklama tokia graži?“ → „Kad labai užsinorėčiau.“"
+<section class="slide" data-type="terminas" data-blk="10.75–11.5 · 3c · 📢 REKLAMA" data-emo="📢" data-burn="1"
+ data-lt-note="⏱ 10:45–11:30 · ⚠ pasiūlymas, laukia Kris'o. Žaidimo 4-ieji vartai klaus: „Kodėl reklama tokia graži?“ → „Kad labai užsinorėčiau.“"
 >
   <div class="duo p10duo">
     <div class="pic"><img src="data:image/webp;base64,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" alt=""></div>
@@ -1267,6 +1300,25 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
       <h2 class="after" style="color:var(--gold)"><span data-lt="Kodėl tokia graži? Kad labai užsinorėtum.">Kodėl tokia graži? Kad labai užsinorėtum.</span></h2>
     </div>
   </div>
+</section>
+
+<!-- ══════════ 11:30–14:15 · 🖐️ KURIS ŽENKLAS? (Kris 2026-11-26: P9 ženklai + reklamos, vaikas tempia) ══════════ -->
+<section class="slide kz" data-type="veiksmas" data-blk="11.5–14.25 · 🖐️ KURIS ŽENKLAS? (P9 ženklai)"
+ data-lt-note="⏱ 11:30–14:15 · Reklamos daro tą patį, ką botai P9. Po vieną vaiką prie kompiuterio: pele tempia reklamą į tinkamą kampą. Klasė padeda P9 gestu: 🫵 nykštys į save · 🤗 glostau sau galvą · 💍 atidarau žiedo dėžutę · 🫴 pirštu „ateik čia“. Tinka — kampas sužaliuoja. Netinka — reklama ramiai grįžta į vidurį, bando dar. ➡️ = kita reklama (4). Po 4-os ➡️ — inkaras choru."
+>
+  <h1 class="kzh"><span data-lt="🖐️ Kuris ženklas?">🖐️ Kuris ženklas?</span></h1>
+  <div class="kzk kz-tl" data-k="tave"><div class="e">🫵</div><div class="s"><span data-lt="Klausia apie tave">Klausia apie tave</span></div><div class="okm">✓</div></div>
+  <div class="kzk kz-tr" data-k="gir"><div class="e">🤗</div><div class="s"><span data-lt="Labai giria">Labai giria</span></div><div class="okm">✓</div></div>
+  <div class="kzk kz-bl" data-k="dov"><div class="e">💍</div><div class="s"><span data-lt="Žada dovanų">Žada dovanų</span></div><div class="okm">✓</div></div>
+  <div class="kzk kz-br" data-k="kit"><div class="e">🫴</div><div class="s"><span data-lt="Kviečia kitur">Kviečia kitur</span></div><div class="okm">✓</div></div>
+  <div class="kzmid dnd">
+    <div class="kzad r1" data-k="dov"><div class="in"><div class="tt"><span data-lt="Dovana tau!">Dovana tau!</span></div><div class="art">🎁</div><div class="btn"><span data-lt="Spausk ir gauk!">Spausk ir gauk!</span></div></div></div>
+    <div class="kzad r2 p7s" data-k="tave"><div class="in"><div class="tt"><span data-lt="Kiek tau metų? Kur gyveni?">Kiek tau metų? Kur gyveni?</span></div><div class="fld"><span data-lt="Vardas">Vardas</span></div><div class="fld"><span data-lt="Mokykla">Mokykla</span></div></div></div>
+    <div class="kzad r3 p7s" data-k="gir"><div class="in"><div class="tt"><span data-lt="Tu – pats geriausias žaidėjas!">Tu – pats geriausias žaidėjas!</span></div><div class="art">🏆⭐</div></div></div>
+    <div class="kzad r4 p7s" data-k="kit"><div class="in"><div class="tt"><span data-lt="Eik į kitą žaidimą!">Eik į kitą žaidimą!</span></div><div class="art">🎮</div><div class="btn"><span data-lt="Spausk čia ➜">Spausk čia ➜</span></div></div></div>
+    <div class="kzwin" aria-live="polite"><span class="kzhand">✋</span><span class="kzname"></span></div>
+  </div>
+  <div class="rule g p7s kzfin"><span data-lt="⚓ Matau ženklą — ✋ STOP ir pasakau suaugusiam">⚓ Matau ženklą — ✋ STOP ir pasakau suaugusiam</span></div>
 </section>
 
 <!-- ══════════ 14:15–14:45 · 🎯 MISIJA ŽAIDIME ══════════ -->
@@ -1485,7 +1537,8 @@ var SEG=[
  {a:2,    b:4.5,  lt:"Magiški klausimai · kartojimas"},
  {a:4.5,  b:5,    lt:"Tikslas"},
  {a:5,    b:6,    lt:"Istorija"},
- {a:6,    b:14.25,lt:"Iššokantys langai · pavyzdžiai"},
+ {a:6,    b:11.5, lt:"Iššokantys langai · pavyzdžiai"},
+ {a:11.5, b:14.25,lt:"Kuris ženklas?"},
  {a:14.25,b:14.75,lt:"Misija"},
  {a:14.75,b:15.5, lt:"Kaip įeisim"},
  {a:15.5, b:16.5, lt:"Obis kūnu"},
@@ -1900,6 +1953,61 @@ function gameCheck(g){
    Klaida → sudreba, grįžta, rodyklė rodo teisingą dėžę; po 3 klaidų dėžė švyti.
    Navigacijos neliečia: pointer įvykiai sustabdomi, klavišai velkant ignoruojami. */
 var DND={dragging:false, ac:null};
+
+/* ══ 🖐️ KURIS ŽENKLAS? (Kris 2026-11-26) — vaikas tempia reklamą į P9 ženklo kampą.
+   Tinka → nusileidžia į kampą, kampas žalias, didelis ženklo vardas + ✋. Netinka → ramiai grįžta į vidurį (be raudonos, be garso).
+   Raundai = .p7s (mentoriaus ➡️). Velkant — jokios navigacijos (DND.dragging), paspaudimas ant reklamos skaidrės neperjungia. ══ */
+(function(){
+  [].slice.call(document.querySelectorAll(".slide.kz")).forEach(function(sec){
+    var mid=sec.querySelector(".kzmid"), cur=null, pid=null, sx=0, sy=0;
+    function corners(){ return [].slice.call(sec.querySelectorAll(".kzk")); }
+    function sync(){
+      var ads=[].slice.call(sec.querySelectorAll(".kzad")), fin=sec.querySelector(".kzfin").classList.contains("shown"), idx=0;
+      ads.forEach(function(a,i){ if(i===0 || a.classList.contains("shown")) idx=i; });
+      var key=idx+"|"+fin; if(sec._kzk===key) return; sec._kzk=key;
+      ads.forEach(function(a,i){ a.classList.toggle("cur", i===idx && !fin); a.classList.remove("snap","drag","back"); a.style.transform=""; });
+      sec.classList.toggle("fin", fin); mid.classList.remove("won");
+      corners().forEach(function(c){ c.classList.remove("ok","hot"); });
+    }
+    new MutationObserver(sync).observe(sec,{subtree:true,attributes:true,attributeFilter:["class"]});
+    sync();
+    function at(x,y){ var hit=null; corners().forEach(function(c){ var r=c.getBoundingClientRect(); if(x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom) hit=c; }); return hit; }
+    mid.addEventListener("pointerdown",function(e){
+      e.stopPropagation();
+      var a=e.target.closest(".kzad.cur"); if(!a || a.classList.contains("snap") || mid.classList.contains("won")) return;
+      e.preventDefault(); cur=a; pid=e.pointerId; sx=e.clientX; sy=e.clientY; DND.dragging=true;
+      a.classList.remove("back"); a.classList.add("drag"); try{ a.setPointerCapture(pid); }catch(err){}
+    });
+    mid.addEventListener("pointermove",function(e){
+      if(!cur || e.pointerId!==pid) return; e.stopPropagation(); e.preventDefault();
+      cur.style.transform="translate("+(e.clientX-sx)+"px,"+(e.clientY-sy)+"px) scale(1.04)";
+      var h=at(e.clientX,e.clientY); corners().forEach(function(c){ c.classList.toggle("hot",c===h); });
+    });
+    function end(e){
+      if(!cur || e.pointerId!==pid) return; e.stopPropagation();
+      var a=cur; cur=null; DND.dragging=false; try{ a.releasePointerCapture(pid); }catch(err){}
+      a.classList.remove("drag"); corners().forEach(function(c){ c.classList.remove("hot"); });
+      var c=(e.type==="pointercancel")?null:at(e.clientX,e.clientY);
+      if(c && c.getAttribute("data-k")===a.getAttribute("data-k")){
+        var ar=a.getBoundingClientRect(), cr=c.getBoundingClientRect(), dx=e.clientX-sx, dy=e.clientY-sy;
+        var tx=dx+(cr.left+cr.width/2)-(ar.left+ar.width/2), ty=dy+(cr.top+cr.height/2)-(ar.top+ar.height/2);
+        void a.offsetWidth; a.classList.add("snap"); a.style.transform="translate("+tx+"px,"+ty+"px) scale(.18)";
+        c.classList.add("ok");
+        mid.querySelector(".kzname").textContent=c.querySelector(".e").textContent+" "+c.querySelector(".s").textContent;
+        setTimeout(function(){ if(a.classList.contains("snap")) mid.classList.add("won"); },420);
+      } else {
+        a.classList.add("back"); a.style.transform="";
+      }
+    }
+    mid.addEventListener("pointerup",end);
+    mid.addEventListener("pointercancel",end);
+    mid.addEventListener("click",function(e){ e.stopPropagation(); });
+    mid.addEventListener("dragstart",function(e){ e.preventDefault(); });
+    mid.addEventListener("touchstart",function(e){ e.stopPropagation(); },{passive:true});
+    mid.addEventListener("touchend",function(e){ e.stopPropagation(); },{passive:true});
+  });
+})();
+
 function dndAudio(){ try{ if(!DND.ac) DND.ac=new (window.AudioContext||window.webkitAudioContext)(); if(DND.ac.state==="suspended") DND.ac.resume(); }catch(e){} return DND.ac; }
 function dndTone(ok){
   var ac=dndAudio(); if(!ac) return;
