@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Džiunglių obis 1.8.1</title>
+<title>Džiunglių obis 1.9</title>
 <link rel="icon" href="data:,">
 <!-- rule 16, a children's page: anonymous cookieless events only (no Clarity, no recordings, no cookies, no names) -->
 <script src="https://krisvas333.github.io/neuron-ar/kv/kv-track.js" data-mode="kids" defer></script>
@@ -407,7 +407,7 @@ div.purse.spent{color:#ffe7b0}
     <div id="lang" role="group" data-la="lang" aria-label="Kalba"><button type="button" data-v="lt" lang="lt" aria-pressed="false">LT</button><button type="button" data-v="en" lang="en" aria-pressed="false">EN</button></div>
   </div>
 </div>
-<script data-project="dziungliu-obis" data-version="v1.8.1" data-mode="kids" data-hidden="1">
+<script data-project="dziungliu-obis" data-version="v1.9" data-mode="kids" data-hidden="1">
 /*! scorecard.js v1.1 · ⭐ one feedback button for every build · Kris Vas · 2026-11-10
  *
  * Copy this file into your build, then add ONE line before </body>:
@@ -951,7 +951,7 @@ div.purse.spent{color:#ffe7b0}
 <script type="module">
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-const VERSION="v1.8.1";
+const VERSION="v1.9";
 const NET_AUTO=/*NETAUTO*/false;
 const WEB=true;
 const WEB_RELAY="wss://dziungliu-obis-rele.infogynejai.workers.dev/ws";
@@ -980,7 +980,8 @@ const CFG = {
   slideAcc: 5.5, slideMax: 7.2,               // v1.3 čiuožykla: the same leaning floor, leaning forwards
   ghostS: 2, pushV: 4.2, pushEvery: .12,      // v1.3 classmates: see-through for 2 s after coming back; a push kicks at 4.2 u/s
   netHz: 10,
-  meetNeed: 5, meetOffS: 8,                   // v1.8 (Kris 2026-11-26): the start gate after the pick opens when 5 children stand on the meeting square at once (all of them if the room has fewer); relay gone 8 s = she goes on alone
+  outroLead: 115,                             // v1.9 (Kris 2026-11-26): the P10 film starts by itself this many seconds before the lesson lock (web copy): ~37 s film + question, done ~8 s before Klaidas's 60 s clock walks in (68 s before the lock)
+  meetNeed: 5, meetOffS: 8,                   // v1.8 (Kris 2026-11-26): the start gate after the pick opens when 5 children stand on the meeting square at once (always 5 online); relay gone 8 s = she goes on alone
   breakAfterStage: 3, breakMoveS: 15, breakEveryS: 600,
   musicVol: .13, duck: .4,
   readS: .075, readMinS: 1.6,
@@ -3152,7 +3153,7 @@ const gateUp = () => WEB && !!$('gate');
 let LOCKED = false;      // the lesson is over: the frame loop stops (70-main.js), the clock block blocks every key and tap
 
 /* ④ events: the names follow info-gynejai TRACKING.md (zaidimas_pradeta, zaidimas_baigta, dar_karta, klausimas_ok/klaida); props carry no person */
-const DEV = ['relay', 'solo', 'test', 'laikas', 'rask', 'review', 'mentorius', 'qa', 'pabaiga'].some(k => QS.has(k));
+const DEV = ['relay', 'solo', 'test', 'laikas', 'rask', 'review', 'mentorius', 'qa', 'pabaiga', 'bandymas'].some(k => QS.has(k));
 function kontekstas() {   // pamoka | namai: the same lesson windows as info-gynejai track.js (Thu 13:35–15:15, Fri 12:55–16:00, Vilnius)
   try { let wd = '', h = -1, m = 0;
     for (const p of new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Vilnius', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date())) { if (p.type === 'weekday') wd = p.value; if (p.type === 'hour') h = +p.value; if (p.type === 'minute') m = +p.value; }
@@ -3701,6 +3702,7 @@ ${M('Klausimai (iš karto teisingai · ne iš karto):', 'Questions (right first 
 ${Object.keys(qs).sort().map(k => `${k} ${L(k)}  ${qs[k][0]} · ${qs[k][1]}`).join('\n') || M('dar nėra', 'none yet')}
 ${M('Šis žaidimas: ruožas', 'This run: stage')} ${S.stage} · ${M('kritimai', 'falls')} ${S.falls.slice(1).join(' ')} · ${M('praleista', 'skips')} ${S.skips} · 👛 ${S.spent || 0} 🧊${S.sentAddr ? ' ✉️' : ''}
 ${M('Starto vartai', 'Start gate')}: ${MEET.open ? M('atviri', 'open') + (MEET.by === 'alone' ? M(' (žaidžia viena)', ' (playing alone)') : M(' · „Išvalyti skaičius“ uždaro naujai klasei', ' · "Clear counts" shuts it for a new class')) : M('uždaryti', 'shut') + ` · ${M('ant aikštelės', 'on the square')} ${Math.min(MEET.n, MEET.need)}/${MEET.need}`}
+${M('Filmas pats', 'Film by itself')}: ${autoNextTxt()}
 ${M('Piešimo kvietimai', 'Draw calls')} ${renderer.info.render.calls} · ${M('trikampiai', 'triangles')} ${renderer.info.render.triangles} · fps ${PERF.fps.toFixed(0)}</pre>`;
 }
 $('mentor').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (!b) return; const k = b.dataset.m;
@@ -4399,7 +4401,9 @@ function oStopTex() {
 }
 
 /* ---------- the set: built once, the first time the outro plays ---------- */
-async function outroBuild() {
+/* v1.9: built once even when asked twice (the lesson end builds it ~20 s ahead; „Toliau ▶“ may ask while that is still going) */
+function outroBuild() { return OUT.bp || (OUT.bp = outroBuild0()); }
+async function outroBuild0() {
   if (OUT.built) return;
   const S3 = new THREE.Scene(); OUT.scene = S3;
   S3.background = new THREE.Color('#161028'); S3.fog = new THREE.Fog('#4a3550', 11, 44);
@@ -4616,9 +4620,9 @@ async function outroHeld(skipped) {
   say('P10O_9');
 }
 /* „Praleisti“: straight to the held last frame */
-function outroSkip() {
+function outroSkip(quiet) {
   if (!S.outro || OUT.held) return;
-  OUT.tok++; ocancel(); stopVoice(); capOff(); SFX.click();
+  OUT.tok++; ocancel(); stopVoice(); capOff(); if (!quiet) SFX.click();
   const M = OUT.M, B = OUT.B; M.vis = false; OUT.mi.visible = false; M.squat = 0;
   oMapGround(OMAPE, OLAST[0]); oHoleGlow(1); OUT.beam.visible = OUT.holo.scan.visible = OUT.holo.stop.visible = false;
   if (OUTRO_ENDING === 'B') { B.vis = false; OUT.bi.visible = false; }
@@ -4627,7 +4631,7 @@ function outroSkip() {
   OUT.bi.userData.setVisor(null); oshot('skip', ...OLAST); $('ofade').classList.remove('on');
   const tok = OUT.tok; outroHeld(true).catch(e => { if (e !== OCANCEL) console.error(e); }); void tok;
 }
-async function outroStart(from) {
+async function outroStart(from, held) {      // v1.9 held = straight to the held last frame (a laptop opened late at the lesson end)
   if (S.outro) outroOff();
   voiceUnlock(); stopVoice(); capOff();
   if (S.paused) { S.paused = false; $('pause').hidden = true; audioPause(false); }
@@ -4636,6 +4640,7 @@ async function outroStart(from) {
   $('ofade').classList.add('on'); $('oskip').hidden = false; $('oq').hidden = true; syncHud();
   const tok = ++OUT.tok; await outroBuild(); if (tok !== OUT.tok || !S.outro) return;
   oReset(); OUT.ready = true;
+  if (held) return outroSkip(true);
   outroPlay(tok).catch(e => { if (e !== OCANCEL) console.error(e); });
 }
 /* leaving it (the mentor jumps to a stage, „Iš pradžių“, ...): everything back as it was */
@@ -4675,6 +4680,76 @@ function pabaigaCard() {
   c.addEventListener('click', () => { if (went) return; went = true; c.remove(); outroStart('pabaiga'); });
   $('ui').insertBefore(c, $('mentor'));
   setTimeout(() => { try { $('bPabaiga').focus({ preventScroll: true }); } catch (e) {} }, 60);
+}
+
+/* ---- 69-auto-outro.js ---- */
+/* ===== v1.9 the P10 film plays by itself at the end of every lesson (Kris 2026-11-26: "the outro clip … has to be played automatically with a minute
+   to go before the timer runs out for everyone. Not exactly a minute to go, but however much time the clip needs to finish.")
+   Web copy only (the lesson clock lives there). Every laptop reads the same BCJR timetable the lesson clock reads (Supabase bcjr_tvarkarastis_v) on the
+   same server time (the Date of that answer), so every laptop in the class starts the film at the same second; nothing goes through the relay.
+     lock − CFG.outroLead (115 s)   the film starts (whatever she is doing: racing, a card, paused, the start card)
+     lock − ~78 s                   the film is over: the held frame with „Ką Mistė turėjo daryti?“ (said once)
+     lock − 68 s                    Klaidas walks in over the held frame with his 60 s clock (the shared lesson-clock block, unchanged)
+     lock                           the lesson locks (ispejimas + 60 s in the timetable)
+   The film ends BEFORE Klaidas comes because his layer covers the whole screen; the question then gets the last minute.
+   Already in the film (she finished and pressed „Toliau ▶“), or on its held frame: left as it is. Opened late (a reload): up to 10 s late the film
+   plays from the start, later straight to the held frame with the question.
+   Tests: ?laikas=4@14:10 moves this page's clock (and the lesson clock's) to Thursday 14:10, the same switch the clock block reads.
+          ?bandymas=13:00 = a trial lesson end at 13:00 today, real time, the same second on every laptop opened with it: the film at 12:58:05, and the
+          lesson clock's own „timer“ trial is set off so Klaidas comes ~68 s before 13:00 and the page locks (Esc or a reload ends the trial). ===== */
+const AUTO = { rows: null, off: 0, simDow: 0, done: {}, pre: false, timer: false, last: null };
+const AUTO_SB = 'https://iiekmeylpppczicrsxho.supabase.co/rest/v1/bcjr_tvarkarastis_v?select=sav_diena,ispejimas,atrakinti';
+const AUTO_KEY = 'sb_publishable_iJC59f30YJm7hU4OwZsLDQ_9FN-ygzF';
+const autoSec = t => { const p = String(t).split(':').map(Number); return p[0] * 3600 + (p[1] || 0) * 60 + (p[2] || 0); };
+const AUTO_FMT = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Vilnius', weekday: 'short', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+function autoNow(n = Date.now() + AUTO.off) {      // Vilnius: {dow 1–7, sec since midnight}, the same as the lesson clock's dabar()
+  const parts = AUTO_FMT.formatToParts(new Date(n));
+  const g = t => parts.find(p => p.type === t).value;
+  return { dow: AUTO.simDow || { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 7 }[g('weekday')] || 0, sec: (+g('hour') % 24) * 3600 + +g('minute') * 60 + +g('second') + (n % 1000) / 1000 };
+}
+/* the lesson ends today (seconds since midnight): the trial end, or every timetable row for today (lock = ispejimas + 60 s) */
+function autoEnds(dow) {
+  const tr = QS.get('bandymas'); if (tr && /^\d{1,2}:\d{2}(:\d{2})?$/.test(tr)) return [autoSec(tr)];
+  return (AUTO.rows || []).filter(r => r.ispejimas && +r.sav_diena === dow).map(r => autoSec(r.ispejimas) + 60);
+}
+function autoTick() {
+  if (LOCKED || !AUTO.rows || PABAIGA) return;      // v1.8.1's ?pabaiga page (the film alone behind its card) is the mentor's own: left as Gabrielius built it
+  const { dow, sec } = autoNow(), lead = CFG.outroLead;
+  for (const L of autoEnds(dow)) {
+    const s0 = L - lead;
+    if (sec >= s0 - 20 && sec < s0 && !AUTO.pre && !OUT.built) { AUTO.pre = true; outroBuild().catch(() => {}); }      // the set is built ahead, so no laptop starts late
+    if (QS.has('bandymas') && !AUTO.timer && sec >= L - 68 - 2 && sec < L) {      // the trial: the lesson clock's own „timer“ (it gets Klaidas ready ~1–3 s, then 8 s + 60 s)
+      AUTO.timer = true; for (const k of 'timer') dispatchEvent(new KeyboardEvent('keydown', { key: k, bubbles: true }));
+    }
+    if (sec < s0 || sec >= L || AUTO.done[L]) continue;
+    AUTO.done[L] = true; AUTO.last = { L, at: +sec.toFixed(1) };
+    if (S.outro) continue;      // already in the film or on its held frame
+    const late = sec - s0;
+    tev('filmas_auto', { velavo_s: Math.round(late), kaip: QS.has('bandymas') ? 'bandymas' : 'pamoka' });
+    outroStart('pamoka', late > 10).catch(e => console.error(e));
+  }
+}
+if (WEB) {
+  const q0 = Date.now();
+  fetch(AUTO_SB, { headers: { apikey: AUTO_KEY, Authorization: 'Bearer ' + AUTO_KEY } })
+    /* the server's Date has whole seconds: +0.5 s, against the middle of the request, so two laptops start the film within ~½ s of each other (the lesson clock's own offset can be up to 1 s off; the film ends ~10 s before Klaidas either way) */
+    .then(r => { const d = r.headers.get('Date'), q1 = Date.now(); if (d) AUTO.off = new Date(d).getTime() + 500 - (q0 + q1) / 2; return r.json(); })
+    .then(j => {
+      AUTO.rows = Array.isArray(j) ? j : [];
+      const sim = QS.get('laikas'), m = sim && sim.match(/^(?:(\d)@)?(\d{1,2}):(\d{2})(?::(\d{2}))?$/);      // the lesson clock's own test switch, read the same way
+      if (m) { AUTO.simDow = +(m[1] || 0); AUTO.off += ((+m[2]) * 3600 + (+m[3]) * 60 + (+(m[4] || 0)) - Math.floor(autoNow().sec)) * 1000; }
+      setInterval(autoTick, 100); autoTick();
+    })
+    .catch(() => {});      // no network or no timetable: no lesson clock either; the film stays on „Toliau ▶“ and the mentor menu
+  setInterval(() => fetch(AUTO_SB, { headers: { apikey: AUTO_KEY, Authorization: 'Bearer ' + AUTO_KEY }, cache: 'no-store' }).then(r => r.json()).then(j => { if (Array.isArray(j) && j.length) AUTO.rows = j; }).catch(() => {}), 60000);
+}
+/* the mentor menu's line: when the film plays by itself next (Vilnius time on this page's clock), or why it will not */
+function autoNextTxt() {
+  if (!WEB) return M('tik infogynejai.lt kopijoje', 'only in the infogynejai.lt copy');
+  if (!AUTO.rows) return M('laukiam tvarkaraščio…', 'waiting for the timetable…');
+  const { dow, sec } = autoNow(), hms = x => [x / 3600 | 0, (x / 60 | 0) % 60, x % 60 | 0].map(v => String(v).padStart(2, '0')).join(':');
+  const next = autoEnds(dow).map(L => L - CFG.outroLead).filter(s0 => s0 > sec - 1).sort((a, b) => a - b)[0];
+  return next == null ? M('šiandien pamokų nebėra', 'no more lessons today') : `${hms(next)} (${M('užraktas', 'lock')} ${hms(next + CFG.outroLead)})${QS.has('bandymas') ? M(' · bandymas', ' · trial') : ''}`;
 }
 
 /* ---- 70-main.js ---- */
@@ -4807,6 +4882,7 @@ else if (QS.has('review')) revSolo(false);     // v1.5.3 round 3b: ?review=1 ope
 
 /* QA hook: read-only views plus the same shortcuts the mentor menu has. Nothing here is reachable by a child. */
 window.__obby = {
+  AUTO, autoNow, autoNextTxt, OUT,
   drive(f) { window.__qaDrive = f; },
   /* QA: mean brightness of the picture (0 black … 1 white), rendered small; and how see-through each cave piece is */
   lum() { const W = 80, H = 60, rt = new THREE.WebGLRenderTarget(W, H), px = new Uint8Array(W * H * 4); renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.readRenderTargetPixels(rt, 0, 0, W, H, px); renderer.setRenderTarget(null); rt.dispose();
