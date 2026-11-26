@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Džiunglių obis 1.8</title>
+<title>Džiunglių obis 1.8.1</title>
 <link rel="icon" href="data:,">
 <!-- rule 16, a children's page: anonymous cookieless events only (no Clarity, no recordings, no cookies, no names) -->
 <script src="https://krisvas333.github.io/neuron-ar/kv/kv-track.js" data-mode="kids" defer></script>
@@ -407,7 +407,7 @@ div.purse.spent{color:#ffe7b0}
     <div id="lang" role="group" data-la="lang" aria-label="Kalba"><button type="button" data-v="lt" lang="lt" aria-pressed="false">LT</button><button type="button" data-v="en" lang="en" aria-pressed="false">EN</button></div>
   </div>
 </div>
-<script data-project="dziungliu-obis" data-version="v1.8" data-mode="kids" data-hidden="1">
+<script data-project="dziungliu-obis" data-version="v1.8.1" data-mode="kids" data-hidden="1">
 /*! scorecard.js v1.1 · ⭐ one feedback button for every build · Kris Vas · 2026-11-10
  *
  * Copy this file into your build, then add ONE line before </body>:
@@ -951,7 +951,7 @@ div.purse.spent{color:#ffe7b0}
 <script type="module">
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-const VERSION="v1.8";
+const VERSION="v1.8.1";
 const NET_AUTO=/*NETAUTO*/false;
 const WEB=true;
 const WEB_RELAY="wss://dziungliu-obis-rele.infogynejai.workers.dev/ws";
@@ -989,13 +989,14 @@ const $ = id => document.getElementById(id);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v)), lerp = (a, b, k) => a + (b - a) * k;
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const QS = new URLSearchParams(location.search);
+const PABAIGA = QS.has('pabaiga');      // v1.8.1 (Kris 2026-11-26 "Show me the ending clip. Give me the link"): ?pabaiga = only the P10 ending film (68-outro.js pabaigaCard)
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
 /* ---------- language: LT | EN, switchable at any moment (50-ui.js setLang).
    Default is Lithuanian, never the browser's language. ?lang=en opens English. The last choice lives inside our one storage key. ---------- */
 const LANGS = ['lt', 'en'], SKEY = 'dziungliu-obis:v1';
 function statLoad() { try { return JSON.parse(localStorage.getItem(SKEY)) || {}; } catch (e) { return {}; } }
-let LANG = (() => { const q = (QS.get('lang') || '').toLowerCase().slice(0, 2); if (LANGS.includes(q)) return q; const s = statLoad().lang; return LANGS.includes(s) ? s : 'lt'; })();
+let LANG = (() => { const q = (QS.get('lang') || '').toLowerCase().slice(0, 2); if (LANGS.includes(q)) return q; if (PABAIGA) return 'lt'; const s = statLoad().lang; return LANGS.includes(s) ? s : 'lt'; })();
 let VO = VOL[LANG], VODUR = VODURL[LANG], VOSRC = VOSRCL[LANG], ADULT = ADULTL[LANG];
 const L = id => VO[id] ?? ('⟨' + id + '⟩');
 const LX = k => EXTRAL[LANG][k] ?? L(k);                        // screen-reader labels and the no-3D message
@@ -3060,6 +3061,7 @@ const NET = { ws: null, on: false, id: null, host: false, peers: new Map(), n: 1
    ?kambarys=427 (letters and digits, at most 12; „bendras“ when none). &mentorius=1 = the mentor's own page, the only one that may change the room. */
 let ROOM = (QS.get('kambarys') || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 12) || 'bendras', MENTOR = QS.get('mentorius') === '1';
 function netUrl() {
+  if (PABAIGA) return null;      // v1.8.1: the ending-film link (?pabaiga) never joins a relay room
   const q = QS.get('relay'), u = q ? (/^wss?:/.test(q) ? q : 'ws://' + q + '/ws') : WEB && WEB_RELAY && !QS.has('solo') ? WEB_RELAY : null;
   if (u && WEB) return u + (u.includes('?') ? '&' : '?') + 'kambarys=' + ROOM + (MENTOR ? '&mentorius=1' : '');
   if (u) return u;
@@ -3150,7 +3152,7 @@ const gateUp = () => WEB && !!$('gate');
 let LOCKED = false;      // the lesson is over: the frame loop stops (70-main.js), the clock block blocks every key and tap
 
 /* ④ events: the names follow info-gynejai TRACKING.md (zaidimas_pradeta, zaidimas_baigta, dar_karta, klausimas_ok/klaida); props carry no person */
-const DEV = ['relay', 'solo', 'test', 'laikas', 'rask', 'review', 'mentorius', 'qa'].some(k => QS.has(k));
+const DEV = ['relay', 'solo', 'test', 'laikas', 'rask', 'review', 'mentorius', 'qa', 'pabaiga'].some(k => QS.has(k));
 function kontekstas() {   // pamoka | namai: the same lesson windows as info-gynejai track.js (Thu 13:35–15:15, Fri 12:55–16:00, Vilnius)
   try { let wd = '', h = -1, m = 0;
     for (const p of new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Vilnius', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date())) { if (p.type === 'weekday') wd = p.value; if (p.type === 'hour') h = +p.value; if (p.type === 'minute') m = +p.value; }
@@ -4661,6 +4663,20 @@ function outroTick(dt) {
 }
 $('oskip').addEventListener('click', e => { e.stopPropagation(); outroSkip(); });
 
+/* v1.8.1 (Kris 2026-11-26: "Show me the ending clip. Give me the link here"): ?pabaiga opens straight to one big card, „🎬 Pabaiga ▶“.
+   One click (or Enter) plays the film; the click is what lets the voices play. Nothing else starts behind it: no start card, no game, no music,
+   no relay room (35-net.js), its events count as dev (36-web.js), no scorecard. Lithuanian only: the LT | EN switch is hidden and the film is LT
+   unless ?lang= says otherwise. It ends on the same held frame, „Ką Mistė turėjo daryti?“. */
+function pabaigaCard() {
+  $('start').hidden = true; $('ui').classList.add('pabaiga');
+  document.head.appendChild(el('style', null, '#ui.pabaiga #lang{display:none}#pabaiga{background:#04161a;cursor:pointer}#bPabaiga{font-size:clamp(44px,11vh,110px);min-height:clamp(120px,24vh,240px);padding:.25em 1.1em;border-radius:36px;box-shadow:0 10px 0 #7a4b00,0 0 60px #ffb02e66}#bPabaiga:focus-visible{outline:6px solid #fff;outline-offset:6px}'));
+  const c = el('div', 'scr', '<button class="big" type="button" id="bPabaiga" aria-label="Pabaiga">🎬 Pabaiga ▶</button>'); c.id = 'pabaiga';
+  let went = false;
+  c.addEventListener('click', () => { if (went) return; went = true; c.remove(); outroStart('pabaiga'); });
+  $('ui').insertBefore(c, $('mentor'));
+  setTimeout(() => { try { $('bPabaiga').focus({ preventScroll: true }); } catch (e) {} }, 60);
+}
+
 /* ---- 70-main.js ---- */
 /* ===== Boot, the frame loop, the buttons, and the test bot ===== */
 const NLEAVES = buildCourse();
@@ -4784,7 +4800,8 @@ function frame(now) {
 }
 placeAt(ST.start, true); syncHud(); sndSync(); requestAnimationFrame(frame); netStart();
 if (QS.has('test')) toggleMentor(true);
-if (QS.has('rask')) raskSolo(false);     // v1.5.3 (card C5): ?rask=1 opens only „Rask triuką"
+if (PABAIGA) pabaigaCard();     // v1.8.1: ?pabaiga opens only the P10 ending film, behind one big card
+else if (QS.has('rask')) raskSolo(false);     // v1.5.3 (card C5): ?rask=1 opens only „Rask triuką"
 else if (QS.has('review')) revSolo(false);     // v1.5.3 round 3b: ?review=1 opens only „Pataisom klaidas" with 2 questions as if missed
 { const mp = mistePortrait(), s = $('sMiste'); if (mp && s) { s.src = mp; s.hidden = false; } }   // Mistė, the guide, on the start card
 
