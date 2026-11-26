@@ -1,3 +1,7 @@
+---
+title: "P3 · scenarijus"
+---
+
 # P3 · Mentoriaus scenarijus — „Mistė norėjo padėti"
 
 **PAMOKA 3 · LYGIS 0 ▸ ŽINOVAS · KLAVIATŪRA** *(srities etiketė 🟡 pasiūlyta, nepatvirtinta)*
