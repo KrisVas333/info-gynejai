@@ -662,6 +662,10 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
 .slide.vidfull{padding:0;background:#000}
 .slide.vidfull .vwrap{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;box-shadow:none;background:#000}
 .slide.vidfull .vwrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+/* 🎬 VIDEO = VISAS EKRANAS su pavadinimu tik iki ▶ (Kris 2026-11-27, s27 pabaigos filmukas) */
+.slide.vidfull.vidttl .kicker{position:absolute;top:6vh;left:50%;transform:translateX(-50%);z-index:3;margin:0;pointer-events:none;
+  background:#0b0f24d9;padding:.25em .8em;border-radius:999px;white-space:nowrap}
+.slide.vidfull.vidttl:has(.vwrap.pl) .kicker,.slide.vidfull.vidttl:has(.vwrap.end) .kicker{display:none}
 /* 🏃 Testo kortelės: judesio GIF 2× didesnis, be emoji (Kris 2026-10-14) */
 .slide[data-correct] .tile .t .mv{width:clamp(11rem,min(26vw,28vh),18rem);height:clamp(16rem,min(38vw,40vh),26rem)}
 /* 🔑 slaptažodžio eilutė kortelėje */
@@ -1412,7 +1416,7 @@ h2{font-size:clamp(1rem,2.2vw,2.6rem)}                                   /* 42 p
 </section>
 
 <!-- ══════════ 43:00–43:45 · 🎬 PABAIGOS FILMUKAS — atsarginis (Kris 2026-11-27) ══════════ -->
-<section class="slide" data-type="dziungles" data-blk="43–43.75 · 🎬 PABAIGOS FILMUKAS (atsarginis)"
+<section class="slide vidfull vidttl" data-type="dziungles" data-blk="43–43.75 · 🎬 PABAIGOS FILMUKAS (atsarginis)"
  data-lt-note="⏱ 43:00–43:45 · Atsarginis: jei žaidimo pabaigos filmukas kompiuteriuose nepasirodė — paleisk čia (▶ arba P)."
 >
   <div class="kicker"><span data-lt="🎬 Pabaigos filmukas">🎬 Pabaigos filmukas</span></div>
