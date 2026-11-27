@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Džiunglių obis 2.0</title>
+<title>Džiunglių obis 2.0.1</title>
 <link rel="icon" href="data:,">
 <!-- rule 16, a children's page: anonymous cookieless events only (no Clarity, no recordings, no cookies, no names) -->
 <script src="https://krisvas333.github.io/neuron-ar/kv/kv-track.js" data-mode="kids" defer></script>
@@ -435,7 +435,7 @@ div.purse.spent{color:#ffe7b0}
     <div id="lang" role="group" data-la="lang" aria-label="Kalba"><button type="button" data-v="lt" lang="lt" aria-pressed="false">LT</button><button type="button" data-v="en" lang="en" aria-pressed="false">EN</button></div>
   </div>
 </div>
-<script data-project="dziungliu-obis" data-version="v2.0" data-mode="kids" data-hidden="1">
+<script data-project="dziungliu-obis" data-version="v2.0.1" data-mode="kids" data-hidden="1">
 /*! scorecard.js v1.1 · ⭐ one feedback button for every build · Kris Vas · 2026-11-10
  *
  * Copy this file into your build, then add ONE line before </body>:
@@ -979,7 +979,7 @@ div.purse.spent{color:#ffe7b0}
 <script type="module">
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-const VERSION="v2.0";
+const VERSION="v2.0.1";
 const NET_AUTO=/*NETAUTO*/false;
 const WEB=true;
 const WEB_RELAY="wss://dziungliu-obis-rele.infogynejai.workers.dev/ws";
@@ -1992,7 +1992,7 @@ function layCourse() {
   const s6 = run(0, 11, 0), s7 = run(-1.5, 11, -.08); WALLS.push({ x: s7.x + 3.25 + .25, z: s7.z + 1.5, w: .5, d: 6, y: s7.y + 1.6, h: 3.2, bank: true }); const s8 = run(0, 11, 0);
   const rock = (b, dx, dz, first) => { const x = b.x + dx, z = b.z + dz, y = surf(b, x, z, 1e9); WALLS.push({ x, z, r: .62, y: y + .95, h: 1.6, rock: true, first: !!first }); };
   rock(s1, 1.7, -1.6, true); rock(s3, -1.5, .6); rock(s3, 1.6, -2.4); rock(s4, 0, 3); rock(s4, -1.9, -1.2); rock(s4, 1.7, -4);
-  rock(s5, -1.6, 2); rock(s5, 1.8, -3); rock(s6, 0, 3); rock(s6, -1.9, -1.5); rock(s6, 1.8, -4.5); rock(s7, 1.6, 2.5); rock(s7, -1.6, -2.5); rock(s8, -1.8, 3); rock(s8, 1.8, -1); rock(s8, 0, -4.5);
+  rock(s5, -1.6, 2); rock(s5, 1.8, -1.5);     /* v2.0.1: was -3, beside the start of the slanted rail (she was pinned there) */ rock(s6, 0, 3); rock(s6, -1.9, -1.5); rock(s6, 1.8, -2.0);     /* v2.0.1: was -4.5, inside the corner the slanted rail closes (she was pinned there) */ rock(s7, 1.6, 2.5); rock(s7, -1.6, -2.5); rock(s8, -1.8, 3); rock(s8, 1.8, -1); rock(s8, 0, -4.5);
   ST.slide = [s1, s2, s3, s4, ...more];
   B.last = L; B.y = L.y - kz2 * L.d / 2;
   p = plat({ gap: 0, w: 7, d: 8, dy: 0 }); p.y = B.y = L.y - kz2 * L.d / 2; p.ymin = p.y; p.save = true;
@@ -2183,8 +2183,67 @@ function lush(p, stat) {
   if (p.kind === 'solid' && !p.tunnel) { for (let k = 0, n = 1 + Math.floor(rnd() * 3); k < n; k++) { const s = RR(1.4, 2.6); put('hang', p.x + RR(-hw * .7, hw * .7), p.ymin - .95, p.z + RR(-hd * .7, hd * .7), RR(0, 6.3), s, s, s, tint(.7, .95)); }
     for (let k = 0, n = 1 + Math.floor(rnd() * 2); k < n; k++) put(rnd() < .5 ? 'vine0' : 'vine1', p.x + RR(-hw * .8, hw * .8), p.ymin - 1.1, p.z + RR(-hd * .8, hd * .8), RR(0, 3.1), .8, RR(3, 6.5), 1, tint(.75, 1)); }
 }
+/* v2.0.1 (Kris 2026-11-27: "sliding tilted platforms need guardrails - They are too difficult as it stands now, so we need our rails so you don't lose if you slide down"):
+   low wooden rails on every leaning floor, on the sides she slides off. They are walls (WALLS, flag trail): their inner face is the block's edge, so nothing
+   of the floor is lost and there is no gap; she slides into the rail and stays on the block, then walks or jumps on. Drawn low (posts and two bars, the
+   meeting square's wood) and fading when they stand between the camera and her (addFader).
+   · Stage 2's five slabs (šlaitas, leaning sideways): both long sides. Their ends stay open: that is where she jumps from slab to slab.
+   · Stage 4's water slide (čiuožykla, 8 runs, leaning forwards): both sides of every run. The bottom stays open (it is the way on). Where a run is shifted
+     sideways against the next one, the corner of the upper run that hangs past the lower one is closed by a short slanted rail that steers her onto the
+     lower run, and the step out on the other side is closed along the joint.
+   · The steep slab of each optional side way: the two sides it leans towards.
+   The collision is taller than the drawn rail (from under the floor to 3.6 m over the block's highest point), so neither a fast slide nor a jump takes her over it. */
+function railTilts() {
+  const w0 = WALLS.length;
+  const sy = (b, x, z) => b.y + b.tilt.kx * clamp(x - b.x, -b.w / 2, b.w / 2) + b.tilt.kz * clamp(z - b.z, -b.d / 2, b.d / 2);
+  const T = .4, H = 3.6, ymax = b => b.y + Math.abs(b.tilt.kx) * b.w / 2 + Math.abs(b.tilt.kz) * b.d / 2;     // the wall reaches 3.6 m over the block's highest point: her highest jump is 1.77 m, and on the slide a jump from 5 m further up adds 1.4 m; the drawn rail is 0.86 m
+  /* one straight rail along a line (x0,z0)→(x1,z1) at the block's edge; the wall sits just outside the edge (o = which way is out) */
+  const line = (b, x0, z0, x1, z1, ox, oz, art) => {
+    const L = Math.hypot(x1 - x0, z1 - z0), n = Math.max(1, Math.ceil(L / (b.tilt.kz && Math.abs(z1 - z0) > .1 || b.tilt.kx && Math.abs(x1 - x0) > .1 ? 1 : 99)));
+    for (let i = 0; i < n; i++) { const a = i / n, c = (i + 1) / n, xa = x0 + (x1 - x0) * a, za = z0 + (z1 - z0) * a, xc = x0 + (x1 - x0) * c, zc = z0 + (z1 - z0) * c;
+      const ya = sy(b, xa, za), yc = sy(b, xc, zc), top = ymax(b) + H, bot = Math.min(ya, yc) - .7;
+      WALLS.push({ x: (xa + xc) / 2 + ox * (T / 2 - .03), z: (za + zc) / 2 + oz * (T / 2 - .03), w: Math.abs(xc - xa) + (ox ? T : 0), d: Math.abs(zc - za) + (oz ? T : 0), y: top, h: top - bot, trail: true }); }
+    art.push(...railArt([[x0, sy(b, x0, z0), z0], [x1, sy(b, x1, z1), z1]]));
+  };
+  /* the four edges of a block: W E (along z) and N S (along x) */
+  const edge = (b, k, art, from = 0, to = 1) => { const hw = b.w / 2, hd = b.d / 2;
+    if (k === 'W' || k === 'E') { const s = k === 'E' ? 1 : -1, x = b.x + s * hw, za = b.z + hd - from * b.d, zb = b.z + hd - to * b.d; line(b, x, za, x, zb, s, 0, art); }
+    else { const s = k === 'S' ? 1 : -1, z = b.z + s * hd, xa = b.x - hw + from * b.w, xb = b.x - hw + to * b.w; line(b, xa, z, xb, z, 0, s, art); } };
+  for (const b of PL.filter(q => q.slope)) { const art = []; edge(b, 'W', art); edge(b, 'E', art); addFader(art); }
+  for (const b of PL.filter(q => q.side2 && q.tilt)) { const art = []; for (const k of (b.tilt.kz ? ['N', 'S'] : ['W', 'E'])) edge(b, k, art); addFader(art); }
+  const SL = ST.slide || [];
+  SL.forEach((A, i) => {
+    const art = [], up = SL[i - 1], dn = SL[i + 1], hw = A.w / 2;
+    for (const s of [-1, 1]) {
+      const k = s > 0 ? 'E' : 'W', ex = A.x + s * hw;
+      /* the run below sits further in on this side: stop the straight rail 2.5 m before the joint and slant it in onto the run below */
+      const inward = dn && s * (dn.x + s * dn.w / 2 - ex) < -.05, cut = inward ? Math.min(.5, 2.5 / A.d) : 0;
+      edge(A, k, art, 0, 1 - cut);
+      if (inward) { const zj = A.z - A.d / 2, z0 = zj + cut * A.d, z1 = zj, x1 = dn.x + s * dn.w / 2, N = Math.ceil(Math.hypot(x1 - ex, z1 - z0) / .16);     // in line with the run below at the joint, then 0.1 m further in for 0.5 m: she meets the rail (or bank) below from the side, never its end
+        for (let j = 0; j <= N; j++) { const x = ex + (x1 - ex) * j / N, z = z0 + (z1 - z0) * j / N, b = z < A.z - A.d / 2 ? dn : A, y = sy(b, x, z);
+          WALLS.push({ x: x + s * .1, z, r: .22, y: ymax(b) + H, h: ymax(b) + H - y + .7, trail: true }); }
+        for (let z = zj - .16; z > zj - .5; z -= .16) WALLS.push({ x: x1 - s * .1, z, r: .22, y: ymax(dn) + H, h: ymax(dn) + H - sy(dn, x1, z) + .7, trail: true });
+        art.push(...railArt([[ex, sy(A, ex, z0), z0], [x1, sy(dn, x1, zj), zj]])); }
+      /* the run above was narrower on this side: close the step out along the top of this run */
+      if (up && s * (A.x + s * hw - (up.x + s * up.w / 2)) > .05) { const xa = up.x + s * up.w / 2, z = A.z + A.d / 2; const w0 = WALLS.length; line(A, xa, z, ex, z, 0, 1, art); for (const w of WALLS.slice(w0)) w.z -= T; }     // drawn on the joint, the wall just inside this run
+    }
+    addFader(art);
+  });
+  /* her rails are checked before every other wall (the slide's banks start where a rail runs on): pressed against a rail she is back beside it before a bank's end is checked, so she never catches on that end */
+  WALLS.unshift(...WALLS.splice(w0));
+}
+/* posts and two bars along a polyline of points on the floor [x, floor y, z] */
+function railArt(pts) {
+  const out = [], up = new THREE.Vector3(0, 1, 0), wood = '#6b4a2f', top = '#a07a4a';
+  const beam = (a, b, th, hex, tp) => { const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b), L = A.distanceTo(B); if (L < .05) return;
+    const g = colorize(new THREE.BoxGeometry(th, th, L + th).toNonIndexed(), hex, tp), m = new THREE.Matrix4().lookAt(A, B, up); m.setPosition(A.clone().add(B).multiplyScalar(.5)); out.push(g.applyMatrix4(m)); };
+  for (let i = 0; i + 1 < pts.length; i++) { const [x0, y0, z0] = pts[i], [x1, y1, z1] = pts[i + 1], L = Math.hypot(x1 - x0, z1 - z0), n = Math.max(1, Math.round(L / 1.4));
+    for (let j = 0; j <= n; j++) { const k = j / n, x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, z = z0 + (z1 - z0) * k; out.push(cbox(.14, .86, .14, x, y + .38, z, wood)); }
+    beam([x0, y0 + .8, z0], [x1, y1 + .8, z1], .13, wood, top); beam([x0, y0 + .42, z0], [x1, y1 + .42, z1], .09, wood, wood); }
+  return out;
+}
 function buildCourse() {
-  layCourse(); layNuts(); layStars();
+  layCourse(); layNuts(); layStars(); railTilts();     // v2.0.1: guardrails on every leaning floor (after the stars, so every star and plant stays where it was)
   const stat = [], lavaG = [], arrowG = [], waterArrowG = [], glowG = [];
   for (const p of PL) {
     if (p.save) {      // a small flag: from here on she comes back to this block
@@ -2395,7 +2454,7 @@ function courseDress(dt) {
     else if (b.visible) { b.visible = false; FX.burst(b.position.x, p.y + .5, b.position.z, ['#ffffff', '#ffd27a', '#ff9a3c'], 12, 3, .3, 5, .6); if (S.mode === 'play' && !S.paused && d.n < 3 && PLY.g && (PLY.g === p || PLY.g.id === p.id - 1)) { d.n++; SFX.poof(); } } }
   /* the coconut on slab 1: from the high edge down to the sand bank, then back up there again */
   if (DEMO.coco && SG[DEMO.cp.stage] && SG[DEMO.cp.stage].visible) { const p = DEMO.cp, c = DEMO.coco, s = Math.sign(p.tilt.kx); DEMO.ct = (DEMO.ct + dt) % 3.2; const k = clamp(DEMO.ct / 2.2, 0, 1), e = k * k;
-    const x = p.x + s * (p.w / 2 - .6) - s * e * (p.w + .4), on = Math.abs(x - p.x) <= p.w / 2, y = on ? surf(p, x, p.z + 1.2, 99) : p.ymin - .3; c.visible = DEMO.ct < 2.9; c.position.set(x, y + .42, p.z + 1.2); c.rotation.z += dt * 6 * s; }
+    const x = p.x + s * (p.w / 2 - .6) - s * e * (p.w - 1.02), on = Math.abs(x - p.x) <= p.w / 2,     /* v2.0.1: it rolls down to the low rail and stops against it */ y = on ? surf(p, x, p.z + 1.2, 99) : p.ymin - .3; c.visible = DEMO.ct < 2.9; c.position.set(x, y + .42, p.z + 1.2); c.rotation.z += dt * 6 * s; }
 }
 function trapBoardDone(p) { p.vis.board.material.map = adTex(TRAPS[p.trap].ic, true); p.vis.fl.visible = true; }
 /* a fresh run: everything back to how it was built */
